@@ -1,0 +1,773 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2759E77776A5A5155B4E2176 /* Pods_StudiumUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CDF896A1C96AD896583B6F2 /* Pods_StudiumUITests.framework */; };
+		9CFE9D7321A8ADBC0030AE33 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE9D7221A8ADBC0030AE33 /* AppDelegate.swift */; };
+		9CFE9D7821A8ADBC0030AE33 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CFE9D7621A8ADBC0030AE33 /* Main.storyboard */; };
+		9CFE9D7B21A8ADBC0030AE33 /* Studium.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE9D7921A8ADBC0030AE33 /* Studium.xcdatamodeld */; };
+		9CFE9D7D21A8ADBE0030AE33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CFE9D7C21A8ADBE0030AE33 /* Assets.xcassets */; };
+		9CFE9D8021A8ADBE0030AE33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CFE9D7E21A8ADBE0030AE33 /* LaunchScreen.storyboard */; };
+		9CFE9D8B21A8ADBE0030AE33 /* StudiumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE9D8A21A8ADBE0030AE33 /* StudiumTests.swift */; };
+		9CFE9D9621A8ADBE0030AE33 /* StudiumUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE9D9521A8ADBE0030AE33 /* StudiumUITests.swift */; };
+		9CFE9DA521A8AE960030AE33 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE9DA421A8AE960030AE33 /* LoginViewController.swift */; };
+		9CFE9DA821A8BBEE0030AE33 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE9DA721A8BBEE0030AE33 /* MenuTableViewController.swift */; };
+		9CFE9DAB21A8BC6B0030AE33 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE9DAA21A8BC6B0030AE33 /* HomeViewController.swift */; };
+		9CFE9DAD21A8BC840030AE33 /* CourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE9DAC21A8BC840030AE33 /* CourseViewController.swift */; };
+		9CFE9DAF21A8BC8F0030AE33 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE9DAE21A8BC8F0030AE33 /* ProfileViewController.swift */; };
+		9CFE9DB121A8BC9A0030AE33 /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE9DB021A8BC9A0030AE33 /* DocumentsViewController.swift */; };
+		DCDCA30A0259D09056ED34DE /* Pods_StudiumTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 680AF054BAE403BD03DB8DA1 /* Pods_StudiumTests.framework */; };
+		F1B1CA9919349ED5CFE1C280 /* Pods_Studium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC89C62786E9836B037027E /* Pods_Studium.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9CFE9D8721A8ADBE0030AE33 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9CFE9D6721A8ADBC0030AE33 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9CFE9D6E21A8ADBC0030AE33;
+			remoteInfo = Studium;
+		};
+		9CFE9D9221A8ADBE0030AE33 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9CFE9D6721A8ADBC0030AE33 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9CFE9D6E21A8ADBC0030AE33;
+			remoteInfo = Studium;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0D0D5F6926FC3A70A81E131D /* Pods-StudiumTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudiumTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudiumTests/Pods-StudiumTests.release.xcconfig"; sourceTree = "<group>"; };
+		0E83DFE790C0A80B2F43811B /* Pods-StudiumUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudiumUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudiumUITests/Pods-StudiumUITests.release.xcconfig"; sourceTree = "<group>"; };
+		1CDF896A1C96AD896583B6F2 /* Pods_StudiumUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudiumUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D66B128BEEFBD37FBF61C25 /* Pods-Studium.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studium.release.xcconfig"; path = "Pods/Target Support Files/Pods-Studium/Pods-Studium.release.xcconfig"; sourceTree = "<group>"; };
+		680AF054BAE403BD03DB8DA1 /* Pods_StudiumTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudiumTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7802F022145F5DBC30D73AF1 /* Pods-Studium.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studium.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studium/Pods-Studium.debug.xcconfig"; sourceTree = "<group>"; };
+		7B2EB8B6FB4CA8EFFB172DA4 /* Pods-StudiumUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudiumUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudiumUITests/Pods-StudiumUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		9CFE9D6F21A8ADBC0030AE33 /* Studium.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Studium.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9CFE9D7221A8ADBC0030AE33 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9CFE9D7721A8ADBC0030AE33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9CFE9D7A21A8ADBC0030AE33 /* Studium.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Studium.xcdatamodel; sourceTree = "<group>"; };
+		9CFE9D7C21A8ADBE0030AE33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9CFE9D7F21A8ADBE0030AE33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9CFE9D8121A8ADBE0030AE33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9CFE9D8621A8ADBE0030AE33 /* StudiumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudiumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9CFE9D8A21A8ADBE0030AE33 /* StudiumTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudiumTests.swift; sourceTree = "<group>"; };
+		9CFE9D8C21A8ADBE0030AE33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9CFE9D9121A8ADBE0030AE33 /* StudiumUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudiumUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9CFE9D9521A8ADBE0030AE33 /* StudiumUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudiumUITests.swift; sourceTree = "<group>"; };
+		9CFE9D9721A8ADBE0030AE33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9CFE9DA421A8AE960030AE33 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		9CFE9DA721A8BBEE0030AE33 /* MenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
+		9CFE9DAA21A8BC6B0030AE33 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		9CFE9DAC21A8BC840030AE33 /* CourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseViewController.swift; sourceTree = "<group>"; };
+		9CFE9DAE21A8BC8F0030AE33 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		9CFE9DB021A8BC9A0030AE33 /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
+		ACC89C62786E9836B037027E /* Pods_Studium.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studium.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1518B2E0B085F4758918CFA /* Pods-StudiumTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudiumTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudiumTests/Pods-StudiumTests.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9CFE9D6C21A8ADBC0030AE33 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1B1CA9919349ED5CFE1C280 /* Pods_Studium.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9CFE9D8321A8ADBE0030AE33 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCDCA30A0259D09056ED34DE /* Pods_StudiumTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9CFE9D8E21A8ADBE0030AE33 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2759E77776A5A5155B4E2176 /* Pods_StudiumUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3116D69C2086EA685ADD33FE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ACC89C62786E9836B037027E /* Pods_Studium.framework */,
+				680AF054BAE403BD03DB8DA1 /* Pods_StudiumTests.framework */,
+				1CDF896A1C96AD896583B6F2 /* Pods_StudiumUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9CFE9D6621A8ADBC0030AE33 = {
+			isa = PBXGroup;
+			children = (
+				9CFE9D7121A8ADBC0030AE33 /* Studium */,
+				9CFE9D8921A8ADBE0030AE33 /* StudiumTests */,
+				9CFE9D9421A8ADBE0030AE33 /* StudiumUITests */,
+				9CFE9D7021A8ADBC0030AE33 /* Products */,
+				D87D6B37575295D3DF883508 /* Pods */,
+				3116D69C2086EA685ADD33FE /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		9CFE9D7021A8ADBC0030AE33 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9CFE9D6F21A8ADBC0030AE33 /* Studium.app */,
+				9CFE9D8621A8ADBE0030AE33 /* StudiumTests.xctest */,
+				9CFE9D9121A8ADBE0030AE33 /* StudiumUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9CFE9D7121A8ADBC0030AE33 /* Studium */ = {
+			isa = PBXGroup;
+			children = (
+				9CFE9D7221A8ADBC0030AE33 /* AppDelegate.swift */,
+				9CFE9D7C21A8ADBE0030AE33 /* Assets.xcassets */,
+				9CFE9DA321A8AE6A0030AE33 /* MainViewControllers */,
+				9CFE9D7E21A8ADBE0030AE33 /* LaunchScreen.storyboard */,
+				9CFE9D7621A8ADBC0030AE33 /* Main.storyboard */,
+				9CFE9D8121A8ADBE0030AE33 /* Info.plist */,
+				9CFE9D7921A8ADBC0030AE33 /* Studium.xcdatamodeld */,
+			);
+			path = Studium;
+			sourceTree = "<group>";
+		};
+		9CFE9D8921A8ADBE0030AE33 /* StudiumTests */ = {
+			isa = PBXGroup;
+			children = (
+				9CFE9D8A21A8ADBE0030AE33 /* StudiumTests.swift */,
+				9CFE9D8C21A8ADBE0030AE33 /* Info.plist */,
+			);
+			path = StudiumTests;
+			sourceTree = "<group>";
+		};
+		9CFE9D9421A8ADBE0030AE33 /* StudiumUITests */ = {
+			isa = PBXGroup;
+			children = (
+				9CFE9D9521A8ADBE0030AE33 /* StudiumUITests.swift */,
+				9CFE9D9721A8ADBE0030AE33 /* Info.plist */,
+			);
+			path = StudiumUITests;
+			sourceTree = "<group>";
+		};
+		9CFE9DA321A8AE6A0030AE33 /* MainViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9CFE9DA621A8BBD10030AE33 /* Menu */,
+				9CFE9DA421A8AE960030AE33 /* LoginViewController.swift */,
+			);
+			path = MainViewControllers;
+			sourceTree = "<group>";
+		};
+		9CFE9DA621A8BBD10030AE33 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				9CFE9DA921A8BC260030AE33 /* MainMenuViewControllers */,
+				9CFE9DA721A8BBEE0030AE33 /* MenuTableViewController.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		9CFE9DA921A8BC260030AE33 /* MainMenuViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9CFE9DAA21A8BC6B0030AE33 /* HomeViewController.swift */,
+				9CFE9DAC21A8BC840030AE33 /* CourseViewController.swift */,
+				9CFE9DAE21A8BC8F0030AE33 /* ProfileViewController.swift */,
+				9CFE9DB021A8BC9A0030AE33 /* DocumentsViewController.swift */,
+			);
+			path = MainMenuViewControllers;
+			sourceTree = "<group>";
+		};
+		D87D6B37575295D3DF883508 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7802F022145F5DBC30D73AF1 /* Pods-Studium.debug.xcconfig */,
+				5D66B128BEEFBD37FBF61C25 /* Pods-Studium.release.xcconfig */,
+				D1518B2E0B085F4758918CFA /* Pods-StudiumTests.debug.xcconfig */,
+				0D0D5F6926FC3A70A81E131D /* Pods-StudiumTests.release.xcconfig */,
+				7B2EB8B6FB4CA8EFFB172DA4 /* Pods-StudiumUITests.debug.xcconfig */,
+				0E83DFE790C0A80B2F43811B /* Pods-StudiumUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9CFE9D6E21A8ADBC0030AE33 /* Studium */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9CFE9D9A21A8ADBE0030AE33 /* Build configuration list for PBXNativeTarget "Studium" */;
+			buildPhases = (
+				7AE56DA560AF9174F5CFED55 /* [CP] Check Pods Manifest.lock */,
+				9CFE9D6B21A8ADBC0030AE33 /* Sources */,
+				9CFE9D6C21A8ADBC0030AE33 /* Frameworks */,
+				9CFE9D6D21A8ADBC0030AE33 /* Resources */,
+				50EFBB571D73FFA8C041E609 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Studium;
+			productName = Studium;
+			productReference = 9CFE9D6F21A8ADBC0030AE33 /* Studium.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9CFE9D8521A8ADBE0030AE33 /* StudiumTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9CFE9D9D21A8ADBE0030AE33 /* Build configuration list for PBXNativeTarget "StudiumTests" */;
+			buildPhases = (
+				BA632DF959B842BC62F40972 /* [CP] Check Pods Manifest.lock */,
+				9CFE9D8221A8ADBE0030AE33 /* Sources */,
+				9CFE9D8321A8ADBE0030AE33 /* Frameworks */,
+				9CFE9D8421A8ADBE0030AE33 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9CFE9D8821A8ADBE0030AE33 /* PBXTargetDependency */,
+			);
+			name = StudiumTests;
+			productName = StudiumTests;
+			productReference = 9CFE9D8621A8ADBE0030AE33 /* StudiumTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		9CFE9D9021A8ADBE0030AE33 /* StudiumUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9CFE9DA021A8ADBE0030AE33 /* Build configuration list for PBXNativeTarget "StudiumUITests" */;
+			buildPhases = (
+				E03A00193EF8B8C0C099CCE1 /* [CP] Check Pods Manifest.lock */,
+				9CFE9D8D21A8ADBE0030AE33 /* Sources */,
+				9CFE9D8E21A8ADBE0030AE33 /* Frameworks */,
+				9CFE9D8F21A8ADBE0030AE33 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9CFE9D9321A8ADBE0030AE33 /* PBXTargetDependency */,
+			);
+			name = StudiumUITests;
+			productName = StudiumUITests;
+			productReference = 9CFE9D9121A8ADBE0030AE33 /* StudiumUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9CFE9D6721A8ADBC0030AE33 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = Unict.it;
+				TargetAttributes = {
+					9CFE9D6E21A8ADBC0030AE33 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					9CFE9D8521A8ADBE0030AE33 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 9CFE9D6E21A8ADBC0030AE33;
+					};
+					9CFE9D9021A8ADBE0030AE33 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 9CFE9D6E21A8ADBC0030AE33;
+					};
+				};
+			};
+			buildConfigurationList = 9CFE9D6A21A8ADBC0030AE33 /* Build configuration list for PBXProject "Studium" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9CFE9D6621A8ADBC0030AE33;
+			productRefGroup = 9CFE9D7021A8ADBC0030AE33 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9CFE9D6E21A8ADBC0030AE33 /* Studium */,
+				9CFE9D8521A8ADBE0030AE33 /* StudiumTests */,
+				9CFE9D9021A8ADBE0030AE33 /* StudiumUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9CFE9D6D21A8ADBC0030AE33 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9CFE9D8021A8ADBE0030AE33 /* LaunchScreen.storyboard in Resources */,
+				9CFE9D7D21A8ADBE0030AE33 /* Assets.xcassets in Resources */,
+				9CFE9D7821A8ADBC0030AE33 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9CFE9D8421A8ADBE0030AE33 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9CFE9D8F21A8ADBE0030AE33 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		50EFBB571D73FFA8C041E609 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Studium/Pods-Studium-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SWRevealViewController/SWRevealViewController.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SWRevealViewController.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Studium/Pods-Studium-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7AE56DA560AF9174F5CFED55 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Studium-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BA632DF959B842BC62F40972 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-StudiumTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E03A00193EF8B8C0C099CCE1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-StudiumUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9CFE9D6B21A8ADBC0030AE33 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9CFE9DAB21A8BC6B0030AE33 /* HomeViewController.swift in Sources */,
+				9CFE9DB121A8BC9A0030AE33 /* DocumentsViewController.swift in Sources */,
+				9CFE9DA821A8BBEE0030AE33 /* MenuTableViewController.swift in Sources */,
+				9CFE9DA521A8AE960030AE33 /* LoginViewController.swift in Sources */,
+				9CFE9D7B21A8ADBC0030AE33 /* Studium.xcdatamodeld in Sources */,
+				9CFE9DAF21A8BC8F0030AE33 /* ProfileViewController.swift in Sources */,
+				9CFE9D7321A8ADBC0030AE33 /* AppDelegate.swift in Sources */,
+				9CFE9DAD21A8BC840030AE33 /* CourseViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9CFE9D8221A8ADBE0030AE33 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9CFE9D8B21A8ADBE0030AE33 /* StudiumTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9CFE9D8D21A8ADBE0030AE33 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9CFE9D9621A8ADBE0030AE33 /* StudiumUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9CFE9D8821A8ADBE0030AE33 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9CFE9D6E21A8ADBC0030AE33 /* Studium */;
+			targetProxy = 9CFE9D8721A8ADBE0030AE33 /* PBXContainerItemProxy */;
+		};
+		9CFE9D9321A8ADBE0030AE33 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9CFE9D6E21A8ADBC0030AE33 /* Studium */;
+			targetProxy = 9CFE9D9221A8ADBE0030AE33 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9CFE9D7621A8ADBC0030AE33 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9CFE9D7721A8ADBC0030AE33 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		9CFE9D7E21A8ADBE0030AE33 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9CFE9D7F21A8ADBE0030AE33 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9CFE9D9821A8ADBE0030AE33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		9CFE9D9921A8ADBE0030AE33 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9CFE9D9B21A8ADBE0030AE33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7802F022145F5DBC30D73AF1 /* Pods-Studium.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7JSR847A9P;
+				INFOPLIST_FILE = Studium/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Unict.it.Studium;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9CFE9D9C21A8ADBE0030AE33 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D66B128BEEFBD37FBF61C25 /* Pods-Studium.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7JSR847A9P;
+				INFOPLIST_FILE = Studium/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Unict.it.Studium;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		9CFE9D9E21A8ADBE0030AE33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1518B2E0B085F4758918CFA /* Pods-StudiumTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = StudiumTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Unict.it.StudiumTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Studium.app/Studium";
+			};
+			name = Debug;
+		};
+		9CFE9D9F21A8ADBE0030AE33 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D0D5F6926FC3A70A81E131D /* Pods-StudiumTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = StudiumTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Unict.it.StudiumTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Studium.app/Studium";
+			};
+			name = Release;
+		};
+		9CFE9DA121A8ADBE0030AE33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B2EB8B6FB4CA8EFFB172DA4 /* Pods-StudiumUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = StudiumUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Unict.it.StudiumUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Studium;
+			};
+			name = Debug;
+		};
+		9CFE9DA221A8ADBE0030AE33 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E83DFE790C0A80B2F43811B /* Pods-StudiumUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = StudiumUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Unict.it.StudiumUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Studium;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9CFE9D6A21A8ADBC0030AE33 /* Build configuration list for PBXProject "Studium" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9CFE9D9821A8ADBE0030AE33 /* Debug */,
+				9CFE9D9921A8ADBE0030AE33 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9CFE9D9A21A8ADBE0030AE33 /* Build configuration list for PBXNativeTarget "Studium" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9CFE9D9B21A8ADBE0030AE33 /* Debug */,
+				9CFE9D9C21A8ADBE0030AE33 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9CFE9D9D21A8ADBE0030AE33 /* Build configuration list for PBXNativeTarget "StudiumTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9CFE9D9E21A8ADBE0030AE33 /* Debug */,
+				9CFE9D9F21A8ADBE0030AE33 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9CFE9DA021A8ADBE0030AE33 /* Build configuration list for PBXNativeTarget "StudiumUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9CFE9DA121A8ADBE0030AE33 /* Debug */,
+				9CFE9DA221A8ADBE0030AE33 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9CFE9D7921A8ADBC0030AE33 /* Studium.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9CFE9D7A21A8ADBC0030AE33 /* Studium.xcdatamodel */,
+			);
+			currentVersion = 9CFE9D7A21A8ADBC0030AE33 /* Studium.xcdatamodel */;
+			path = Studium.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 9CFE9D6721A8ADBC0030AE33 /* Project object */;
+}
