@@ -12,6 +12,7 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //ho modificato
 
         // Do any additional setup after loading the view.
     }
