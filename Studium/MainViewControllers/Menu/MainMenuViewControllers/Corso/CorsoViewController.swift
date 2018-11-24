@@ -8,12 +8,32 @@
 
 import UIKit
 
-class CorsoViewController: UIViewController {
+class CorsoViewController: UIViewController, UIScrollViewDelegate, SWRevealViewControllerDelegate {
 
+    @IBOutlet var viewAppoggio: UIView!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var vetrinaButton: UIButton!
+    @IBOutlet var avvisiButton: UIButton!
+    @IBOutlet var descrizioneButton: UIButton!
+    @IBOutlet var documentiButton: UIButton!
+    
+    @IBOutlet var nomeCorsoLabel: UILabel!
+    @IBOutlet var nomeProfessoreLabel: UILabel!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //commento
-        // Do any additional setup after loading the view.
+        
+        /*if revealViewController() != nil { //Menu laterale
+            revealViewController().rearViewRevealWidth = view.bounds.width - 70
+            revealViewController().rightViewRevealWidth = 160
+            revealViewController().delegate = self
+            view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+        }*/
+        
+        scrollView.delegate = self
+        
     }
     
 
