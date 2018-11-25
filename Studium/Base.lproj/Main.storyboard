@@ -19,13 +19,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vHR-dQ-zxg">
-                                <rect key="frame" x="19" y="474" width="377" height="31"/>
+                                <rect key="frame" x="19" y="440.5" width="377" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="375" id="ftH-jD-Zes"/>
                                 </constraints>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ricorda" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lGb-k0-eMY">
-                                <rect key="frame" x="90.5" y="474" width="58.5" height="30"/>
+                                <rect key="frame" x="90.5" y="440.5" width="58.5" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="MS7-sA-as8"/>
                                 </constraints>
@@ -34,23 +34,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="9KB-Ho-3Xk">
-                                <rect key="frame" x="19" y="108" width="337.5" height="333.5"/>
+                                <rect key="frame" x="19" y="141.5" width="337.5" height="266.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anno Accademico" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNh-Il-m3x">
-                                        <rect key="frame" x="0.0" y="0.0" width="337.5" height="40"/>
-                                        <color key="backgroundColor" red="0.47689298793749157" green="0.47689298793749157" blue="0.47689298793749157" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="XZu-kC-SDt"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <pickerView contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="gyI-Ma-rfj">
-                                        <rect key="frame" x="0.0" y="55" width="337.5" height="113.5"/>
-                                    </pickerView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credenziali" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ehT-Fo-pW0">
-                                        <rect key="frame" x="0.0" y="183.5" width="337.5" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="337.5" height="40"/>
                                         <color key="backgroundColor" red="0.47689298790000001" green="0.47689298790000001" blue="0.47689298790000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="vWI-VH-jbw"/>
@@ -60,7 +47,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sFw-zX-5Tr">
-                                        <rect key="frame" x="0.0" y="238.5" width="337.5" height="40"/>
+                                        <rect key="frame" x="0.0" y="55" width="337.5" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="hAa-bE-919"/>
                                         </constraints>
@@ -69,7 +56,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4s1-xN-HHm">
-                                        <rect key="frame" x="0.0" y="293.5" width="337.5" height="40"/>
+                                        <rect key="frame" x="0.0" y="110" width="337.5" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Po1-lU-HB8"/>
                                         </constraints>
@@ -77,17 +64,30 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anno Accademico" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNh-Il-m3x">
+                                        <rect key="frame" x="0.0" y="165" width="337.5" height="40"/>
+                                        <color key="backgroundColor" red="0.47689298793749157" green="0.47689298793749157" blue="0.47689298793749157" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="XZu-kC-SDt"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="gyI-Ma-rfj">
+                                        <rect key="frame" x="0.0" y="220" width="337.5" height="46.5"/>
+                                    </pickerView>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pAi-ia-HNu">
-                                <rect key="frame" x="19" y="531" width="337.5" height="40"/>
-                                <color key="backgroundColor" red="0.47689298790000001" green="0.47689298790000001" blue="0.47689298790000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <rect key="frame" x="19" y="497.5" width="337.5" height="50"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="aMp-7M-VwF"/>
+                                    <constraint firstAttribute="height" constant="50" id="aMp-7M-VwF"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <state key="normal" title="Entra">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" red="0.48201538710000003" green="0.081179716910000005" blue="0.0" alpha="0.70226883559999997" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
                                     <action selector="loginButtonClicked:" destination="Wuc-p9-wJ8" eventType="touchUpInside" id="Tf0-Qc-KMM"/>
@@ -102,7 +102,7 @@
                             <constraint firstItem="vHR-dQ-zxg" firstAttribute="leading" secondItem="lGb-k0-eMY" secondAttribute="trailing" constant="-130" id="JfU-G9-loI"/>
                             <constraint firstItem="9KB-Ho-3Xk" firstAttribute="centerY" secondItem="ftq-RX-tmK" secondAttribute="centerY" multiplier="0.8" id="MCx-90-85f"/>
                             <constraint firstItem="9KB-Ho-3Xk" firstAttribute="width" secondItem="IZe-ai-Is8" secondAttribute="width" multiplier="0.9" id="Qbg-TF-Iif"/>
-                            <constraint firstItem="9KB-Ho-3Xk" firstAttribute="height" secondItem="IZe-ai-Is8" secondAttribute="height" multiplier="0.5" id="ieP-ZI-CSc"/>
+                            <constraint firstItem="9KB-Ho-3Xk" firstAttribute="height" secondItem="IZe-ai-Is8" secondAttribute="height" multiplier="0.4" id="ieP-ZI-CSc"/>
                             <constraint firstItem="pAi-ia-HNu" firstAttribute="centerX" secondItem="ftq-RX-tmK" secondAttribute="centerX" id="lu4-lq-6Ea"/>
                             <constraint firstItem="vHR-dQ-zxg" firstAttribute="leading" secondItem="9KB-Ho-3Xk" secondAttribute="leading" id="wEr-qp-D1q"/>
                             <constraint firstItem="pAi-ia-HNu" firstAttribute="top" secondItem="vHR-dQ-zxg" secondAttribute="bottom" constant="26" id="xII-N2-OSC"/>
