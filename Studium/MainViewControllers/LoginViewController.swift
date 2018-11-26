@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var credentialLabel: UILabel!
@@ -20,14 +20,8 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     var yearsDataSource = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        //dati da scaricare
-        yearsDataSource.append("2014/2015")
-        yearsDataSource.append("2015/2016")
-        yearsDataSource.append("2016/2017")
-        yearsDataSource.append("2017/2018")
-        yearsDataSource.append("2018/2019")
-        
-        
+        getAndAddLoginYears()
+    
         loginButton.layer.cornerRadius = 7.0
         loginButton.clipsToBounds = true
         
@@ -38,20 +32,49 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         yearLabel.clipsToBounds = true
         
         loginButton.layer.borderWidth = 3.0
-        loginButton.layer.borderColor = #colorLiteral(red: 0.5277059674, green: 0, blue: 0, alpha: 0.7022688356)
+        loginButton.layer.borderColor = #colorLiteral(red: 0, green: 0.2044389844, blue: 0.4145363569, alpha: 0.7022688356)
 
         yearsPickerView.delegate = self
         
         // Do any additional setup after loading the view.
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.pickerTapped))
+        tap.cancelsTouchesInView = false
+        tap.delegate = self
+        yearsPickerView.addGestureRecognizer(tap)
+    }
+    
+    func getAndAddLoginYears(){
+        //dati da scaricare
+        
+        yearsDataSource.append("2018/2019")
+        yearsDataSource.append("2017/2018")
+        yearsDataSource.append("2016/2017")
+        yearsDataSource.append("2015/2016")
+        yearsDataSource.append("2014/2015")
+        
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true}
+    
+    
+    
+    
+    @objc func pickerTapped(tapRecognizer:UITapGestureRecognizer)
+    {
+        if (tapRecognizer.state == UIGestureRecognizer.State.ended){
+            self.view.endEditing(true)
+            self.usernameTextField.resignFirstResponder()
+            self.passwordTextField.resignFirstResponder()
+        }
+        
     }
     
     
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touch")
         self.view.endEditing(true)
-        self.usernameTextField.resignFirstResponder()
-        self.passwordTextField.resignFirstResponder()
+        
     }
     
     
