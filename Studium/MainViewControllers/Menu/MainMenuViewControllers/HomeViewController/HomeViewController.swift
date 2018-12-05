@@ -13,7 +13,8 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     
 
     @IBOutlet weak var departmentsTableView: UITableView!
-    @IBOutlet weak var departmentsTextField: UITextField!
+    @IBOutlet weak var departmentsSelectButton: UIButton!
+   // @IBOutlet weak var departmentsTextField: UITextField!
     var departmentsDataSource = [Departments]()
     var selectedDepartments : Departments! // in base a questa var cambia il contenuto della tabella CoursesTable
     
@@ -26,7 +27,13 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         self.departmentsTableView.reloadData()
         
         print(departmentsDataSource.count)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Corsi", style: .plain, target: self, action: #selector(segueToCorsiPetro))
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func segueToCorsiPetro(){
+        self.performSegue(withIdentifier: "segueToCorsi", sender: nil)
     }
     
     func getDepartments(){
@@ -67,7 +74,8 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.departmentsTableView{
-            self.departmentsTextField.text = self.departmentsDataSource[indexPath.row].name
+            self.departmentsSelectButton.setTitle(self.departmentsDataSource[indexPath.row].name, for: .normal)
+            
             self.view.endEditing(true)
             
             self.hideDepartmentTableAnimated()
@@ -94,11 +102,14 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         }
     }
 
-    @IBAction func departmentTextFieldEditingBegin(_ sender: Any) {
+    
+    @IBAction func departmentButtonClicked(_ sender: Any) {
         if self.departmentsTableView.isHidden == true{
             self.showDepartmentTableAnimated()
         }
     }
+    
+    
     
     func hideDepartmentTableAnimated(){
 
