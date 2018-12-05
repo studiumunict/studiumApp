@@ -70,6 +70,30 @@ class CorsoViewController: UIViewController, UIScrollViewDelegate, SWRevealViewC
         descrizioneView.frame = CGRect(x: viewAppoggio.bounds.width * 2, y: scrollView.contentOffset.y, width: scrollView.frame.width, height: viewAppoggio.bounds.height)
         documentiView.frame = CGRect(x: viewAppoggio.bounds.width * 3, y: scrollView.contentOffset.y, width: scrollView.frame.width, height: viewAppoggio.bounds.height)
         prenotazioniView.frame = CGRect(x: viewAppoggio.bounds.width * 4, y: scrollView.contentOffset.y, width: scrollView.frame.width, height: viewAppoggio.bounds.height)
+        
+        // ---
+        nomeProfessoreLabel.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.black, spessore: 0.7)
+        
+        vetrinaView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.black, spessore: 0.25)
+        vetrinaView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, spessore: 0.25)
+        avvisiView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.black, spessore: 0.25)
+        avvisiView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, spessore: 0.25)
+        descrizioneView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.black, spessore: 0.25)
+        descrizioneView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, spessore: 0.25)
+        documentiView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.black, spessore: 0.25)
+        documentiView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, spessore: 0.25)
+        prenotazioniView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.black, spessore: 0.25)
+        prenotazioniView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, spessore: 0.25)
+        
+        vetrinaButton.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, spessore: 0.7)
+        vetrinaButton.layer.addBorder(edge: UIRectEdge.top, color: UIColor.black, spessore: 1.0)
+        avvisiButton.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, spessore: 0.7)
+        avvisiButton.layer.addBorder(edge: UIRectEdge.top, color: UIColor.black, spessore: 1.0)
+        descrizioneButton.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, spessore: 0.7)
+        descrizioneButton.layer.addBorder(edge: UIRectEdge.top, color: UIColor.black, spessore: 1.0)
+        documentiButton.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, spessore: 0.7)
+        documentiButton.layer.addBorder(edge: UIRectEdge.top, color: UIColor.black, spessore: 1.0)
+        prenotazioniButton.layer.addBorder(edge: UIRectEdge.top, color: UIColor.black, spessore: 1.0)
     }
     
     override func viewWillAppear(_ animated: Bool) {
