@@ -204,10 +204,10 @@
             </objects>
             <point key="canvasLocation" x="-538.39999999999998" y="1922.7886056971515"/>
         </scene>
-        <!--Corso View Controller-->
+        <!--Course View Controller-->
         <scene sceneID="eQl-3D-NGP">
             <objects>
-                <viewController id="n1g-6i-V6L" customClass="CorsoViewController" customModule="Studium" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="n1g-6i-V6L" customClass="CourseViewController" customModule="Studium" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YiF-S2-Mc0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

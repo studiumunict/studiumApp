@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		135D120F21B8092200DA9C69 /* ExtensionCALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135D120E21B8092200DA9C69 /* ExtensionCALayer.swift */; };
-		13F8E3C221A9667200BBAD9B /* CorsoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F8E3C121A9667200BBAD9B /* CorsoViewController.swift */; };
+		13F8E3C221A9667200BBAD9B /* CourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F8E3C121A9667200BBAD9B /* CourseViewController.swift */; };
 		2759E77776A5A5155B4E2176 /* Pods_StudiumUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CDF896A1C96AD896583B6F2 /* Pods_StudiumUITests.framework */; };
 		9C06A22721AB6BC500E695DB /* DepartmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C06A22621AB6BC500E695DB /* DepartmentTableViewCell.swift */; };
 		9C06A22A21AB700200E695DB /* DepartmentClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C06A22921AB700200E695DB /* DepartmentClass.swift */; };
@@ -23,7 +23,6 @@
 		9CFE9DA521A8AE960030AE33 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE9DA421A8AE960030AE33 /* LoginViewController.swift */; };
 		9CFE9DA821A8BBEE0030AE33 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE9DA721A8BBEE0030AE33 /* MenuTableViewController.swift */; };
 		9CFE9DAB21A8BC6B0030AE33 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE9DAA21A8BC6B0030AE33 /* HomeViewController.swift */; };
-		9CFE9DAD21A8BC840030AE33 /* CourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE9DAC21A8BC840030AE33 /* CourseViewController.swift */; };
 		9CFE9DAF21A8BC8F0030AE33 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE9DAE21A8BC8F0030AE33 /* ProfileViewController.swift */; };
 		9CFE9DB121A8BC9A0030AE33 /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE9DB021A8BC9A0030AE33 /* DocumentsViewController.swift */; };
 		DCDCA30A0259D09056ED34DE /* Pods_StudiumTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 680AF054BAE403BD03DB8DA1 /* Pods_StudiumTests.framework */; };
@@ -51,7 +50,7 @@
 		0D0D5F6926FC3A70A81E131D /* Pods-StudiumTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudiumTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudiumTests/Pods-StudiumTests.release.xcconfig"; sourceTree = "<group>"; };
 		0E83DFE790C0A80B2F43811B /* Pods-StudiumUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudiumUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudiumUITests/Pods-StudiumUITests.release.xcconfig"; sourceTree = "<group>"; };
 		135D120E21B8092200DA9C69 /* ExtensionCALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionCALayer.swift; sourceTree = "<group>"; };
-		13F8E3C121A9667200BBAD9B /* CorsoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorsoViewController.swift; sourceTree = "<group>"; };
+		13F8E3C121A9667200BBAD9B /* CourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseViewController.swift; sourceTree = "<group>"; };
 		13F8E3CB21A9887E00BBAD9B /* SWRevealViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		13F8E3CE21A98A4000BBAD9B /* SWRevealViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		13F8E3D021A98C6900BBAD9B /* Studium-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Studium-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -79,7 +78,6 @@
 		9CFE9DA421A8AE960030AE33 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9CFE9DA721A8BBEE0030AE33 /* MenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		9CFE9DAA21A8BC6B0030AE33 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		9CFE9DAC21A8BC840030AE33 /* CourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseViewController.swift; sourceTree = "<group>"; };
 		9CFE9DAE21A8BC8F0030AE33 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		9CFE9DB021A8BC9A0030AE33 /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
 		ACC89C62786E9836B037027E /* Pods_Studium.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studium.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,7 +115,7 @@
 		13F8E3C321A9668600BBAD9B /* Corso */ = {
 			isa = PBXGroup;
 			children = (
-				13F8E3C121A9667200BBAD9B /* CorsoViewController.swift */,
+				13F8E3C121A9667200BBAD9B /* CourseViewController.swift */,
 			);
 			path = Corso;
 			sourceTree = "<group>";
@@ -240,7 +238,6 @@
 			children = (
 				9C06A22521AB6B8A00E695DB /* HomeViewController */,
 				13F8E3C321A9668600BBAD9B /* Corso */,
-				9CFE9DAC21A8BC840030AE33 /* CourseViewController.swift */,
 				9CFE9DAE21A8BC8F0030AE33 /* ProfileViewController.swift */,
 				9CFE9DB021A8BC9A0030AE33 /* DocumentsViewController.swift */,
 			);
@@ -476,13 +473,12 @@
 				9CFE9DB121A8BC9A0030AE33 /* DocumentsViewController.swift in Sources */,
 				9CFE9DA821A8BBEE0030AE33 /* MenuTableViewController.swift in Sources */,
 				9C06A22C21AB707500E695DB /* CourseClass.swift in Sources */,
-				13F8E3C221A9667200BBAD9B /* CorsoViewController.swift in Sources */,
+				13F8E3C221A9667200BBAD9B /* CourseViewController.swift in Sources */,
 				9CFE9DA521A8AE960030AE33 /* LoginViewController.swift in Sources */,
 				9CFE9D7B21A8ADBC0030AE33 /* Studium.xcdatamodeld in Sources */,
 				9CFE9DAF21A8BC8F0030AE33 /* ProfileViewController.swift in Sources */,
 				9C06A22721AB6BC500E695DB /* DepartmentTableViewCell.swift in Sources */,
 				9CFE9D7321A8ADBC0030AE33 /* AppDelegate.swift in Sources */,
-				9CFE9DAD21A8BC840030AE33 /* CourseViewController.swift in Sources */,
 				9C06A22A21AB700200E695DB /* DepartmentClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -661,7 +657,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7JSR847A9P;
+				DEVELOPMENT_TEAM = 22WBCLURAG;
 				INFOPLIST_FILE = Studium/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -684,7 +680,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7JSR847A9P;
+				DEVELOPMENT_TEAM = 22WBCLURAG;
 				INFOPLIST_FILE = Studium/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
