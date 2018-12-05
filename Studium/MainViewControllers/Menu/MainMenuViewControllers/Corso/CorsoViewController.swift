@@ -108,14 +108,20 @@ class CorsoViewController: UIViewController, UIScrollViewDelegate, SWRevealViewC
         }*/
         
         vetrinaButton.backgroundColor = UIColor.lightGray
-        avvisiButton.backgroundColor = UIColor.darkGray
-        descrizioneButton.backgroundColor = UIColor.darkGray
-        documentiButton.backgroundColor = UIColor.darkGray
-        prenotazioniButton.backgroundColor = UIColor.darkGray
+        avvisiButton.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
+        descrizioneButton.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
+        documentiButton.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
+        prenotazioniButton.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
     }
     
     
-    
+    func setAllDarkGray(){
+        vetrinaButton.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
+        avvisiButton.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
+        descrizioneButton.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
+        documentiButton.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
+        prenotazioniButton.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
+    }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //conta l'indice della pagina corrente
         let page = scrollView.contentOffset.x / scrollView.frame.size.width
@@ -123,34 +129,23 @@ class CorsoViewController: UIViewController, UIScrollViewDelegate, SWRevealViewC
         //i bottoni vengono evidenziati quando si cambia pagina
         switch Int(page) {
         case 0:
+            setAllDarkGray()
             vetrinaButton.backgroundColor = UIColor.lightGray
-            avvisiButton.backgroundColor = UIColor.darkGray
-            descrizioneButton.backgroundColor = UIColor.darkGray
-            documentiButton.backgroundColor = UIColor.darkGray
-            prenotazioniButton.backgroundColor = UIColor.darkGray
+            
         case 1:
-            vetrinaButton.backgroundColor = UIColor.darkGray
+            setAllDarkGray()
             avvisiButton.backgroundColor = UIColor.lightGray
-            descrizioneButton.backgroundColor = UIColor.darkGray
-            documentiButton.backgroundColor = UIColor.darkGray
-            prenotazioniButton.backgroundColor = UIColor.darkGray
+            
         case 2:
-            vetrinaButton.backgroundColor = UIColor.darkGray
-            avvisiButton.backgroundColor = UIColor.darkGray
+            setAllDarkGray()
             descrizioneButton.backgroundColor = UIColor.lightGray
-            documentiButton.backgroundColor = UIColor.darkGray
-            prenotazioniButton.backgroundColor = UIColor.darkGray
+            
         case 3:
-            vetrinaButton.backgroundColor = UIColor.darkGray
-            avvisiButton.backgroundColor = UIColor.darkGray
-            descrizioneButton.backgroundColor = UIColor.darkGray
+            setAllDarkGray()
             documentiButton.backgroundColor = UIColor.lightGray
-            prenotazioniButton.backgroundColor = UIColor.darkGray
+            
         case 4:
-            vetrinaButton.backgroundColor = UIColor.darkGray
-            avvisiButton.backgroundColor = UIColor.darkGray
-            descrizioneButton.backgroundColor = UIColor.darkGray
-            documentiButton.backgroundColor = UIColor.darkGray
+            setAllDarkGray()
             prenotazioniButton.backgroundColor = UIColor.lightGray
         default:
             break
@@ -159,42 +154,33 @@ class CorsoViewController: UIViewController, UIScrollViewDelegate, SWRevealViewC
 
     @IBAction func sendToVetrinaView(_ sender: UIButton) {
         scrollView.scrollRectToVisible(vetrinaView.frame, animated: false)
+        setAllDarkGray()
         vetrinaButton.backgroundColor = UIColor.lightGray
-        avvisiButton.backgroundColor = UIColor.darkGray
-        descrizioneButton.backgroundColor = UIColor.darkGray
-        documentiButton.backgroundColor = UIColor.darkGray
+        
     }
     
     @IBAction func sendToAvvisiView(_ sender: UIButton) {
         scrollView.scrollRectToVisible(avvisiView.frame, animated: false)
-        vetrinaButton.backgroundColor = UIColor.darkGray
-        avvisiButton.backgroundColor = UIColor.lightGray
-        descrizioneButton.backgroundColor = UIColor.darkGray
+        setAllDarkGray()
         documentiButton.backgroundColor = UIColor.darkGray
     }
     
     @IBAction func sendToDescrizioneView(_ sender: UIButton) {
         scrollView.scrollRectToVisible(descrizioneView.frame, animated: false)
-        vetrinaButton.backgroundColor = UIColor.darkGray
-        avvisiButton.backgroundColor = UIColor.darkGray
+        setAllDarkGray()
         descrizioneButton.backgroundColor = UIColor.lightGray
-        documentiButton.backgroundColor = UIColor.darkGray
+        
     }
     
     @IBAction func sendToDocumentiView(_ sender: UIButton) {
         scrollView.scrollRectToVisible(documentiView.frame, animated: false)
-        vetrinaButton.backgroundColor = UIColor.darkGray
-        avvisiButton.backgroundColor = UIColor.darkGray
-        descrizioneButton.backgroundColor = UIColor.darkGray
+        setAllDarkGray()
         documentiButton.backgroundColor = UIColor.lightGray
     }
     
     @IBAction func sendToPrenotazioniView(_ sender: UIButton) {
         scrollView.scrollRectToVisible(prenotazioniView.frame, animated: false)
-        vetrinaButton.backgroundColor = UIColor.darkGray
-        avvisiButton.backgroundColor = UIColor.darkGray
-        descrizioneButton.backgroundColor = UIColor.darkGray
-        documentiButton.backgroundColor = UIColor.darkGray
+        setAllDarkGray()
         prenotazioniButton.backgroundColor = UIColor.lightGray
     }
     

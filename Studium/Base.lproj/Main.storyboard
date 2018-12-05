@@ -95,7 +95,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="vHR-dQ-zxg" firstAttribute="top" secondItem="9KB-Ho-3Xk" secondAttribute="bottom" constant="32.5" id="Bdd-nS-BJa"/>
                             <constraint firstItem="pAi-ia-HNu" firstAttribute="width" secondItem="IZe-ai-Is8" secondAttribute="width" multiplier="0.9" id="ElR-pw-8Kf"/>
@@ -146,14 +146,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C7Y-bl-FAq">
-                                                    <rect key="frame" x="9" y="0.0" width="338" height="49.5"/>
+                                                    <rect key="frame" x="18" y="0.0" width="320" height="49.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="C7Y-bl-FAq" firstAttribute="width" secondItem="SvI-Tw-eGl" secondAttribute="width" multiplier="0.95" id="340-4f-nNp"/>
+                                                <constraint firstItem="C7Y-bl-FAq" firstAttribute="width" secondItem="SvI-Tw-eGl" secondAttribute="width" multiplier="0.9" id="340-4f-nNp"/>
                                                 <constraint firstItem="C7Y-bl-FAq" firstAttribute="height" secondItem="SvI-Tw-eGl" secondAttribute="height" id="9AQ-jC-rEd"/>
                                                 <constraint firstItem="C7Y-bl-FAq" firstAttribute="centerX" secondItem="SvI-Tw-eGl" secondAttribute="centerX" id="AXu-3j-jrb"/>
                                                 <constraint firstItem="C7Y-bl-FAq" firstAttribute="centerY" secondItem="SvI-Tw-eGl" secondAttribute="centerY" id="fIe-lJ-d5a"/>
@@ -181,7 +181,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.47689298790000001" green="0.47689298790000001" blue="0.47689298790000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.069202016140000003" green="0.069202016140000003" blue="0.069202016140000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="uPP-QE-Iig" firstAttribute="centerX" secondItem="pvS-qg-F5m" secondAttribute="centerX" id="17r-Ah-S6S"/>
                             <constraint firstItem="I0a-dP-J9e" firstAttribute="width" secondItem="hoX-vv-RsY" secondAttribute="width" multiplier="0.95" id="CHv-Gi-cVb"/>
@@ -325,7 +325,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qrt-G7-45q">
                                         <rect key="frame" x="0.0" y="0.0" width="75" height="60"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                         <state key="normal" title="Vetrina">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -336,7 +336,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XH4-vB-odC">
                                         <rect key="frame" x="75" y="0.0" width="75" height="60"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                         <state key="normal" title="Avvisi">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -347,7 +347,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ioA-WR-O94">
                                         <rect key="frame" x="150" y="0.0" width="75" height="60"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                         <state key="normal" title="Desc">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -358,7 +358,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fu3-dj-jqI">
                                         <rect key="frame" x="225" y="0.0" width="75" height="60"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                         <state key="normal" title="Doc">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -369,6 +369,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvz-Dh-4cG">
                                         <rect key="frame" x="300" y="0.0" width="75" height="60"/>
+                                        <color key="backgroundColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                         <state key="normal" title="Pren">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -378,6 +379,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <color key="backgroundColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="ioA-WR-O94" firstAttribute="centerY" secondItem="XH4-vB-odC" secondAttribute="centerY" id="3bo-mm-nw9"/>
                                     <constraint firstItem="qrt-G7-45q" firstAttribute="leading" secondItem="XXN-dc-0jk" secondAttribute="leading" id="6Ro-sh-6ZW"/>
@@ -399,7 +401,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="iaP-kY-GH5" firstAttribute="trailing" secondItem="3zr-8d-cb0" secondAttribute="trailing" id="1jd-Qq-4Os"/>
                             <constraint firstItem="XXN-dc-0jk" firstAttribute="bottom" secondItem="iaP-kY-GH5" secondAttribute="bottom" id="4Zn-pa-DXC"/>

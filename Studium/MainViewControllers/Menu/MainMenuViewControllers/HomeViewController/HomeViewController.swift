@@ -28,6 +28,8 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         
         print(departmentsDataSource.count)
         
+        departmentsSelectButton.layer.cornerRadius = 5.0
+        departmentsSelectButton.clipsToBounds = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Corsi", style: .plain, target: self, action: #selector(segueToCorsiPetro))
         // Do any additional setup after loading the view.
     }
@@ -38,6 +40,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     
     func getDepartments(){
         departmentsDataSource.append(Departments.init(depName: "Matematica e Informatica", depCode: 1))
+        departmentsDataSource.append(Departments.init(depName: "Ingegneria informatica", depCode: 2))
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -74,6 +77,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.departmentsTableView{
+            self.departmentsSelectButton.setTitleColor(UIColor.darkGray, for: .normal)
             self.departmentsSelectButton.setTitle(self.departmentsDataSource[indexPath.row].name, for: .normal)
             
             self.view.endEditing(true)
