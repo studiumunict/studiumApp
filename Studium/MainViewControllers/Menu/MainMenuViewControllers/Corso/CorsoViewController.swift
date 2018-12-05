@@ -13,10 +13,12 @@ class CorsoViewController: UIViewController, UIScrollViewDelegate, SWRevealViewC
     @IBOutlet var viewAppoggio: UIView! //Contiene la scrollView
     @IBOutlet var scrollView: UIScrollView!
     
+    // --- MARK: Stack View ---
     @IBOutlet var vetrinaButton: UIButton!
     @IBOutlet var avvisiButton: UIButton!
     @IBOutlet var descrizioneButton: UIButton!
     @IBOutlet var documentiButton: UIButton!
+    @IBOutlet var prenotazioniButton: UIButton!
     
     @IBOutlet var nomeCorsoLabel: UILabel!
     @IBOutlet var nomeProfessoreLabel: UILabel!
@@ -41,13 +43,17 @@ class CorsoViewController: UIViewController, UIScrollViewDelegate, SWRevealViewC
     // --- MARK: Documenti View ---
     @IBOutlet var documentiView: UIView!
     
+    // --- MARK: Prenotazioni View ---
+    @IBOutlet var prenotazioniView: UIView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*if revealViewController() != nil { //Menu laterale
-            revealViewController().rearViewRevealWidth = view.bounds.width - 70
+        //Definire le dimensioni dei menu
+        /*if revealViewController() != nil {
+            revealViewController().rearViewRevealWidth = view.bounds.width - 70 //Menu sx
+            revealViewController()?.rightViewController = 160 //Menu dx
             revealViewController().delegate = self
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }*/
@@ -56,21 +62,23 @@ class CorsoViewController: UIViewController, UIScrollViewDelegate, SWRevealViewC
         
         scrollView.delegate = self
         scrollView.bounds.size = CGSize(width: viewAppoggio.frame.width, height: scrollView.frame.height) //definisco le dimensioni reali
-        scrollView.contentSize = CGSize(width: viewAppoggio.frame.width * 4, height: scrollView.frame.height) //definisco il 'range' o contenuto della scrollView
+        scrollView.contentSize = CGSize(width: viewAppoggio.frame.width * 5, height: scrollView.frame.height) //definisco il 'range' o contenuto della scrollView
         
         //imposta le dimensione e le posizioni delle varie pagine rispetto alla scrollView
         vetrinaView.frame = CGRect(x: 0, y: 0, width: viewAppoggio.frame.width, height: viewAppoggio.frame.height)
         avvisiView.frame = CGRect(x: viewAppoggio.bounds.width, y: scrollView.contentOffset.y, width: scrollView.frame.width, height: viewAppoggio.bounds.height)
         descrizioneView.frame = CGRect(x: viewAppoggio.bounds.width * 2, y: scrollView.contentOffset.y, width: scrollView.frame.width, height: viewAppoggio.bounds.height)
         documentiView.frame = CGRect(x: viewAppoggio.bounds.width * 3, y: scrollView.contentOffset.y, width: scrollView.frame.width, height: viewAppoggio.bounds.height)
-        
+        prenotazioniView.frame = CGRect(x: viewAppoggio.bounds.width * 4, y: scrollView.contentOffset.y, width: scrollView.frame.width, height: viewAppoggio.bounds.height)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        /*if revealViewController() != nil { //Menu laterale
-            revealViewController().rearViewRevealWidth = view.bounds.width - 70
+        //Definire le dimensioni dei menu
+        /*if revealViewController() != nil {
+         revealViewController().rearViewRevealWidth = view.bounds.width - 70 //Menu sx
+         revealViewController()?.rightViewController = 160 //Menu dx
             revealViewController().delegate = self
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }*/
@@ -79,6 +87,7 @@ class CorsoViewController: UIViewController, UIScrollViewDelegate, SWRevealViewC
         avvisiButton.backgroundColor = UIColor.darkGray
         descrizioneButton.backgroundColor = UIColor.darkGray
         documentiButton.backgroundColor = UIColor.darkGray
+        prenotazioniButton.backgroundColor = UIColor.darkGray
     }
     
     
@@ -94,21 +103,31 @@ class CorsoViewController: UIViewController, UIScrollViewDelegate, SWRevealViewC
             avvisiButton.backgroundColor = UIColor.darkGray
             descrizioneButton.backgroundColor = UIColor.darkGray
             documentiButton.backgroundColor = UIColor.darkGray
+            prenotazioniButton.backgroundColor = UIColor.darkGray
         case 1:
             vetrinaButton.backgroundColor = UIColor.darkGray
             avvisiButton.backgroundColor = UIColor.lightGray
             descrizioneButton.backgroundColor = UIColor.darkGray
             documentiButton.backgroundColor = UIColor.darkGray
+            prenotazioniButton.backgroundColor = UIColor.darkGray
         case 2:
             vetrinaButton.backgroundColor = UIColor.darkGray
             avvisiButton.backgroundColor = UIColor.darkGray
             descrizioneButton.backgroundColor = UIColor.lightGray
             documentiButton.backgroundColor = UIColor.darkGray
+            prenotazioniButton.backgroundColor = UIColor.darkGray
         case 3:
             vetrinaButton.backgroundColor = UIColor.darkGray
             avvisiButton.backgroundColor = UIColor.darkGray
             descrizioneButton.backgroundColor = UIColor.darkGray
             documentiButton.backgroundColor = UIColor.lightGray
+            prenotazioniButton.backgroundColor = UIColor.darkGray
+        case 4:
+            vetrinaButton.backgroundColor = UIColor.darkGray
+            avvisiButton.backgroundColor = UIColor.darkGray
+            descrizioneButton.backgroundColor = UIColor.darkGray
+            documentiButton.backgroundColor = UIColor.darkGray
+            prenotazioniButton.backgroundColor = UIColor.lightGray
         default:
             break
         }
@@ -138,7 +157,7 @@ class CorsoViewController: UIViewController, UIScrollViewDelegate, SWRevealViewC
         documentiButton.backgroundColor = UIColor.darkGray
     }
     
-    @IBAction func sendToDocumentiView(_ sender: Any) {
+    @IBAction func sendToDocumentiView(_ sender: UIButton) {
         scrollView.scrollRectToVisible(documentiView.frame, animated: false)
         vetrinaButton.backgroundColor = UIColor.darkGray
         avvisiButton.backgroundColor = UIColor.darkGray
@@ -146,6 +165,14 @@ class CorsoViewController: UIViewController, UIScrollViewDelegate, SWRevealViewC
         documentiButton.backgroundColor = UIColor.lightGray
     }
     
+    @IBAction func sendToPrenotazioniView(_ sender: UIButton) {
+        scrollView.scrollRectToVisible(prenotazioniView.frame, animated: false)
+        vetrinaButton.backgroundColor = UIColor.darkGray
+        avvisiButton.backgroundColor = UIColor.darkGray
+        descrizioneButton.backgroundColor = UIColor.darkGray
+        documentiButton.backgroundColor = UIColor.darkGray
+        prenotazioniButton.backgroundColor = UIColor.lightGray
+    }
     
     
     

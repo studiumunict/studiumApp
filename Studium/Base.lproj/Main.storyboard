@@ -273,9 +273,10 @@
                                                         <rect key="frame" x="8" y="148" width="359" height="361"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                        <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 1230756774 Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 24/05/2018 consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. 23 giugno</mutableString>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <dataDetectorType key="dataDetectorTypes" link="YES" calendarEvent="YES"/>
                                                     </textView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -284,18 +285,24 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="517"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="UuD-an-hck">
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="UuD-an-hck">
                                                         <rect key="frame" x="8" y="8" width="359" height="501"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <dataDetectorType key="dataDetectorTypes" link="YES" calendarEvent="YES"/>
                                                     </textView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L5D-go-otu">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="517"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rvT-Xm-RM4">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="517"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -315,7 +322,7 @@
                                 <rect key="frame" x="0.0" y="607" width="375" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qrt-G7-45q">
-                                        <rect key="frame" x="0.0" y="0.0" width="94" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="75" height="60"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                         <state key="normal" title="Vetrina">
@@ -326,7 +333,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XH4-vB-odC">
-                                        <rect key="frame" x="94" y="0.0" width="93.5" height="60"/>
+                                        <rect key="frame" x="75" y="0.0" width="75" height="60"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                         <state key="normal" title="Avvisi">
@@ -337,7 +344,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ioA-WR-O94">
-                                        <rect key="frame" x="187.5" y="0.0" width="94" height="60"/>
+                                        <rect key="frame" x="150" y="0.0" width="75" height="60"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                         <state key="normal" title="Desc">
@@ -348,7 +355,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fu3-dj-jqI">
-                                        <rect key="frame" x="281.5" y="0.0" width="93.5" height="60"/>
+                                        <rect key="frame" x="225" y="0.0" width="75" height="60"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                         <state key="normal" title="Doc">
@@ -358,19 +365,32 @@
                                             <action selector="sendToDocumentiView:" destination="n1g-6i-V6L" eventType="touchUpInside" id="1y6-wP-0od"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvz-Dh-4cG">
+                                        <rect key="frame" x="300" y="0.0" width="75" height="60"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <state key="normal" title="Pren">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="sendToPrenotazioniView:" destination="n1g-6i-V6L" eventType="touchUpInside" id="r4w-vE-bW5"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="ioA-WR-O94" firstAttribute="centerY" secondItem="XH4-vB-odC" secondAttribute="centerY" id="3bo-mm-nw9"/>
                                     <constraint firstItem="qrt-G7-45q" firstAttribute="leading" secondItem="XXN-dc-0jk" secondAttribute="leading" id="6Ro-sh-6ZW"/>
                                     <constraint firstAttribute="height" constant="60" id="9fA-kz-GIe"/>
                                     <constraint firstItem="XH4-vB-odC" firstAttribute="centerY" secondItem="qrt-G7-45q" secondAttribute="centerY" id="BVO-5H-fB5"/>
+                                    <constraint firstItem="uvz-Dh-4cG" firstAttribute="centerY" secondItem="fu3-dj-jqI" secondAttribute="centerY" id="H2E-KN-c6k"/>
                                     <constraint firstItem="ioA-WR-O94" firstAttribute="width" secondItem="XH4-vB-odC" secondAttribute="width" id="I7B-c2-Rim"/>
+                                    <constraint firstItem="uvz-Dh-4cG" firstAttribute="width" secondItem="fu3-dj-jqI" secondAttribute="width" id="WOZ-jo-ZhH"/>
+                                    <constraint firstItem="uvz-Dh-4cG" firstAttribute="height" secondItem="fu3-dj-jqI" secondAttribute="height" id="bK4-gr-aIk"/>
                                     <constraint firstItem="qrt-G7-45q" firstAttribute="centerY" secondItem="XXN-dc-0jk" secondAttribute="centerY" id="ciZ-U6-j7H"/>
                                     <constraint firstItem="fu3-dj-jqI" firstAttribute="height" secondItem="ioA-WR-O94" secondAttribute="height" id="ggK-hP-PXj"/>
                                     <constraint firstItem="ioA-WR-O94" firstAttribute="height" secondItem="XH4-vB-odC" secondAttribute="height" id="hAV-aI-kjA"/>
                                     <constraint firstItem="qrt-G7-45q" firstAttribute="height" secondItem="XXN-dc-0jk" secondAttribute="height" id="iar-N3-5hp"/>
                                     <constraint firstItem="XH4-vB-odC" firstAttribute="width" secondItem="qrt-G7-45q" secondAttribute="width" id="maX-us-UxF"/>
-                                    <constraint firstItem="qrt-G7-45q" firstAttribute="width" secondItem="XXN-dc-0jk" secondAttribute="width" multiplier="0.25" id="nyN-Lp-I7d"/>
+                                    <constraint firstItem="qrt-G7-45q" firstAttribute="width" secondItem="XXN-dc-0jk" secondAttribute="width" multiplier="0.2" id="nyN-Lp-I7d"/>
                                     <constraint firstItem="XH4-vB-odC" firstAttribute="height" secondItem="qrt-G7-45q" secondAttribute="height" id="pki-wE-7nK"/>
                                     <constraint firstItem="fu3-dj-jqI" firstAttribute="width" secondItem="ioA-WR-O94" secondAttribute="width" id="q4I-Pp-1or"/>
                                     <constraint firstItem="fu3-dj-jqI" firstAttribute="centerY" secondItem="ioA-WR-O94" secondAttribute="centerY" id="yrl-YX-X1W"/>
@@ -409,6 +429,8 @@
                         <outlet property="messaggioErroreLabelVetrinaView" destination="IZK-7E-iNU" id="cWo-qC-lOV"/>
                         <outlet property="nomeCorsoLabel" destination="7zE-yR-aJ7" id="9kd-YR-bZm"/>
                         <outlet property="nomeProfessoreLabel" destination="3zr-8d-cb0" id="Bkc-EZ-s2P"/>
+                        <outlet property="prenotazioniButton" destination="uvz-Dh-4cG" id="UMz-R0-ZeZ"/>
+                        <outlet property="prenotazioniView" destination="rvT-Xm-RM4" id="01A-Fg-cCb"/>
                         <outlet property="scrollView" destination="frq-Sf-c7i" id="79m-GS-n7G"/>
                         <outlet property="testoAvvisoTextView" destination="qyY-4V-xfP" id="vu3-tC-chB"/>
                         <outlet property="titoloAvvisoLabel" destination="1G7-y2-R6A" id="wWz-xh-8cc"/>
