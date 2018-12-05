@@ -107,7 +107,7 @@ class CorsoViewController: UIViewController, UIScrollViewDelegate, SWRevealViewC
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }*/
         
-        vetrinaButton.backgroundColor = UIColor.lightGray
+        vetrinaButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
         avvisiButton.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
         descrizioneButton.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
         documentiButton.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
@@ -130,23 +130,23 @@ class CorsoViewController: UIViewController, UIScrollViewDelegate, SWRevealViewC
         switch Int(page) {
         case 0:
             setAllDarkGray()
-            vetrinaButton.backgroundColor = UIColor.lightGray
+            vetrinaButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
             
         case 1:
             setAllDarkGray()
-            avvisiButton.backgroundColor = UIColor.lightGray
+            avvisiButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
             
         case 2:
             setAllDarkGray()
-            descrizioneButton.backgroundColor = UIColor.lightGray
+            descrizioneButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
             
         case 3:
             setAllDarkGray()
-            documentiButton.backgroundColor = UIColor.lightGray
+            documentiButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
             
         case 4:
             setAllDarkGray()
-            prenotazioniButton.backgroundColor = UIColor.lightGray
+            prenotazioniButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
         default:
             break
         }
@@ -155,33 +155,32 @@ class CorsoViewController: UIViewController, UIScrollViewDelegate, SWRevealViewC
     @IBAction func sendToVetrinaView(_ sender: UIButton) {
         scrollView.scrollRectToVisible(vetrinaView.frame, animated: false)
         setAllDarkGray()
-        vetrinaButton.backgroundColor = UIColor.lightGray
+        vetrinaButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
         
     }
     
     @IBAction func sendToAvvisiView(_ sender: UIButton) {
         scrollView.scrollRectToVisible(avvisiView.frame, animated: false)
         setAllDarkGray()
-        documentiButton.backgroundColor = UIColor.darkGray
+        avvisiButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
     }
     
     @IBAction func sendToDescrizioneView(_ sender: UIButton) {
         scrollView.scrollRectToVisible(descrizioneView.frame, animated: false)
         setAllDarkGray()
-        descrizioneButton.backgroundColor = UIColor.lightGray
-        
+        descrizioneButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
     }
     
     @IBAction func sendToDocumentiView(_ sender: UIButton) {
         scrollView.scrollRectToVisible(documentiView.frame, animated: false)
         setAllDarkGray()
-        documentiButton.backgroundColor = UIColor.lightGray
+        documentiButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
     }
     
     @IBAction func sendToPrenotazioniView(_ sender: UIButton) {
         scrollView.scrollRectToVisible(prenotazioniView.frame, animated: false)
         setAllDarkGray()
-        prenotazioniButton.backgroundColor = UIColor.lightGray
+        prenotazioniButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
     }
     
     
