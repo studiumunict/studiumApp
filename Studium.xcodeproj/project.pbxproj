@@ -12,7 +12,10 @@
 		2759E77776A5A5155B4E2176 /* Pods_StudiumUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CDF896A1C96AD896583B6F2 /* Pods_StudiumUITests.framework */; };
 		9C06A22721AB6BC500E695DB /* DepartmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C06A22621AB6BC500E695DB /* DepartmentTableViewCell.swift */; };
 		9C06A22A21AB700200E695DB /* DepartmentClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C06A22921AB700200E695DB /* DepartmentClass.swift */; };
-		9C06A22C21AB707500E695DB /* CourseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C06A22B21AB707500E695DB /* CourseClass.swift */; };
+		9C06A22C21AB707500E695DB /* CDLClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C06A22B21AB707500E695DB /* CDLClass.swift */; };
+		9CFE72C121B9508E001EB697 /* CDLTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE72C021B9508E001EB697 /* CDLTableViewCell.swift */; };
+		9CFE72C321B95206001EB697 /* TeachingClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE72C221B95206001EB697 /* TeachingClass.swift */; };
+		9CFE72C521B95331001EB697 /* HomeTableSectionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE72C421B95331001EB697 /* HomeTableSectionClass.swift */; };
 		9CFE9D7321A8ADBC0030AE33 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE9D7221A8ADBC0030AE33 /* AppDelegate.swift */; };
 		9CFE9D7821A8ADBC0030AE33 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CFE9D7621A8ADBC0030AE33 /* Main.storyboard */; };
 		9CFE9D7B21A8ADBC0030AE33 /* Studium.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE9D7921A8ADBC0030AE33 /* Studium.xcdatamodeld */; };
@@ -61,7 +64,10 @@
 		7B2EB8B6FB4CA8EFFB172DA4 /* Pods-StudiumUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudiumUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudiumUITests/Pods-StudiumUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9C06A22621AB6BC500E695DB /* DepartmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentTableViewCell.swift; sourceTree = "<group>"; };
 		9C06A22921AB700200E695DB /* DepartmentClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentClass.swift; sourceTree = "<group>"; };
-		9C06A22B21AB707500E695DB /* CourseClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseClass.swift; sourceTree = "<group>"; };
+		9C06A22B21AB707500E695DB /* CDLClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDLClass.swift; sourceTree = "<group>"; };
+		9CFE72C021B9508E001EB697 /* CDLTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDLTableViewCell.swift; sourceTree = "<group>"; };
+		9CFE72C221B95206001EB697 /* TeachingClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingClass.swift; sourceTree = "<group>"; };
+		9CFE72C421B95331001EB697 /* HomeTableSectionClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableSectionClass.swift; sourceTree = "<group>"; };
 		9CFE9D6F21A8ADBC0030AE33 /* Studium.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Studium.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CFE9D7221A8ADBC0030AE33 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9CFE9D7721A8ADBC0030AE33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -144,6 +150,7 @@
 			children = (
 				9CFE9DAA21A8BC6B0030AE33 /* HomeViewController.swift */,
 				9C06A22621AB6BC500E695DB /* DepartmentTableViewCell.swift */,
+				9CFE72C021B9508E001EB697 /* CDLTableViewCell.swift */,
 			);
 			path = HomeViewController;
 			sourceTree = "<group>";
@@ -152,7 +159,9 @@
 			isa = PBXGroup;
 			children = (
 				9C06A22921AB700200E695DB /* DepartmentClass.swift */,
-				9C06A22B21AB707500E695DB /* CourseClass.swift */,
+				9C06A22B21AB707500E695DB /* CDLClass.swift */,
+				9CFE72C221B95206001EB697 /* TeachingClass.swift */,
+				9CFE72C421B95331001EB697 /* HomeTableSectionClass.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -472,13 +481,16 @@
 				135D120F21B8092200DA9C69 /* ExtensionCALayer.swift in Sources */,
 				9CFE9DB121A8BC9A0030AE33 /* DocumentsViewController.swift in Sources */,
 				9CFE9DA821A8BBEE0030AE33 /* MenuTableViewController.swift in Sources */,
-				9C06A22C21AB707500E695DB /* CourseClass.swift in Sources */,
+				9C06A22C21AB707500E695DB /* CDLClass.swift in Sources */,
 				13F8E3C221A9667200BBAD9B /* CourseViewController.swift in Sources */,
 				9CFE9DA521A8AE960030AE33 /* LoginViewController.swift in Sources */,
+				9CFE72C521B95331001EB697 /* HomeTableSectionClass.swift in Sources */,
 				9CFE9D7B21A8ADBC0030AE33 /* Studium.xcdatamodeld in Sources */,
 				9CFE9DAF21A8BC8F0030AE33 /* ProfileViewController.swift in Sources */,
+				9CFE72C321B95206001EB697 /* TeachingClass.swift in Sources */,
 				9C06A22721AB6BC500E695DB /* DepartmentTableViewCell.swift in Sources */,
 				9CFE9D7321A8ADBC0030AE33 /* AppDelegate.swift in Sources */,
+				9CFE72C121B9508E001EB697 /* CDLTableViewCell.swift in Sources */,
 				9C06A22A21AB700200E695DB /* DepartmentClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -657,7 +669,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 22WBCLURAG;
+				DEVELOPMENT_TEAM = 7JSR847A9P;
 				INFOPLIST_FILE = Studium/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -680,7 +692,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 22WBCLURAG;
+				DEVELOPMENT_TEAM = 7JSR847A9P;
 				INFOPLIST_FILE = Studium/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

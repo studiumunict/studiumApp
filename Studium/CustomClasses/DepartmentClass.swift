@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class Departments{
+class Department{
     
     var name :String!
     var code :Int!

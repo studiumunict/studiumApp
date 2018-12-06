@@ -134,7 +134,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="I0a-dP-J9e">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hDA-9f-FuP">
+                                <rect key="frame" x="9.5" y="111" width="356" height="556"/>
+                                <color key="backgroundColor" red="0.069202016140000003" green="0.069202016140000003" blue="0.069202016140000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="separatorColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CDLCell" id="3EK-s8-Pwj" customClass="CDLTableViewCell" customModule="Studium" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="356" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3EK-s8-Pwj" id="8IH-Cs-grd">
+                                            <rect key="frame" x="0.0" y="0.0" width="356" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dr-aU-cAS">
+                                                    <rect key="frame" x="17.5" y="-3" width="320" height="49.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.96879995200000002" green="0.96879995200000002" blue="0.96879995200000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.069202016140000003" green="0.069202016140000003" blue="0.069202016140000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <connections>
+                                            <outlet property="CDLnameLabel" destination="9dr-aU-cAS" id="pFG-nV-bsX"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="I0a-dP-J9e">
                                 <rect key="frame" x="9.5" y="111" width="356" height="556"/>
                                 <color key="backgroundColor" red="0.94168385152284262" green="0.94168385152284262" blue="0.94168385152284262" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
@@ -185,16 +213,21 @@
                         <constraints>
                             <constraint firstItem="uPP-QE-Iig" firstAttribute="centerX" secondItem="pvS-qg-F5m" secondAttribute="centerX" id="17r-Ah-S6S"/>
                             <constraint firstItem="I0a-dP-J9e" firstAttribute="width" secondItem="hoX-vv-RsY" secondAttribute="width" multiplier="0.95" id="CHv-Gi-cVb"/>
+                            <constraint firstItem="pvS-qg-F5m" firstAttribute="bottom" secondItem="hDA-9f-FuP" secondAttribute="bottom" id="E91-li-E73"/>
+                            <constraint firstItem="hDA-9f-FuP" firstAttribute="top" secondItem="uPP-QE-Iig" secondAttribute="bottom" constant="-3" id="EcC-Zg-r56"/>
                             <constraint firstItem="pvS-qg-F5m" firstAttribute="top" secondItem="uPP-QE-Iig" secondAttribute="top" constant="-10" id="LNO-aQ-bNY"/>
                             <constraint firstItem="I0a-dP-J9e" firstAttribute="top" secondItem="uPP-QE-Iig" secondAttribute="bottom" constant="-3" id="NSI-Nv-2g0"/>
                             <constraint firstItem="uPP-QE-Iig" firstAttribute="width" secondItem="hoX-vv-RsY" secondAttribute="width" multiplier="0.95" id="NyE-66-1HH"/>
                             <constraint firstItem="I0a-dP-J9e" firstAttribute="bottom" secondItem="pvS-qg-F5m" secondAttribute="bottom" id="Oo2-GJ-xpI"/>
+                            <constraint firstItem="hDA-9f-FuP" firstAttribute="centerX" secondItem="pvS-qg-F5m" secondAttribute="centerX" id="iO6-ER-Lk6"/>
+                            <constraint firstItem="hDA-9f-FuP" firstAttribute="width" secondItem="hoX-vv-RsY" secondAttribute="width" multiplier="0.95" id="kiv-KP-7tP"/>
                             <constraint firstItem="I0a-dP-J9e" firstAttribute="centerX" secondItem="pvS-qg-F5m" secondAttribute="centerX" id="vGL-6q-gkA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pvS-qg-F5m"/>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="jhF-Gw-TMV"/>
                     <connections>
+                        <outlet property="cdlTableView" destination="hDA-9f-FuP" id="nP1-gK-0qa"/>
                         <outlet property="departmentsSelectButton" destination="uPP-QE-Iig" id="gP3-U5-hzO"/>
                         <outlet property="departmentsTableView" destination="I0a-dP-J9e" id="unp-Te-o4w"/>
                         <segue destination="aqe-Yk-Phq" kind="show" identifier="segueToCorsi" id="rDa-ii-Lwh"/>
