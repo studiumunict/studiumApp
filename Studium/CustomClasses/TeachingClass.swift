@@ -11,10 +11,23 @@ import Foundation
 class Teaching{
     var name: String!
     var code: Int!
+    var teacherName: String!
+    var haveShowcase: Bool! = false
+    var haveDescription: Bool! = false
+    var haveDocuments: Bool! = false
+    var haveBooking: Bool! = false
+    var descriptionText: String! = nil
+    //...
     
-    init(teachingName: String, teachingCode :Int) {
+    init(teachingName: String, teachingCode: Int) {
         self.name = teachingName
         self.code = teachingCode
+    }
+    
+    init(teachingName: String, teachingCode: Int, teacherName: String){
+        self.name = teachingName;
+        self.code = teachingCode;
+        self.teacherName = teacherName;
     }
     
 }
