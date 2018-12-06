@@ -189,6 +189,9 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         if self.departmentsTableView.isHidden == true{
             self.showDepartmentTableAnimated()
         }
+        else {
+            self.hideDepartmentTableAnimated()
+        }
     }
     
     
