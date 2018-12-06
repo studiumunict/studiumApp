@@ -1,5 +1,5 @@
 //
-//  CourseViewController.swift
+//  TeachingViewController.swift
 //  Studium
 //
 //  Created by Francesco Petrosino on 24/11/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CourseViewController: UIViewController, UIScrollViewDelegate, SWRevealViewControllerDelegate {
+class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealViewControllerDelegate {
 
     @IBOutlet var viewAppoggio: UIView! //Contiene la scrollView
     @IBOutlet var scrollView: UIScrollView!
@@ -48,6 +48,10 @@ class CourseViewController: UIViewController, UIScrollViewDelegate, SWRevealView
     @IBOutlet var bookingView: UIView!
     
     
+    // --- MARK: Variables ---
+    var teachingDataSource: Teaching!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,6 +61,35 @@ class CourseViewController: UIViewController, UIScrollViewDelegate, SWRevealView
             revealViewController()?.rightViewController = 160 //Menu dx
             revealViewController().delegate = self
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+        }*/
+        teachingDataSource = Teaching(teachingName: "Telecomunicazioni", teachingCode: 123, teacherName: "Allocco")
+        courseNameLabel.text = teachingDataSource.name
+        nameTeacherLabel.text = teachingDataSource.teacherName
+        navigationItem.title = String(teachingDataSource.code)
+        
+        if teachingDataSource.haveShowcase {
+            errorMessageLabelShowcaseView.isHidden = true
+            loadingIndicatorShowcaseView.isHidden = true
+        } else {
+            errorMessageLabelShowcaseView.isHidden = false
+        }
+        
+        if teachingDataSource.haveDescription {
+            descriptionMessageTextView.text = teachingDataSource.descriptionText
+        } else {
+            descriptionMessageTextView.text = "Nessuna descrizione per questo insegnamento."
+        }
+        
+        /*if teachingDataSource.haveDocuments {
+            <#statements#>
+        } else {
+            <#statements#>
+        }
+        
+        if teachingDataSource.haveBooking {
+            <#statements#>
+        } else {
+            <#statements#>
         }*/
         
         viewAppoggio.bounds.size = CGSize(width: self.view.frame.width, height: self.view.frame.height - (stackView.frame.height + courseNameLabel.frame.height + nameTeacherLabel.frame.height)) //definisco le dimensioni reali e di autolayout per la scrollView

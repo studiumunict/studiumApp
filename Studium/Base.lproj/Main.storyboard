@@ -237,10 +237,10 @@
             </objects>
             <point key="canvasLocation" x="-538.39999999999998" y="1922.7886056971515"/>
         </scene>
-        <!--Course View Controller-->
+        <!--Teaching View Controller-->
         <scene sceneID="9Jr-ri-VGu">
             <objects>
-                <viewController id="aqe-Yk-Phq" customClass="CourseViewController" customModule="Studium" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="aqe-Yk-Phq" customClass="TeachingViewController" customModule="Studium" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yjc-jx-pZm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
