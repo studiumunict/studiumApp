@@ -12,6 +12,7 @@ class CourseViewController: UIViewController, UIScrollViewDelegate, SWRevealView
 
     @IBOutlet var viewAppoggio: UIView! //Contiene la scrollView
     @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var stackView: UIStackView!
     
     // --- MARK: Stack View ---
     @IBOutlet var showcaseButton: UIButton!
@@ -58,7 +59,7 @@ class CourseViewController: UIViewController, UIScrollViewDelegate, SWRevealView
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }*/
         
-        viewAppoggio.bounds.size = CGSize(width: self.view.frame.width, height: self.view.frame.height - (showcaseButton.frame.height + courseNameLabel.frame.height + nameTeacherLabel.frame.height)) //definisco le dimensioni reali e di autolayout per la scrollView
+        viewAppoggio.bounds.size = CGSize(width: self.view.frame.width, height: self.view.frame.height - (stackView.frame.height + courseNameLabel.frame.height + nameTeacherLabel.frame.height)) //definisco le dimensioni reali e di autolayout per la scrollView
         
         scrollView.delegate = self
         scrollView.bounds.size = CGSize(width: viewAppoggio.frame.width, height: scrollView.frame.height) //definisco le dimensioni reali
@@ -72,9 +73,10 @@ class CourseViewController: UIViewController, UIScrollViewDelegate, SWRevealView
         bookingView.frame = CGRect(x: viewAppoggio.bounds.width * 4, y: scrollView.contentOffset.y, width: scrollView.frame.width, height: viewAppoggio.bounds.height)
         
         // ---
-        nameTeacherLabel.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.black, thickness: 0.7)
+        //nameTeacherLabel.layer.borderWidth = 1.0 //setta tutti i bordi correttamente per intero su XS Max
+        nameTeacherLabel.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.black, thickness: 0.7) //Non setta per tutta la width il bordo su XS Max
         
-        showcaseView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.black, thickness: 0.25)
+        showcaseView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.black, thickness: 0.5)
         showcaseView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, thickness: 0.25)
         notifyView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.black, thickness: 0.25)
         notifyView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, thickness: 0.25)
@@ -83,17 +85,8 @@ class CourseViewController: UIViewController, UIScrollViewDelegate, SWRevealView
         documentsView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.black, thickness: 0.25)
         documentsView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, thickness: 0.25)
         bookingView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.black, thickness: 0.25)
-        bookingView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, thickness: 0.25)
-        
-        showcaseButton.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, thickness: 0.7)
-        showcaseButton.layer.addBorder(edge: UIRectEdge.top, color: UIColor.black, thickness: 1.0)
-        notifyButton.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, thickness: 0.7)
-        notifyButton.layer.addBorder(edge: UIRectEdge.top, color: UIColor.black, thickness: 1.0)
-        descriptionButton.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, thickness: 0.7)
-        descriptionButton.layer.addBorder(edge: UIRectEdge.top, color: UIColor.black, thickness: 1.0)
-        documentsButton.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, thickness: 0.7)
-        documentsButton.layer.addBorder(edge: UIRectEdge.top, color: UIColor.black, thickness: 1.0)
-        bookingButton.layer.addBorder(edge: UIRectEdge.top, color: UIColor.black, thickness: 1.0)
+        bookingView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, thickness: 0.5)
+        stackView.layer.addBorder(edge: UIRectEdge.top, color: UIColor.black, thickness: 0.7)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,6 +100,7 @@ class CourseViewController: UIViewController, UIScrollViewDelegate, SWRevealView
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }*/
         
+        self.view.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
         showcaseButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
         notifyButton.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
         descriptionButton.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
@@ -152,32 +146,32 @@ class CourseViewController: UIViewController, UIScrollViewDelegate, SWRevealView
         }
     }
 
-    @IBAction func sendToVetrinaView(_ sender: UIButton) {
+    @IBAction func sendToShowcaseView(_ sender: UIButton) {
         scrollView.scrollRectToVisible(showcaseView.frame, animated: false)
         setAllDarkGray()
         showcaseButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
         
     }
     
-    @IBAction func sendToAvvisiView(_ sender: UIButton) {
+    @IBAction func sendToNotifyView(_ sender: UIButton) {
         scrollView.scrollRectToVisible(notifyView.frame, animated: false)
         setAllDarkGray()
         notifyButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
     }
     
-    @IBAction func sendToDescrizioneView(_ sender: UIButton) {
+    @IBAction func sendToDescriptionView(_ sender: UIButton) {
         scrollView.scrollRectToVisible(descriptionView.frame, animated: false)
         setAllDarkGray()
         descriptionButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
     }
     
-    @IBAction func sendToDocumentiView(_ sender: UIButton) {
+    @IBAction func sendToDocumentsView(_ sender: UIButton) {
         scrollView.scrollRectToVisible(documentsView.frame, animated: false)
         setAllDarkGray()
         documentsButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
     }
     
-    @IBAction func sendToPrenotazioniView(_ sender: UIButton) {
+    @IBAction func sendToBookingView(_ sender: UIButton) {
         scrollView.scrollRectToVisible(bookingView.frame, animated: false)
         setAllDarkGray()
         bookingButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
