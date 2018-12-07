@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, SWRevealViewControllerDelegate {
     
     
 
@@ -21,8 +21,25 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     
    // var selectedDepartment : Department! // in base a questa var cambia il contenuto della tabella CoursesTable
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        if revealViewController() != nil {
+            revealViewController().rearViewRevealWidth = 160//Menu sx/
+            revealViewController().delegate = self
+            view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        if revealViewController() != nil {
+            revealViewController().rearViewRevealWidth = 160 //Menu sx
+            revealViewController().delegate = self
+            view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+        }
+        
+        
+        
         self.departmentsTableView.delegate = self
         self.departmentsTableView.dataSource = self
         self.departmentsTableView.isHidden =  true
