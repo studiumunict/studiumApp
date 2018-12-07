@@ -120,6 +120,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1364997B21BA7548008C5345 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				135D120E21B8092200DA9C69 /* ExtensionCALayer.swift */,
+				13D86DDA21B9A3BF007638FD /* ExtensionUIColor.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		13F8E3C321A9668600BBAD9B /* Corso */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,8 +212,7 @@
 				9CFE9D7921A8ADBC0030AE33 /* Studium.xcdatamodeld */,
 				13F8E3D021A98C6900BBAD9B /* Studium-Bridging-Header.h */,
 				13F8E3C821A9885B00BBAD9B /* SWRevealViewController */,
-				135D120E21B8092200DA9C69 /* ExtensionCALayer.swift */,
-				13D86DDA21B9A3BF007638FD /* ExtensionUIColor.swift */,
+				1364997B21BA7548008C5345 /* Extension */,
 			);
 			path = Studium;
 			sourceTree = "<group>";
