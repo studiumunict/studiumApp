@@ -266,13 +266,29 @@
 		9CFE9DA921A8BC260030AE33 /* MainMenuViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				9CFEB89B21BAA5AA0045FB54 /* DocumentsViewController */,
+				9CFEB89A21BAA59B0045FB54 /* ProfileViewController */,
 				9CFE72C821BA97FA001EB697 /* Courses */,
 				9C06A22521AB6B8A00E695DB /* HomeViewController */,
 				13F8E3C321A9668600BBAD9B /* Corso */,
-				9CFE9DAE21A8BC8F0030AE33 /* ProfileViewController.swift */,
-				9CFE9DB021A8BC9A0030AE33 /* DocumentsViewController.swift */,
 			);
 			path = MainMenuViewControllers;
+			sourceTree = "<group>";
+		};
+		9CFEB89A21BAA59B0045FB54 /* ProfileViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9CFE9DAE21A8BC8F0030AE33 /* ProfileViewController.swift */,
+			);
+			path = ProfileViewController;
+			sourceTree = "<group>";
+		};
+		9CFEB89B21BAA5AA0045FB54 /* DocumentsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9CFE9DB021A8BC9A0030AE33 /* DocumentsViewController.swift */,
+			);
+			path = DocumentsViewController;
 			sourceTree = "<group>";
 		};
 		D87D6B37575295D3DF883508 /* Pods */ = {
