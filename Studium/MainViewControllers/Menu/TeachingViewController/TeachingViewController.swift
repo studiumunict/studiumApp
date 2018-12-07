@@ -98,10 +98,16 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
             <#statements#>
         }*/
         
+        
+        
         navigationItem.title = "Insegnamento"
         self.view.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
         setAllDarkGray()
-        showcaseButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
+        
+        print(showcaseButton.titleEdgeInsets)
+        
+        
+        
         
         viewAppoggio.bounds.size = CGSize(width: self.view.frame.width, height: self.view.frame.height - (stackView.frame.height + courseNameLabel.frame.height + nameTeacherLabel.frame.height)) //definisco le dimensioni reali e di autolayout per la scrollView
         
@@ -173,6 +179,13 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
         teachingDataSource.completeDataSource(teacherName: "Allocco", haveShowcase: nil, haveDescription: nil, haveDocuments: nil, haveBooking: nil, descriptionText: nil)
     }
     
+    /*func customizeButton(button: UIButton!, backgroundColor: UIColor!, image: UIImage!, title: String!) {
+        button.backgroundColor = backgroundColor
+        button.setImage(image, for: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: <#T##CGFloat#>, left: <#T##CGFloat#>, bottom: <#T##CGFloat#>, right: <#T##CGFloat#>)
+        button.titleLabel?.text = title
+        button.titleEdgeInsets = UIEdgeInsets(top: <#T##CGFloat#>, left: <#T##CGFloat#>, bottom: <#T##CGFloat#>, right: <#T##CGFloat#>)
+    }*/
     
     func setAllDarkGray(){
         showcaseButton.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
