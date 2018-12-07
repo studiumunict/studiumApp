@@ -14,7 +14,7 @@ class ProfileViewController: UIViewController, SWRevealViewControllerDelegate {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.blue
         if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 160 //Menu sx
+            revealViewController().rearViewRevealWidth = 130 //Menu sx
             revealViewController().delegate = self
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }

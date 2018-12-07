@@ -26,7 +26,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 160//Menu sx/
+            revealViewController().rearViewRevealWidth = 130//Menu sx/
             revealViewController().delegate = self
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
@@ -92,8 +92,11 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         
         if ofDepartment.code == 1 { //dipartimento di informatica
             print("scarico corsi dipartimento indormtatica")
-            CDLDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "INFORMATICA L-31", courseCode: 31), teachingArray: [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 2)]))
-            CDLDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "MATEMATICA L-27", courseCode: 27), teachingArray: [Teaching.init(teachingName: "Analisi 1", teachingCode: 1),Teaching.init(teachingName: "Algebra 1", teachingCode: 2)]))
+            CDLDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "INFORMATICA L-31", courseCode: 31), teachingArray:
+                [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: false),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)]))
+            
+            
+            CDLDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "MATEMATICA L-27", courseCode: 27), teachingArray: [Teaching.init(teachingName: "Elementi di Analisi matematica 1", teachingCode: 8675, teacherName: "Ornella Naselli", signedUp: false),Teaching.init(teachingName: "Algebra 1", teachingCode: 8760, teacherName: "Andrea Scapellato", signedUp: false)]))
             
         }
         
@@ -138,7 +141,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             return 50
         }
         else {
-            return 50
+            return 100
         }
       
     }
@@ -222,7 +225,16 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         else { //CDL table
             let cell = cdlTableView.dequeueReusableCell(withIdentifier: "CDLCell") as! CDLTableViewCell
             //modifico la cella e la mostro
-            cell.CDLnameLabel.text = self.CDLDataSource[indexPath.section].teachings[indexPath.row].name
+            let dataElement = self.CDLDataSource[indexPath.section].teachings[indexPath.row]
+            cell.CDLnameLabel.text = dataElement.name
+            cell.teacherNameLabel.text = dataElement.teacherName
+            if dataElement.signedUp{
+                cell.signedUpImage.image = UIImage.init(named: "star_full")
+            }
+            else{
+                cell.signedUpImage.image = UIImage.init(named: "star_empty")
+            }
+            cell.codeLabel.text = String(dataElement.code)
             return cell
         }
     }
