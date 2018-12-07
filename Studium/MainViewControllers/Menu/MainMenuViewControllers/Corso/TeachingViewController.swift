@@ -60,6 +60,8 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
             revealViewController().rearViewRevealWidth = 160//Menu sx/
             revealViewController().delegate = self
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+            viewAppoggio.addGestureRecognizer(revealViewController().panGestureRecognizer())
+            scrollView.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         
         setNewTeachingDataSource() //Inizializza i nuovi dati del teachingDataSource scaricandoli dal db
@@ -102,6 +104,7 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
         scrollView.delegate = self
         scrollView.bounds.size = CGSize(width: viewAppoggio.frame.width, height: scrollView.frame.height) //definisco le dimensioni reali
         scrollView.contentSize = CGSize(width: viewAppoggio.frame.width * 5, height: 1.0) //definisco il 'range' o contenuto della scrollView
+        scrollView.bounces = false
         
         //imposta le dimensione e le posizioni delle varie pagine rispetto alla scrollView
         showcaseView.frame = CGRect(x: 0, y: 0, width: viewAppoggio.frame.width, height: viewAppoggio.frame.height)
@@ -142,16 +145,20 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
             revealViewController().rearViewRevealWidth = 160//Menu sx/
             revealViewController().delegate = self
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+            viewAppoggio.addGestureRecognizer(revealViewController().panGestureRecognizer())
+            scrollView.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
     }
     
     func revealController(_ revealController: SWRevealViewController!, didMoveTo position: FrontViewPosition) {
         switch position {
         case .right: //Uno dei due menu è aperto
-            scrollView.isUserInteractionEnabled = false
+            scrollView.isScrollEnabled = false
+            stackView.isUserInteractionEnabled = false
             
         case .left: //Tutti i menu sono chiusi
-            scrollView.isUserInteractionEnabled = true
+            scrollView.isScrollEnabled = true
+            stackView.isUserInteractionEnabled = true
             
         default:
             break
@@ -180,22 +187,27 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
         case 0:
             setAllDarkGray()
             showcaseButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
+            scrollView.addGestureRecognizer(revealViewController().panGestureRecognizer())
             
         case 1:
             setAllDarkGray()
             notifyButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
+            scrollView.removeGestureRecognizer(revealViewController().panGestureRecognizer())
             
         case 2:
             setAllDarkGray()
             descriptionButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
+            scrollView.removeGestureRecognizer(revealViewController().panGestureRecognizer())
             
         case 3:
             setAllDarkGray()
             documentsButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
+            scrollView.removeGestureRecognizer(revealViewController().panGestureRecognizer())
             
         case 4:
             setAllDarkGray()
             bookingButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
+            scrollView.removeGestureRecognizer(revealViewController().panGestureRecognizer())
         default:
             break
         }
