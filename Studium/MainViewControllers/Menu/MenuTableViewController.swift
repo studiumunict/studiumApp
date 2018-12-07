@@ -22,16 +22,10 @@ class MenuTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        let label  = UILabel.init(frame: CGRect(x: 40, y: 0, width: self.view.frame.width, height: 30))
-        label.text = "Menu"
-        return label
-        
+    override func viewDidAppear(_ animated: Bool) {
+       
     }
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-       return 30
-    }
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
