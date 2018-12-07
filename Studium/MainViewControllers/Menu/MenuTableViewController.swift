@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuTableViewController: UITableViewController {
+class MenuTableViewController: UITableViewController, SWRevealViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +22,26 @@ class MenuTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0{
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "HomeNavigation") as! UINavigationController
+            let segue = SWRevealViewControllerSeguePushController.init(identifier: "pushToHome", source: self, destination: vc)
+            segue.perform()
+            
+        }
+        else if indexPath.row == 1{
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "CourseNavigation") as! UINavigationController
+            let segue = SWRevealViewControllerSeguePushController.init(identifier: "pushToCourse", source: self, destination: vc)
+            segue.perform()
+            
+        }
+        else if indexPath.row == 2{
+            
+        }
+        else if indexPath.row == 3{
+            
+        }
+    }
     override func viewDidAppear(_ animated: Bool) {
        
     }
