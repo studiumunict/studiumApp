@@ -54,40 +54,39 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("ciao")
+        
         //Definire le dimensioni dei menu
-        /*if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = view.bounds.width - 70 //Menu sx
-            revealViewController()?.rightViewController = 160 //Menu dx
+        if revealViewController() != nil {
+            revealViewController().rearViewRevealWidth = 160//Menu sx/
             revealViewController().delegate = self
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-        }*/
+        }
         
         setNewTeachingDataSource() //Inizializza i nuovi dati del teachingDataSource scaricandoli dal db
         
         courseNameLabel.text = teachingDataSource.name
         nameTeacherLabel.text = teachingDataSource.teacherName
         
-        /*if teachingDataSource.haveShowcase {
+        if teachingDataSource.haveShowcase != nil && teachingDataSource.haveShowcase {
             errorMessageLabelShowcaseView.isHidden = true
             loadingIndicatorShowcaseView.isHidden = true
         } else {
             errorMessageLabelShowcaseView.isHidden = false
         }
         
-        if teachingDataSource.haveDescription {
+        if teachingDataSource.haveDescription != nil && teachingDataSource.haveDescription {
             descriptionMessageTextView.text = teachingDataSource.descriptionText
         } else {
             descriptionMessageTextView.text = "Nessuna descrizione per questo insegnamento."
         }
         
-        if teachingDataSource.haveDocuments {
+        /*if teachingDataSource.haveDocuments != nil {
             <#statements#>
         } else {
             <#statements#>
         }
         
-        if teachingDataSource.haveBooking {
+        if teachingDataSource.haveBooking != nil {
             <#statements#>
         } else {
             <#statements#>
@@ -131,13 +130,32 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        
+        //Quando apre le view, se il menu' è aperto lo chiude
+        if (revealViewController().frontViewPosition != FrontViewPosition.left) {
+            revealViewController().frontViewPosition = .left
+        }
+        
         //Definire le dimensioni dei menu
-        /*if revealViewController() != nil {
-         revealViewController().rearViewRevealWidth = view.bounds.width - 70 //Menu sx
-         revealViewController()?.rightViewController = 160 //Menu dx
+        if revealViewController() != nil {
+            revealViewController().rearViewRevealWidth = 160//Menu sx/
             revealViewController().delegate = self
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-        }*/
+        }
+    }
+    
+    func revealController(_ revealController: SWRevealViewController!, didMoveTo position: FrontViewPosition) {
+        switch position {
+        case .right: //Uno dei due menu è aperto
+            scrollView.isUserInteractionEnabled = false
+            
+        case .left: //Tutti i menu sono chiusi
+            scrollView.isUserInteractionEnabled = true
+            
+        default:
+            break
+        }
     }
     
     func setNewTeachingDataSource(){ //Scarica i dati dal db
