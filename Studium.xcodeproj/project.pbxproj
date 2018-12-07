@@ -122,21 +122,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1364997B21BA7548008C5345 /* Extension */ = {
+		1364997B21BA7548008C5345 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				135D120E21B8092200DA9C69 /* ExtensionCALayer.swift */,
 				13D86DDA21B9A3BF007638FD /* ExtensionUIColor.swift */,
 			);
-			path = Extension;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
-		13F8E3C321A9668600BBAD9B /* Corso */ = {
+		13ED7C9521BAB19D00643BAB /* HomeNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				9C06A22521AB6B8A00E695DB /* HomeViewController */,
+				13F8E3C321A9668600BBAD9B /* TeachingViewController */,
+			);
+			path = HomeNavigationController;
+			sourceTree = "<group>";
+		};
+		13ED7C9621BAB1AF00643BAB /* DocumentsNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				9CFEB89B21BAA5AA0045FB54 /* DocumentsViewController */,
+			);
+			path = DocumentsNavigationController;
+			sourceTree = "<group>";
+		};
+		13ED7C9721BAB1C800643BAB /* ProfileNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				9CFEB89A21BAA59B0045FB54 /* ProfileViewController */,
+			);
+			path = ProfileNavigationController;
+			sourceTree = "<group>";
+		};
+		13ED7C9821BAB1EF00643BAB /* CoursesNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				9CFE72C821BA97FA001EB697 /* CoursesViewController */,
+			);
+			path = CoursesNavigationController;
+			sourceTree = "<group>";
+		};
+		13F8E3C321A9668600BBAD9B /* TeachingViewController */ = {
 			isa = PBXGroup;
 			children = (
 				13F8E3C121A9667200BBAD9B /* TeachingViewController.swift */,
 			);
-			path = Corso;
+			path = TeachingViewController;
 			sourceTree = "<group>";
 		};
 		13F8E3C821A9885B00BBAD9B /* SWRevealViewController */ = {
@@ -179,12 +212,12 @@
 			path = CustomClasses;
 			sourceTree = "<group>";
 		};
-		9CFE72C821BA97FA001EB697 /* Courses */ = {
+		9CFE72C821BA97FA001EB697 /* CoursesViewController */ = {
 			isa = PBXGroup;
 			children = (
 				9CFE72C921BA9814001EB697 /* CoursesViewController.swift */,
 			);
-			path = Courses;
+			path = CoursesViewController;
 			sourceTree = "<group>";
 		};
 		9CFE9D6621A8ADBC0030AE33 = {
@@ -222,7 +255,7 @@
 				9CFE9D7921A8ADBC0030AE33 /* Studium.xcdatamodeld */,
 				13F8E3D021A98C6900BBAD9B /* Studium-Bridging-Header.h */,
 				13F8E3C821A9885B00BBAD9B /* SWRevealViewController */,
-				1364997B21BA7548008C5345 /* Extension */,
+				1364997B21BA7548008C5345 /* Extensions */,
 			);
 			path = Studium;
 			sourceTree = "<group>";
@@ -266,11 +299,10 @@
 		9CFE9DA921A8BC260030AE33 /* MainMenuViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				9C06A22521AB6B8A00E695DB /* HomeViewController */,
-				9CFEB89B21BAA5AA0045FB54 /* DocumentsViewController */,
-				9CFEB89A21BAA59B0045FB54 /* ProfileViewController */,
-				9CFE72C821BA97FA001EB697 /* Courses */,
-				13F8E3C321A9668600BBAD9B /* Corso */,
+				13ED7C9521BAB19D00643BAB /* HomeNavigationController */,
+				13ED7C9621BAB1AF00643BAB /* DocumentsNavigationController */,
+				13ED7C9721BAB1C800643BAB /* ProfileNavigationController */,
+				13ED7C9821BAB1EF00643BAB /* CoursesNavigationController */,
 			);
 			path = MainMenuViewControllers;
 			sourceTree = "<group>";
