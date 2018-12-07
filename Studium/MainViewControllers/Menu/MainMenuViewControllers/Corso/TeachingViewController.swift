@@ -54,7 +54,7 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("ciao")
         //Definire le dimensioni dei menu
         /*if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = view.bounds.width - 70 //Menu sx
