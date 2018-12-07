@@ -11,6 +11,7 @@ import Foundation
 class Teaching{
     var name: String!
     var code: Int!
+    var signedUp : Bool!
     var teacherName: String!
     var haveShowcase: Bool!
     var haveDescription: Bool!
@@ -19,9 +20,11 @@ class Teaching{
     var descriptionText: String!
     //...
     
-    init(teachingName: String, teachingCode: Int) {
+    init(teachingName: String, teachingCode: Int, teacherName: String, signedUp :Bool) {
         self.name = teachingName
         self.code = teachingCode
+        self.teacherName = teacherName
+        self.signedUp = signedUp
     }
     
     init(teachingName: String, teachingCode: Int, teacherName: String, haveShowcase: Bool?, haveDescription: Bool?, haveDocuments: Bool?, haveBooking: Bool?, descriptionText: String?){

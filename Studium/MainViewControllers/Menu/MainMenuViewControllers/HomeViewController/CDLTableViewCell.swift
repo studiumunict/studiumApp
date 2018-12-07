@@ -10,7 +10,10 @@ import UIKit
 
 class CDLTableViewCell: UITableViewCell {
     @IBOutlet weak var CDLnameLabel: UILabel!
+    @IBOutlet weak var signedUpImage: UIImageView!
+    @IBOutlet weak var codeLabel: UILabel!
     
+    @IBOutlet weak var teacherNameLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none

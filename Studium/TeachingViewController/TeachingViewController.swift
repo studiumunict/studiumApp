@@ -58,6 +58,9 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.lightWhite
+        
+        
         
         //Definire le dimensioni dei menu
         if revealViewController() != nil {
@@ -119,19 +122,19 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
         
         // ---
         //nameTeacherLabel.layer.borderWidth = 1.0 //setta tutti i bordi correttamente per intero su XS Max
-        nameTeacherLabel.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.black, thickness: 0.7) //Non setta per tutta la width il bordo su XS Max
+        nameTeacherLabel.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.primaryBackground, thickness: 0.7) //Non setta per tutta la width il bordo su XS Max
         
-        showcaseView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.black, thickness: 0.5)
-        showcaseView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, thickness: 0.25)
-        notifyView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.black, thickness: 0.25)
-        notifyView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, thickness: 0.25)
-        descriptionView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.black, thickness: 0.25)
-        descriptionView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, thickness: 0.25)
-        documentsView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.black, thickness: 0.25)
-        documentsView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, thickness: 0.25)
-        bookingView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.black, thickness: 0.25)
-        bookingView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.black, thickness: 0.5)
-        stackView.layer.addBorder(edge: UIRectEdge.top, color: UIColor.black, thickness: 0.7)
+        showcaseView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.primaryBackground, thickness: 0.5)
+        showcaseView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.primaryBackground, thickness: 0.25)
+        notifyView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.primaryBackground, thickness: 0.25)
+        notifyView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.primaryBackground, thickness: 0.25)
+        descriptionView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.primaryBackground, thickness: 0.25)
+        descriptionView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.primaryBackground, thickness: 0.25)
+        documentsView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.primaryBackground, thickness: 0.25)
+        documentsView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.primaryBackground, thickness: 0.25)
+        bookingView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.primaryBackground, thickness: 0.25)
+        bookingView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.primaryBackground, thickness: 0.5)
+        stackView.layer.addBorder(edge: UIRectEdge.top, color: UIColor.primaryBackground, thickness: 0.7)
     }
     
     override func viewWillAppear(_ animated: Bool) {
