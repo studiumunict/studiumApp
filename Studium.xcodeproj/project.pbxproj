@@ -215,6 +215,7 @@
 				9C06A22821AB6FE900E695DB /* CustomClasses */,
 				9CFE9D7221A8ADBC0030AE33 /* AppDelegate.swift */,
 				9CFE9D7C21A8ADBE0030AE33 /* Assets.xcassets */,
+				13F8E3C321A9668600BBAD9B /* TeachingViewController */,
 				9CFE9DA321A8AE6A0030AE33 /* MainViewControllers */,
 				9CFE9D7E21A8ADBE0030AE33 /* LaunchScreen.storyboard */,
 				9CFE9D7621A8ADBC0030AE33 /* Main.storyboard */,
@@ -258,7 +259,6 @@
 			isa = PBXGroup;
 			children = (
 				9CFE9DA721A8BBEE0030AE33 /* MenuTableViewController.swift */,
-				13F8E3C321A9668600BBAD9B /* TeachingViewController */,
 				9CFE9DA921A8BC260030AE33 /* MainMenuViewControllers */,
 			);
 			path = Menu;

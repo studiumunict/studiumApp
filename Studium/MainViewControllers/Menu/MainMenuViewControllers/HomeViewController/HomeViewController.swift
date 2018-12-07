@@ -26,7 +26,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 160//Menu sx/
+            revealViewController().rearViewRevealWidth = 130//Menu sx/
             revealViewController().delegate = self
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
