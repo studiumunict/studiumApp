@@ -484,10 +484,10 @@
             </objects>
             <point key="canvasLocation" x="-538.39999999999998" y="2696.4017991004498"/>
         </scene>
-        <!--Course View Controller-->
+        <!--Courses View Controller-->
         <scene sceneID="DK9-zW-fXr">
             <objects>
-                <viewController id="F3O-sh-4Gz" customClass="CourseViewController" customModule="Studium" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="F3O-sh-4Gz" customClass="CoursesViewController" customModule="Studium" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sjA-UN-im6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -721,6 +721,10 @@
                             <outlet property="delegate" destination="feH-IH-s8z" id="HmT-fv-tgg"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="RIR-wf-nu1" kind="custom" identifier="pushToHome" customClass="SWRevealViewControllerSeguePushController" id="YwA-o2-fQF"/>
+                        <segue destination="vFC-hh-Ww0" kind="custom" identifier="pushToCourse" customClass="SWRevealViewControllerSeguePushController" id="PQQ-En-RsV"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hgC-Sa-lTn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -729,7 +733,7 @@
         <!--Navigation Controller-->
         <scene sceneID="nwx-Mp-bDx">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RIR-wf-nu1" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HomeNavigation" automaticallyAdjustsScrollViewInsets="NO" id="RIR-wf-nu1" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0hL-d2-f1R">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -747,7 +751,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Ev9-9o-YUA">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vFC-hh-Ww0" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="CourseNavigation" automaticallyAdjustsScrollViewInsets="NO" id="vFC-hh-Ww0" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="S2o-Dg-eXo">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -799,4 +803,7 @@
             <point key="canvasLocation" x="5138.3999999999996" y="1160.8695652173915"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="YwA-o2-fQF"/>
+    </inferredMetricsTieBreakers>
 </document>

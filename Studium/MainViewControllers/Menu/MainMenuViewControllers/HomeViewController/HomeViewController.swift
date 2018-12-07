@@ -11,7 +11,9 @@ import UIKit
 class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, SWRevealViewControllerDelegate {
     
     
-
+    deinit{
+        print("home deinit")
+    }
     @IBOutlet weak var cdlTableView: UITableView!
     @IBOutlet weak var departmentsTableView: UITableView!
     @IBOutlet weak var departmentsSelectButton: UIButton!

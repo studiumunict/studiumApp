@@ -10,6 +10,10 @@ import UIKit
 
 class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealViewControllerDelegate {
 
+    
+    deinit{
+        print("deinit teaching")
+    }
     @IBOutlet var viewAppoggio: UIView! //Contiene la scrollView
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var stackView: UIStackView!
