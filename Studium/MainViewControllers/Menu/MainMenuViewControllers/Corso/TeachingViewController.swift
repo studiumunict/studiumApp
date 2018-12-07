@@ -49,7 +49,7 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
     
     
     // --- MARK: Variables ---
-    var teachingDataSource: Teaching!
+    var teachingDataSource: Teaching! //Pre inizializzato solo con: name, code
     
     
     override func viewDidLoad() {
@@ -62,12 +62,13 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
             revealViewController().delegate = self
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }*/
-        teachingDataSource = Teaching(teachingName: "Telecomunicazioni", teachingCode: 123, teacherName: "Allocco")
+        
+        setNewTeachingDataSource() //Inizializza i nuovi dati del teachingDataSource scaricandoli dal db
+        
         courseNameLabel.text = teachingDataSource.name
         nameTeacherLabel.text = teachingDataSource.teacherName
-        navigationItem.title = String(teachingDataSource.code)
         
-        if teachingDataSource.haveShowcase {
+        /*if teachingDataSource.haveShowcase {
             errorMessageLabelShowcaseView.isHidden = true
             loadingIndicatorShowcaseView.isHidden = true
         } else {
@@ -80,7 +81,7 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
             descriptionMessageTextView.text = "Nessuna descrizione per questo insegnamento."
         }
         
-        /*if teachingDataSource.haveDocuments {
+        if teachingDataSource.haveDocuments {
             <#statements#>
         } else {
             <#statements#>
@@ -92,11 +93,16 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
             <#statements#>
         }*/
         
+        navigationItem.title = "Insegnamento"
+        self.view.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
+        setAllDarkGray()
+        showcaseButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
+        
         viewAppoggio.bounds.size = CGSize(width: self.view.frame.width, height: self.view.frame.height - (stackView.frame.height + courseNameLabel.frame.height + nameTeacherLabel.frame.height)) //definisco le dimensioni reali e di autolayout per la scrollView
         
         scrollView.delegate = self
         scrollView.bounds.size = CGSize(width: viewAppoggio.frame.width, height: scrollView.frame.height) //definisco le dimensioni reali
-        scrollView.contentSize = CGSize(width: viewAppoggio.frame.width * 5, height: scrollView.frame.height) //definisco il 'range' o contenuto della scrollView
+        scrollView.contentSize = CGSize(width: viewAppoggio.frame.width * 5, height: 1.0) //definisco il 'range' o contenuto della scrollView
         
         //imposta le dimensione e le posizioni delle varie pagine rispetto alla scrollView
         showcaseView.frame = CGRect(x: 0, y: 0, width: viewAppoggio.frame.width, height: viewAppoggio.frame.height)
@@ -132,13 +138,10 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
             revealViewController().delegate = self
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }*/
-        
-        self.view.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
-        showcaseButton.backgroundColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
-        notifyButton.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
-        descriptionButton.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
-        documentsButton.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
-        bookingButton.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
+    }
+    
+    func setNewTeachingDataSource(){ //Scarica i dati dal db
+        teachingDataSource.completeDataSource(teacherName: "Allocco", haveShowcase: nil, haveDescription: nil, haveDocuments: nil, haveBooking: nil, descriptionText: nil)
     }
     
     
@@ -149,6 +152,7 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
         documentsButton.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
         bookingButton.backgroundColor = #colorLiteral(red: 0.146052599, green: 0.146084398, blue: 0.146048367, alpha: 1)
     }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //conta l'indice della pagina corrente
         let page = scrollView.contentOffset.x / scrollView.frame.size.width
