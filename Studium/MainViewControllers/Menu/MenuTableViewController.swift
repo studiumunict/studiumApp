@@ -8,6 +8,12 @@
 
 import UIKit
 
+ var HomeFrontController : UINavigationController! = nil
+ var CourseFrontController : UINavigationController! = nil
+ var ProfileFrontController : UINavigationController! = nil
+ var DocsFrontController : UINavigationController! = nil
+
+
 class MenuTableViewController: UITableViewController, SWRevealViewControllerDelegate {
 
     override func viewDidLoad() {
@@ -24,15 +30,27 @@ class MenuTableViewController: UITableViewController, SWRevealViewControllerDele
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0{
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "HomeNavigation") as! UINavigationController
-            let segue = SWRevealViewControllerSeguePushController.init(identifier: "pushToHome", source: self, destination: vc)
-            segue.perform()
-            
+            if HomeFrontController == nil {
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "HomeNavigation") as! UINavigationController
+                let segue = SWRevealViewControllerSeguePushController.init(identifier: "pushToHome", source: self, destination: vc)
+                segue.perform()
+                HomeFrontController = vc
+            }
+            else{
+                self.revealViewController()?.pushFrontViewController(HomeFrontController, animated: true)
+            }
         }
         else if indexPath.row == 1{
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "CourseNavigation") as! UINavigationController
-            let segue = SWRevealViewControllerSeguePushController.init(identifier: "pushToCourse", source: self, destination: vc)
-            segue.perform()
+            if CourseFrontController == nil {
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "CourseNavigation") as! UINavigationController
+                let segue = SWRevealViewControllerSeguePushController.init(identifier: "pushToCourse", source: self, destination: vc)
+                segue.perform()
+                CourseFrontController = vc
+            }
+            else{
+                self.revealViewController()?.pushFrontViewController(CourseFrontController, animated: true)
+            }
+            
             
         }
         else if indexPath.row == 2{
