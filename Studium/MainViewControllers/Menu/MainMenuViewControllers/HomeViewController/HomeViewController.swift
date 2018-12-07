@@ -30,6 +30,30 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         }
     }
     
+    func revealController(_ revealController: SWRevealViewController!, didMoveTo position: FrontViewPosition) {
+         print("moved")
+        switch position {
+        case .right:
+            print("right")
+            self.departmentsSelectButton.isUserInteractionEnabled = false
+            self.cdlTableView.isUserInteractionEnabled = false
+            self.departmentsTableView.isUserInteractionEnabled = false
+           
+            
+            break
+        case .left :
+            print("move to left")
+            self.departmentsSelectButton.isUserInteractionEnabled = true
+            self.cdlTableView.isUserInteractionEnabled = true
+            self.departmentsTableView.isUserInteractionEnabled = true
+           
+            break
+            
+        default:
+            break
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if revealViewController() != nil {
