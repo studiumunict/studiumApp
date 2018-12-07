@@ -230,7 +230,7 @@
                         <outlet property="cdlTableView" destination="hDA-9f-FuP" id="nP1-gK-0qa"/>
                         <outlet property="departmentsSelectButton" destination="uPP-QE-Iig" id="gP3-U5-hzO"/>
                         <outlet property="departmentsTableView" destination="I0a-dP-J9e" id="unp-Te-o4w"/>
-                        <segue destination="aqe-Yk-Phq" kind="show" identifier="segueToCorsi" id="rDa-ii-Lwh"/>
+                        <segue destination="aqe-Yk-Phq" kind="show" identifier="segueToTeachingController" id="rDa-ii-Lwh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GxM-kR-gaW" userLabel="First Responder" sceneMemberID="firstResponder"/>

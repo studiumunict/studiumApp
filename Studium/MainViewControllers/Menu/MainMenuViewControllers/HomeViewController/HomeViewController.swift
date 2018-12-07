@@ -35,14 +35,11 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         
         departmentsSelectButton.layer.cornerRadius = 5.0
         departmentsSelectButton.clipsToBounds = true
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Corsi", style: .plain, target: self, action: #selector(segueToCorsiPetro))
         
         // Do any additional setup after loading the view.
     }
     
-    @objc func segueToCorsiPetro(){
-        self.performSegue(withIdentifier: "segueToCorsi", sender: nil)
-    }
+    
     
     
     
@@ -75,14 +72,17 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             getCDLAndTeachings(ofDepartment : self.departmentsDataSource[indexPath.row])
         }
         else {
-            print(" course Table")
-            
-            
+            self.performSegue(withIdentifier: "segueToTeachingController", sender: indexPath)
             
         }
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let  controller = segue.destination as? TeachingViewController{
+            let index = sender as! IndexPath
+            controller.teachingDataSource = CDLDataSource[index.section].teachings[index.row]
+        }
+    }
     
     
     
