@@ -23,11 +23,10 @@ class MenuTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view  =  UIView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
-        let label  = UILabel()
+        
+        let label  = UILabel.init(frame: CGRect(x: 40, y: 0, width: self.view.frame.width, height: 30))
         label.text = "Menu"
-        view.addSubview(label)
-        return view
+        return label
         
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
