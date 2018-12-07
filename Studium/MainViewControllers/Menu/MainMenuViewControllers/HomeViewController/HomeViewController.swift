@@ -58,12 +58,12 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        HomeFrontController = self.navigationController
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 160 //Menu sx
             revealViewController().delegate = self
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
-        
         
         
         self.departmentsTableView.delegate = self

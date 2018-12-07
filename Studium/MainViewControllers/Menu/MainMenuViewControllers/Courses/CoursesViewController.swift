@@ -12,6 +12,8 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.green
+        
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 160//Menu sx/
             revealViewController().delegate = self

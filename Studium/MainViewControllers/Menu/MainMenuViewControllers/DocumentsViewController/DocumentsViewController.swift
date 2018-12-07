@@ -8,13 +8,25 @@
 
 import UIKit
 
-class DocumentsViewController: UIViewController {
+class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         //added comments
-        
+        self.view.backgroundColor = UIColor.red
+        if revealViewController() != nil {
+            revealViewController().rearViewRevealWidth = 160 //Menu sx
+            revealViewController().delegate = self
+            view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+        }
         // Do any additional setup after loading the view.
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        if revealViewController() != nil {
+            revealViewController().rearViewRevealWidth = 160 //Menu sx
+            revealViewController().delegate = self
+            view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+        }
     }
     
 

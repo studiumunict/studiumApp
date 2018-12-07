@@ -54,9 +54,27 @@ class MenuTableViewController: UITableViewController, SWRevealViewControllerDele
             
         }
         else if indexPath.row == 2{
+            if ProfileFrontController == nil {
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileNavigation") as! UINavigationController
+                let segue = SWRevealViewControllerSeguePushController.init(identifier: "pushToProfile", source: self, destination: vc)
+                segue.perform()
+                ProfileFrontController = vc
+            }
+            else{
+                self.revealViewController()?.pushFrontViewController(ProfileFrontController, animated: true)
+            }
             
         }
         else if indexPath.row == 3{
+            if DocsFrontController == nil {
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocsNavigation") as! UINavigationController
+                let segue = SWRevealViewControllerSeguePushController.init(identifier: "pushToDocs", source: self, destination: vc)
+                segue.perform()
+                DocsFrontController = vc
+            }
+            else{
+                self.revealViewController()?.pushFrontViewController(DocsFrontController, animated: true)
+            }
             
         }
     }
