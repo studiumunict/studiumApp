@@ -71,10 +71,14 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Definire le dimensioni dei menu
         
-        /*documentsButton.imageView?.frame = CGRect(x: 10, y: 0, width: 20, height: 20)*/
-      
+        //*****QUESTA COSA LA DEVI FARE PER OGNI BOTTONE
+        let docImageView = UIImageView.init(frame: CGRect(x: 8, y: 5, width: 40, height: 35))
+        docImageView.image = UIImage.init(named: "folder")
+        documentsButton.addSubview(docImageView)
+        
+        
+        //Definire le dimensioni dei menu
         
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 130//Menu sx/

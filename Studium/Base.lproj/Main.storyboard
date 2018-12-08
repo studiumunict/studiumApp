@@ -418,7 +418,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dR6-7M-Xej">
                                                 <rect key="frame" x="11.5" y="0.0" width="52.5" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
-                                                <state key="normal" image="folder">
+                                                <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>

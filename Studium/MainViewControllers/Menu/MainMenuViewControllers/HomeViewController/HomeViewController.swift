@@ -68,10 +68,15 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         self.cdlTableView.isHidden = true
+    
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
+        imageView.image = UIImage.init(named: "menu")
+        let buttonView = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
+        buttonView.addSubview(imageView)
+    
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: buttonView)
         
-        /*let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        button.imageView?.image = UIImage.init(named: "more")*/
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .action, target: self, action: nil)
+        //self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "menu"), style: .plain, target: self, action: nil)
         
         let _ = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { (t) in
             self.showDepartmentTableAnimated()
@@ -81,6 +86,8 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 160 //Menu sx
             revealViewController().delegate = self
+            self.navigationItem.leftBarButtonItem?.target = revealViewController()
+            self.navigationItem.leftBarButtonItem?.action = #selector(SWRevealViewController.revealToggle(_:))
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         
