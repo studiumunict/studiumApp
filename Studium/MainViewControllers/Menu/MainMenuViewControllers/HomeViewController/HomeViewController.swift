@@ -26,8 +26,10 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 130//Menu sx/
+            revealViewController().rearViewRevealWidth = 130 //Menu sx
             revealViewController().delegate = self
+            self.navigationItem.leftBarButtonItem?.target = revealViewController()
+            self.navigationItem.leftBarButtonItem?.action = #selector(SWRevealViewController.revealToggle(_:))
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
     }
@@ -84,7 +86,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         
         HomeFrontController = self.navigationController
         if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 160 //Menu sx
+            revealViewController().rearViewRevealWidth = 130 //Menu sx
             revealViewController().delegate = self
             self.navigationItem.leftBarButtonItem?.target = revealViewController()
             self.navigationItem.leftBarButtonItem?.action = #selector(SWRevealViewController.revealToggle(_:))
