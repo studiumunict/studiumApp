@@ -597,20 +597,24 @@
                     <connections>
                         <outlet property="bookingButton" destination="d0z-FC-wF1" id="YNU-yu-Ofh"/>
                         <outlet property="bookingButtonView" destination="TEP-mn-fa7" id="6xQ-BF-jiF"/>
+                        <outlet property="bookingLabel" destination="cWc-8B-Oip" id="oCa-uR-XhQ"/>
                         <outlet property="bookingView" destination="b0G-D1-NPL" id="51V-Kp-WXz"/>
                         <outlet property="courseNameLabel" destination="mq1-De-iby" id="amq-jr-Ml8"/>
                         <outlet property="descriptionButton" destination="dQ5-CZ-8Ti" id="NLB-tT-7mZ"/>
                         <outlet property="descriptionButtonView" destination="cmt-LH-szh" id="fX7-ZW-Ayh"/>
+                        <outlet property="descriptionLabel" destination="M5m-Lo-ual" id="lw5-Hd-O0D"/>
                         <outlet property="descriptionMessageTextView" destination="Q96-qE-hHI" id="Yw6-jG-rCm"/>
                         <outlet property="descriptionView" destination="BZz-x6-gns" id="Aax-Tl-jNQ"/>
                         <outlet property="documentsButton" destination="dR6-7M-Xej" id="uA6-3b-CfC"/>
                         <outlet property="documentsButtonView" destination="oWO-pt-zy9" id="VFF-u2-HLl"/>
+                        <outlet property="documentsLabel" destination="xm9-FS-c9u" id="DWj-Fm-21j"/>
                         <outlet property="documentsView" destination="264-sB-LrD" id="OGq-Zm-feP"/>
                         <outlet property="errorMessageLabelShowcaseView" destination="rfO-aK-PMU" id="zxl-gl-7Rf"/>
                         <outlet property="loadingIndicatorShowcaseView" destination="5bj-8h-v50" id="a1o-UC-nXZ"/>
                         <outlet property="nameTeacherLabel" destination="bzp-bk-RfF" id="25s-SJ-O2E"/>
                         <outlet property="notifyButton" destination="wqz-wd-gLo" id="awf-7F-ZgB"/>
                         <outlet property="notifyButtonView" destination="h3h-Dv-Yjt" id="o9G-e1-uHH"/>
+                        <outlet property="notifyLabel" destination="u78-ka-FzN" id="gYt-D4-s1H"/>
                         <outlet property="notifyMessageTextView" destination="xJb-Ak-xMN" id="nKF-2L-NyU"/>
                         <outlet property="notifyPickerView" destination="hNU-hf-nGZ" id="mby-dJ-Qh8"/>
                         <outlet property="notifyTitleLabel" destination="RYL-GJ-EPz" id="aun-n2-FSw"/>
@@ -618,6 +622,7 @@
                         <outlet property="scrollView" destination="IoP-rR-k6i" id="wcg-aV-g4F"/>
                         <outlet property="showcaseButton" destination="FHH-2V-qq4" id="2SS-tK-jjg"/>
                         <outlet property="showcaseButtonView" destination="L2F-vt-W7r" id="wZx-nc-V0A"/>
+                        <outlet property="showcaseLabel" destination="sAV-Dt-9zZ" id="E55-bf-wJc"/>
                         <outlet property="showcaseView" destination="jRG-cZ-QMs" id="L69-PX-4qX"/>
                         <outlet property="stackView" destination="r7S-aq-9e7" id="sdI-pF-c2I"/>
                         <outlet property="viewAppoggio" destination="iu3-v0-7ya" id="u5a-G1-JAs"/>
