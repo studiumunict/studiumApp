@@ -166,10 +166,12 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
         case .right: //Uno dei due menu è aperto
             scrollView.isScrollEnabled = false
             stackView.isUserInteractionEnabled = false
+            self.navigationController?.navigationBar.isUserInteractionEnabled = false
             
         case .left: //Tutti i menu sono chiusi
             scrollView.isScrollEnabled = true
             stackView.isUserInteractionEnabled = true
+            self.navigationController?.navigationBar.isUserInteractionEnabled = true
             
         default:
             break
