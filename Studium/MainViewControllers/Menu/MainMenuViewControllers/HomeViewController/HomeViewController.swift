@@ -26,8 +26,10 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 130//Menu sx/
+            revealViewController().rearViewRevealWidth = 130 //Menu sx
             revealViewController().delegate = self
+            self.navigationItem.leftBarButtonItem?.target = revealViewController()
+            self.navigationItem.leftBarButtonItem?.action = #selector(SWRevealViewController.revealToggle(_:))
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
     }
@@ -55,13 +57,39 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             break
         }
     }
+    override func viewDidLayoutSubviews() {
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+       
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.cdlTableView.isHidden = true
+    
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
+        imageView.image = UIImage.init(named: "menu")
+        let buttonView = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
+        buttonView.addSubview(imageView)
+    
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: buttonView)
+        
+        //self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "menu"), style: .plain, target: self, action: nil)
+        
+        let _ = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { (t) in
+            self.showDepartmentTableAnimated()
+        }
+        
         HomeFrontController = self.navigationController
         if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 160 //Menu sx
+            revealViewController().rearViewRevealWidth = 130 //Menu sx
             revealViewController().delegate = self
+            self.navigationItem.leftBarButtonItem?.target = revealViewController()
+            self.navigationItem.leftBarButtonItem?.action = #selector(SWRevealViewController.revealToggle(_:))
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         
@@ -114,7 +142,9 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             self.departmentsSelectButton.setTitleColor(UIColor.darkGray, for: .normal)
             self.departmentsSelectButton.setTitle(self.departmentsDataSource[indexPath.row].name, for: .normal)
             self.view.endEditing(true)
+            self.cdlTableView.isHidden = false
             self.hideDepartmentTableAnimated()
+            
             getCDLAndTeachings(ofDepartment : self.departmentsDataSource[indexPath.row])
         }
         else {

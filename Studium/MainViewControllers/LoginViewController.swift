@@ -32,7 +32,7 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         yearLabel.clipsToBounds = true
         
         loginButton.layer.borderWidth = 3.0
-        loginButton.layer.borderColor = #colorLiteral(red: 0, green: 0.2044389844, blue: 0.4145363569, alpha: 0.7022688356)
+        loginButton.layer.borderColor = UIColor.primaryBackground.cgColor
 
         yearsPickerView.delegate = self
         
