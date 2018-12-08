@@ -112,11 +112,11 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
         
         setAllPrimaryBackgroundColor()
         
-        customizeButton(button: showcaseButton, backgroundColor: UIColor.secondaryBackground, image: UIImage(named: "avv_action"), title: "Vetrina")
+        /*customizeButton(button: showcaseButton, backgroundColor: UIColor.secondaryBackground, image: UIImage(named: "avv_action"), title: "Vetrina")
         customizeButton(button: notifyButton, backgroundColor: UIColor.primaryBackground, image: UIImage(named: "avv_action"), title: "Avvisi")
         customizeButton(button: descriptionButton, backgroundColor: UIColor.primaryBackground, image: UIImage(named: "avv_action"), title: "Descrizione")
         customizeButton(button: documentsButton, backgroundColor: UIColor.primaryBackground, image: UIImage(named: "avv_action"), title: "Documenti")
-        customizeButton(button: bookingButton, backgroundColor: UIColor.primaryBackground, image: UIImage(named: "avv_action"), title: "Prenotazioni")
+        customizeButton(button: bookingButton, backgroundColor: UIColor.primaryBackground, image: UIImage(named: "avv_action"), title: "Prenotazioni")*/
         
         
         
