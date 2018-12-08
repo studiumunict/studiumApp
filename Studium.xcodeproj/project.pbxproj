@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1311D89B21BBE82E00A09499 /* ProfileClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1311D89A21BBE82E00A09499 /* ProfileClass.swift */; };
 		135D120F21B8092200DA9C69 /* ExtensionCALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135D120E21B8092200DA9C69 /* ExtensionCALayer.swift */; };
 		13D86DDB21B9A3BF007638FD /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D86DDA21B9A3BF007638FD /* ExtensionUIColor.swift */; };
 		13F8E3C221A9667200BBAD9B /* TeachingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F8E3C121A9667200BBAD9B /* TeachingViewController.swift */; };
@@ -54,6 +55,7 @@
 /* Begin PBXFileReference section */
 		0D0D5F6926FC3A70A81E131D /* Pods-StudiumTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudiumTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudiumTests/Pods-StudiumTests.release.xcconfig"; sourceTree = "<group>"; };
 		0E83DFE790C0A80B2F43811B /* Pods-StudiumUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudiumUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudiumUITests/Pods-StudiumUITests.release.xcconfig"; sourceTree = "<group>"; };
+		1311D89A21BBE82E00A09499 /* ProfileClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileClass.swift; sourceTree = "<group>"; };
 		135D120E21B8092200DA9C69 /* ExtensionCALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionCALayer.swift; sourceTree = "<group>"; };
 		13D86DDA21B9A3BF007638FD /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
 		13F8E3C121A9667200BBAD9B /* TeachingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				9C06A22921AB700200E695DB /* DepartmentClass.swift */,
+				1311D89A21BBE82E00A09499 /* ProfileClass.swift */,
 				9C06A22B21AB707500E695DB /* CDLClass.swift */,
 				9CFE72C221B95206001EB697 /* TeachingClass.swift */,
 				9CFE72C421B95331001EB697 /* HomeTableSectionClass.swift */,
@@ -523,6 +526,7 @@
 				9C06A22C21AB707500E695DB /* CDLClass.swift in Sources */,
 				13F8E3C221A9667200BBAD9B /* TeachingViewController.swift in Sources */,
 				9CFE9DA521A8AE960030AE33 /* LoginViewController.swift in Sources */,
+				1311D89B21BBE82E00A09499 /* ProfileClass.swift in Sources */,
 				9CFE72C521B95331001EB697 /* HomeTableSectionClass.swift in Sources */,
 				9CFE9D7B21A8ADBC0030AE33 /* Studium.xcdatamodeld in Sources */,
 				9CFE9DAF21A8BC8F0030AE33 /* ProfileViewController.swift in Sources */,

@@ -10,22 +10,44 @@ import UIKit
 
 class ProfileViewController: UIViewController, SWRevealViewControllerDelegate {
 
+    
+    @IBOutlet var usernameLabel: UILabel!
+    @IBOutlet var codeLabel: UILabel!
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var surnameLabel: UILabel!
+    @IBOutlet var telNumberLabel: UILabel!
+    @IBOutlet var emailLabel: UILabel!
+    
+    var profileDataSource: Profile!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.blue
-        if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 130 //Menu sx
-            revealViewController().delegate = self
-            view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-        }
-        // Do any additional setup after loading the view.
-    }
-    override func viewDidAppear(_ animated: Bool) {
+        
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 160 //Menu sx
             revealViewController().delegate = self
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if revealViewController() != nil {
+            revealViewController().rearViewRevealWidth = 160 //Menu sx
+            revealViewController().delegate = self
+            view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+        }
+        
+        profileDataSource = Profile(username: "king", code: "x81000123", name: "Diego", surname: "Ragno", telNumber: "12345678901", email: "ilking@dmi.unict.it", profileImage: "user")
+        
+        usernameLabel.text = profileDataSource.username
+        codeLabel.text = String.uppercased(profileDataSource.code)()
+        nameLabel.text = profileDataSource.name
+        surnameLabel.text = profileDataSource.surname
+        telNumberLabel.text = profileDataSource.telNumber
+        emailLabel.text = profileDataSource.email
     }
     
 
