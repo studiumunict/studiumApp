@@ -42,12 +42,12 @@ class ProfileViewController: UIViewController, SWRevealViewControllerDelegate {
         
         profileDataSource = Profile(username: "king", code: "x81000123", name: "Diego", surname: "Ragno", telNumber: "12345678901", email: "ilking@dmi.unict.it", profileImage: "user")
         
-        usernameLabel.text = profileDataSource.username
+      /*  usernameLabel.text = profileDataSource.username
         codeLabel.text = String.uppercased(profileDataSource.code)()
         nameLabel.text = profileDataSource.name
         surnameLabel.text = profileDataSource.surname
         telNumberLabel.text = profileDataSource.telNumber
-        emailLabel.text = profileDataSource.email
+        emailLabel.text = profileDataSource.email*/
     }
     
 

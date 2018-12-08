@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //self.window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController")
         
         self.window?.makeKeyAndVisible()
+        UIApplication.shared.statusBarStyle = .lightContent
         return true
     }
 

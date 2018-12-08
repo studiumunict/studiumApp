@@ -316,7 +316,6 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FHH-2V-qq4">
                                                 <rect key="frame" x="11.5" y="0.0" width="52.5" height="48"/>
-                                                <color key="backgroundColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
                                                 <state key="normal" image="avv">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -325,8 +324,8 @@
                                                     <action selector="sendToShowcaseView:" destination="aqe-Yk-Phq" eventType="touchUpInside" id="EhZ-4y-N0m"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sAV-Dt-9zZ">
-                                                <rect key="frame" x="24" y="48" width="27.5" height="12"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vetrina" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sAV-Dt-9zZ">
+                                                <rect key="frame" x="19.5" y="48" width="36" height="12"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
                                                 <color key="textColor" red="0.91044991779999995" green="0.91044991779999995" blue="0.91044991779999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
@@ -347,7 +346,6 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqz-wd-gLo">
                                                 <rect key="frame" x="11.5" y="0.0" width="52.5" height="48"/>
-                                                <color key="backgroundColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
                                                 <state key="normal" image="avv">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -356,8 +354,8 @@
                                                     <action selector="sendToNotifyView:" destination="aqe-Yk-Phq" eventType="touchUpInside" id="Hpy-HR-weO"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u78-ka-FzN">
-                                                <rect key="frame" x="24" y="48" width="27.5" height="12"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avvisi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u78-ka-FzN">
+                                                <rect key="frame" x="23" y="48" width="29.5" height="12"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
                                                 <color key="textColor" red="0.91044991779999995" green="0.91044991779999995" blue="0.91044991779999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
@@ -378,7 +376,6 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQ5-CZ-8Ti">
                                                 <rect key="frame" x="11.5" y="0.0" width="52.5" height="48"/>
-                                                <color key="backgroundColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
                                                 <state key="normal" image="avv">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -387,8 +384,8 @@
                                                     <action selector="sendToDescriptionView:" destination="aqe-Yk-Phq" eventType="touchUpInside" id="aP8-qF-IAF"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5m-Lo-ual">
-                                                <rect key="frame" x="24" y="48" width="27.5" height="12"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descrizione" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5m-Lo-ual">
+                                                <rect key="frame" x="8" y="48" width="59.5" height="12"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
                                                 <color key="textColor" red="0.91044991779999995" green="0.91044991779999995" blue="0.91044991779999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
@@ -409,7 +406,6 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dR6-7M-Xej">
                                                 <rect key="frame" x="11.5" y="0.0" width="52.5" height="50"/>
-                                                <color key="backgroundColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
                                                 <state key="normal" image="avv">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -418,8 +414,8 @@
                                                     <action selector="sendToDocumentsView:" destination="aqe-Yk-Phq" eventType="touchUpInside" id="tMj-Gl-Pug"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Documents" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xm9-FS-c9u">
-                                                <rect key="frame" x="9" y="48" width="57" height="12"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Documenti" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xm9-FS-c9u">
+                                                <rect key="frame" x="10.5" y="48" width="54.5" height="12"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
                                                 <color key="textColor" red="0.91044991779999995" green="0.91044991779999995" blue="0.91044991779999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
@@ -440,7 +436,6 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0z-FC-wF1">
                                                 <rect key="frame" x="11.5" y="0.0" width="52.5" height="50"/>
-                                                <color key="backgroundColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
                                                 <state key="normal" image="avv">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -590,23 +585,28 @@
                     </view>
                     <connections>
                         <outlet property="bookingButton" destination="d0z-FC-wF1" id="YNU-yu-Ofh"/>
+                        <outlet property="bookingButtonView" destination="TEP-mn-fa7" id="6xQ-BF-jiF"/>
                         <outlet property="bookingView" destination="b0G-D1-NPL" id="51V-Kp-WXz"/>
                         <outlet property="courseNameLabel" destination="mq1-De-iby" id="amq-jr-Ml8"/>
                         <outlet property="descriptionButton" destination="dQ5-CZ-8Ti" id="NLB-tT-7mZ"/>
+                        <outlet property="descriptionButtonView" destination="cmt-LH-szh" id="fX7-ZW-Ayh"/>
                         <outlet property="descriptionMessageTextView" destination="Q96-qE-hHI" id="Yw6-jG-rCm"/>
                         <outlet property="descriptionView" destination="BZz-x6-gns" id="Aax-Tl-jNQ"/>
                         <outlet property="documentsButton" destination="dR6-7M-Xej" id="uA6-3b-CfC"/>
+                        <outlet property="documentsButtonView" destination="oWO-pt-zy9" id="VFF-u2-HLl"/>
                         <outlet property="documentsView" destination="264-sB-LrD" id="OGq-Zm-feP"/>
                         <outlet property="errorMessageLabelShowcaseView" destination="rfO-aK-PMU" id="zxl-gl-7Rf"/>
                         <outlet property="loadingIndicatorShowcaseView" destination="5bj-8h-v50" id="a1o-UC-nXZ"/>
                         <outlet property="nameTeacherLabel" destination="bzp-bk-RfF" id="25s-SJ-O2E"/>
                         <outlet property="notifyButton" destination="wqz-wd-gLo" id="awf-7F-ZgB"/>
+                        <outlet property="notifyButtonView" destination="h3h-Dv-Yjt" id="o9G-e1-uHH"/>
                         <outlet property="notifyMessageTextView" destination="xJb-Ak-xMN" id="nKF-2L-NyU"/>
                         <outlet property="notifyPickerView" destination="hNU-hf-nGZ" id="mby-dJ-Qh8"/>
                         <outlet property="notifyTitleLabel" destination="RYL-GJ-EPz" id="aun-n2-FSw"/>
                         <outlet property="notifyView" destination="1Es-N7-1rA" id="R5F-EO-dYG"/>
                         <outlet property="scrollView" destination="IoP-rR-k6i" id="wcg-aV-g4F"/>
                         <outlet property="showcaseButton" destination="FHH-2V-qq4" id="2SS-tK-jjg"/>
+                        <outlet property="showcaseButtonView" destination="L2F-vt-W7r" id="wZx-nc-V0A"/>
                         <outlet property="showcaseView" destination="jRG-cZ-QMs" id="L69-PX-4qX"/>
                         <outlet property="stackView" destination="r7S-aq-9e7" id="sdI-pF-c2I"/>
                         <outlet property="viewAppoggio" destination="iu3-v0-7ya" id="u5a-G1-JAs"/>

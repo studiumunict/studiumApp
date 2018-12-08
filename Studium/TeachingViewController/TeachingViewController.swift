@@ -19,10 +19,22 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
     @IBOutlet var stackView: UIStackView!
     
     // --- MARK: Stack View ---
+    
+    @IBOutlet weak var showcaseButtonView: UIView!
     @IBOutlet var showcaseButton: UIButton!
+   
+    @IBOutlet weak var notifyButtonView: UIView!
     @IBOutlet var notifyButton: UIButton!
+    
+    
+    @IBOutlet weak var descriptionButtonView: UIView!
     @IBOutlet var descriptionButton: UIButton!
+    
+    @IBOutlet weak var documentsButtonView: UIView!
     @IBOutlet var documentsButton: UIButton!
+    
+    
+    @IBOutlet weak var bookingButtonView: UIView!
     @IBOutlet var bookingButton: UIButton!
     
     @IBOutlet var courseNameLabel: UILabel!
@@ -61,14 +73,13 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
         
         //Definire le dimensioni dei menu
         if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 160//Menu sx/
+            revealViewController().rearViewRevealWidth = 130//Menu sx/
             revealViewController().delegate = self
             self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
             viewAppoggio.addGestureRecognizer(revealViewController().panGestureRecognizer())
             scrollView.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
-        
-        setNewTeachingDataSource() //Inizializza i nuovi dati del teachingDataSource scaricandoli dal db
+        completeTeachingDataSource() //Inizializza i nuovi dati del teachingDataSource scaricandoli dal db
         
         courseNameLabel.text = teachingDataSource.name
         nameTeacherLabel.text = teachingDataSource.teacherName
@@ -86,20 +97,6 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
             descriptionMessageTextView.text = "Nessuna descrizione per questo insegnamento."
         }
         
-        /*if teachingDataSource.haveDocuments != nil {
-            <#statements#>
-        } else {
-            <#statements#>
-        }
-        
-        if teachingDataSource.haveBooking != nil {
-            <#statements#>
-        } else {
-            <#statements#>
-        }*/
-        
-        
-        
         navigationItem.title = "Insegnamento"
         self.view.backgroundColor = UIColor.primaryBackground
         nameTeacherLabel.backgroundColor = UIColor.lightWhite
@@ -110,16 +107,9 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
         documentsView.backgroundColor = UIColor.lightWhite
         bookingView.backgroundColor = UIColor.lightWhite
         
-        setAllPrimaryBackgroundColor()
-        
-        /*customizeButton(button: showcaseButton, backgroundColor: UIColor.secondaryBackground, image: UIImage(named: "avv_action"), title: "Vetrina")
-        customizeButton(button: notifyButton, backgroundColor: UIColor.primaryBackground, image: UIImage(named: "avv_action"), title: "Avvisi")
-        customizeButton(button: descriptionButton, backgroundColor: UIColor.primaryBackground, image: UIImage(named: "avv_action"), title: "Descrizione")
-        customizeButton(button: documentsButton, backgroundColor: UIColor.primaryBackground, image: UIImage(named: "avv_action"), title: "Documenti")
-        customizeButton(button: bookingButton, backgroundColor: UIColor.primaryBackground, image: UIImage(named: "avv_action"), title: "Prenotazioni")*/
-        
-        
-        
+        setAllButtonsPrimaryBackgroundColor()
+        showcaseButtonView.backgroundColor = UIColor.secondaryBackground
+       
         viewAppoggio.bounds.size = CGSize(width: self.view.frame.width, height: self.view.frame.height - (stackView.frame.height + courseNameLabel.frame.height + nameTeacherLabel.frame.height)) //definisco le dimensioni reali e di autolayout per la scrollView
         
         scrollView.delegate = self
@@ -163,7 +153,7 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
         
         //Definire le dimensioni dei menu
         if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 160//Menu sx/
+            revealViewController().rearViewRevealWidth = 130//Menu sx/
             revealViewController().delegate = self
             self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
             viewAppoggio.addGestureRecognizer(revealViewController().panGestureRecognizer())
@@ -186,25 +176,18 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
         }
     }
     
-    func setNewTeachingDataSource(){ //Scarica i dati dal db
+    func completeTeachingDataSource(){ //Scarica i dati dal db
         teachingDataSource.completeDataSource(teacherName: "Allocco", haveShowcase: nil, haveDescription: nil, haveDocuments: nil, haveBooking: nil, descriptionText: nil)
     }
     
-    func customizeButton(button: UIButton!, backgroundColor: UIColor!, image: UIImage!, title: String!) {
-        button.backgroundColor = backgroundColor
-        button.setImage(image, for: .normal)
-        button.titleLabel?.text = title
-        button.titleLabel?.textColor = UIColor.lightWhite
-        button.imageEdgeInsets = UIEdgeInsets(top: 6.5, left: button.bounds.width / 3, bottom: button.bounds.height / 2 - 6.5, right: -5)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: -37, right: 0)
-    }
     
-    func setAllPrimaryBackgroundColor(){
-        showcaseButton.backgroundColor = UIColor.primaryBackground
-        notifyButton.backgroundColor = UIColor.primaryBackground
-        descriptionButton.backgroundColor = UIColor.primaryBackground
-        documentsButton.backgroundColor = UIColor.primaryBackground
-        bookingButton.backgroundColor = UIColor.primaryBackground
+    
+    func setAllButtonsPrimaryBackgroundColor(){
+        showcaseButtonView.backgroundColor = UIColor.primaryBackground
+        notifyButtonView.backgroundColor = UIColor.primaryBackground
+        descriptionButtonView.backgroundColor = UIColor.primaryBackground
+        documentsButtonView.backgroundColor = UIColor.primaryBackground
+        bookingButtonView.backgroundColor = UIColor.primaryBackground
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -214,28 +197,28 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
         //i bottoni vengono evidenziati quando si cambia pagina
         switch Int(page) {
         case 0:
-            setAllPrimaryBackgroundColor()
-            showcaseButton.backgroundColor = UIColor.secondaryBackground
+            setAllButtonsPrimaryBackgroundColor()
+            showcaseButtonView.backgroundColor = UIColor.secondaryBackground
             scrollView.addGestureRecognizer(revealViewController().panGestureRecognizer())
             
         case 1:
-            setAllPrimaryBackgroundColor()
-            notifyButton.backgroundColor = UIColor.secondaryBackground
+            setAllButtonsPrimaryBackgroundColor()
+            notifyButtonView.backgroundColor = UIColor.secondaryBackground
             scrollView.removeGestureRecognizer(revealViewController().panGestureRecognizer())
             
         case 2:
-            setAllPrimaryBackgroundColor()
-            descriptionButton.backgroundColor = UIColor.secondaryBackground
+            setAllButtonsPrimaryBackgroundColor()
+            descriptionButtonView.backgroundColor = UIColor.secondaryBackground
             scrollView.removeGestureRecognizer(revealViewController().panGestureRecognizer())
             
         case 3:
-            setAllPrimaryBackgroundColor()
-            documentsButton.backgroundColor = UIColor.secondaryBackground
+            setAllButtonsPrimaryBackgroundColor()
+            documentsButtonView.backgroundColor = UIColor.secondaryBackground
             scrollView.removeGestureRecognizer(revealViewController().panGestureRecognizer())
             
         case 4:
-            setAllPrimaryBackgroundColor()
-            bookingButton.backgroundColor = UIColor.secondaryBackground
+            setAllButtonsPrimaryBackgroundColor()
+            bookingButtonView.backgroundColor = UIColor.secondaryBackground
             scrollView.removeGestureRecognizer(revealViewController().panGestureRecognizer())
         default:
             break
@@ -244,33 +227,33 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
 
     @IBAction func sendToShowcaseView(_ sender: UIButton) {
         scrollView.scrollRectToVisible(showcaseView.frame, animated: false)
-        setAllPrimaryBackgroundColor()
-        showcaseButton.backgroundColor = UIColor.secondaryBackground
+        setAllButtonsPrimaryBackgroundColor()
+        showcaseButtonView.backgroundColor = UIColor.secondaryBackground
         
     }
     
     @IBAction func sendToNotifyView(_ sender: UIButton) {
         scrollView.scrollRectToVisible(notifyView.frame, animated: false)
-        setAllPrimaryBackgroundColor()
-        notifyButton.backgroundColor = UIColor.secondaryBackground
+        setAllButtonsPrimaryBackgroundColor()
+        notifyButtonView.backgroundColor = UIColor.secondaryBackground
     }
     
     @IBAction func sendToDescriptionView(_ sender: UIButton) {
         scrollView.scrollRectToVisible(descriptionView.frame, animated: false)
-        setAllPrimaryBackgroundColor()
-        descriptionButton.backgroundColor = UIColor.secondaryBackground
+        setAllButtonsPrimaryBackgroundColor()
+        descriptionButtonView.backgroundColor = UIColor.secondaryBackground
     }
     
     @IBAction func sendToDocumentsView(_ sender: UIButton) {
         scrollView.scrollRectToVisible(documentsView.frame, animated: false)
-        setAllPrimaryBackgroundColor()
-        documentsButton.backgroundColor = UIColor.secondaryBackground
+        setAllButtonsPrimaryBackgroundColor()
+        documentsButtonView.backgroundColor = UIColor.secondaryBackground
     }
     
     @IBAction func sendToBookingView(_ sender: UIButton) {
         scrollView.scrollRectToVisible(bookingView.frame, animated: false)
-        setAllPrimaryBackgroundColor()
-        bookingButton.backgroundColor = UIColor.secondaryBackground
+        setAllButtonsPrimaryBackgroundColor()
+        bookingButtonView.backgroundColor = UIColor.secondaryBackground
     }
     
     
