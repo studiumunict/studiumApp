@@ -72,6 +72,10 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
         super.viewDidLoad()
         
         //Definire le dimensioni dei menu
+        
+        /*documentsButton.imageView?.frame = CGRect(x: 10, y: 0, width: 20, height: 20)*/
+      
+        
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 130//Menu sx/
             revealViewController().delegate = self

@@ -55,9 +55,28 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             break
         }
     }
+    override func viewDidLayoutSubviews() {
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+       
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.cdlTableView.isHidden = true
+        
+        /*let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        button.imageView?.image = UIImage.init(named: "more")*/
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .action, target: self, action: nil)
+        
+        let _ = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { (t) in
+            self.showDepartmentTableAnimated()
+        }
+        
         HomeFrontController = self.navigationController
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 160 //Menu sx
@@ -114,7 +133,9 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             self.departmentsSelectButton.setTitleColor(UIColor.darkGray, for: .normal)
             self.departmentsSelectButton.setTitle(self.departmentsDataSource[indexPath.row].name, for: .normal)
             self.view.endEditing(true)
+            self.cdlTableView.isHidden = false
             self.hideDepartmentTableAnimated()
+            
             getCDLAndTeachings(ofDepartment : self.departmentsDataSource[indexPath.row])
         }
         else {
