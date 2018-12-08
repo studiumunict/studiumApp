@@ -101,28 +101,18 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
         
         showcaseView.backgroundColor = UIColor.lightWhite
         showcaseView.frame = CGRect(x: 0, y: 0, width: viewAppoggio.frame.width, height: viewAppoggio.frame.height) //Dimensioni rispetto alla scrollView
-        showcaseView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.primaryBackground, thickness: 0.5)
-        showcaseView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.primaryBackground, thickness: 0.25)
         
         notifyView.backgroundColor = UIColor.lightWhite
         notifyView.frame = CGRect(x: viewAppoggio.bounds.width, y: scrollView.contentOffset.y, width: scrollView.frame.width, height: viewAppoggio.bounds.height) //Dimensioni rispetto alla scrollView
-        notifyView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.primaryBackground, thickness: 0.25)
-        notifyView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.primaryBackground, thickness: 0.25)
         
         descriptionView.backgroundColor = UIColor.lightWhite
         descriptionView.frame = CGRect(x: viewAppoggio.bounds.width * 2, y: scrollView.contentOffset.y, width: scrollView.frame.width, height: viewAppoggio.bounds.height) //Dimensioni rispetto alla scrollView
-        descriptionView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.primaryBackground, thickness: 0.25)
-        descriptionView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.primaryBackground, thickness: 0.25)
         
         documentsView.backgroundColor = UIColor.lightWhite
         documentsView.frame = CGRect(x: viewAppoggio.bounds.width * 3, y: scrollView.contentOffset.y, width: scrollView.frame.width, height: viewAppoggio.bounds.height) //Dimensioni rispetto alla scrollView
-        documentsView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.primaryBackground, thickness: 0.25)
-        documentsView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.primaryBackground, thickness: 0.25)
         
         bookingView.backgroundColor = UIColor.lightWhite
         bookingView.frame = CGRect(x: viewAppoggio.bounds.width * 4, y: scrollView.contentOffset.y, width: scrollView.frame.width, height: viewAppoggio.bounds.height) //Dimensioni rispetto alla scrollView
-        bookingView.layer.addBorder(edge: UIRectEdge.left, color: UIColor.primaryBackground, thickness: 0.25)
-        bookingView.layer.addBorder(edge: UIRectEdge.right, color: UIColor.primaryBackground, thickness: 0.5)
         
         
         
@@ -131,9 +121,11 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
         
         
         //Cambiare l'immagine per i vari bottoni
-        let docImageView = UIImageView(frame: CGRect(x: 8, y: 5, width: 40, height: 35))
-        docImageView.image = UIImage(named: "folder")
-        documentsButton.addSubview(docImageView)
+        customButtons(button: showcaseButton, image: "home")
+        customButtons(button: notifyButton, image: "avv")
+        customButtons(button: descriptionButton, image: "descr")
+        customButtons(button: documentsButton, image: "folder")
+        customButtons(button: bookingButton, image: "courses")
         
         
        
@@ -218,6 +210,12 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
         bookingButtonView.backgroundColor = UIColor.primaryBackground
     }
     
+    
+    func customButtons(button: UIButton!, image: String!){
+        let customImageView = UIImageView(frame: CGRect(x: 8, y: 5, width: 40, height: 35))
+        customImageView.image = UIImage(named: image!)
+        button.addSubview(customImageView)
+    }
     
     
     

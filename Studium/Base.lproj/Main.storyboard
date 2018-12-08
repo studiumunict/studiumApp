@@ -328,7 +328,7 @@
                                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FHH-2V-qq4">
                                                 <rect key="frame" x="11.5" y="0.0" width="52.5" height="48"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
-                                                <state key="normal" image="avv">
+                                                <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -358,7 +358,7 @@
                                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqz-wd-gLo">
                                                 <rect key="frame" x="11.5" y="0.0" width="52.5" height="48"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
-                                                <state key="normal" image="avv">
+                                                <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -388,7 +388,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQ5-CZ-8Ti">
                                                 <rect key="frame" x="11.5" y="0.0" width="52.5" height="48"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
-                                                <state key="normal" image="avv">
+                                                <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -448,7 +448,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0z-FC-wF1">
                                                 <rect key="frame" x="11.5" y="0.0" width="52.5" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
-                                                <state key="normal" image="avv">
+                                                <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -959,7 +959,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="avv" width="24" height="24"/>
         <image name="courses" width="47.261539459228516" height="47.261539459228516"/>
         <image name="folder" width="46.428211212158203" height="46.428211212158203"/>
         <image name="home" width="46.428211212158203" height="46.428211212158203"/>
