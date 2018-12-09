@@ -65,6 +65,31 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
     var teachingDataSource: Teaching! //Pre inizializzato solo con: name, code, teacherName, signedUp
     
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        
+        //Quando apre le view, se il menu' è aperto lo chiude
+        if (revealViewController().frontViewPosition != FrontViewPosition.left) {
+            revealViewController().frontViewPosition = .left
+        }
+        
+        //Definire le dimensioni dei menu
+        if revealViewController() != nil {
+            revealViewController().rearViewRevealWidth = 130//Menu sx
+            revealViewController().delegate = self
+            self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+            viewAppoggio.addGestureRecognizer(revealViewController().panGestureRecognizer())
+            scrollView.addGestureRecognizer(revealViewController().panGestureRecognizer())
+        }
+        
+        completeTeachingDataSource() //Inizializza i nuovi dati del teachingDataSource scaricandoli dal db
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -77,8 +102,6 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
             scrollView.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         
-        completeTeachingDataSource() //Inizializza i nuovi dati del teachingDataSource scaricandoli dal db
-        
         navigationItem.title = "Insegnamento"
         
         self.view.backgroundColor = UIColor.primaryBackground
@@ -90,12 +113,12 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
         
         
         
-        viewAppoggio.bounds.size = CGSize(width: self.view.frame.width, height: self.view.frame.height - (stackView.frame.height + courseNameLabel.frame.height + nameTeacherLabel.frame.height)) //definisco le dimensioni reali e di autolayout per la scrollView
+        viewAppoggio.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height - (stackView.frame.height + courseNameLabel.frame.height + nameTeacherLabel.frame.height)) //definisco le dimensioni reali e di autolayout per la scrollView
         
         scrollView.delegate = self
-        scrollView.bounds.size = CGSize(width: viewAppoggio.frame.width, height: scrollView.frame.height) //definisco le dimensioni reali
+        scrollView.frame = CGRect(x: 0.0, y: 0.0, width: viewAppoggio.frame.width, height: scrollView.frame.height) //definisco le dimensioni reali
         scrollView.contentSize = CGSize(width: viewAppoggio.frame.width * 5, height: 1.0) //definisco il 'range' o contenuto della scrollView
-        scrollView.bounces = false
+        //scrollView.bounces = false
         
         
         
@@ -130,26 +153,6 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
         
        
         stackView.layer.addBorder(edge: UIRectEdge.top, color: UIColor.primaryBackground, thickness: 0.7)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        
-        //Quando apre le view, se il menu' è aperto lo chiude
-        if (revealViewController().frontViewPosition != FrontViewPosition.left) {
-            revealViewController().frontViewPosition = .left
-        }
-        
-        //Definire le dimensioni dei menu
-        if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 130//Menu sx
-            revealViewController().delegate = self
-            self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-            viewAppoggio.addGestureRecognizer(revealViewController().panGestureRecognizer())
-            scrollView.addGestureRecognizer(revealViewController().panGestureRecognizer())
-        }
     }
     
     
@@ -223,32 +226,33 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
         //conta l'indice della pagina corrente
         let page = scrollView.contentOffset.x / scrollView.frame.size.width
         
+        if revealViewController() != nil {
+            scrollView.removeGestureRecognizer(revealViewController().panGestureRecognizer())
+        }
+        
+        setAllButtonsViewWithPrimaryBackgroundColor()
+        
         //i bottoni vengono evidenziati quando si cambia pagina
         switch Int(page) {
         case 0:
-            setAllButtonsViewWithPrimaryBackgroundColor()
             showcaseButtonView.backgroundColor = UIColor.secondaryBackground
-            scrollView.addGestureRecognizer(revealViewController().panGestureRecognizer())
+            if revealViewController() != nil {
+                scrollView.addGestureRecognizer(revealViewController().panGestureRecognizer())
+            }
+            return
             
         case 1:
-            setAllButtonsViewWithPrimaryBackgroundColor()
             notifyButtonView.backgroundColor = UIColor.secondaryBackground
-            scrollView.removeGestureRecognizer(revealViewController().panGestureRecognizer())
             
         case 2:
-            setAllButtonsViewWithPrimaryBackgroundColor()
             descriptionButtonView.backgroundColor = UIColor.secondaryBackground
-            scrollView.removeGestureRecognizer(revealViewController().panGestureRecognizer())
             
         case 3:
-            setAllButtonsViewWithPrimaryBackgroundColor()
             documentsButtonView.backgroundColor = UIColor.secondaryBackground
-            scrollView.removeGestureRecognizer(revealViewController().panGestureRecognizer())
             
         case 4:
-            setAllButtonsViewWithPrimaryBackgroundColor()
             bookingButtonView.backgroundColor = UIColor.secondaryBackground
-            scrollView.removeGestureRecognizer(revealViewController().panGestureRecognizer())
+            
         default:
             break
         }
