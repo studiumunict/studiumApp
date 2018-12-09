@@ -28,8 +28,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 130 //Menu sx
             revealViewController().delegate = self
-            self.navigationItem.leftBarButtonItem?.target = revealViewController()
-            self.navigationItem.leftBarButtonItem?.action = #selector(SWRevealViewController.revealToggle(_:))
+            self.navigationItem.leftBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:))))
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
     }
@@ -75,10 +74,8 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         imageView.image = UIImage.init(named: "menu")
         let buttonView = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
         buttonView.addSubview(imageView)
-    
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: buttonView)
         
-        //self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "menu"), style: .plain, target: self, action: nil)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: buttonView)
         
         let _ = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { (t) in
             self.showDepartmentTableAnimated()
@@ -88,8 +85,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 130 //Menu sx
             revealViewController().delegate = self
-            self.navigationItem.leftBarButtonItem?.target = revealViewController()
-            self.navigationItem.leftBarButtonItem?.action = #selector(SWRevealViewController.revealToggle(_:))
+            self.navigationItem.leftBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:))))
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         
