@@ -11,23 +11,69 @@ import UIKit
 class ProfileViewController: UIViewController, SWRevealViewControllerDelegate {
 
     
-    @IBOutlet var usernameLabel: UILabel!
-    @IBOutlet var codeLabel: UILabel!
-    @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var surnameLabel: UILabel!
-    @IBOutlet var telNumberLabel: UILabel!
-    @IBOutlet var emailLabel: UILabel!
-    
-    var profileDataSource: Profile!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var phoneNumberLabel: UILabel!
+    @IBOutlet weak var universityCodeLabel: UILabel!
+    @IBOutlet weak var codFiscaleLabel: UILabel!
+    @IBOutlet weak var studentNameLabel: UILabel!
+    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var usernameView: UIView!
+    @IBOutlet weak var universityCodeView: UIView!
+    @IBOutlet weak var phoneNumberView: UIView!
+    @IBOutlet weak var emailView: UIView!
+    var profileDataSource: Student!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
+        imageView.image = UIImage.init(named: "menu")
+        let buttonView = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
+        buttonView.addSubview(imageView)
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: buttonView)
+        
         
         if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 160 //Menu sx
+            revealViewController().rearViewRevealWidth = 130 //Menu sx
             revealViewController().delegate = self
+            self.navigationItem.leftBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:))))
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
+        userImageView.layer.cornerRadius = userImageView.frame.size.width / 2
+        userImageView.clipsToBounds = true
+        userImageView.layer.borderWidth = 3.0
+        userImageView.layer.borderColor = UIColor.secondaryBackground.cgColor
+        
+        
+        universityCodeView.layer.cornerRadius =  7.0
+        universityCodeView.clipsToBounds = true
+        usernameView.layer.cornerRadius =  7.0
+        usernameView.clipsToBounds = true
+        phoneNumberView.layer.cornerRadius =  7.0
+        phoneNumberView.clipsToBounds = true
+        emailView.layer.cornerRadius =  7.0
+        emailView.clipsToBounds = true
+        
+        getStudent()
+        
+        
+        
+        
+        
+        
+    }
+    
+    func getStudent(){
+        
+        profileDataSource = Student(codFiscale: "SCNSNR98P29C351C", code: "X81000123", name: "Simone Orazio", surname: "Scionti", telNumber: "12345678901", email: "ilking@dmi.unict.it", profileImage: UIImage.init(named: "logo"))
+        
+        codFiscaleLabel.text = profileDataSource.codFiscale
+        universityCodeLabel.text = profileDataSource.code
+        studentNameLabel.text = profileDataSource.name + " " + profileDataSource.surname
+        emailLabel.text = profileDataSource.email
+        phoneNumberLabel.text = profileDataSource.telNumber
+        profileImageView.image = profileDataSource.profileImage
         
     }
     
@@ -35,30 +81,12 @@ class ProfileViewController: UIViewController, SWRevealViewControllerDelegate {
         super.viewWillAppear(animated)
         
         if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 160 //Menu sx
+            revealViewController().rearViewRevealWidth = 130 //Menu sx
             revealViewController().delegate = self
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         
-        profileDataSource = Profile(username: "king", code: "x81000123", name: "Diego", surname: "Ragno", telNumber: "12345678901", email: "ilking@dmi.unict.it", profileImage: "user")
-        
-      /*  usernameLabel.text = profileDataSource.username
-        codeLabel.text = String.uppercased(profileDataSource.code)()
-        nameLabel.text = profileDataSource.name
-        surnameLabel.text = profileDataSource.surname
-        telNumberLabel.text = profileDataSource.telNumber
-        emailLabel.text = profileDataSource.email*/
+       
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

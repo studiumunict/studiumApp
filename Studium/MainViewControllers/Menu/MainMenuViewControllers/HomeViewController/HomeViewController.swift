@@ -56,15 +56,6 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             break
         }
     }
-    override func viewDidLayoutSubviews() {
-        
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-       
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

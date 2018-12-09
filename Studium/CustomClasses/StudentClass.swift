@@ -1,5 +1,5 @@
 //
-//  ProfileClass.swift
+//  StudentClass.swift
 //  Studium
 //
 //  Created by Francesco Petrosino on 08/12/2018.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-class Profile{
+class Student{
     
-    var username: String!
+    var codFiscale: String!
     var code: String!
     var name: String!
     var surname: String!
@@ -18,13 +18,13 @@ class Profile{
     var email: String!
     var profileImage: UIImage!
     
-    init(username: String!, code: String!, name: String!, surname: String!, telNumber: String!, email: String!, profileImage: String!){
-        self.username = username
+    init(codFiscale: String!, code: String!, name: String!, surname: String!, telNumber: String!, email: String!, profileImage: UIImage!){
+        self.codFiscale = codFiscale
         self.code = code
         self.name = name
         self.surname = surname
         self.telNumber = telNumber
         self.email = email
-        self.profileImage = UIImage(named: profileImage)
+        self.profileImage = profileImage
     }
 }
