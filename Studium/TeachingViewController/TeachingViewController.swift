@@ -104,12 +104,13 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         }
         
         navigationItem.title = "Insegnamento"
+        navigationController?.view.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.secondaryBackground, thickness: 0.3)
         
         self.view.backgroundColor = UIColor.primaryBackground
         
-        //courseNameLabel.backgroundColor = UIColor.primaryBackground
+        courseNameLabel.backgroundColor = UIColor.primaryBackground
         courseNameLabel.textColor = UIColor.lightWhite
-        //nameTeacherLabel.backgroundColor = UIColor.primaryBackground
+        nameTeacherLabel.backgroundColor = UIColor.primaryBackground
         nameTeacherLabel.textColor = UIColor.lightWhite
         
         
@@ -125,7 +126,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         customButtons(button: bookingButton, image: "courses")
         
     
-        stackView.layer.addBorder(edge: UIRectEdge.top, color: UIColor.primaryBackground, thickness: 0.7)
+        stackView.layer.addBorder(edge: UIRectEdge.top, color: UIColor.secondaryBackground, thickness: 0.7)
     }
     
     
@@ -168,10 +169,10 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         return viewControllerList[nextIndex]
     }
     
-    /*func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        <#code#>
-    }*/
     
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
+        return viewControllerList.count
+    }
     
     
     func revealController(_ revealController: SWRevealViewController!, didMoveTo position: FrontViewPosition) {
@@ -279,7 +280,6 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         //pageViewController.scrollRectToVisible(showcaseView.frame, animated: false)
         setAllButtonsViewWithPrimaryBackgroundColor()
         showcaseButtonView.backgroundColor = UIColor.secondaryBackground
-        
     }
     
     @IBAction func sendToNotifyView(_ sender: UIButton) {
