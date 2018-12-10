@@ -262,6 +262,14 @@
                                     <action selector="departmentButtonClicked:" destination="sqY-5t-UNn" eventType="touchUpInside" id="OEX-Oo-cnY"/>
                                 </connections>
                             </button>
+                            <searchBar contentMode="redraw" placeholder=" Cerca un corso di studi" translatesAutoresizingMaskIntoConstraints="NO" id="X5T-Dh-cu7">
+                                <rect key="frame" x="2" y="64" width="371" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Ss1-ai-fyP"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.91044991779999995" green="0.91044991779999995" blue="0.91044991779999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="0.069202016140000003" green="0.069202016140000003" blue="0.069202016140000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -269,11 +277,14 @@
                             <constraint firstItem="I0a-dP-J9e" firstAttribute="width" secondItem="hoX-vv-RsY" secondAttribute="width" multiplier="0.95" id="CHv-Gi-cVb"/>
                             <constraint firstItem="pvS-qg-F5m" firstAttribute="bottom" secondItem="hDA-9f-FuP" secondAttribute="bottom" id="E91-li-E73"/>
                             <constraint firstItem="hDA-9f-FuP" firstAttribute="top" secondItem="uPP-QE-Iig" secondAttribute="bottom" constant="-3" id="EcC-Zg-r56"/>
+                            <constraint firstItem="X5T-Dh-cu7" firstAttribute="width" secondItem="hoX-vv-RsY" secondAttribute="width" multiplier="0.99" id="JJn-ov-NeF"/>
                             <constraint firstItem="pvS-qg-F5m" firstAttribute="top" secondItem="uPP-QE-Iig" secondAttribute="top" constant="-10" id="LNO-aQ-bNY"/>
                             <constraint firstItem="I0a-dP-J9e" firstAttribute="top" secondItem="uPP-QE-Iig" secondAttribute="bottom" constant="-3" id="NSI-Nv-2g0"/>
                             <constraint firstItem="uPP-QE-Iig" firstAttribute="width" secondItem="hoX-vv-RsY" secondAttribute="width" multiplier="0.95" id="NyE-66-1HH"/>
                             <constraint firstItem="I0a-dP-J9e" firstAttribute="bottom" secondItem="pvS-qg-F5m" secondAttribute="bottom" id="Oo2-GJ-xpI"/>
+                            <constraint firstItem="X5T-Dh-cu7" firstAttribute="top" secondItem="pvS-qg-F5m" secondAttribute="top" id="cFu-Sa-PR2"/>
                             <constraint firstItem="hDA-9f-FuP" firstAttribute="centerX" secondItem="pvS-qg-F5m" secondAttribute="centerX" id="iO6-ER-Lk6"/>
+                            <constraint firstItem="X5T-Dh-cu7" firstAttribute="centerX" secondItem="pvS-qg-F5m" secondAttribute="centerX" id="khh-Co-RUi"/>
                             <constraint firstItem="hDA-9f-FuP" firstAttribute="width" secondItem="hoX-vv-RsY" secondAttribute="width" multiplier="0.95" id="kiv-KP-7tP"/>
                             <constraint firstItem="I0a-dP-J9e" firstAttribute="centerX" secondItem="pvS-qg-F5m" secondAttribute="centerX" id="vGL-6q-gkA"/>
                         </constraints>
@@ -282,6 +293,7 @@
                     <navigationItem key="navigationItem" title="Home" id="jhF-Gw-TMV"/>
                     <connections>
                         <outlet property="cdlTableView" destination="hDA-9f-FuP" id="nP1-gK-0qa"/>
+                        <outlet property="cdsSearchBar" destination="X5T-Dh-cu7" id="L21-bc-GNS"/>
                         <outlet property="departmentsSelectButton" destination="uPP-QE-Iig" id="gP3-U5-hzO"/>
                         <outlet property="departmentsTableView" destination="I0a-dP-J9e" id="unp-Te-o4w"/>
                         <segue destination="aqe-Yk-Phq" kind="show" identifier="segueToTeachingController" id="rDa-ii-Lwh"/>
@@ -639,7 +651,23 @@
                     <view key="view" contentMode="scaleToFill" id="sjA-UN-im6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Cerca un corso ed iscriviti!" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5ml-Ow-jas">
+                                <rect key="frame" x="9.5" y="80" width="356" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="2dD-3Y-BbU"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="5ml-Ow-jas" firstAttribute="width" secondItem="sjA-UN-im6" secondAttribute="width" multiplier="0.95" id="OGG-qN-Zmf"/>
+                            <constraint firstItem="5ml-Ow-jas" firstAttribute="centerX" secondItem="5Pz-Rb-gXw" secondAttribute="centerX" id="UvW-kU-FPA"/>
+                            <constraint firstItem="5ml-Ow-jas" firstAttribute="top" secondItem="5Pz-Rb-gXw" secondAttribute="top" constant="16" id="mgB-od-dRA"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5Pz-Rb-gXw"/>
                     </view>
                     <navigationItem key="navigationItem" id="NNC-X6-WSx"/>
