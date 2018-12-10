@@ -263,9 +263,9 @@
                                 </connections>
                             </button>
                             <searchBar contentMode="redraw" placeholder=" Cerca un corso di studi" translatesAutoresizingMaskIntoConstraints="NO" id="X5T-Dh-cu7">
-                                <rect key="frame" x="2" y="64" width="371" height="50"/>
+                                <rect key="frame" x="2" y="74" width="371" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Ss1-ai-fyP"/>
+                                    <constraint firstAttribute="height" constant="40" id="Ss1-ai-fyP"/>
                                 </constraints>
                                 <color key="barTintColor" red="0.91044991779999995" green="0.91044991779999995" blue="0.91044991779999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -282,7 +282,7 @@
                             <constraint firstItem="I0a-dP-J9e" firstAttribute="top" secondItem="uPP-QE-Iig" secondAttribute="bottom" constant="-3" id="NSI-Nv-2g0"/>
                             <constraint firstItem="uPP-QE-Iig" firstAttribute="width" secondItem="hoX-vv-RsY" secondAttribute="width" multiplier="0.95" id="NyE-66-1HH"/>
                             <constraint firstItem="I0a-dP-J9e" firstAttribute="bottom" secondItem="pvS-qg-F5m" secondAttribute="bottom" id="Oo2-GJ-xpI"/>
-                            <constraint firstItem="X5T-Dh-cu7" firstAttribute="top" secondItem="pvS-qg-F5m" secondAttribute="top" id="cFu-Sa-PR2"/>
+                            <constraint firstItem="X5T-Dh-cu7" firstAttribute="top" secondItem="pvS-qg-F5m" secondAttribute="top" constant="10" id="cFu-Sa-PR2"/>
                             <constraint firstItem="hDA-9f-FuP" firstAttribute="centerX" secondItem="pvS-qg-F5m" secondAttribute="centerX" id="iO6-ER-Lk6"/>
                             <constraint firstItem="X5T-Dh-cu7" firstAttribute="centerX" secondItem="pvS-qg-F5m" secondAttribute="centerX" id="khh-Co-RUi"/>
                             <constraint firstItem="hDA-9f-FuP" firstAttribute="width" secondItem="hoX-vv-RsY" secondAttribute="width" multiplier="0.95" id="kiv-KP-7tP"/>

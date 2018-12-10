@@ -62,6 +62,12 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         super.viewDidLoad()
         self.cdlTableView.isHidden = true
         self.cdsSearchBar.isHidden = true
+        self.cdsSearchBar.backgroundImage = UIImage()
+        let textFieldInsideSearchBar = cdsSearchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.backgroundColor = UIColor.lightWhite
+        textFieldInsideSearchBar?.font = UIFont.boldSystemFont(ofSize: 16)
+        textFieldInsideSearchBar?.textColor = UIColor.secondaryBackground
+        
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
         imageView.image = UIImage.init(named: "menu")
         let buttonView = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
@@ -111,10 +117,31 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     
     @objc func startSearching(){
         print("inizio ricerca")
-        self.cdsSearchBar.alpha = 0.0
-        self.cdsSearchBar.isHidden = false
-        UIView.animate(withDuration: 0.4) {
-            self.cdsSearchBar.alpha = 1.0
+        if self.cdsSearchBar.isHidden {
+            self.cdsSearchBar.alpha = 0.0
+            self.cdsSearchBar.isHidden = false
+            if departmentsTableView.isHidden == false {
+                hideDepartmentTableAnimated()
+            }
+            self.cdsSearchBar.becomeFirstResponder()
+            UIView.animate(withDuration: 0.4, animations: {
+                self.cdsSearchBar.alpha = 1.0
+            }) { (t) in
+                
+            }
+            
+            
+        }
+        else{
+            self.departmentsSelectButton.isHidden = false
+            self.cdsSearchBar.resignFirstResponder()
+            UIView.animate(withDuration: 0.4, animations: {
+              self.cdsSearchBar.alpha = 0.0
+            }) { (t) in
+                self.cdsSearchBar.isHidden = true
+                
+            }
+            
         }
     }
     
