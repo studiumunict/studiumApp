@@ -14,6 +14,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         print("home deinit")
     }
     
+    @IBOutlet weak var cdsSearchBar: UISearchBar!
     @IBOutlet weak var cdlTableView: UITableView!
     @IBOutlet weak var departmentsTableView: UITableView!
     @IBOutlet weak var departmentsSelectButton: UIButton!
@@ -60,13 +61,28 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         self.cdlTableView.isHidden = true
-    
+        self.cdsSearchBar.isHidden = true
+        self.cdsSearchBar.backgroundImage = UIImage()
+        let textFieldInsideSearchBar = cdsSearchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.backgroundColor = UIColor.lightWhite
+        textFieldInsideSearchBar?.font = UIFont.boldSystemFont(ofSize: 16)
+        textFieldInsideSearchBar?.textColor = UIColor.secondaryBackground
+        
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
         imageView.image = UIImage.init(named: "menu")
         let buttonView = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
         buttonView.addSubview(imageView)
-        
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: buttonView)
+        
+       // creare un bottone con lente di ingrandimento
+        
+        let imageView2 = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
+        imageView2.image = UIImage.init(named: "menu")
+        let buttonView2 = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
+        buttonView2.addSubview(imageView2)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: buttonView2)
+        self.navigationItem.rightBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.searchingClicked)))
+        
         
         let _ = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { (t) in
             self.showDepartmentTableAnimated()
@@ -99,7 +115,35 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     
     
     
-    
+    @objc func searchingClicked(){
+        print("inizio ricerca")
+        if self.cdsSearchBar.isHidden {
+            self.cdsSearchBar.alpha = 0.0
+            self.cdsSearchBar.isHidden = false
+            if departmentsTableView.isHidden == false {
+                hideDepartmentTableAnimated()
+            }
+            self.cdsSearchBar.becomeFirstResponder()
+            UIView.animate(withDuration: 0.4, animations: {
+                self.cdsSearchBar.alpha = 1.0
+            }) { (t) in
+                
+            }
+            
+            
+        }
+        else{
+            self.departmentsSelectButton.isHidden = false
+            self.cdsSearchBar.resignFirstResponder()
+            UIView.animate(withDuration: 0.4, animations: {
+              self.cdsSearchBar.alpha = 0.0
+            }) { (t) in
+                self.cdsSearchBar.isHidden = true
+                
+            }
+            
+        }
+    }
     
     func getCDLAndTeachings(ofDepartment : Department){ //questa funzione scaricherà dal db
         self.CDLDataSource.removeAll()
