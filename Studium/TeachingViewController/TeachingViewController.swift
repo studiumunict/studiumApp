@@ -103,47 +103,17 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
            pageViewController.setViewControllers([fisrtViewController], direction: .forward, animated: true, completion: nil)
         }
         
-        
-        
-        
         navigationItem.title = "Insegnamento"
         
         self.view.backgroundColor = UIColor.primaryBackground
         
-        courseNameLabel.backgroundColor = UIColor.lightWhite
-        
-        nameTeacherLabel.backgroundColor = UIColor.lightWhite
-        nameTeacherLabel.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.primaryBackground, thickness: 0.7)
-        
-        
+        //courseNameLabel.backgroundColor = UIColor.primaryBackground
+        courseNameLabel.textColor = UIColor.lightWhite
+        //nameTeacherLabel.backgroundColor = UIColor.primaryBackground
+        nameTeacherLabel.textColor = UIColor.lightWhite
         
         
-        
-        /*scrollView.delegate = self
-        scrollView.frame = CGRect(x: 0.0, y: 0.0, width: viewAppoggio.frame.width, height: scrollView.frame.height) //definisco le dimensioni reali
-        scrollView.contentSize = CGSize(width: viewAppoggio.frame.width * 5, height: 1.0) //definisco il 'range' o contenuto della scrollView
-        //scrollView.bounces = false
-        
-        
-        
-        showcaseView.backgroundColor = UIColor.lightWhite
-        showcaseView.frame = CGRect(x: 0, y: 0, width: viewAppoggio.frame.width, height: viewAppoggio.frame.height) //Dimensioni rispetto alla scrollView
-        
-        notifyView.backgroundColor = UIColor.lightWhite
-        notifyView.frame = CGRect(x: viewAppoggio.bounds.width, y: scrollView.contentOffset.y, width: scrollView.frame.width, height: viewAppoggio.bounds.height) //Dimensioni rispetto alla scrollView
-        
-        descriptionView.backgroundColor = UIColor.lightWhite
-        descriptionView.frame = CGRect(x: viewAppoggio.bounds.width * 2, y: scrollView.contentOffset.y, width: scrollView.frame.width, height: viewAppoggio.bounds.height) //Dimensioni rispetto alla scrollView
-        
-        documentsView.backgroundColor = UIColor.lightWhite
-        documentsView.frame = CGRect(x: viewAppoggio.bounds.width * 3, y: scrollView.contentOffset.y, width: scrollView.frame.width, height: viewAppoggio.bounds.height) //Dimensioni rispetto alla scrollView
-        
-        bookingView.backgroundColor = UIColor.lightWhite
-        bookingView.frame = CGRect(x: viewAppoggio.bounds.width * 4, y: scrollView.contentOffset.y, width: scrollView.frame.width, height: viewAppoggio.bounds.height) //Dimensioni rispetto alla scrollView
-        
-        */
-        
-        setAllButtonsViewWithPrimaryBackgroundColor()
+        //setAllButtonsViewWithPrimaryBackgroundColor()
         showcaseButtonView.backgroundColor = UIColor.secondaryBackground
         
         
@@ -154,8 +124,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         customButtons(button: documentsButton, image: "folder")
         customButtons(button: bookingButton, image: "courses")
         
-        
-       
+    
         stackView.layer.addBorder(edge: UIRectEdge.top, color: UIColor.primaryBackground, thickness: 0.7)
     }
     
@@ -198,6 +167,10 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         
         return viewControllerList[nextIndex]
     }
+    
+    /*func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        <#code#>
+    }*/
     
     
     

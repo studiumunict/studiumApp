@@ -13,8 +13,9 @@ class DocumentsPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //self.view.frame = viewAppoggio.frame
-        self.view.backgroundColor = UIColor.yellow
+        self.view.backgroundColor = UIColor.lightWhite
+        self.view.layer.borderColor = UIColor.black.cgColor
+        self.view.layer.borderWidth = 0.5
     }
     
 
