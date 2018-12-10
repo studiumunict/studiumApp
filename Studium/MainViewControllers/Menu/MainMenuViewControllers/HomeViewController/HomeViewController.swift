@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, SWRevealViewControllerDelegate {
+class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, SWRevealViewControllerDelegate, UISearchBarDelegate {
     
     deinit{
         print("home deinit")
@@ -21,7 +21,8 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
    // @IBOutlet weak var departmentsTextField: UITextField!
     var departmentsDataSource = [Department]()
     var CDLDataSource = [HomeTableSection]()
-    
+    var filteredCDLDataSource = [HomeTableSection]()
+    var searchTimer : Timer!
    // var selectedDepartment : Department! // in base a questa var cambia il contenuto della tabella CoursesTable
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,6 +40,10 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         switch position {
         case .right:
             print("right")
+            self.cdsSearchBar.resignFirstResponder()
+            if (cdsSearchBar.isHidden == false && cdsSearchBar.text == ""){
+                hideSearchBarAnimated()
+            }
             self.departmentsSelectButton.isUserInteractionEnabled = false
             self.cdlTableView.isUserInteractionEnabled = false
             self.departmentsTableView.isUserInteractionEnabled = false
@@ -63,6 +68,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         self.cdlTableView.isHidden = true
         self.cdsSearchBar.isHidden = true
         self.cdsSearchBar.backgroundImage = UIImage()
+        self.cdsSearchBar.delegate = self
         let textFieldInsideSearchBar = cdsSearchBar.value(forKey: "searchField") as? UITextField
         textFieldInsideSearchBar?.backgroundColor = UIColor.lightWhite
         textFieldInsideSearchBar?.font = UIFont.boldSystemFont(ofSize: 16)
@@ -82,8 +88,6 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         buttonView2.addSubview(imageView2)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: buttonView2)
         self.navigationItem.rightBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.searchingClicked)))
-        
-        
         let _ = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { (t) in
             self.showDepartmentTableAnimated()
         }
@@ -114,43 +118,100 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     }
     
     
-    
-    @objc func searchingClicked(){
-        print("inizio ricerca")
-        if self.cdsSearchBar.isHidden {
-            self.cdsSearchBar.alpha = 0.0
-            self.cdsSearchBar.isHidden = false
-            if departmentsTableView.isHidden == false {
-                hideDepartmentTableAnimated()
-            }
-            self.cdsSearchBar.becomeFirstResponder()
-            UIView.animate(withDuration: 0.4, animations: {
-                self.cdsSearchBar.alpha = 1.0
-            }) { (t) in
-                
-            }
-            
-            
+    func showSearchBarAnimated(){
+        self.cdsSearchBar.alpha = 0.0
+        self.cdsSearchBar.isHidden = false
+        if departmentsTableView.isHidden == false {
+            hideDepartmentTableAnimated()
         }
-        else{
-            self.departmentsSelectButton.isHidden = false
-            self.cdsSearchBar.resignFirstResponder()
-            UIView.animate(withDuration: 0.4, animations: {
-              self.cdsSearchBar.alpha = 0.0
-            }) { (t) in
-                self.cdsSearchBar.isHidden = true
-                
-            }
+        if cdlTableView.isHidden{
+            self.cdlTableView.alpha = 0.0
+            self.cdlTableView.isHidden = false
+        }
+        
+        self.cdsSearchBar.becomeFirstResponder()
+        self.filteredCDLDataSource.removeAll()
+        self.cdlTableView.reloadData()
+        UIView.animate(withDuration: 0.4, animations: {
+            self.cdsSearchBar.alpha = 1.0
+            self.cdlTableView.alpha = 1.0
+        }) { (t) in
             
         }
     }
     
+    
+    func hideSearchBarAnimated(){
+        self.departmentsSelectButton.isHidden = false
+        self.cdsSearchBar.resignFirstResponder()
+        self.cdsSearchBar.text = ""
+        self.cdlTableView.reloadData()
+        UIView.animate(withDuration: 0.4, animations: {
+            self.cdsSearchBar.alpha = 0.0
+        }) { (t) in
+            self.cdsSearchBar.isHidden = true
+            
+        }
+    }
+    @objc func searchingClicked(){
+        print("inizio ricerca")
+        if self.cdsSearchBar.isHidden {
+           showSearchBarAnimated()
+        }
+        else{
+            hideSearchBarAnimated()
+        }
+    }
+    
+    func getTeachingsDuringSearch(serchedText : String){
+        self.filteredCDLDataSource.removeAll()
+        filteredCDLDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "INFORMATICA L-31", courseCode: 31), teachingArray:
+            [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)]))
+        self.cdlTableView.reloadData()
+        
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if self.searchTimer == nil && searchBar.text != "" {
+            self.searchTimer  = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (t) in
+              //  print("cerco testo 1", searchBar.text!)
+                self.getTeachingsDuringSearch(serchedText: searchBar.text!)
+                self.searchTimer = nil
+            }
+        }
+        else if searchBar.text != ""{
+            self.searchTimer.invalidate()
+            self.searchTimer  = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (t) in
+                //print("cerco testo 2", searchBar.text!)
+                self.getTeachingsDuringSearch(serchedText: searchBar.text!)
+                self.searchTimer = nil
+            }
+        }
+        else if searchBar.text == ""{
+            self.searchTimer = nil
+            //print("stringa vuota, rimuovo elementi cercati")
+            self.filteredCDLDataSource.removeAll()
+            self.cdlTableView.reloadData()
+        }
+        
+    }
+    
+    
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+       // print("beginEditingSearch")
+        self.cdlTableView.reloadData()
+    }
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        //print("endEditingSearch")
+        self.cdlTableView.reloadData()
+    }
+
+    
     func getCDLAndTeachings(ofDepartment : Department){ //questa funzione scaricherà dal db
         self.CDLDataSource.removeAll()
-        
-        
         if ofDepartment.code == 1 { //dipartimento di informatica
-            print("scarico corsi dipartimento indormtatica")
+            print("scarico corsi dipartimento informtatica")
             CDLDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "INFORMATICA L-31", courseCode: 31), teachingArray:
                 [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)]))
             
@@ -187,14 +248,24 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let  controller = segue.destination as? TeachingViewController{
             let index = sender as! IndexPath
-            controller.teachingDataSource = CDLDataSource[index.section].teachings[index.row]
+             if self.cdsSearchBar.isFirstResponder || self.cdsSearchBar.text != ""{
+                controller.teachingDataSource = filteredCDLDataSource[index.section].teachings[index.row]
+            }
+            else{
+                controller.teachingDataSource = CDLDataSource[index.section].teachings[index.row]
+            }
+            
         }
     }
     
     
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.view.endEditing(true)
+        self.cdsSearchBar.resignFirstResponder()
+        if (cdsSearchBar.isHidden == false && cdsSearchBar.text == ""){
+            hideSearchBarAnimated()
+        }
+ 
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -211,7 +282,13 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             return 1
         }
         else { // cdltable
-            return self.CDLDataSource.count
+            if self.cdsSearchBar.isFirstResponder || self.cdsSearchBar.text != ""{
+                return filteredCDLDataSource.count
+            }
+            else{
+                return self.CDLDataSource.count
+            }
+            
         }
         
     }
@@ -221,10 +298,19 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             return departmentsDataSource.count
         }
         else {
-            if CDLDataSource[section].expanded == true{ //celle espanse
-                return CDLDataSource[section].teachings.count
+            if self.cdsSearchBar.isFirstResponder || self.cdsSearchBar.text != ""{
+                if filteredCDLDataSource[section].expanded == true{ //celle espanse
+                    return filteredCDLDataSource[section].teachings.count
+                }
+                else {return 0} // le celle non sono espanse
             }
-            else {return 0} // le celle non sono espanse
+            else{
+                if CDLDataSource[section].expanded == true{ //celle espanse
+                    return CDLDataSource[section].teachings.count
+                }
+                else {return 0} // le celle non sono espanse
+            }
+            
         }
     }
    
@@ -242,7 +328,13 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             let button = UIButton.init(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
             button.layer.cornerRadius = 5.0
             button.clipsToBounds = true
-            button.setTitle(CDLDataSource[section].course.name, for: .normal)
+            if self.cdsSearchBar.isFirstResponder || self.cdsSearchBar.text != ""{
+                button.setTitle(filteredCDLDataSource[section].course.name, for: .normal)
+            }
+            else{
+                button.setTitle(CDLDataSource[section].course.name, for: .normal)
+            }
+            
             button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
             button.setTitleColor(#colorLiteral(red: 0.9103601575, green: 0.9105128646, blue: 0.9103400707, alpha: 1), for: .normal)
             button.backgroundColor = #colorLiteral(red: 0.09844832867, green: 0.09847258776, blue: 0.09844512492, alpha: 1)
@@ -256,22 +348,47 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     }
     
     @objc func removeOrExpandRows(button : UIButton ){
+        
+        
+        
         let sect = button.tag
         var indices = [IndexPath]()
         var row = 0;
-        for _ in CDLDataSource[sect].teachings{ // salva tutti gli indici
-            indices.append(IndexPath.init(row: row, section: sect))
-            row += 1
-        }
-        
-        if CDLDataSource[sect].expanded == true{ //RIMUOVE LE RIGHE
-            CDLDataSource[sect].expanded = false
-            self.cdlTableView.deleteRows(at: indices, with: .fade)
+        if self.cdsSearchBar.isFirstResponder || self.cdsSearchBar.text != ""{
+            for _ in filteredCDLDataSource[sect].teachings{ // salva tutti gli indici
+                indices.append(IndexPath.init(row: row, section: sect))
+                row += 1
+            }
+            
+            if filteredCDLDataSource[sect].expanded == true{ //RIMUOVE LE RIGHE
+                filteredCDLDataSource[sect].expanded = false
+                self.cdlTableView.deleteRows(at: indices, with: .fade)
+            }
+            else{
+                filteredCDLDataSource[sect].expanded = true
+                self.cdlTableView.insertRows(at: indices, with: .fade)
+            }
+            
+            
         }
         else{
-            CDLDataSource[sect].expanded = true
-            self.cdlTableView.insertRows(at: indices, with: .fade)
+            for _ in CDLDataSource[sect].teachings{ // salva tutti gli indici
+                indices.append(IndexPath.init(row: row, section: sect))
+                row += 1
+            }
+            
+            if CDLDataSource[sect].expanded == true{ //RIMUOVE LE RIGHE
+                CDLDataSource[sect].expanded = false
+                self.cdlTableView.deleteRows(at: indices, with: .fade)
+            }
+            else{
+                CDLDataSource[sect].expanded = true
+                self.cdlTableView.insertRows(at: indices, with: .fade)
+            }
+            
         }
+        
+        
         
     }
     
@@ -286,7 +403,14 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         else { //CDL table
             let cell = cdlTableView.dequeueReusableCell(withIdentifier: "CDLCell") as! CDLTableViewCell
             //modifico la cella e la mostro
-            let dataElement = self.CDLDataSource[indexPath.section].teachings[indexPath.row]
+            var dataElement : Teaching!
+            if self.cdsSearchBar.isFirstResponder || self.cdsSearchBar.text != ""{
+                print("prendo dal filtered")
+                 dataElement = self.filteredCDLDataSource[indexPath.section].teachings[indexPath.row]
+            }
+            else{
+                 dataElement = self.CDLDataSource[indexPath.section].teachings[indexPath.row]
+            }
             cell.CDLnameLabel.text = dataElement.name
             cell.teacherNameLabel.text = dataElement.teacherName
             if dataElement.signedUp{
