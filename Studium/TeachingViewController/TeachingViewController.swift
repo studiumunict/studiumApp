@@ -8,11 +8,10 @@
 
 import UIKit
 
-class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealViewControllerDelegate {
+class TeachingViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, SWRevealViewControllerDelegate {
 
     
     @IBOutlet var viewAppoggio: UIView! //Contiene la scrollView
-    @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var stackView: UIStackView!
     
     @IBOutlet var courseNameLabel: UILabel!
@@ -39,31 +38,19 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
     @IBOutlet var bookingButton: UIButton!
     @IBOutlet var bookingLabel: UILabel!
     
-    // --- MARK: Vetrina View ---
-    @IBOutlet var showcaseView: UIView!
-    @IBOutlet var loadingIndicatorShowcaseView: UIActivityIndicatorView!
-    @IBOutlet var errorMessageLabelShowcaseView: UILabel!
-    
-    // --- MARK: Avvisi View ---
-    @IBOutlet var notifyView: UIView!
-    @IBOutlet var notifyPickerView: UIPickerView!
-    @IBOutlet var notifyTitleLabel: UILabel!
-    @IBOutlet var notifyMessageTextView: UITextView!
-    
-    // --- MARK: Descrizione View ---
-    @IBOutlet var descriptionView: UIView!
-    @IBOutlet var descriptionMessageTextView: UITextView!
-    
-    // --- MARK: Documenti View ---
-    @IBOutlet var documentsView: UIView!
-    
-    // --- MARK: Prenotazioni View ---
-    @IBOutlet var bookingView: UIView!
-    
-    
     // --- MARK: Variables ---
     var teachingDataSource: Teaching! //Pre inizializzato solo con: name, code, teacherName, signedUp
-    
+    let pageViewController: UIPageViewController!  = UIPageViewController(transitionStyle: UIPageViewController.TransitionStyle.scroll, navigationOrientation: UIPageViewController.NavigationOrientation.horizontal, options: nil)
+    lazy var viewControllerList: [UIViewController] = {
+        let sb = storyboard!
+        let vc1 = sb.instantiateViewController(withIdentifier: "showcasePageViewController")
+        let vc2 = sb.instantiateViewController(withIdentifier: "notifyPageViewController")
+        let vc3 = sb.instantiateViewController(withIdentifier: "descriptionPageViewController")
+        let vc4 = sb.instantiateViewController(withIdentifier: "documentsPageViewController")
+        let vc5 = sb.instantiateViewController(withIdentifier: "bookingPageViewController")
+        
+        return [vc1, vc2, vc3, vc4, vc5]
+    }()
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,10 +69,9 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
             revealViewController().delegate = self
             self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
             viewAppoggio.addGestureRecognizer(revealViewController().panGestureRecognizer())
-            scrollView.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         
-        completeTeachingDataSource() //Inizializza i nuovi dati del teachingDataSource scaricandoli dal db
+        //completeTeachingDataSource() //Inizializza i nuovi dati del teachingDataSource scaricandoli dal db
     }
     
     
@@ -99,8 +85,26 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
             revealViewController().delegate = self
             self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
             viewAppoggio.addGestureRecognizer(revealViewController().panGestureRecognizer())
-            scrollView.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
+        
+        
+        
+        
+        viewAppoggio.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height - (stackView.frame.height + courseNameLabel.frame.height + nameTeacherLabel.frame.height)) //definisco le dimensioni reali e di autolayout per la scrollView
+        
+        pageViewController.dataSource = self
+        pageViewController.delegate = self
+        
+        pageViewController.view.frame = CGRect(x: 0.0, y: 0.0, width: viewAppoggio.frame.width, height: viewAppoggio.frame.height)
+        
+        viewAppoggio.addSubview(pageViewController.view)
+        
+        if let fisrtViewController = viewControllerList.first {
+           pageViewController.setViewControllers([fisrtViewController], direction: .forward, animated: true, completion: nil)
+        }
+        
+        
+        
         
         navigationItem.title = "Insegnamento"
         
@@ -113,9 +117,9 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
         
         
         
-        viewAppoggio.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height - (stackView.frame.height + courseNameLabel.frame.height + nameTeacherLabel.frame.height)) //definisco le dimensioni reali e di autolayout per la scrollView
         
-        scrollView.delegate = self
+        
+        /*scrollView.delegate = self
         scrollView.frame = CGRect(x: 0.0, y: 0.0, width: viewAppoggio.frame.width, height: scrollView.frame.height) //definisco le dimensioni reali
         scrollView.contentSize = CGSize(width: viewAppoggio.frame.width * 5, height: 1.0) //definisco il 'range' o contenuto della scrollView
         //scrollView.bounces = false
@@ -137,7 +141,7 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
         bookingView.backgroundColor = UIColor.lightWhite
         bookingView.frame = CGRect(x: viewAppoggio.bounds.width * 4, y: scrollView.contentOffset.y, width: scrollView.frame.width, height: viewAppoggio.bounds.height) //Dimensioni rispetto alla scrollView
         
-        
+        */
         
         setAllButtonsViewWithPrimaryBackgroundColor()
         showcaseButtonView.backgroundColor = UIColor.secondaryBackground
@@ -157,15 +161,55 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
     
     
     
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        
+        guard let vcIndex = viewControllerList.index(of: viewController) else {
+            return nil
+        }
+        
+        let previousIndex = vcIndex - 1
+        
+        guard previousIndex >= 0 else {
+            return nil
+        }
+        
+        guard viewControllerList.count > previousIndex else {
+            return nil
+        }
+        
+        return viewControllerList[previousIndex]
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        
+        guard let vcIndex = viewControllerList.index(of: viewController) else {
+            return nil
+        }
+        
+        let nextIndex = vcIndex + 1
+        
+        guard viewControllerList.count != nextIndex else {
+            return nil
+        }
+        
+        guard viewControllerList.count > nextIndex else {
+            return nil
+        }
+        
+        return viewControllerList[nextIndex]
+    }
+    
+    
+    
     func revealController(_ revealController: SWRevealViewController!, didMoveTo position: FrontViewPosition) {
         switch position {
         case .right: //Uno dei due menu è aperto
-            scrollView.isScrollEnabled = false
+            //scrollView.isScrollEnabled = false
             stackView.isUserInteractionEnabled = false
             self.navigationController?.navigationBar.isUserInteractionEnabled = false
             
         case .left: //Tutti i menu sono chiusi
-            scrollView.isScrollEnabled = true
+            //scrollView.isScrollEnabled = true
             stackView.isUserInteractionEnabled = true
             self.navigationController?.navigationBar.isUserInteractionEnabled = true
             
@@ -176,7 +220,7 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
     
     
     
-    
+    /*
     func completeTeachingDataSource(){ //Scarica i dati dal db
         teachingDataSource.completeDataSource(haveShowcase: nil, haveDocuments: nil, haveBooking: nil, descriptionText: nil)
         
@@ -202,7 +246,7 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
             descriptionMessageTextView.text = "Nessuna descrizione per questo insegnamento."
         }
     }
-    
+    */
     
     
     func setAllButtonsViewWithPrimaryBackgroundColor(){
@@ -221,7 +265,7 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
     }
     
     
-    
+    /*
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //conta l'indice della pagina corrente
         let page = scrollView.contentOffset.x / scrollView.frame.size.width
@@ -257,52 +301,36 @@ class TeachingViewController: UIViewController, UIScrollViewDelegate, SWRevealVi
             break
         }
     }
-
+*/
     @IBAction func sendToShowcaseView(_ sender: UIButton) {
-        scrollView.scrollRectToVisible(showcaseView.frame, animated: false)
+        //pageViewController.scrollRectToVisible(showcaseView.frame, animated: false)
         setAllButtonsViewWithPrimaryBackgroundColor()
         showcaseButtonView.backgroundColor = UIColor.secondaryBackground
         
     }
     
     @IBAction func sendToNotifyView(_ sender: UIButton) {
-        scrollView.scrollRectToVisible(notifyView.frame, animated: false)
+       // pageViewController.scrollRectToVisible(notifyView.frame, animated: false)
         setAllButtonsViewWithPrimaryBackgroundColor()
         notifyButtonView.backgroundColor = UIColor.secondaryBackground
     }
     
     @IBAction func sendToDescriptionView(_ sender: UIButton) {
-        scrollView.scrollRectToVisible(descriptionView.frame, animated: false)
+        //pageViewController.scrollRectToVisible(descriptionView.frame, animated: false)
         setAllButtonsViewWithPrimaryBackgroundColor()
         descriptionButtonView.backgroundColor = UIColor.secondaryBackground
     }
     
     @IBAction func sendToDocumentsView(_ sender: UIButton) {
-        scrollView.scrollRectToVisible(documentsView.frame, animated: false)
+       // pageViewController.scrollRectToVisible(documentsView.frame, animated: false)
         setAllButtonsViewWithPrimaryBackgroundColor()
         documentsButtonView.backgroundColor = UIColor.secondaryBackground
     }
     
     @IBAction func sendToBookingView(_ sender: UIButton) {
-        scrollView.scrollRectToVisible(bookingView.frame, animated: false)
+        //pageViewController.scrollRectToVisible(bookingView.frame, animated: false)
         setAllButtonsViewWithPrimaryBackgroundColor()
         bookingButtonView.backgroundColor = UIColor.secondaryBackground
     }
-    
-    
-    
-    
-    
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
