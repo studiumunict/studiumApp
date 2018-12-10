@@ -81,7 +81,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         let buttonView2 = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
         buttonView2.addSubview(imageView2)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: buttonView2)
-        self.navigationItem.rightBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.startSearching)))
+        self.navigationItem.rightBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.searchingClicked)
         
         
         let _ = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { (t) in
@@ -115,7 +115,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     
     
     
-    @objc func startSearching(){
+    @objc func searchingClicked(){
         print("inizio ricerca")
         if self.cdsSearchBar.isHidden {
             self.cdsSearchBar.alpha = 0.0
