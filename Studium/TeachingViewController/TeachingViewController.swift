@@ -67,8 +67,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 130//Menu sx
             revealViewController().delegate = self
-            self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-            viewAppoggio.addGestureRecognizer(revealViewController().panGestureRecognizer())
+            viewControllerList[0].view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         
         //completeTeachingDataSource() //Inizializza i nuovi dati del teachingDataSource scaricandoli dal db
@@ -83,8 +82,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 130//Menu sx/
             revealViewController().delegate = self
-            self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-            viewAppoggio.addGestureRecognizer(revealViewController().panGestureRecognizer())
+            viewControllerList[0].view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         
         
@@ -169,9 +167,39 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         return viewControllerList[nextIndex]
     }
     
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        guard completed else { return }
     
-    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return viewControllerList.count
+        guard let vc = pageViewController.viewControllers?.first else { return }
+        
+        if revealViewController() != nil {
+            vc.view.removeGestureRecognizer(revealViewController().panGestureRecognizer())
+        }
+        
+        setAllButtonsViewWithPrimaryBackgroundColor()
+        
+        switch vc {
+        case is ShowcasePageViewController:
+            showcaseButtonView.backgroundColor = UIColor.secondaryBackground
+            if revealViewController() != nil {
+                vc.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+            }
+            
+        case is NotifyPageViewController:
+            notifyButtonView.backgroundColor = UIColor.secondaryBackground
+            
+        case is DescriptionPageViewController:
+            descriptionButtonView.backgroundColor = UIColor.secondaryBackground
+            
+        case is DocumentsPageViewController:
+            documentsButtonView.backgroundColor = UIColor.secondaryBackground
+            
+        case is BookingPageViewController:
+            bookingButtonView.backgroundColor = UIColor.secondaryBackground
+            
+        default:
+            break
+        }
     }
     
     
@@ -239,69 +267,33 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     }
     
     
-    /*
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        //conta l'indice della pagina corrente
-        let page = scrollView.contentOffset.x / scrollView.frame.size.width
-        
-        if revealViewController() != nil {
-            scrollView.removeGestureRecognizer(revealViewController().panGestureRecognizer())
-        }
-        
-        setAllButtonsViewWithPrimaryBackgroundColor()
-        
-        //i bottoni vengono evidenziati quando si cambia pagina
-        switch Int(page) {
-        case 0:
-            showcaseButtonView.backgroundColor = UIColor.secondaryBackground
-            if revealViewController() != nil {
-                scrollView.addGestureRecognizer(revealViewController().panGestureRecognizer())
-            }
-            return
-            
-        case 1:
-            notifyButtonView.backgroundColor = UIColor.secondaryBackground
-            
-        case 2:
-            descriptionButtonView.backgroundColor = UIColor.secondaryBackground
-            
-        case 3:
-            documentsButtonView.backgroundColor = UIColor.secondaryBackground
-            
-        case 4:
-            bookingButtonView.backgroundColor = UIColor.secondaryBackground
-            
-        default:
-            break
-        }
-    }
-*/
+    
     @IBAction func sendToShowcaseView(_ sender: UIButton) {
-        //pageViewController.scrollRectToVisible(showcaseView.frame, animated: false)
+        pageViewController.setViewControllers([viewControllerList[0]], direction: .forward, animated: false, completion: nil)
         setAllButtonsViewWithPrimaryBackgroundColor()
         showcaseButtonView.backgroundColor = UIColor.secondaryBackground
     }
     
     @IBAction func sendToNotifyView(_ sender: UIButton) {
-       // pageViewController.scrollRectToVisible(notifyView.frame, animated: false)
+        pageViewController.setViewControllers([viewControllerList[1]], direction: .forward, animated: false, completion: nil)
         setAllButtonsViewWithPrimaryBackgroundColor()
         notifyButtonView.backgroundColor = UIColor.secondaryBackground
     }
     
     @IBAction func sendToDescriptionView(_ sender: UIButton) {
-        //pageViewController.scrollRectToVisible(descriptionView.frame, animated: false)
+        pageViewController.setViewControllers([viewControllerList[2]], direction: .forward, animated: false, completion: nil)
         setAllButtonsViewWithPrimaryBackgroundColor()
         descriptionButtonView.backgroundColor = UIColor.secondaryBackground
     }
     
     @IBAction func sendToDocumentsView(_ sender: UIButton) {
-       // pageViewController.scrollRectToVisible(documentsView.frame, animated: false)
+        pageViewController.setViewControllers([viewControllerList[3]], direction: .forward, animated: false, completion: nil)
         setAllButtonsViewWithPrimaryBackgroundColor()
         documentsButtonView.backgroundColor = UIColor.secondaryBackground
     }
     
     @IBAction func sendToBookingView(_ sender: UIButton) {
-        //pageViewController.scrollRectToVisible(bookingView.frame, animated: false)
+        pageViewController.setViewControllers([viewControllerList[4]], direction: .forward, animated: false, completion: nil)
         setAllButtonsViewWithPrimaryBackgroundColor()
         bookingButtonView.backgroundColor = UIColor.secondaryBackground
     }
