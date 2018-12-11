@@ -124,8 +124,6 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         customButtons(button: descriptionButton, image: "description")
         customButtons(button: documentsButton, image: "folder")
         customButtons(button: bookingButton, image: "booking")
-        
-        
         stackView.layer.addBorder(edge: UIRectEdge.top, color: UIColor.secondaryBackground, thickness: 0.7)
     }
     
