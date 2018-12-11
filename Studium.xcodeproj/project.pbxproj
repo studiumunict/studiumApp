@@ -14,7 +14,6 @@
 		139BCB6821BDE034005A750A /* DescriptionPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139BCB6721BDE034005A750A /* DescriptionPageViewController.swift */; };
 		139BCB6A21BDE057005A750A /* DocumentsPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139BCB6921BDE057005A750A /* DocumentsPagesViewController.swift */; };
 		139BCB6C21BDE0AF005A750A /* BookingPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139BCB6B21BDE0AF005A750A /* BookingPagesViewController.swift */; };
-		139E8DDE21C03B59003AB1A0 /* NotifyPilaClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139E8DDD21C03B59003AB1A0 /* NotifyPilaClass.swift */; };
 		13D86DDB21B9A3BF007638FD /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D86DDA21B9A3BF007638FD /* ExtensionUIColor.swift */; };
 		13F8E3C221A9667200BBAD9B /* TeachingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F8E3C121A9667200BBAD9B /* TeachingViewController.swift */; };
 		2759E77776A5A5155B4E2176 /* Pods_StudiumUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CDF896A1C96AD896583B6F2 /* Pods_StudiumUITests.framework */; };
@@ -68,7 +67,6 @@
 		139BCB6721BDE034005A750A /* DescriptionPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionPageViewController.swift; sourceTree = "<group>"; };
 		139BCB6921BDE057005A750A /* DocumentsPagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsPagesViewController.swift; sourceTree = "<group>"; };
 		139BCB6B21BDE0AF005A750A /* BookingPagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingPagesViewController.swift; sourceTree = "<group>"; };
-		139E8DDD21C03B59003AB1A0 /* NotifyPilaClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyPilaClass.swift; sourceTree = "<group>"; };
 		13D86DDA21B9A3BF007638FD /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
 		13F8E3C121A9667200BBAD9B /* TeachingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingViewController.swift; sourceTree = "<group>"; };
 		13F8E3CB21A9887E00BBAD9B /* SWRevealViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
@@ -203,7 +201,6 @@
 				9C06A22B21AB707500E695DB /* CDLClass.swift */,
 				9CFE72C221B95206001EB697 /* TeachingClass.swift */,
 				9CFE72C421B95331001EB697 /* HomeTableSectionClass.swift */,
-				139E8DDD21C03B59003AB1A0 /* NotifyPilaClass.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -565,7 +562,6 @@
 				13D86DDB21B9A3BF007638FD /* ExtensionUIColor.swift in Sources */,
 				9C06A22721AB6BC500E695DB /* DepartmentTableViewCell.swift in Sources */,
 				9CFE9D7321A8ADBC0030AE33 /* AppDelegate.swift in Sources */,
-				139E8DDE21C03B59003AB1A0 /* NotifyPilaClass.swift in Sources */,
 				9CFE72C121B9508E001EB697 /* CDLTableViewCell.swift in Sources */,
 				9C06A22A21AB700200E695DB /* DepartmentClass.swift in Sources */,
 			);
