@@ -39,11 +39,12 @@ class Teaching{
     var notifyList: [Notify]!
     
     
-    init(teachingName: String, teachingCode: Int, teacherName: String, signedUp :Bool) {
+    init(teachingName: String, teachingCode: Int, teacherName: String, signedUp: Bool) {
         self.name = teachingName
         self.code = teachingCode
         self.teacherName = teacherName
         self.signedUp = signedUp
+        notifyList = [Notify]()
     }
     
     
@@ -64,10 +65,12 @@ class Teaching{
         if let val = descriptionText {
             self.descriptionText = val
         }
+        
+        notifyList = [Notify]()
     }
     
-    func addNewNotify(date: String!, title: String!, message: String!){
-        notifyList.append(Notify(date: date, title: title, message: message))
+    func addNewNotify(date: String?, title: String?, message: String?){
+        notifyList.append(Notify(date: date!, title: title!, message: message!))
     }
     
 }

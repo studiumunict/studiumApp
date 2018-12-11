@@ -61,7 +61,6 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             viewControllerList[0].view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         
-        //completeTeachingDataSource() //Inizializza i nuovi dati del teachingDataSource scaricandoli dal db
     }
     
     
@@ -71,10 +70,6 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         
         completeTeachingDataSource()
         
-        
-        
-        
-        
         viewControllerList = {
             let sb = storyboard!
             let vc1 = sb.instantiateViewController(withIdentifier: "showcasePageViewController") as! ShowcasePageViewController
@@ -83,8 +78,11 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             let vc4 = sb.instantiateViewController(withIdentifier: "documentsPageViewController") as! DocumentsPageViewController
             let vc5 = sb.instantiateViewController(withIdentifier: "bookingPageViewController") as! BookingPageViewController
             
-            //passare i valori. ES:
+            vc1.haveShowcase = teachingDataSource.haveShowcase
+            vc2.notifyList = teachingDataSource.notifyList
             vc3.descriptionText = teachingDataSource.descriptionText
+            vc4.haveDocuments = teachingDataSource.haveDocuments
+            vc5.haveBooking = teachingDataSource.haveBooking
             
             return [vc1, vc2, vc3, vc4, vc5]
         }()
@@ -112,6 +110,13 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         
         navigationItem.title = "Insegnamento"
         navigationController?.view.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.secondaryBackground, thickness: 0.3)
+        
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
+        imageView.image = UIImage.init(named: "menu")
+        let buttonView = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
+        buttonView.addSubview(imageView)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: buttonView)
+        self.navigationItem.rightBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.signedupClicked)))
         
         showcaseButtonView.backgroundColor = UIColor.buttonSelected
         
@@ -228,31 +233,16 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     
     
     
-    func completeTeachingDataSource(){ //Scarica i dati dal db
-        teachingDataSource.completeDataSource(haveShowcase: nil, haveDocuments: nil, haveBooking: nil, descriptionText: "ciao")
+    func completeTeachingDataSource(){
+        //Scarica i dati dal db
+        teachingDataSource.completeDataSource(haveShowcase: nil, haveDocuments: nil, haveBooking: nil, descriptionText: nil)
+        
+        teachingDataSource.addNewNotify(date: "30/10/2018", title: "Date esami", message: "Giorno 2 novembre ci sarà la prima prova scritta.")
+        teachingDataSource.addNewNotify(date: "25/11/2018", title: "Lezione rimandata", message: "Si avvisano gli studenti che giorno 26 novembre non ci sarà lezione.")
+        teachingDataSource.addNewNotify(date: "05/12/2018", title: "Risultati della prova in itinere", message: "Tutti promossi. :)")
         
         courseNameLabel.text = teachingDataSource.name
         nameTeacherLabel.text = teachingDataSource.teacherName
-        
-        if teachingDataSource.signedUp! {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "star_full")?.withRenderingMode(.alwaysOriginal), style: .plain, target: nil, action: nil)
-        } else {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "star_empty")?.withRenderingMode(.alwaysOriginal), style: .plain, target: nil, action: nil)
-        }
-        /*
-        if teachingDataSource.haveShowcase != nil && teachingDataSource.haveShowcase {
-            vc1.errorMessageLabel.isHidden = true
-            vc1.loadingIndicator.isHidden = true
-        } else {
-            vc1.errorMessageLabel.isHidden = false
-        }
-        
-        if let val = teachingDataSource.descriptionText {
-            vc3.descriptionTextView.text = val
-        } else {
-            vc3.descriptionTextView.text = "Nessuna descrizione per questo insegnamento."
-        }*/
-    
     }
     
     
@@ -272,6 +262,10 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         button.addSubview(customImageView)
     }
     
+    
+    @objc func signedupClicked() {
+        //mostra la view per la registrazione al corso
+    }
     
     
     @IBAction func sendToShowcaseView(_ sender: UIButton) {

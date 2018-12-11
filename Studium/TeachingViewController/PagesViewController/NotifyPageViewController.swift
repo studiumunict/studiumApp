@@ -33,6 +33,7 @@ class NotifyPageViewController: UIViewController, UIPickerViewDelegate, UIPicker
             errorMessageLabel.isHidden = true
             notifyPickerView.delegate = self
             notifyPickerView.dataSource = self
+            pickerView(notifyPickerView, didSelectRow: notifyPickerView.selectedRow(inComponent: 0), inComponent: 0)
             
         } else {
             
