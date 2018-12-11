@@ -380,7 +380,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         for view in button.subviews{
             if let imageView = view as? UIImageView{
                 if imageView.transform == .identity{
-                    if animated {
+                    if animated{
                         UIView.animate(withDuration: 0.2) {
                             imageView.transform = CGAffineTransform(rotationAngle: .pi)
                         }
