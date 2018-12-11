@@ -71,6 +71,10 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         
         completeTeachingDataSource()
         
+        
+        
+        
+        
         viewControllerList = {
             let sb = storyboard!
             let vc1 = sb.instantiateViewController(withIdentifier: "showcasePageViewController") as! ShowcasePageViewController
@@ -109,16 +113,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         navigationItem.title = "Insegnamento"
         navigationController?.view.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.secondaryBackground, thickness: 0.3)
         
-        self.view.backgroundColor = UIColor.primaryBackground
-        
-        courseNameLabel.backgroundColor = UIColor.primaryBackground
-        courseNameLabel.textColor = UIColor.lightWhite
-        nameTeacherLabel.backgroundColor = UIColor.primaryBackground
-        nameTeacherLabel.textColor = UIColor.lightWhite
-        
-        
-        //setAllButtonsViewWithPrimaryBackgroundColor()
-        showcaseButtonView.backgroundColor = UIColor.secondaryBackground
+        showcaseButtonView.backgroundColor = UIColor.buttonSelected
         
         
         //Cambiare l'immagine per i vari bottoni
@@ -172,6 +167,8 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         return viewControllerList[nextIndex]
     }
     
+
+    
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard completed else { return }
     
@@ -181,31 +178,33 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             vc.view.removeGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         
-        setAllButtonsViewWithPrimaryBackgroundColor()
+        setAllButtonsViewWithClearBackgroundColor()
         
         switch vc {
         case is ShowcasePageViewController:
-            showcaseButtonView.backgroundColor = UIColor.secondaryBackground
+            showcaseButtonView.backgroundColor = UIColor.buttonSelected
             if revealViewController() != nil {
                 vc.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
             }
             
         case is NotifyPageViewController:
-            notifyButtonView.backgroundColor = UIColor.secondaryBackground
+            notifyButtonView.backgroundColor = UIColor.buttonSelected
             
         case is DescriptionPageViewController:
-            descriptionButtonView.backgroundColor = UIColor.secondaryBackground
+            descriptionButtonView.backgroundColor = UIColor.buttonSelected
             
         case is DocumentsPageViewController:
-            documentsButtonView.backgroundColor = UIColor.secondaryBackground
+            documentsButtonView.backgroundColor = UIColor.buttonSelected
             
         case is BookingPageViewController:
-            bookingButtonView.backgroundColor = UIColor.secondaryBackground
+            bookingButtonView.backgroundColor = UIColor.buttonSelected
             
         default:
             break
         }
     }
+    
+   
     
     
     func revealController(_ revealController: SWRevealViewController!, didMoveTo position: FrontViewPosition) {
@@ -256,17 +255,17 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     
     
     
-    func setAllButtonsViewWithPrimaryBackgroundColor(){
-        showcaseButtonView.backgroundColor = UIColor.primaryBackground
-        notifyButtonView.backgroundColor = UIColor.primaryBackground
-        descriptionButtonView.backgroundColor = UIColor.primaryBackground
-        documentsButtonView.backgroundColor = UIColor.primaryBackground
-        bookingButtonView.backgroundColor = UIColor.primaryBackground
+    func setAllButtonsViewWithClearBackgroundColor(){
+        showcaseButtonView.backgroundColor = UIColor.clear
+        notifyButtonView.backgroundColor = UIColor.clear
+        descriptionButtonView.backgroundColor = UIColor.clear
+        documentsButtonView.backgroundColor = UIColor.clear
+        bookingButtonView.backgroundColor = UIColor.clear
     }
     
     
     func customButtons(button: UIButton!, image: String!){
-        let customImageView = UIImageView(frame: CGRect(x: 8, y: 5, width: 40, height: 35))
+        let customImageView = UIImageView(frame: CGRect(x: button.frame.size.width/2 - 16, y: button.frame.size.height/2 - 15, width: 32, height: 30))
         customImageView.image = UIImage(named: image!)
         button.addSubview(customImageView)
     }
@@ -275,32 +274,32 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     
     @IBAction func sendToShowcaseView(_ sender: UIButton) {
         pageViewController.setViewControllers([viewControllerList[0]], direction: .forward, animated: false, completion: nil)
-        setAllButtonsViewWithPrimaryBackgroundColor()
-        showcaseButtonView.backgroundColor = UIColor.secondaryBackground
+        setAllButtonsViewWithClearBackgroundColor()
+        showcaseButtonView.backgroundColor = UIColor.buttonSelected
     }
     
     @IBAction func sendToNotifyView(_ sender: UIButton) {
         pageViewController.setViewControllers([viewControllerList[1]], direction: .forward, animated: false, completion: nil)
-        setAllButtonsViewWithPrimaryBackgroundColor()
-        notifyButtonView.backgroundColor = UIColor.secondaryBackground
+        setAllButtonsViewWithClearBackgroundColor()
+        notifyButtonView.backgroundColor = UIColor.buttonSelected
     }
     
     @IBAction func sendToDescriptionView(_ sender: UIButton) {
         pageViewController.setViewControllers([viewControllerList[2]], direction: .forward, animated: false, completion: nil)
-        setAllButtonsViewWithPrimaryBackgroundColor()
-        descriptionButtonView.backgroundColor = UIColor.secondaryBackground
+        setAllButtonsViewWithClearBackgroundColor()
+        descriptionButtonView.backgroundColor = UIColor.buttonSelected
     }
     
     @IBAction func sendToDocumentsView(_ sender: UIButton) {
         pageViewController.setViewControllers([viewControllerList[3]], direction: .forward, animated: false, completion: nil)
-        setAllButtonsViewWithPrimaryBackgroundColor()
-        documentsButtonView.backgroundColor = UIColor.secondaryBackground
+        setAllButtonsViewWithClearBackgroundColor()
+        documentsButtonView.backgroundColor = UIColor.buttonSelected
     }
     
     @IBAction func sendToBookingView(_ sender: UIButton) {
         pageViewController.setViewControllers([viewControllerList[4]], direction: .forward, animated: false, completion: nil)
-        setAllButtonsViewWithPrimaryBackgroundColor()
-        bookingButtonView.backgroundColor = UIColor.secondaryBackground
+        setAllButtonsViewWithClearBackgroundColor()
+        bookingButtonView.backgroundColor = UIColor.buttonSelected
     }
 
 }
