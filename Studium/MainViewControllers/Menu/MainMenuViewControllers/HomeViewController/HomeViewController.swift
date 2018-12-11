@@ -341,11 +341,24 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             let button = UIButton.init(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
             button.layer.cornerRadius = 5.0
             button.clipsToBounds = true
+            
+            
+            let arrowImageView = UIImageView.init(frame: CGRect(x: 10, y: button.frame.height/2 - 7.5, width: 15, height: 15))
+            arrowImageView.image = UIImage.init(named: "arrow");
+            button.addSubview(arrowImageView)
+            
+            
             if self.cdsSearchBar.isFirstResponder || self.cdsSearchBar.text != ""{
                 button.setTitle(filteredCDLDataSource[section].course.name, for: .normal)
+                if filteredCDLDataSource[section].expanded {
+                    rotateArrows180Degrees(button: button,animated: false)
+                }
             }
             else{
                 button.setTitle(CDLDataSource[section].course.name, for: .normal)
+                if CDLDataSource[section].expanded {
+                    rotateArrows180Degrees(button: button,animated: false)
+                }
             }
             
             button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
@@ -353,9 +366,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             button.backgroundColor = #colorLiteral(red: 0.09844832867, green: 0.09847258776, blue: 0.09844512492, alpha: 1)
             button.tag = section
             button.addTarget(self, action: #selector(self.removeOrExpandRows), for: .touchUpInside)
-            let arrowImageView = UIImageView.init(frame: CGRect(x: 10, y: button.frame.height/2 - 7.5, width: 15, height: 15))
-            arrowImageView.image = UIImage.init(named: "arrow");
-            button.addSubview(arrowImageView)
+           
             
             
             return button
@@ -365,17 +376,28 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         return nil
     }
     
-    func rotateArrows180Degrees(button : UIButton){
+    func rotateArrows180Degrees(button : UIButton,animated : Bool){
         for view in button.subviews{
             if let imageView = view as? UIImageView{
                 if imageView.transform == .identity{
-                    UIView.animate(withDuration: 0.2) {
-                         imageView.transform = CGAffineTransform(rotationAngle: .pi)
+                    if animated {
+                        UIView.animate(withDuration: 0.2) {
+                            imageView.transform = CGAffineTransform(rotationAngle: .pi)
+                        }
                     }
+                    else {
+                        imageView.transform = CGAffineTransform(rotationAngle: .pi)
+                    }
+                   
                 }
                 else{
-                    UIView.animate(withDuration: 0.2) {
-                        imageView.transform = .identity
+                    if animated {
+                        UIView.animate(withDuration: 0.2) {
+                            imageView.transform = .identity
+                        }
+                    }
+                    else{
+                          imageView.transform = .identity
                     }
                 }
             }
@@ -384,7 +406,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     
     
     @objc func removeOrExpandRows(button : UIButton ){
-        rotateArrows180Degrees(button: button)
+        rotateArrows180Degrees(button: button,animated: true)
         let sect = button.tag
         var indices = [IndexPath]()
         var row = 0;
