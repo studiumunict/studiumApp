@@ -41,16 +41,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     // --- MARK: Variables ---
     var teachingDataSource: Teaching! //Pre inizializzato solo con: name, code, teacherName, signedUp
     let pageViewController: UIPageViewController!  = UIPageViewController(transitionStyle: UIPageViewController.TransitionStyle.scroll, navigationOrientation: UIPageViewController.NavigationOrientation.horizontal, options: nil)
-    lazy var viewControllerList: [UIViewController] = {
-        let sb = storyboard!
-        let vc1 = sb.instantiateViewController(withIdentifier: "showcasePageViewController")
-        let vc2 = sb.instantiateViewController(withIdentifier: "notifyPageViewController")
-        let vc3 = sb.instantiateViewController(withIdentifier: "descriptionPageViewController")
-        let vc4 = sb.instantiateViewController(withIdentifier: "documentsPageViewController")
-        let vc5 = sb.instantiateViewController(withIdentifier: "bookingPageViewController")
-        
-        return [vc1, vc2, vc3, vc4, vc5]
-    }()
+    lazy var viewControllerList: [UIViewController]! = { return nil }()
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,14 +69,28 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        completeTeachingDataSource()
+        
+        viewControllerList = {
+            let sb = storyboard!
+            let vc1 = sb.instantiateViewController(withIdentifier: "showcasePageViewController") as! ShowcasePageViewController
+            let vc2 = sb.instantiateViewController(withIdentifier: "notifyPageViewController") as! NotifyPageViewController
+            let vc3 = sb.instantiateViewController(withIdentifier: "descriptionPageViewController") as! DescriptionPageViewController
+            let vc4 = sb.instantiateViewController(withIdentifier: "documentsPageViewController") as! DocumentsPageViewController
+            let vc5 = sb.instantiateViewController(withIdentifier: "bookingPageViewController") as! BookingPageViewController
+            
+            //passare i valori. ES:
+            vc3.descriptionText = teachingDataSource.descriptionText
+            
+            return [vc1, vc2, vc3, vc4, vc5]
+        }()
+        
         //Definire le dimensioni dei menu
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 130//Menu sx/
             revealViewController().delegate = self
             viewControllerList[0].view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
-        
-        
         
         
         viewAppoggio.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height - (stackView.frame.height + courseNameLabel.frame.height + nameTeacherLabel.frame.height)) //definisco le dimensioni reali e di autolayout per la scrollView
@@ -123,7 +128,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         customButtons(button: documentsButton, image: "folder")
         customButtons(button: bookingButton, image: "courses")
         
-    
+        
         stackView.layer.addBorder(edge: UIRectEdge.top, color: UIColor.secondaryBackground, thickness: 0.7)
     }
     
@@ -222,9 +227,8 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     
     
     
-    /*
     func completeTeachingDataSource(){ //Scarica i dati dal db
-        teachingDataSource.completeDataSource(haveShowcase: nil, haveDocuments: nil, haveBooking: nil, descriptionText: nil)
+        teachingDataSource.completeDataSource(haveShowcase: nil, haveDocuments: nil, haveBooking: nil, descriptionText: "ciao")
         
         courseNameLabel.text = teachingDataSource.name
         nameTeacherLabel.text = teachingDataSource.teacherName
@@ -234,21 +238,22 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         } else {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "star_empty")?.withRenderingMode(.alwaysOriginal), style: .plain, target: nil, action: nil)
         }
-        
+        /*
         if teachingDataSource.haveShowcase != nil && teachingDataSource.haveShowcase {
-            errorMessageLabelShowcaseView.isHidden = true
-            loadingIndicatorShowcaseView.isHidden = true
+            vc1.errorMessageLabel.isHidden = true
+            vc1.loadingIndicator.isHidden = true
         } else {
-            errorMessageLabelShowcaseView.isHidden = false
+            vc1.errorMessageLabel.isHidden = false
         }
         
         if let val = teachingDataSource.descriptionText {
-            descriptionMessageTextView.text = val
+            vc3.descriptionTextView.text = val
         } else {
-            descriptionMessageTextView.text = "Nessuna descrizione per questo insegnamento."
-        }
+            vc3.descriptionTextView.text = "Nessuna descrizione per questo insegnamento."
+        }*/
+    
     }
-    */
+    
     
     
     func setAllButtonsViewWithPrimaryBackgroundColor(){

@@ -10,10 +10,8 @@ import UIKit
 
 class ShowcasePageViewController: UIViewController {
 
-    
     @IBOutlet var errorMessageLabel: UILabel!
     @IBOutlet var loadingIndicator: UIActivityIndicatorView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
