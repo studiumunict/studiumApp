@@ -13,5 +13,7 @@ extension UIColor{
     static var secondaryBackground: UIColor = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
     static var title: UIColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0) //a caso
     static var lightWhite : UIColor = #colorLiteral(red: 0.9103601575, green: 0.9105128646, blue: 0.9103400707, alpha: 1)
+    static var navigationBarColor = #colorLiteral(red: 0.04193217307, green: 0.04194748402, blue: 0.04193013161, alpha: 1)
+    static var buttonSelected = #colorLiteral(red: 0.228349328, green: 0.2283941507, blue: 0.2283434272, alpha: 1)
     
 }

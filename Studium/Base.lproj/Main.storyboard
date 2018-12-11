@@ -324,7 +324,7 @@
                                 <rect key="frame" x="177.5" y="268.5" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.96879995200000002" green="0.96879995200000002" blue="0.96879995200000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="PO1-77-CuU" firstAttribute="top" secondItem="tH0-kp-Dqu" secondAttribute="top" constant="108" id="1k1-b2-lHe"/>
                             <constraint firstItem="PO1-77-CuU" firstAttribute="centerX" secondItem="tH0-kp-Dqu" secondAttribute="centerX" id="303-BA-zt3"/>
@@ -347,31 +347,31 @@
         <scene sceneID="9Jr-ri-VGu">
             <objects>
                 <viewController storyboardIdentifier="teachingViewController" id="aqe-Yk-Phq" customClass="TeachingViewController" customModule="Studium" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="yjc-jx-pZm">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="yjc-jx-pZm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome Corso" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mq1-De-iby">
-                                <rect key="frame" x="0.0" y="64" width="375" height="40"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="35"/>
+                                <color key="backgroundColor" red="0.91044991779999995" green="0.91044991779999995" blue="0.91044991779999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="YJX-ZT-hLk"/>
+                                    <constraint firstAttribute="height" constant="35" id="YJX-ZT-hLk"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="textColor" red="0.90970492362976074" green="0.90986090898513794" blue="0.9096950888633728" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome Professore" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzp-bk-RfF">
-                                <rect key="frame" x="0.0" y="104" width="375" height="30"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="0.0" y="92" width="375" height="30"/>
+                                <color key="backgroundColor" red="0.91044991779999995" green="0.91044991779999995" blue="0.91044991779999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="0fm-lo-LUK"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="italicSystem" pointSize="16"/>
-                                <color key="textColor" red="0.97972720859999995" green="0.00063174654499999997" blue="0.080703608689999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                <color key="textColor" red="0.32928388749999998" green="0.32928388749999998" blue="0.32928388749999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r7S-aq-9e7">
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r7S-aq-9e7">
                                 <rect key="frame" x="0.0" y="607" width="375" height="60"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L2F-vt-W7r">
@@ -536,7 +536,7 @@
                                     <constraint firstItem="h3h-Dv-Yjt" firstAttribute="width" secondItem="r7S-aq-9e7" secondAttribute="width" multiplier="0.2" id="s8y-6N-VII"/>
                                 </constraints>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iu3-v0-7ya">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iu3-v0-7ya">
                                 <rect key="frame" x="0.0" y="134" width="375" height="473"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -544,13 +544,13 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="mq1-De-iby" firstAttribute="top" secondItem="Uac-fg-oBP" secondAttribute="top" id="2jw-tW-QbS"/>
                             <constraint firstItem="bzp-bk-RfF" firstAttribute="trailing" secondItem="mq1-De-iby" secondAttribute="trailing" id="57g-3Z-SLc"/>
                             <constraint firstItem="r7S-aq-9e7" firstAttribute="leading" secondItem="Uac-fg-oBP" secondAttribute="leading" id="5Uc-hQ-HOO"/>
                             <constraint firstItem="iu3-v0-7ya" firstAttribute="trailing" secondItem="bzp-bk-RfF" secondAttribute="trailing" id="F7O-C7-AdN"/>
-                            <constraint firstItem="bzp-bk-RfF" firstAttribute="top" secondItem="mq1-De-iby" secondAttribute="bottom" id="MqN-OB-1PF"/>
+                            <constraint firstItem="bzp-bk-RfF" firstAttribute="top" secondItem="mq1-De-iby" secondAttribute="bottom" constant="-7" id="MqN-OB-1PF"/>
                             <constraint firstItem="mq1-De-iby" firstAttribute="leading" secondItem="Uac-fg-oBP" secondAttribute="leading" id="NoI-sr-jYC"/>
                             <constraint firstItem="iu3-v0-7ya" firstAttribute="top" secondItem="bzp-bk-RfF" secondAttribute="bottom" id="OqK-fV-R01"/>
                             <constraint firstItem="r7S-aq-9e7" firstAttribute="top" secondItem="iu3-v0-7ya" secondAttribute="bottom" id="PAc-K4-d0y"/>
@@ -1162,7 +1162,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.96879995200000002" green="0.96879995200000002" blue="0.96879995200000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="dxI-oc-zFn" firstAttribute="top" secondItem="JMu-Oj-KpK" secondAttribute="bottom" constant="15" id="5xk-DP-Bb7"/>
                             <constraint firstItem="wya-Hw-uSR" firstAttribute="top" secondItem="0mT-Lm-PM5" secondAttribute="top" constant="8" id="8mI-XO-h2W"/>
@@ -1218,7 +1218,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.96879995200000002" green="0.96879995200000002" blue="0.96879995200000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="dn5-x8-boE" firstAttribute="top" secondItem="7cW-S3-1IX" secondAttribute="top" id="EWI-b4-jHA"/>
                             <constraint firstItem="0zU-5F-yaL" firstAttribute="centerX" secondItem="7cW-S3-1IX" secondAttribute="centerX" id="PoC-8m-Dc3"/>
@@ -1246,7 +1246,7 @@
                     <view key="view" contentMode="scaleToFill" id="ihn-dK-D2O">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="537"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.96879995200000002" green="0.96879995200000002" blue="0.96879995200000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="lRG-83-CQT"/>
                     </view>
                     <size key="freeformSize" width="375" height="537"/>
@@ -1274,7 +1274,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.96879995200000002" green="0.96879995200000002" blue="0.96879995200000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="6KU-Qu-gem" firstAttribute="centerX" secondItem="ILI-7e-485" secondAttribute="centerX" id="oZD-rU-vPV"/>
                             <constraint firstItem="6KU-Qu-gem" firstAttribute="top" secondItem="ILI-7e-485" secondAttribute="top" constant="98" id="ugG-7j-Dlb"/>

@@ -9,11 +9,9 @@
 import UIKit
 
 class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, SWRevealViewControllerDelegate, UISearchBarDelegate {
-    
     deinit{
         print("home deinit")
     }
-    
     @IBOutlet weak var cdsSearchBar: UISearchBar!
     @IBOutlet weak var cdlTableView: UITableView!
     @IBOutlet weak var departmentsTableView: UITableView!
@@ -81,7 +79,6 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: buttonView)
         
        // creare un bottone con lente di ingrandimento
-        
         let imageView2 = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
         imageView2.image = UIImage.init(named: "menu")
         let buttonView2 = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
