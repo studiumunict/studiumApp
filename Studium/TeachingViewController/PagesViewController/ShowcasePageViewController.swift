@@ -10,17 +10,15 @@ import UIKit
 
 class ShowcasePageViewController: UIViewController {
 
-    
     @IBOutlet var errorMessageLabel: UILabel!
     @IBOutlet var loadingIndicator: UIActivityIndicatorView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.lightWhite
         loadingIndicator.color = UIColor.primaryBackground
-        self.view.layer.borderColor = UIColor.black.cgColor
+        self.view.layer.borderColor = UIColor.primaryBackground.cgColor
         self.view.layer.borderWidth = 0.5
     }
     
