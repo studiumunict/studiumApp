@@ -18,6 +18,10 @@ class DescriptionPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.view.backgroundColor = UIColor.lightWhite
+        self.view.layer.borderColor = UIColor.primaryBackground.cgColor
+        self.view.layer.borderWidth = 0.5
         
         if descriptionText != nil {
             descriptionTextView.isHidden = false
@@ -26,12 +30,8 @@ class DescriptionPageViewController: UIViewController {
         } else {
             descriptionTextView.isHidden = true
             errorMessageLabel.isHidden = false
-            descriptionTextView.text = "Questo insegnamento non è stato ancora descritto."
+            errorMessageLabel.text = "Questo insegnamento non è stato ancora descritto."
         }
-
-        self.view.backgroundColor = UIColor.lightWhite
-        self.view.layer.borderColor = UIColor.primaryBackground.cgColor
-        self.view.layer.borderWidth = 0.5
     }
 
 
