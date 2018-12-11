@@ -430,9 +430,6 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             self.hideDepartmentTableAnimated()
         }
     }
-    
-    
-    
     func hideDepartmentTableAnimated(){
 
         UIView.animate(withDuration: 0.3, animations: {

@@ -117,11 +117,13 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         
         
         //Cambiare l'immagine per i vari bottoni
-        customButtons(button: showcaseButton, image: "home")
-        customButtons(button: notifyButton, image: "avv")
-        customButtons(button: descriptionButton, image: "descr")
+        customButtons(button: showcaseButton, image: "showcase")
+        
+        //fare controllo se sono attive le notifiche per il corso, nel caso negativo settare markedBell
+        customButtons(button: notifyButton, image: "bell")
+        customButtons(button: descriptionButton, image: "description")
         customButtons(button: documentsButton, image: "folder")
-        customButtons(button: bookingButton, image: "courses")
+        customButtons(button: bookingButton, image: "booking")
         
         
         stackView.layer.addBorder(edge: UIRectEdge.top, color: UIColor.secondaryBackground, thickness: 0.7)
