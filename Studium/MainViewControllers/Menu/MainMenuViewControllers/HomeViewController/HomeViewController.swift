@@ -61,6 +61,24 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         }
     }
     
+    func setSearchIconOnSearchButton(){
+        let imageView2 = UIImageView(frame: CGRect(x: 0, y: 2.5, width: 25.5, height: 25))
+        imageView2.image = UIImage.init(named: "search")
+        let buttonView2 = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 27.5))
+        buttonView2.addSubview(imageView2)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: buttonView2)
+        self.navigationItem.rightBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.searchingClicked)))
+        
+    }
+    func setCancelIconOnSearchButton(){
+        let imageView2 = UIImageView(frame: CGRect(x: 0, y: 2.5, width: 25.5, height: 25))
+        imageView2.image = UIImage.init(named: "close")
+        let buttonView2 = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 27.5))
+        buttonView2.addSubview(imageView2)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: buttonView2)
+        self.navigationItem.rightBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.searchingClicked)))
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.cdlTableView.isHidden = true
@@ -77,14 +95,8 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         let buttonView = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
         buttonView.addSubview(imageView)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: buttonView)
-        
-       // creare un bottone con lente di ingrandimento
-        let imageView2 = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
-        imageView2.image = UIImage.init(named: "menu")
-        let buttonView2 = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
-        buttonView2.addSubview(imageView2)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: buttonView2)
-        self.navigationItem.rightBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.searchingClicked)))
+        setSearchIconOnSearchButton()
+       
         let _ = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { (t) in
             self.showDepartmentTableAnimated()
         }
@@ -116,6 +128,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     
     
     func showSearchBarAnimated(){
+        setCancelIconOnSearchButton()
         self.cdsSearchBar.alpha = 0.0
         self.cdsSearchBar.isHidden = false
         if departmentsTableView.isHidden == false {
@@ -139,6 +152,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     
     
     func hideSearchBarAnimated(){
+        setSearchIconOnSearchButton()
         self.departmentsSelectButton.isHidden = false
         self.cdsSearchBar.resignFirstResponder()
         self.cdsSearchBar.text = ""
@@ -151,9 +165,11 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         }
     }
     @objc func searchingClicked(){
-        print("inizio ricerca")
+        
         if self.cdsSearchBar.isHidden {
            showSearchBarAnimated()
+           print("inizio ricerca")
+        
         }
         else{
             hideSearchBarAnimated()
@@ -337,6 +353,11 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             button.backgroundColor = #colorLiteral(red: 0.09844832867, green: 0.09847258776, blue: 0.09844512492, alpha: 1)
             button.tag = section
             button.addTarget(self, action: #selector(self.removeOrExpandRows), for: .touchUpInside)
+            let arrowImageView = UIImageView.init(frame: CGRect(x: 10, y: button.frame.height/2 - 7.5, width: 15, height: 15))
+            arrowImageView.image = UIImage.init(named: "arrow");
+            button.addSubview(arrowImageView)
+            
+            
             return button
             
         
@@ -344,10 +365,26 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         return nil
     }
     
+    func rotateArrows180Degrees(button : UIButton){
+        for view in button.subviews{
+            if let imageView = view as? UIImageView{
+                if imageView.transform == .identity{
+                    UIView.animate(withDuration: 0.2) {
+                         imageView.transform = CGAffineTransform(rotationAngle: .pi)
+                    }
+                }
+                else{
+                    UIView.animate(withDuration: 0.2) {
+                        imageView.transform = .identity
+                    }
+                }
+            }
+        }
+    }
+    
+    
     @objc func removeOrExpandRows(button : UIButton ){
-        
-        
-        
+        rotateArrows180Degrees(button: button)
         let sect = button.tag
         var indices = [IndexPath]()
         var row = 0;
