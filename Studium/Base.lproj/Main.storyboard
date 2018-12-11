@@ -1161,14 +1161,26 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error message label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29C-QS-GRv">
+                                <rect key="frame" x="16" y="118" width="343" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="343" id="A8o-LA-EbB"/>
+                                    <constraint firstAttribute="height" constant="70" id="iUl-yZ-TLW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.96879995200000002" green="0.96879995200000002" blue="0.96879995200000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="29C-QS-GRv" firstAttribute="top" secondItem="wya-Hw-uSR" secondAttribute="top" constant="98" id="5BI-pa-Ybf"/>
                             <constraint firstItem="dxI-oc-zFn" firstAttribute="top" secondItem="JMu-Oj-KpK" secondAttribute="bottom" constant="15" id="5xk-DP-Bb7"/>
                             <constraint firstItem="wya-Hw-uSR" firstAttribute="top" secondItem="0mT-Lm-PM5" secondAttribute="top" constant="8" id="8mI-XO-h2W"/>
                             <constraint firstItem="dxI-oc-zFn" firstAttribute="centerX" secondItem="JMu-Oj-KpK" secondAttribute="centerX" id="TpC-Gb-WcD"/>
                             <constraint firstItem="wya-Hw-uSR" firstAttribute="bottom" secondItem="dxI-oc-zFn" secondAttribute="bottom" constant="20" id="V4N-aK-V5F"/>
                             <constraint firstItem="dxI-oc-zFn" firstAttribute="leading" secondItem="wya-Hw-uSR" secondAttribute="leading" constant="16" id="YcW-e6-2Wj"/>
+                            <constraint firstItem="29C-QS-GRv" firstAttribute="centerX" secondItem="wya-Hw-uSR" secondAttribute="centerX" id="cVh-Bs-Xd5"/>
                             <constraint firstItem="0mT-Lm-PM5" firstAttribute="centerX" secondItem="wya-Hw-uSR" secondAttribute="centerX" id="dDz-il-foT"/>
                             <constraint firstItem="0mT-Lm-PM5" firstAttribute="width" secondItem="7eE-Vd-vYv" secondAttribute="width" id="lGq-Pe-DFN"/>
                             <constraint firstItem="JMu-Oj-KpK" firstAttribute="centerX" secondItem="0mT-Lm-PM5" secondAttribute="centerX" id="lvb-DD-gJe"/>
@@ -1179,6 +1191,7 @@
                     </view>
                     <size key="freeformSize" width="375" height="537"/>
                     <connections>
+                        <outlet property="errorMessageLabel" destination="29C-QS-GRv" id="g7F-wp-KDN"/>
                         <outlet property="notifyMessageTextView" destination="dxI-oc-zFn" id="4f6-4C-TNc"/>
                         <outlet property="notifyPickerView" destination="0mT-Lm-PM5" id="eZ5-Yh-FwV"/>
                         <outlet property="notifyTitleLabel" destination="JMu-Oj-KpK" id="s1S-gd-BUf"/>
@@ -1246,10 +1259,29 @@
                     <view key="view" contentMode="scaleToFill" id="ihn-dK-D2O">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="537"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error message label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBM-dH-Y4b">
+                                <rect key="frame" x="16" y="118" width="343" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="343" id="dzH-FS-ZTN"/>
+                                    <constraint firstAttribute="height" constant="70" id="fRc-3e-4yd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="0.96879995200000002" green="0.96879995200000002" blue="0.96879995200000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="nBM-dH-Y4b" firstAttribute="centerX" secondItem="lRG-83-CQT" secondAttribute="centerX" id="eW4-hQ-4nm"/>
+                            <constraint firstItem="nBM-dH-Y4b" firstAttribute="top" secondItem="lRG-83-CQT" secondAttribute="top" constant="98" id="wTQ-G2-sVL"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="lRG-83-CQT"/>
                     </view>
                     <size key="freeformSize" width="375" height="537"/>
+                    <connections>
+                        <outlet property="errorMessageLabel" destination="nBM-dH-Y4b" id="mOy-f6-pPe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5BX-nl-pwd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

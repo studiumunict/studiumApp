@@ -12,12 +12,21 @@ class BookingPageViewController: UIViewController {
 
     @IBOutlet var errorMessageLabel: UILabel!
     
+    var haveBooking: Bool!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.lightWhite
         self.view.layer.borderColor = UIColor.primaryBackground.cgColor
         self.view.layer.borderWidth = 0.5
+        
+        if haveBooking != nil && haveBooking {
+            errorMessageLabel.isHidden = true
+        } else {
+            errorMessageLabel.isHidden = false
+            errorMessageLabel.text = "Questo corso non ha ancora alcuna prenotazione attiva."
+        }
     }
     
 
