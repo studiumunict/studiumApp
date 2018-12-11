@@ -537,10 +537,49 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iu3-v0-7ya">
-                                <rect key="frame" x="0.0" y="134" width="375" height="473"/>
+                                <rect key="frame" x="0.0" y="122" width="375" height="485"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="473" id="MUH-YJ-ag1"/>
+                                </constraints>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bOk-we-n5O">
+                                <rect key="frame" x="0.0" y="64" width="375" height="130"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sVW-7k-vuA">
+                                        <rect key="frame" x="19" y="72" width="337.5" height="50"/>
+                                        <color key="backgroundColor" red="0.32928388749999998" green="0.32928388749999998" blue="0.32928388749999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="xTH-zj-BVb"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                        <state key="normal" title="Signedup Button">
+                                            <color key="titleColor" red="0.91044991779999995" green="0.91044991779999995" blue="0.91044991779999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="signedUpButtonClicked:" destination="aqe-Yk-Phq" eventType="touchUpInside" id="6aH-6f-Ia6"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label prompt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kd0-yC-ayi">
+                                        <rect key="frame" x="19" y="13" width="337.5" height="45"/>
+                                        <color key="backgroundColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="l6A-58-6qF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <color key="textColor" red="0.91044991779999995" green="0.91044991779999995" blue="0.91044991779999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="sVW-7k-vuA" secondAttribute="bottom" constant="8" id="8fU-kZ-3FI"/>
+                                    <constraint firstItem="kd0-yC-ayi" firstAttribute="width" secondItem="sVW-7k-vuA" secondAttribute="width" id="Dja-sN-Bo9"/>
+                                    <constraint firstItem="kd0-yC-ayi" firstAttribute="centerX" secondItem="bOk-we-n5O" secondAttribute="centerX" id="Xe6-T7-OJR"/>
+                                    <constraint firstItem="sVW-7k-vuA" firstAttribute="width" secondItem="bOk-we-n5O" secondAttribute="width" multiplier="0.9" id="hHZ-Z6-tBW"/>
+                                    <constraint firstItem="sVW-7k-vuA" firstAttribute="centerX" secondItem="bOk-we-n5O" secondAttribute="centerX" id="hle-YF-Ys7"/>
+                                    <constraint firstAttribute="height" constant="130" id="mUZ-0i-Y7A"/>
+                                    <constraint firstItem="kd0-yC-ayi" firstAttribute="top" secondItem="bOk-we-n5O" secondAttribute="top" constant="13" id="uhg-tE-6Uk"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -550,11 +589,14 @@
                             <constraint firstItem="bzp-bk-RfF" firstAttribute="trailing" secondItem="mq1-De-iby" secondAttribute="trailing" id="57g-3Z-SLc"/>
                             <constraint firstItem="r7S-aq-9e7" firstAttribute="leading" secondItem="Uac-fg-oBP" secondAttribute="leading" id="5Uc-hQ-HOO"/>
                             <constraint firstItem="iu3-v0-7ya" firstAttribute="trailing" secondItem="bzp-bk-RfF" secondAttribute="trailing" id="F7O-C7-AdN"/>
+                            <constraint firstItem="bOk-we-n5O" firstAttribute="top" secondItem="Uac-fg-oBP" secondAttribute="top" id="GyP-Ed-zYf"/>
                             <constraint firstItem="bzp-bk-RfF" firstAttribute="top" secondItem="mq1-De-iby" secondAttribute="bottom" constant="-7" id="MqN-OB-1PF"/>
                             <constraint firstItem="mq1-De-iby" firstAttribute="leading" secondItem="Uac-fg-oBP" secondAttribute="leading" id="NoI-sr-jYC"/>
                             <constraint firstItem="iu3-v0-7ya" firstAttribute="top" secondItem="bzp-bk-RfF" secondAttribute="bottom" id="OqK-fV-R01"/>
                             <constraint firstItem="r7S-aq-9e7" firstAttribute="top" secondItem="iu3-v0-7ya" secondAttribute="bottom" id="PAc-K4-d0y"/>
+                            <constraint firstItem="bOk-we-n5O" firstAttribute="centerX" secondItem="Uac-fg-oBP" secondAttribute="centerX" id="Qq4-Vp-NAE"/>
                             <constraint firstItem="Uac-fg-oBP" firstAttribute="trailing" secondItem="r7S-aq-9e7" secondAttribute="trailing" id="SrX-CY-CwW"/>
+                            <constraint firstItem="bOk-we-n5O" firstAttribute="width" secondItem="yjc-jx-pZm" secondAttribute="width" id="Tlw-Or-znD"/>
                             <constraint firstItem="iu3-v0-7ya" firstAttribute="width" secondItem="bzp-bk-RfF" secondAttribute="width" id="WQh-2I-MdZ"/>
                             <constraint firstItem="bzp-bk-RfF" firstAttribute="width" secondItem="mq1-De-iby" secondAttribute="width" id="cUT-5p-H8f"/>
                             <constraint firstItem="Uac-fg-oBP" firstAttribute="trailing" secondItem="mq1-De-iby" secondAttribute="trailing" id="eoh-5B-EYW"/>
@@ -581,9 +623,12 @@
                         <outlet property="notifyButton" destination="wqz-wd-gLo" id="awf-7F-ZgB"/>
                         <outlet property="notifyButtonView" destination="h3h-Dv-Yjt" id="o9G-e1-uHH"/>
                         <outlet property="notifyLabel" destination="u78-ka-FzN" id="gYt-D4-s1H"/>
+                        <outlet property="rightMenuView" destination="bOk-we-n5O" id="JuH-gn-ovo"/>
                         <outlet property="showcaseButton" destination="FHH-2V-qq4" id="2SS-tK-jjg"/>
                         <outlet property="showcaseButtonView" destination="L2F-vt-W7r" id="wZx-nc-V0A"/>
                         <outlet property="showcaseLabel" destination="sAV-Dt-9zZ" id="E55-bf-wJc"/>
+                        <outlet property="signedUpButton" destination="sVW-7k-vuA" id="tyv-BV-8QC"/>
+                        <outlet property="signedUpLabel" destination="kd0-yC-ayi" id="vmi-W8-nA9"/>
                         <outlet property="stackView" destination="r7S-aq-9e7" id="sdI-pF-c2I"/>
                         <outlet property="viewAppoggio" destination="iu3-v0-7ya" id="u5a-G1-JAs"/>
                     </connections>
