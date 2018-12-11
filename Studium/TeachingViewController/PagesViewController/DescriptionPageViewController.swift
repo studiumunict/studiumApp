@@ -19,10 +19,10 @@ class DescriptionPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if descriptionMessage != nil {
+        if descriptionText != nil {
             descriptionTextView.isHidden = false
             errorMessageLabel.isHidden = true
-            descriptionTextView.text = descriptionMessage!
+            descriptionTextView.text = descriptionText!
         } else {
             descriptionTextView.isHidden = true
             errorMessageLabel.isHidden = false
