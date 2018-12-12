@@ -137,14 +137,16 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         
         showcaseButtonView.backgroundColor = UIColor.buttonSelected
         
-        //Cambiare l'immagine per i vari bottoni
+        if teachingDataSource.notifyList.isEmpty {
+            customButtons(button: notifyButton, image: "markedBell")
+        } else {
+            customButtons(button: notifyButton, image: "bell")
+        }
         customButtons(button: showcaseButton, image: "showcase")
-        
-        //fare controllo se sono attive le notifiche per il corso, nel caso negativo settare markedBell
-        customButtons(button: notifyButton, image: "bell")
         customButtons(button: descriptionButton, image: "description")
         customButtons(button: documentsButton, image: "folder")
         customButtons(button: bookingButton, image: "booking")
+        
         stackView.layer.addBorder(edge: UIRectEdge.top, color: UIColor.secondaryBackground, thickness: 0.7)
     }
     
@@ -296,7 +298,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         }
     }
     
-    private func reloadSignedUpView() {
+    func reloadSignedUpView() {
         if teachingDataSource.signedUp {
             signedUpLabel.text = "Sei iscritto."
             signedUpButton.titleLabel?.text = "Disiscriviti"
