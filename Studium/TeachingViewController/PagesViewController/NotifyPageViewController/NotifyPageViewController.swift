@@ -86,8 +86,10 @@ class NotifyPageViewController: UIViewController, UITableViewDelegate {
             tableView.isHidden = false
             setupTableView()
             
-            for x in notifyList {
-                dataSource.items.append(ContentCell(data: x.date, title: x.title, description: x.message))
+            var i: Int = notifyList.count-1
+            while i >= 0 {
+                dataSource.items.append(ContentCell(data: notifyList[i].date, title: notifyList[i].title, description: notifyList[i].message))
+                i -= 1
             }
             
         } else {
