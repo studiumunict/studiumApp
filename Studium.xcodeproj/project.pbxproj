@@ -22,6 +22,8 @@
 		9C06A22721AB6BC500E695DB /* DepartmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C06A22621AB6BC500E695DB /* DepartmentTableViewCell.swift */; };
 		9C06A22A21AB700200E695DB /* DepartmentClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C06A22921AB700200E695DB /* DepartmentClass.swift */; };
 		9C06A22C21AB707500E695DB /* CDLClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C06A22B21AB707500E695DB /* CDLClass.swift */; };
+		9C0E501B21C3F7CE0055C4DD /* ManageCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0E501A21C3F7CE0055C4DD /* ManageCourseViewController.swift */; };
+		9C0E501D21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0E501C21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift */; };
 		9CFE72C121B9508E001EB697 /* CDLTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE72C021B9508E001EB697 /* CDLTableViewCell.swift */; };
 		9CFE72C321B95206001EB697 /* TeachingClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE72C221B95206001EB697 /* TeachingClass.swift */; };
 		9CFE72C521B95331001EB697 /* HomeTableSectionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE72C421B95331001EB697 /* HomeTableSectionClass.swift */; };
@@ -84,6 +86,8 @@
 		9C06A22621AB6BC500E695DB /* DepartmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentTableViewCell.swift; sourceTree = "<group>"; };
 		9C06A22921AB700200E695DB /* DepartmentClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentClass.swift; sourceTree = "<group>"; };
 		9C06A22B21AB707500E695DB /* CDLClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDLClass.swift; sourceTree = "<group>"; };
+		9C0E501A21C3F7CE0055C4DD /* ManageCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCourseViewController.swift; sourceTree = "<group>"; };
+		9C0E501C21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseAndSearchCoursesViewController.swift; sourceTree = "<group>"; };
 		9CFE72C021B9508E001EB697 /* CDLTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDLTableViewCell.swift; sourceTree = "<group>"; };
 		9CFE72C221B95206001EB697 /* TeachingClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingClass.swift; sourceTree = "<group>"; };
 		9CFE72C421B95331001EB697 /* HomeTableSectionClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableSectionClass.swift; sourceTree = "<group>"; };
@@ -227,6 +231,15 @@
 			path = CustomClasses;
 			sourceTree = "<group>";
 		};
+		9C0E501921C3F7AA0055C4DD /* ManageCourseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9C0E501A21C3F7CE0055C4DD /* ManageCourseViewController.swift */,
+				9C0E501C21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift */,
+			);
+			path = ManageCourseViewController;
+			sourceTree = "<group>";
+		};
 		9CFE72C821BA97FA001EB697 /* CoursesViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +328,7 @@
 		9CFE9DA921A8BC260030AE33 /* MainMenuViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				9C0E501921C3F7AA0055C4DD /* ManageCourseViewController */,
 				9C06A22521AB6B8A00E695DB /* HomeViewController */,
 				9CFEB89B21BAA5AA0045FB54 /* DocumentsViewController */,
 				9CFEB89A21BAA59B0045FB54 /* ProfileViewController */,
@@ -582,7 +596,9 @@
 				9CFE9DAF21A8BC8F0030AE33 /* ProfileViewController.swift in Sources */,
 				9CFE72C321B95206001EB697 /* TeachingClass.swift in Sources */,
 				139BCB6821BDE034005A750A /* DescriptionPageViewController.swift in Sources */,
+				9C0E501D21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift in Sources */,
 				13D86DDB21B9A3BF007638FD /* ExtensionUIColor.swift in Sources */,
+				9C0E501B21C3F7CE0055C4DD /* ManageCourseViewController.swift in Sources */,
 				9C06A22721AB6BC500E695DB /* DepartmentTableViewCell.swift in Sources */,
 				9CFE9D7321A8ADBC0030AE33 /* AppDelegate.swift in Sources */,
 				9CFE72C121B9508E001EB697 /* CDLTableViewCell.swift in Sources */,

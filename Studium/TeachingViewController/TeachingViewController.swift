@@ -14,9 +14,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     @IBOutlet var viewAppoggio: UIView! //Contiene la scrollView
     @IBOutlet var stackView: UIStackView!
     
-    @IBOutlet var rightMenuView: UIView!
-    @IBOutlet var signedUpButton: UIButton!
-    @IBOutlet var signedUpLabel: UILabel!
+
     
     @IBOutlet var courseNameLabel: UILabel!
     @IBOutlet var nameTeacherLabel: UILabel!
@@ -114,26 +112,9 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         
         navigationItem.title = "Insegnamento"
         navigationController?.view.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.secondaryBackground, thickness: 0.3)
+       
         
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
-        imageView.image = UIImage.init(named: "menu")
-        let buttonView = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
-        buttonView.addSubview(imageView)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: buttonView)
-        self.navigationItem.rightBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.signedUpClicked)))
-        
-        rightMenuView.backgroundColor = UIColor.primaryBackground
-        rightMenuView.isHidden = true
-        
-        signedUpButton.layer.cornerRadius = 7.0
-        signedUpButton.clipsToBounds = true
-        signedUpButton.layer.borderWidth = 3.0
-        signedUpButton.layer.borderColor = UIColor.secondaryBackground.cgColor
-        signedUpButton.titleLabel?.textAlignment = .center
-        
-        signedUpLabel.layer.cornerRadius = 7.0
-        signedUpLabel.clipsToBounds = true
-        signedUpLabel.textAlignment = .center
+       
         
         showcaseButtonView.backgroundColor = UIColor.buttonSelected
         
@@ -279,34 +260,9 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     }
     
     
-    @objc func signedUpClicked() {
-        if rightMenuView.isHidden {
-            reloadSignedUpView()
-            rightMenuView.isHidden = false
-        } else {
-            rightMenuView.isHidden = true
-        }
-    }
+   
     
-    @IBAction func signedUpButtonClicked(_ sender: UIButton) {
-        if teachingDataSource.signedUp {
-            teachingDataSource.signedUp = false
-            reloadSignedUpView()
-        } else {
-            teachingDataSource.signedUp = true
-            reloadSignedUpView()
-        }
-    }
-    
-    func reloadSignedUpView() {
-        if teachingDataSource.signedUp {
-            signedUpLabel.text = "Sei iscritto."
-            signedUpButton.titleLabel?.text = "Disiscriviti"
-        } else {
-            signedUpLabel.text = "Non risulti iscritto."
-            signedUpButton.titleLabel?.text = "Iscriviti"
-        }
-    }
+ 
     
     
     @IBAction func sendToShowcaseView(_ sender: UIButton) {

@@ -12,6 +12,8 @@ import UIKit
  var CourseFrontController : UINavigationController! = nil
  var ProfileFrontController : UINavigationController! = nil
  var DocsFrontController : UINavigationController! = nil
+ var ManageCourseFrontController : UINavigationController! = nil
+
 
 
 class MenuTableViewController: UITableViewController, SWRevealViewControllerDelegate {
@@ -54,6 +56,19 @@ class MenuTableViewController: UITableViewController, SWRevealViewControllerDele
             
         }
         else if indexPath.row == 2{
+            if ManageCourseFrontController == nil {
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "ManageCourseNavigation") as! UINavigationController
+                let segue = SWRevealViewControllerSeguePushController.init(identifier: "pushToManageCourse", source: self, destination: vc)
+                segue.perform()
+                ManageCourseFrontController = vc
+            }
+            else{
+                self.revealViewController()?.pushFrontViewController(ManageCourseFrontController, animated: true)
+            }
+            
+            
+        }
+        else if indexPath.row == 3{
             if ProfileFrontController == nil {
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileNavigation") as! UINavigationController
                 let segue = SWRevealViewControllerSeguePushController.init(identifier: "pushToProfile", source: self, destination: vc)
@@ -65,7 +80,7 @@ class MenuTableViewController: UITableViewController, SWRevealViewControllerDele
             }
             
         }
-        else if indexPath.row == 3{
+        else if indexPath.row == 4{
             if DocsFrontController == nil {
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocsNavigation") as! UINavigationController
                 let segue = SWRevealViewControllerSeguePushController.init(identifier: "pushToDocs", source: self, destination: vc)
@@ -89,7 +104,7 @@ class MenuTableViewController: UITableViewController, SWRevealViewControllerDele
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 4
+        return 5
     }
 
     /*
