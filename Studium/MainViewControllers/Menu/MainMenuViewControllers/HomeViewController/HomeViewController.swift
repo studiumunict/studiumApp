@@ -362,8 +362,8 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             }
             
             button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-            button.setTitleColor(#colorLiteral(red: 0.9103601575, green: 0.9105128646, blue: 0.9103400707, alpha: 1), for: .normal)
-            button.backgroundColor = #colorLiteral(red: 0.09844832867, green: 0.09847258776, blue: 0.09844512492, alpha: 1)
+            button.setTitleColor(UIColor.lightWhite, for: .normal)
+            button.backgroundColor = UIColor.tableSectionColor
             button.tag = section
             button.addTarget(self, action: #selector(self.removeOrExpandRows), for: .touchUpInside)
            

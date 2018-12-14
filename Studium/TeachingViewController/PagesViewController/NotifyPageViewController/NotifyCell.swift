@@ -16,14 +16,12 @@ class NotifyCell: UITableViewCell {
     }
     
     @IBOutlet private weak var stackView: UIStackView!
-    @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var dataLabel: UILabel!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var carret: UIImageView! //Freccetta animata che expanded or collapse
     @IBOutlet private weak var headerView: UIView!
     @IBOutlet private weak var descriptionView: UIView!
-    @IBOutlet private weak var contView: UIView!
     
     
     var state: CellState = .collapsed {
@@ -37,9 +35,16 @@ class NotifyCell: UITableViewCell {
         
         carret.image = UIImage(named: "arrow");
         
-        containerView.backgroundColor = UIColor.secondaryBackground
+       /* containerView.backgroundColor = UIColor.secondaryBackground
         containerView.layer.cornerRadius = 5.0
-        containerView.layer.borderColor = UIColor.clear.cgColor
+        containerView.layer.borderColor = UIColor.clear.cgColor*/
+        self.contentView.backgroundColor = UIColor.primaryBackground
+        headerView.backgroundColor = UIColor.tableSectionColor
+        headerView.layer.cornerRadius = 5.0
+        headerView.clipsToBounds = true
+        
+        
+        
         
         descriptionLabel.textColor = UIColor.lightWhite
         titleLabel.textColor = UIColor.lightWhite

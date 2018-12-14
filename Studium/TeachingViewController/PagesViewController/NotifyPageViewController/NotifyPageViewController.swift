@@ -76,6 +76,7 @@ class NotifyPageViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.lightWhite
+        self.view.backgroundColor = UIColor.primaryBackground
         self.view.layer.borderColor = UIColor.primaryBackground.cgColor
         self.view.layer.borderWidth = 0.5
         
