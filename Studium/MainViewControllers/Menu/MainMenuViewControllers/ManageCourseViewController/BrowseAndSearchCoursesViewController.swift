@@ -234,7 +234,7 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
                 [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)]))
             
             
-            CDLDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "MATEMATICA L-27", courseCode: 27), teachingArray: [Teaching.init(teachingName: "Elementi di Analisi matematica 1", teachingCode: 8675, teacherName: "Ornella Naselli", signedUp: false),Teaching.init(teachingName: "Algebra 1", teachingCode: 8760, teacherName: "Andrea Scapellato", signedUp: false)]))
+            CDLDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "MATEMATICA L-27", courseCode: 27), teachingArray: [Teaching.init(teachingName: "Elementi di Analisi matematica 1 drl corso mz", teachingCode: 8675, teacherName: "Ornella Naselli", signedUp: false),Teaching.init(teachingName: "Algebra 1", teachingCode: 8760, teacherName: "Andrea Scapellato", signedUp: false)]))
             
         }
         
@@ -265,11 +265,11 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
             if self.cdsSearchBar.isFirstResponder || self.cdsSearchBar.text != ""{
                 self.cdsSearchBar.resignFirstResponder()
                 let teaching  = self.filteredCDLDataSource[indexPath.section].teachings[indexPath.row]
-                  showSignUpViewAnimated(teachingName: teaching.name, teachername: teaching.teacherName, signedUp: teaching.signedUp, indexPath: indexPath )
+                  showSignUpViewAnimated(teachingName: teaching.name, teacherName: teaching.teacherName, signedUp: teaching.signedUp, indexPath: indexPath )
             }
             else{
                   let teaching  = self.CDLDataSource[indexPath.section].teachings[indexPath.row]
-                showSignUpViewAnimated(teachingName: teaching.name, teachername: teaching.teacherName, signedUp: teaching.signedUp, indexPath: indexPath )
+                showSignUpViewAnimated(teachingName: teaching.name, teacherName: teaching.teacherName, signedUp: teaching.signedUp, indexPath: indexPath )
             }
           
         
@@ -487,6 +487,7 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
             else{
                 dataElement = self.CDLDataSource[indexPath.section].teachings[indexPath.row]
             }
+            
             cell.CDLnameLabel.text = dataElement.name
             cell.teacherNameLabel.text = dataElement.teacherName
             if dataElement.signedUp{
@@ -531,7 +532,7 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
     
     
     
-    func showSignUpViewAnimated(teachingName : String, teachername : String , signedUp : Bool, indexPath : IndexPath){
+    func showSignUpViewAnimated(teachingName : String, teacherName : String , signedUp : Bool, indexPath : IndexPath){
         self.navigationItem.rightBarButtonItem?.customView?.isUserInteractionEnabled = false
         
         var cellFrame = self.cdlTableView.rectForRow(at: indexPath)
@@ -541,25 +542,48 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
         oscureView.alpha = 0.0
         self.view.addSubview(oscureView)
         //crei la view con i bottoni di iscrizione
-        let newFrame = CGRect(x: 0, y: 0, width: self.view.frame.size.width * 0.95, height: 230)
+        let newFrame = CGRect(x: 0, y: 0, width: self.view.frame.size.width * 0.9, height: 180)
         self.signUpView = UIView.init(frame: newFrame)
         self.signUpView.center = CGPoint(x: cellFrame.origin.x + cellFrame.width/2  , y: cellFrame.origin.y + cellFrame.height/2 )
         self.view.addSubview(signUpView)
-        
-        
         self.signUpView.backgroundColor = UIColor.tableSectionColor
         self.signUpView.layer.borderColor = UIColor.secondaryBackground.cgColor
         self.signUpView.layer.borderWidth = 1.0
         self.signUpView.layer.cornerRadius = 5.0
-        let button = UIButton(frame: CGRect(x: signUpView.frame.width - 35,y: 10, width: 25, height: 25))
-        button.setImage(UIImage.init(named: "close"), for: .normal)
-        self.signUpView.addSubview(button)
-        button.addTarget(self, action: #selector(hideSignUpViewAnimated), for: .touchUpInside)
-        button.accessibilityElements = [IndexPath]()
-        button.accessibilityElements?.append(indexPath)
         self.signUpView.transform = CGAffineTransform(scaleX: 1, y: 0.01)
         self.signUpView.alpha = 0.0
-        button.alpha = 0.0
+       
+        let teachingNameLabel = UILabel.init(frame: CGRect(x: 10, y: 10, width: signUpView.frame.size.width - 20, height: 20))
+        teachingNameLabel.text = teachingName
+        teachingNameLabel.textColor = UIColor.lightWhite
+        teachingNameLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        teachingNameLabel.textAlignment = .center
+        teachingNameLabel.alpha = 0.0
+        let teacherNameLabel = UILabel.init(frame: CGRect(x: 10 , y: 35, width: signUpView.frame.size.width - 20, height: 20))
+        teacherNameLabel.text = teacherName
+        teacherNameLabel.textColor = UIColor.lightGray
+        teacherNameLabel.font = UIFont.boldSystemFont(ofSize: 13)
+        teacherNameLabel.textAlignment = .center
+        teacherNameLabel.alpha = 0.0
+        let signUpButton = UIButton(frame: CGRect(x: signUpView.frame.size.width/2 - 5, y: 100 , width: 120, height: 50))
+        let cancelButton = UIButton(frame: CGRect(x: signUpView.frame.size.width/2 - 115, y: 100, width: 120, height: 50))
+        signUpButton.backgroundColor = UIColor.lightWhite
+        cancelButton.backgroundColor = UIColor.lightWhite
+        signUpButton.setTitleColor(UIColor.textBlueColor, for: .normal)
+        signUpButton.setTitle("Iscriviti", for: .normal)
+        cancelButton.setTitle("Annulla", for: .normal)
+        cancelButton.setTitleColor(UIColor.textRedColor, for: .normal)
+        cancelButton.addTarget(self, action: #selector(hideSignUpViewAnimated), for: .touchUpInside)
+        cancelButton.accessibilityElements = [IndexPath]()
+        cancelButton.accessibilityElements?.append(indexPath)
+        signUpButton.layer.cornerRadius = 5.0
+        cancelButton.layer.cornerRadius = 5.0
+        
+        
+        signUpView.addSubview(signUpButton)
+        signUpView.addSubview(cancelButton)
+        signUpView.addSubview(teacherNameLabel)
+        signUpView.addSubview(teachingNameLabel)
         
         
         UIView.animate(withDuration: 0.3, animations: {
@@ -569,10 +593,11 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
         }) { (flag) in
             UIView.animate(withDuration: 0.3) {
                 self.oscureView.alpha = 0.9
-                button.alpha = 1.0
                 self.signUpView.transform = .identity
-                self.signUpView.center = self.view.center
-                
+                self.signUpView.center = CGPoint(x: self.view.center.x , y: self.view.center.y - 50 )
+                //porta a 1 gli alpha degli elementi della view
+                teacherNameLabel.alpha = 1.0
+                teachingNameLabel.alpha = 1.0
             }
         }
         
@@ -589,7 +614,9 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
             self.oscureView.alpha = 0.6
              self.signUpView.center = CGPoint(x: cellFrame.origin.x + cellFrame.width/2  , y: cellFrame.origin.y + cellFrame.height/2 )
            self.signUpView.transform = CGAffineTransform(scaleX: 1, y: 0.5)
-            
+            //porta a 0 gli alpha degli elementi della view
+           // teacherNameLabel.alpha = 0.0
+           // teachingNameLabel.alpha = 0.0
             
             
         }) { (flag) in
@@ -598,7 +625,7 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
                 self.signUpView.transform = CGAffineTransform(scaleX: 1, y: 0.01)
                 self.oscureView.alpha = 0.0
                 self.signUpView.alpha = 0.0
-                button.alpha = 0.0
+                
             }, completion: { (f) in
                 self.navigationItem.rightBarButtonItem?.customView?.isUserInteractionEnabled = true
                 self.signUpView.removeFromSuperview()

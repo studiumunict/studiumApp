@@ -1117,7 +1117,9 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ryy-bn-TgP">
                                 <rect key="frame" x="114" y="318" width="124" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="iscriviti a un corso"/>
+                                <state key="normal" title="iscriviti a un corso">
+                                    <color key="titleColor" red="0.20408648252487183" green="0.4718623161315918" blue="0.96479278802871704" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <segue destination="z5Y-Js-uKB" kind="show" id="BFm-hW-Zw8"/>
                                 </connections>

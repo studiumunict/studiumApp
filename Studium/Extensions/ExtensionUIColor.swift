@@ -16,6 +16,9 @@ extension UIColor{
     static var navigationBarColor = #colorLiteral(red: 0.04193217307, green: 0.04194748402, blue: 0.04193013161, alpha: 1)
     static var buttonSelected = #colorLiteral(red: 0.228349328, green: 0.2283941507, blue: 0.2283434272, alpha: 1)
     static var tableSectionColor = #colorLiteral(red: 0.09844832867, green: 0.09847258776, blue: 0.09844512492, alpha: 1)
-    static var oscureViewColor = UIColor(red: 176, green: 176, blue: 176, alpha: 0.7) 
+    static var oscureViewColor = UIColor(red: 176, green: 176, blue: 176, alpha: 0.7)
+    static var textRedColor = #colorLiteral(red: 0.6130949259, green: 0.08687067777, blue: 0.01944066584, alpha: 1)
+    static var textBlueColor = #colorLiteral(red: 0, green: 0.4793968797, blue: 0.9984878898, alpha: 1)
+    static var buttonSignUpSelect = #colorLiteral(red: 0.4939348698, green: 0.5002408624, blue: 0.5000324845, alpha: 1)
     
 }
