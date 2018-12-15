@@ -36,7 +36,7 @@ class NotifyCell: UITableViewCell {
         carret.image = UIImage(named: "arrow");
         
         self.contentView.backgroundColor = UIColor.clear
-        headerView.backgroundColor = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)
+        headerView.backgroundColor = #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)
         headerView.layer.cornerRadius = 5.0
         headerView.clipsToBounds = true
         
