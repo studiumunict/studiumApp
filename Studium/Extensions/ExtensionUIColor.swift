@@ -16,5 +16,6 @@ extension UIColor{
     static var buttonSelected = #colorLiteral(red: 0.228349328, green: 0.2283941507, blue: 0.2283434272, alpha: 1)
     static var tableSectionColor = #colorLiteral(red: 0.09844832867, green: 0.09847258776, blue: 0.09844512492, alpha: 1)
     static var subTitleGray = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
+    static var oscureViewColor = UIColor(red: 176, green: 176, blue: 176, alpha: 0.7) 
     
 }

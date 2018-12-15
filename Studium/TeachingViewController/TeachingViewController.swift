@@ -14,6 +14,8 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     @IBOutlet var viewAppoggio: UIView! //Contiene la scrollView
     @IBOutlet var stackView: UIStackView!
     
+
+    
     @IBOutlet var courseNameLabel: UILabel!
     @IBOutlet var nameTeacherLabel: UILabel!
     
