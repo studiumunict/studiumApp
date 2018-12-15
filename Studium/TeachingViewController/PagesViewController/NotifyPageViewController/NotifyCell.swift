@@ -19,7 +19,7 @@ class NotifyCell: UITableViewCell {
     @IBOutlet private weak var dataLabel: UILabel!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
-    @IBOutlet private weak var carret: UIImageView! //Freccetta animata che expanded or collapse
+    @IBOutlet private weak var carret: UIImageView!
     @IBOutlet private weak var headerView: UIView!
     @IBOutlet private weak var descriptionView: UIView!
     
@@ -35,20 +35,15 @@ class NotifyCell: UITableViewCell {
         
         carret.image = UIImage(named: "arrow");
         
-       /* containerView.backgroundColor = UIColor.secondaryBackground
-        containerView.layer.cornerRadius = 5.0
-        containerView.layer.borderColor = UIColor.clear.cgColor*/
-        self.contentView.backgroundColor = UIColor.primaryBackground
-        headerView.backgroundColor = UIColor.tableSectionColor
+        self.contentView.backgroundColor = UIColor.clear
+        headerView.backgroundColor = #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)
         headerView.layer.cornerRadius = 5.0
         headerView.clipsToBounds = true
         
         
-        
-        
-        descriptionLabel.textColor = UIColor.lightWhite
-        titleLabel.textColor = UIColor.lightWhite
-        dataLabel.textColor = UIColor.lightWhite
+        descriptionLabel.textColor = UIColor.navigationBarColor
+        titleLabel.textColor = UIColor.navigationBarColor
+        dataLabel.textColor = UIColor.subTitleGray
     }
     
     

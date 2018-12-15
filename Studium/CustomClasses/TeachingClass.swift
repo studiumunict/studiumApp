@@ -32,7 +32,9 @@ class Teaching{
     var signedUp : Bool! //TRUE: se sei iscritto, FALSE: altrimenti
     var looked: Bool! //TRUE: se è privata, FALSE: altrimenti
     var teacherName: String!
+   
     var haveShowcase: Bool!
+    var haveSyllabus: Bool!
     var haveDocuments: Bool!
     var haveBooking: Bool!
     var descriptionText: String!
@@ -48,10 +50,14 @@ class Teaching{
     }
     
     
-    func completeDataSource(haveShowcase: Bool?, haveDocuments: Bool?, haveBooking: Bool?, descriptionText: String?){
+    func completeDataSource(haveShowcase: Bool?, haveSyllabus: Bool?, haveDocuments: Bool?, haveBooking: Bool?, descriptionText: String?){
         
         if let val = haveShowcase {
             self.haveShowcase = val
+        }
+        
+        if let val = haveSyllabus {
+            self.haveSyllabus = val
         }
         
         if let val = haveDocuments {
