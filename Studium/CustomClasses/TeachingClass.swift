@@ -34,11 +34,11 @@ class Teaching{
     var teacherName: String!
    
     var haveShowcase: Bool!
-    var haveSyllabus: Bool!
     var haveDocuments: Bool!
     var haveBooking: Bool!
     var descriptionText: String!
     var notifyList: [Notify]!
+    var syllabusCode: String!
     
     
     init(teachingName: String, teachingCode: Int, teacherName: String, signedUp: Bool) {
@@ -50,14 +50,14 @@ class Teaching{
     }
     
     
-    func completeDataSource(haveShowcase: Bool?, haveSyllabus: Bool?, haveDocuments: Bool?, haveBooking: Bool?, descriptionText: String?){
+    func completeDataSource(haveShowcase: Bool?, syllabusCode: String?, haveDocuments: Bool?, haveBooking: Bool?, descriptionText: String?){
         
         if let val = haveShowcase {
             self.haveShowcase = val
         }
         
-        if let val = haveSyllabus {
-            self.haveSyllabus = val
+        if let val = syllabusCode {
+            self.syllabusCode = val
         }
         
         if let val = haveDocuments {

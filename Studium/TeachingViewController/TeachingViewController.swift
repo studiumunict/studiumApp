@@ -68,6 +68,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             
             vc1.haveShowcase = teachingDataSource.haveShowcase
             vc2.notifyList = teachingDataSource.notifyList
+            vc3.syllabusCode = teachingDataSource.syllabusCode
             vc4.descriptionText = teachingDataSource.descriptionText
             vc5.haveDocuments = teachingDataSource.haveDocuments
             vc6.haveBooking = teachingDataSource.haveBooking
@@ -249,7 +250,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     
     func completeTeachingDataSource(){
         //Scarica i dati dal db
-        teachingDataSource.completeDataSource(haveShowcase: true, haveSyllabus: false, haveDocuments: false, haveBooking: false, descriptionText: "ciao")
+        teachingDataSource.completeDataSource(haveShowcase: true, syllabusCode: "14927", haveDocuments: false, haveBooking: false, descriptionText: "ciao")
         
         teachingDataSource.addNewNotify(date: "30/10/2018", title: "Date esami", message: "Giorno 2 novembre ci sarà la prima prova scritta.")
         teachingDataSource.addNewNotify(date: "25/11/2018", title: "Lezione rimandata", message: "Si avvisano gli studenti che giorno 26 novembre non ci sarà lezione.")
@@ -286,7 +287,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             }
         }
         
-        if teachingDataSource.haveSyllabus == nil || !teachingDataSource.haveSyllabus {
+        if teachingDataSource.syllabusCode == nil || teachingDataSource.syllabusCode.isEmpty {
             syllabusButtonView.isHidden = true
             i = 0
             for x in viewControllerList {
