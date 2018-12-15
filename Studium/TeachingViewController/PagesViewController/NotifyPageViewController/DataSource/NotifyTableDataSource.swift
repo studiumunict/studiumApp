@@ -16,7 +16,7 @@ struct ContentCell {
 
 
 
-class DataSource: NSObject, UITableViewDataSource {
+class NotifyTableDataSource: NSObject, UITableViewDataSource {
     
     private let cellIdentifier = "notifyCell"
     

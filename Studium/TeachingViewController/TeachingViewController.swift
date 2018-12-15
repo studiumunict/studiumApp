@@ -14,10 +14,6 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     @IBOutlet var viewAppoggio: UIView! //Contiene la scrollView
     @IBOutlet var stackView: UIStackView!
     
-    @IBOutlet var rightMenuView: UIView!
-    @IBOutlet var signedUpButton: UIButton!
-    @IBOutlet var signedUpLabel: UILabel!
-    
     @IBOutlet var courseNameLabel: UILabel!
     @IBOutlet var nameTeacherLabel: UILabel!
     
@@ -29,6 +25,10 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     @IBOutlet weak var notifyButtonView: UIView!
     @IBOutlet var notifyButton: UIButton!
     @IBOutlet var notifyLabel: UILabel!
+    
+    @IBOutlet weak var syllabusButtonView: UIView!
+    @IBOutlet var syllabusButton: UIButton!
+    @IBOutlet var syllabusLabel: UILabel!
     
     @IBOutlet weak var descriptionButtonView: UIView!
     @IBOutlet var descriptionButton: UIButton!
@@ -48,25 +48,6 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     lazy var viewControllerList: [UIViewController]! = { return nil }()
     
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        
-        //Quando apre le view, se il menu' è aperto lo chiude
-        if (revealViewController().frontViewPosition != FrontViewPosition.left) {
-            revealViewController().frontViewPosition = .left
-        }
-        
-        //Definire le dimensioni dei menu
-        if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 130//Menu sx
-            revealViewController().delegate = self
-            viewControllerList[0].view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-        }
-        
-    }
-    
     
     
     override func viewDidLoad() {
@@ -78,18 +59,22 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             let sb = storyboard!
             let vc1 = sb.instantiateViewController(withIdentifier: "showcasePageViewController") as! ShowcasePageViewController
             let vc2 = sb.instantiateViewController(withIdentifier: "notifyPageViewController") as! NotifyPageViewController
-            let vc3 = sb.instantiateViewController(withIdentifier: "descriptionPageViewController") as! DescriptionPageViewController
-            let vc4 = sb.instantiateViewController(withIdentifier: "documentsPageViewController") as! DocumentsPageViewController
-            let vc5 = sb.instantiateViewController(withIdentifier: "bookingPageViewController") as! BookingPageViewController
+            let vc3 = sb.instantiateViewController(withIdentifier: "syllabusPageViewController") as! SyllabusPageViewController
+            let vc4 = sb.instantiateViewController(withIdentifier: "descriptionPageViewController") as! DescriptionPageViewController
+            let vc5 = sb.instantiateViewController(withIdentifier: "documentsPageViewController") as! DocumentsPageViewController
+            let vc6 = sb.instantiateViewController(withIdentifier: "bookingPageViewController") as! BookingPageViewController
             
             vc1.haveShowcase = teachingDataSource.haveShowcase
             vc2.notifyList = teachingDataSource.notifyList
-            vc3.descriptionText = teachingDataSource.descriptionText
-            vc4.haveDocuments = teachingDataSource.haveDocuments
-            vc5.haveBooking = teachingDataSource.haveBooking
+            vc4.descriptionText = teachingDataSource.descriptionText
+            vc5.haveDocuments = teachingDataSource.haveDocuments
+            vc6.haveBooking = teachingDataSource.haveBooking
             
-            return [vc1, vc2, vc3, vc4, vc5]
+            return [vc1, vc2, vc3, vc4, vc5, vc6]
         }()
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        setPageViewController()
         
         //Definire le dimensioni dei menu
         if revealViewController() != nil {
@@ -114,41 +99,49 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         
         navigationItem.title = "Insegnamento"
         navigationController?.view.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.secondaryBackground, thickness: 0.3)
-        
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
-        imageView.image = UIImage.init(named: "menu")
-        let buttonView = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
-        buttonView.addSubview(imageView)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: buttonView)
-        self.navigationItem.rightBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.signedUpClicked)))
-        
-        rightMenuView.backgroundColor = UIColor.primaryBackground
-        rightMenuView.isHidden = true
-        
-        signedUpButton.layer.cornerRadius = 7.0
-        signedUpButton.clipsToBounds = true
-        signedUpButton.layer.borderWidth = 3.0
-        signedUpButton.layer.borderColor = UIColor.secondaryBackground.cgColor
-        signedUpButton.titleLabel?.textAlignment = .center
-        
-        signedUpLabel.layer.cornerRadius = 7.0
-        signedUpLabel.clipsToBounds = true
-        signedUpLabel.textAlignment = .center
+    
         
         showcaseButtonView.backgroundColor = UIColor.buttonSelected
+        
+        showcaseButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToShowcaseView(_:))))
+        notifyButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToNotifyView(_:))))
+        syllabusButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToSyllabusView(_:))))
+        descriptionButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToDescriptionView(_:))))
+        documentsButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToDocumentsView(_:))))
+        bookingButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToBookingView(_:))))
         
         if teachingDataSource.notifyList.isEmpty {
             customButtons(button: notifyButton, image: "markedBell")
         } else {
             customButtons(button: notifyButton, image: "bell")
         }
+        customButtons(button: syllabusButton, image: "description") //da cambiare img
         customButtons(button: showcaseButton, image: "showcase")
         customButtons(button: descriptionButton, image: "description")
         customButtons(button: documentsButton, image: "folder")
         customButtons(button: bookingButton, image: "booking")
-        
-        stackView.layer.addBorder(edge: UIRectEdge.top, color: UIColor.secondaryBackground, thickness: 0.7)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        
+        //Quando apre le view, se il menu' è aperto lo chiude
+        if (revealViewController().frontViewPosition != FrontViewPosition.left) {
+            revealViewController().frontViewPosition = .left
+        }
+        
+        //Definire le dimensioni dei menu
+        if revealViewController() != nil {
+            revealViewController().rearViewRevealWidth = 130//Menu sx
+            revealViewController().delegate = self
+            viewControllerList[0].view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+        }
+        
+    }
+    
+    
     
     
     
@@ -213,6 +206,9 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         case is NotifyPageViewController:
             notifyButtonView.backgroundColor = UIColor.buttonSelected
             
+        case is SyllabusPageViewController:
+            syllabusButtonView.backgroundColor = UIColor.buttonSelected
+            
         case is DescriptionPageViewController:
             descriptionButtonView.backgroundColor = UIColor.buttonSelected
             
@@ -251,7 +247,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     
     func completeTeachingDataSource(){
         //Scarica i dati dal db
-        teachingDataSource.completeDataSource(haveShowcase: nil, haveDocuments: nil, haveBooking: nil, descriptionText: nil)
+        teachingDataSource.completeDataSource(haveShowcase: true, haveSyllabus: false, haveDocuments: false, haveBooking: false, descriptionText: "ciao")
         
         teachingDataSource.addNewNotify(date: "30/10/2018", title: "Date esami", message: "Giorno 2 novembre ci sarà la prima prova scritta.")
         teachingDataSource.addNewNotify(date: "25/11/2018", title: "Lezione rimandata", message: "Si avvisano gli studenti che giorno 26 novembre non ci sarà lezione.")
@@ -261,11 +257,124 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         nameTeacherLabel.text = teachingDataSource.teacherName
     }
     
+    func setPageViewController() {
+        var i: Int
+        
+        if teachingDataSource.haveShowcase == nil || !teachingDataSource.haveShowcase {
+            showcaseButtonView.isHidden = true
+            i = 0
+            for x in viewControllerList {
+                if x is ShowcasePageViewController {
+                    viewControllerList.remove(at: i)
+                    break
+                }
+                i += 1
+            }
+        }
+        
+        if teachingDataSource.notifyList.isEmpty {
+            notifyButtonView.isHidden = true
+            i = 0
+            for x in viewControllerList {
+                if x is NotifyPageViewController {
+                    viewControllerList.remove(at: i)
+                    break
+                }
+                i += 1
+            }
+        }
+        
+        if teachingDataSource.haveSyllabus == nil || !teachingDataSource.haveSyllabus {
+            syllabusButtonView.isHidden = true
+            i = 0
+            for x in viewControllerList {
+                if x is SyllabusPageViewController {
+                    viewControllerList.remove(at: i)
+                    break
+                }
+                i += 1
+            }
+        }
+        
+        if teachingDataSource.descriptionText == nil || teachingDataSource.descriptionText.isEmpty {
+            descriptionButtonView.isHidden = true
+            i = 0
+            for x in viewControllerList {
+                if x is DescriptionPageViewController {
+                    viewControllerList.remove(at: i)
+                    break
+                }
+                i += 1
+            }
+        }
+        
+        if teachingDataSource.haveDocuments == nil || !teachingDataSource.haveDocuments {
+            documentsButtonView.isHidden = true
+            i = 0
+            for x in viewControllerList {
+                if x is DocumentsPageViewController {
+                    viewControllerList.remove(at: i)
+                    break
+                }
+                i += 1
+            }
+        }
+        
+        if teachingDataSource.haveBooking == nil || !teachingDataSource.haveBooking {
+            bookingButtonView.isHidden = true
+            i = 0
+            for x in viewControllerList {
+                if x is BookingPageViewController {
+                    viewControllerList.remove(at: i)
+                    break
+                }
+                i += 1
+            }
+        }
+        
+        switch viewControllerList.count {
+        
+        case 2:
+            for x in stackView.subviews {
+                stackView.addConstraint(x.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.5, constant: 0))
+            }
+        
+        case 3:
+            for x in stackView.subviews {
+                stackView.addConstraint(x.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 1/3, constant: 0))
+            }
+            
+        case 4:
+            for x in stackView.subviews {
+                stackView.addConstraint(x.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.25, constant: 0))
+            }
+            
+        case 5:
+            for x in stackView.subviews {
+                stackView.addConstraint(x.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.2, constant: 0))
+            }
+            
+        case 6:
+            for x in stackView.subviews {
+                stackView.addConstraint(x.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 1/6, constant: 0))
+            }
+            
+        case 7:
+            for x in stackView.subviews {
+                stackView.addConstraint(x.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 1/7, constant: 0))
+            }
+        
+        default:
+            break
+        }
+    }
+    
     
     
     func setAllButtonsViewWithClearBackgroundColor(){
         showcaseButtonView.backgroundColor = UIColor.clear
         notifyButtonView.backgroundColor = UIColor.clear
+        syllabusButtonView.backgroundColor = UIColor.clear
         descriptionButtonView.backgroundColor = UIColor.clear
         documentsButtonView.backgroundColor = UIColor.clear
         bookingButtonView.backgroundColor = UIColor.clear
@@ -278,63 +387,71 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         button.addSubview(customImageView)
     }
     
+
     
-    @objc func signedUpClicked() {
-        if rightMenuView.isHidden {
-            reloadSignedUpView()
-            rightMenuView.isHidden = false
-        } else {
-            rightMenuView.isHidden = true
+    
+    @objc func sendToShowcaseView(_ sender: UIButton) {
+        var i = 0
+        for x in viewControllerList {
+            if x is ShowcasePageViewController { break }
+            i += 1
         }
-    }
-    
-    @IBAction func signedUpButtonClicked(_ sender: UIButton) {
-        if teachingDataSource.signedUp {
-            teachingDataSource.signedUp = false
-            reloadSignedUpView()
-        } else {
-            teachingDataSource.signedUp = true
-            reloadSignedUpView()
-        }
-    }
-    
-    func reloadSignedUpView() {
-        if teachingDataSource.signedUp {
-            signedUpLabel.text = "Sei iscritto."
-            signedUpButton.titleLabel?.text = "Disiscriviti"
-        } else {
-            signedUpLabel.text = "Non risulti iscritto."
-            signedUpButton.titleLabel?.text = "Iscriviti"
-        }
-    }
-    
-    
-    @IBAction func sendToShowcaseView(_ sender: UIButton) {
-        pageViewController.setViewControllers([viewControllerList[0]], direction: .forward, animated: false, completion: nil)
+        pageViewController.setViewControllers([viewControllerList[i]], direction: .forward, animated: false, completion: nil)
         setAllButtonsViewWithClearBackgroundColor()
         showcaseButtonView.backgroundColor = UIColor.buttonSelected
     }
     
-    @IBAction func sendToNotifyView(_ sender: UIButton) {
-        pageViewController.setViewControllers([viewControllerList[1]], direction: .forward, animated: false, completion: nil)
+    @objc func sendToNotifyView(_ sender: UIButton) {
+        var i = 0
+        for x in viewControllerList {
+            if x is NotifyPageViewController { break }
+            i += 1
+        }
+        pageViewController.setViewControllers([viewControllerList[i]], direction: .forward, animated: false, completion: nil)
         setAllButtonsViewWithClearBackgroundColor()
         notifyButtonView.backgroundColor = UIColor.buttonSelected
     }
     
-    @IBAction func sendToDescriptionView(_ sender: UIButton) {
-        pageViewController.setViewControllers([viewControllerList[2]], direction: .forward, animated: false, completion: nil)
+    @objc func sendToSyllabusView(_ sender: UIButton) {
+        var i = 0
+        for x in viewControllerList {
+            if x is SyllabusPageViewController { break }
+            i += 1
+        }
+        pageViewController.setViewControllers([viewControllerList[i]], direction: .forward, animated: false, completion: nil)
+        setAllButtonsViewWithClearBackgroundColor()
+        syllabusButtonView.backgroundColor = UIColor.buttonSelected
+    }
+    
+    @objc func sendToDescriptionView(_ sender: UIButton) {
+        var i = 0
+        for x in viewControllerList {
+            if x is DescriptionPageViewController { break }
+            i += 1
+        }
+        pageViewController.setViewControllers([viewControllerList[i]], direction: .forward, animated: false, completion: nil)
         setAllButtonsViewWithClearBackgroundColor()
         descriptionButtonView.backgroundColor = UIColor.buttonSelected
     }
     
-    @IBAction func sendToDocumentsView(_ sender: UIButton) {
-        pageViewController.setViewControllers([viewControllerList[3]], direction: .forward, animated: false, completion: nil)
+    @objc func sendToDocumentsView(_ sender: UIButton) {
+        var i = 0
+        for x in viewControllerList {
+            if x is DocumentsPageViewController { break }
+            i += 1
+        }
+        pageViewController.setViewControllers([viewControllerList[i]], direction: .forward, animated: false, completion: nil)
         setAllButtonsViewWithClearBackgroundColor()
         documentsButtonView.backgroundColor = UIColor.buttonSelected
     }
     
-    @IBAction func sendToBookingView(_ sender: UIButton) {
-        pageViewController.setViewControllers([viewControllerList[4]], direction: .forward, animated: false, completion: nil)
+    @objc func sendToBookingView(_ sender: UIButton) {
+        var i = 0
+        for x in viewControllerList {
+            if x is BookingPageViewController { break }
+            i += 1
+        }
+        pageViewController.setViewControllers([viewControllerList[i]], direction: .forward, animated: false, completion: nil)
         setAllButtonsViewWithClearBackgroundColor()
         bookingButtonView.backgroundColor = UIColor.buttonSelected
     }
