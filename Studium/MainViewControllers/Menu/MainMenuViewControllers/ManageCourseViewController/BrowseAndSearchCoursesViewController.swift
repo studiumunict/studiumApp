@@ -546,7 +546,7 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
         self.signUpView = UIView.init(frame: newFrame)
         self.signUpView.center = CGPoint(x: cellFrame.origin.x + cellFrame.width/2  , y: cellFrame.origin.y + cellFrame.height/2 )
         self.view.addSubview(signUpView)
-        self.signUpView.backgroundColor = UIColor.tableSectionColor
+        self.signUpView.backgroundColor = UIColor.primaryBackground
         self.signUpView.layer.borderColor = UIColor.secondaryBackground.cgColor
         self.signUpView.layer.borderWidth = 1.0
         self.signUpView.layer.cornerRadius = 5.0
@@ -578,7 +578,17 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
         cancelButton.accessibilityElements?.append(indexPath)
         signUpButton.layer.cornerRadius = 5.0
         cancelButton.layer.cornerRadius = 5.0
-        
+       
+        //signUpButton.layer.addBorder(edge: .left, color: UIColor.lightGray, thickness: 0.5)
+        cancelButton.layer.addBorder(edge: .right, color: #colorLiteral(red: 0.9961728454, green: 0.9902502894, blue: 1, alpha: 1), thickness: 0.5)
+       /* signUpButton.layer.addBorder(edge: .top, color: UIColor.secondaryBackground, thickness: 2.0)
+        signUpButton.layer.addBorder(edge: .bottom, color: UIColor.secondaryBackground, thickness: 2.0)
+        cancelButton.layer.addBorder(edge: .left, color: UIColor.secondaryBackground, thickness: 2.0)
+        cancelButton.layer.addBorder(edge: .top, color: UIColor.secondaryBackground, thickness: 2.0)
+        cancelButton.layer.addBorder(edge: .bottom, color: UIColor.secondaryBackground, thickness: 2.0)
+ */
+        roundRightRadius(radius: 5.0, view: signUpButton)
+        roundLeftRadius(radius: 5.0, view: cancelButton)
         
         signUpView.addSubview(signUpButton)
         signUpView.addSubview(cancelButton)
@@ -603,6 +613,37 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
         
         
     }
+    
+    func roundCorners(corners:UIRectCorner, radius:CGFloat, view : UIView) {
+        let bounds = view.bounds
+        
+        let maskPath = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        
+        let maskLayer = CAShapeLayer()
+        maskLayer.frame = bounds
+        maskLayer.path = maskPath.cgPath
+        
+        view.layer.mask = maskLayer
+        
+        let frameLayer = CAShapeLayer()
+        frameLayer.frame = bounds
+        frameLayer.path = maskPath.cgPath
+        frameLayer.strokeColor = UIColor.secondaryBackground.cgColor
+        frameLayer.lineWidth = 3.0
+        frameLayer.fillColor = nil
+        
+        view.layer.addSublayer(frameLayer)
+    }
+    
+    
+    func roundLeftRadius(radius:CGFloat, view : UIView) {
+        self.roundCorners(corners: [UIRectCorner.topLeft, UIRectCorner.bottomLeft], radius:radius, view: view)
+    }
+    
+    func roundRightRadius(radius:CGFloat, view : UIView) {
+        self.roundCorners(corners: [UIRectCorner.topRight, UIRectCorner.bottomRight], radius:radius, view: view)
+    }
+    
     @objc func hideSignUpViewAnimated(button: UIButton){
         let indexPath = button.accessibilityElements![0] as! IndexPath
         var cellFrame = self.cdlTableView.rectForRow(at: indexPath)
