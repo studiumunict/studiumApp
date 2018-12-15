@@ -553,13 +553,13 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
         self.signUpView.transform = CGAffineTransform(scaleX: 1, y: 0.01)
         self.signUpView.alpha = 0.0
        
-        let teachingNameLabel = UILabel.init(frame: CGRect(x: 10, y: 10, width: signUpView.frame.size.width - 20, height: 20))
+        let teachingNameLabel = UILabel.init(frame: CGRect(x: 10, y: 20, width: signUpView.frame.size.width - 20, height: 20))
         teachingNameLabel.text = teachingName
         teachingNameLabel.textColor = UIColor.lightWhite
         teachingNameLabel.font = UIFont.boldSystemFont(ofSize: 15)
         teachingNameLabel.textAlignment = .center
         teachingNameLabel.alpha = 0.0
-        let teacherNameLabel = UILabel.init(frame: CGRect(x: 10 , y: 35, width: signUpView.frame.size.width - 20, height: 20))
+        let teacherNameLabel = UILabel.init(frame: CGRect(x: 10 , y: 45, width: signUpView.frame.size.width - 20, height: 20))
         teacherNameLabel.text = teacherName
         teacherNameLabel.textColor = UIColor.lightGray
         teacherNameLabel.font = UIFont.boldSystemFont(ofSize: 13)
