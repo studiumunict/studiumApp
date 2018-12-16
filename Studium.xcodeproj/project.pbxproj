@@ -231,7 +231,6 @@
 			children = (
 				9CFE9DAA21A8BC6B0030AE33 /* HomeViewController.swift */,
 				9C06A22621AB6BC500E695DB /* DepartmentTableViewCell.swift */,
-				9CFE72C021B9508E001EB697 /* CDLTableViewCell.swift */,
 			);
 			path = HomeViewController;
 			sourceTree = "<group>";
@@ -248,12 +247,13 @@
 			path = CustomClasses;
 			sourceTree = "<group>";
 		};
-		9C06CA8421C67AB300FA09DB /* ManageAndViewCourses */ = {
+		9C07EF3721C6ED4D00C4836B /* sharedResources */ = {
 			isa = PBXGroup;
 			children = (
 				9C06CA8521C67ACF00FA09DB /* staticArrayCourses.swift */,
+				9CFE72C021B9508E001EB697 /* CDLTableViewCell.swift */,
 			);
-			path = ManageAndViewCourses;
+			path = sharedResources;
 			sourceTree = "<group>";
 		};
 		9C0E501921C3F7AA0055C4DD /* ManageCourseViewController */ = {
@@ -345,6 +345,7 @@
 		9CFE9DA621A8BBD10030AE33 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				9C07EF3721C6ED4D00C4836B /* sharedResources */,
 				9CFE9DA721A8BBEE0030AE33 /* MenuTableViewController.swift */,
 				9CFE9DA921A8BC260030AE33 /* MainMenuViewControllers */,
 			);
@@ -354,7 +355,6 @@
 		9CFE9DA921A8BC260030AE33 /* MainMenuViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				9C06CA8421C67AB300FA09DB /* ManageAndViewCourses */,
 				9C0E501921C3F7AA0055C4DD /* ManageCourseViewController */,
 				9C06A22521AB6B8A00E695DB /* HomeViewController */,
 				9CFEB89B21BAA5AA0045FB54 /* DocumentsViewController */,
