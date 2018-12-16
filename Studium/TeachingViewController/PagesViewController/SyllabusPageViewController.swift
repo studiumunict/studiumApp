@@ -9,13 +9,17 @@
 import UIKit
 import WebKit
 
-class SyllabusPageViewController: UIViewController, UIWebViewDelegate {
+class SyllabusPageViewController: UIViewController, WKNavigationDelegate  {
 
     @IBOutlet var errorMessageLabel: UILabel!
     @IBOutlet var webView: WKWebView!
     @IBOutlet var progressBar: UIProgressView!
+    @IBOutlet var viewAppoggio: UIView!
+    @IBOutlet var backButton: UIButton!
+    @IBOutlet var forwardButton: UIButton!
     
     var syllabusCode: String!
+    var url: URL!
     
     
     override func viewDidLoad() {
@@ -25,8 +29,16 @@ class SyllabusPageViewController: UIViewController, UIWebViewDelegate {
         self.view.layer.borderColor = UIColor.primaryBackground.cgColor
         self.view.layer.borderWidth = 0.5
         
+        viewAppoggio.backgroundColor = UIColor.lightWhite
+        viewAppoggio.layer.borderWidth = 0.4
+        viewAppoggio.layer.borderColor = UIColor.primaryBackground.cgColor
+        
+        customButtons(button: backButton, image: "arrow", rotazione: (.pi)/2)
+        customButtons(button: forwardButton, image: "arrow", rotazione: 3*(.pi)/2)
+        
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
-         
+        
+        
         if syllabusCode != nil {
             if syllabusCode!.last == "/"  {
                 syllabusCode!.removeLast()
@@ -38,6 +50,29 @@ class SyllabusPageViewController: UIViewController, UIWebViewDelegate {
     
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if url != nil {
+            webView.load(URLRequest(url: url!))
+        }
+    }
+    
+    
+    
+    func customButtons(button: UIButton!, image: String!, rotazione: CGFloat!){
+        let customImageView = UIImageView(frame: CGRect(x: button.frame.size.width/2 - 16, y: button.frame.size.height/2 - 10, width: 22, height: 22))
+        customImageView.image = UIImage(named: image!)?.withRenderingMode(.alwaysTemplate)
+        customImageView.tintColor = UIColor.navigationBarColor
+        customImageView.transform = CGAffineTransform(rotationAngle: rotazione)
+        
+        button.addSubview(customImageView)
+    }
+    
+    
+    
+    // MARK: WebView
+    
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
             progressBar.isHidden = webView.estimatedProgress == 1
@@ -46,7 +81,41 @@ class SyllabusPageViewController: UIViewController, UIWebViewDelegate {
     }
     
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
-        print("\n\n [Error webView]:\n", error.localizedDescription)
+        print("\n\n didFailLoadWithError, error: ", error.localizedDescription)
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print("\n\n didFinish")
+    }
+    
+    func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+        print("\n\n webViewWebContentProcessDidTerminate")
+    }
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        print("\n\n didfail, error: ", error.localizedDescription )
+    }
+    
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        print("\n\n didFailProvisionalNavigation, error: ", error.localizedDescription)
+    }
+    
+    
+    
+    
+    
+    
+    
+    @IBAction func backButtonPressed(_ sender: UIButton) {
+        if webView.canGoBack {
+            webView.goBack()
+        }
+    }
+    
+    @IBAction func forwardButtonPressed(_ sender: UIButton) {
+        if webView.canGoForward {
+            webView.goForward()
+        }
     }
     
 }

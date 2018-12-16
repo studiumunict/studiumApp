@@ -33,7 +33,8 @@ class NotifyCell: UITableViewCell {
     override func awakeFromNib() {
         selectionStyle = .none
         
-        carret.image = UIImage(named: "arrow");
+        carret.image = UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate);
+        carret.tintColor = UIColor.navigationBarColor
         
         self.contentView.backgroundColor = UIColor.clear
         headerView.backgroundColor = #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)

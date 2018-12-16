@@ -1682,8 +1682,41 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="okJ-Bp-rgs">
+                                <rect key="frame" x="0.0" y="492" width="375" height="45"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="46t-98-q21">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q9s-ma-YS2">
+                                                <rect key="frame" x="0.0" y="0.0" width="125" height="45"/>
+                                                <connections>
+                                                    <action selector="backButtonPressed:" destination="YT5-uD-UXr" eventType="touchUpInside" id="UTf-OW-u8D"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYc-i3-UKp">
+                                                <rect key="frame" x="125" y="0.0" width="125" height="45"/>
+                                                <connections>
+                                                    <action selector="forwardButtonPressed:" destination="YT5-uD-UXr" eventType="touchUpInside" id="UTH-HR-OX4"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhL-a4-i0r">
+                                                <rect key="frame" x="250" y="0.0" width="125" height="45"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="46t-98-q21" firstAttribute="centerY" secondItem="okJ-Bp-rgs" secondAttribute="centerY" id="43c-7q-PXD"/>
+                                    <constraint firstItem="46t-98-q21" firstAttribute="centerX" secondItem="okJ-Bp-rgs" secondAttribute="centerX" id="Uh7-ng-vHl"/>
+                                    <constraint firstItem="46t-98-q21" firstAttribute="height" secondItem="okJ-Bp-rgs" secondAttribute="height" id="fem-2G-qya"/>
+                                    <constraint firstItem="46t-98-q21" firstAttribute="width" secondItem="okJ-Bp-rgs" secondAttribute="width" id="n6G-ak-kXj"/>
+                                    <constraint firstAttribute="height" constant="45" id="pME-LU-CwF"/>
+                                </constraints>
+                            </view>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6jc-di-3fE">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="537"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="492"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -1696,23 +1729,29 @@
                         </subviews>
                         <color key="backgroundColor" red="0.96879995200000002" green="0.96879995200000002" blue="0.96879995200000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="okJ-Bp-rgs" firstAttribute="centerX" secondItem="oBu-yD-0BU" secondAttribute="centerX" id="2BD-DJ-vYv"/>
+                            <constraint firstItem="6jc-di-3fE" firstAttribute="top" secondItem="wXl-kE-zUG" secondAttribute="top" id="8ZJ-6v-GsO"/>
+                            <constraint firstItem="oBu-yD-0BU" firstAttribute="bottom" secondItem="okJ-Bp-rgs" secondAttribute="bottom" id="8tf-WS-Lxj"/>
                             <constraint firstItem="KYy-id-kFe" firstAttribute="top" secondItem="oBu-yD-0BU" secondAttribute="top" id="GjT-1Q-8UC"/>
-                            <constraint firstItem="6jc-di-3fE" firstAttribute="bottom" secondItem="oBu-yD-0BU" secondAttribute="bottom" id="LXr-np-Sp3"/>
                             <constraint firstItem="KYy-id-kFe" firstAttribute="leading" secondItem="wXl-kE-zUG" secondAttribute="leading" id="RAx-VU-LU5"/>
-                            <constraint firstItem="6jc-di-3fE" firstAttribute="leading" secondItem="oBu-yD-0BU" secondAttribute="leading" id="ZcP-un-bU1"/>
-                            <constraint firstItem="6jc-di-3fE" firstAttribute="trailing" secondItem="oBu-yD-0BU" secondAttribute="trailing" id="bYF-WU-bXG"/>
+                            <constraint firstItem="okJ-Bp-rgs" firstAttribute="top" secondItem="6jc-di-3fE" secondAttribute="bottom" id="Xwq-XS-QLx"/>
                             <constraint firstItem="Q0E-RA-CCm" firstAttribute="width" secondItem="wXl-kE-zUG" secondAttribute="width" id="f4w-cN-bmz"/>
                             <constraint firstItem="Q0E-RA-CCm" firstAttribute="top" secondItem="oBu-yD-0BU" secondAttribute="top" constant="98" id="g7C-lU-hFa"/>
                             <constraint firstItem="Q0E-RA-CCm" firstAttribute="centerX" secondItem="oBu-yD-0BU" secondAttribute="centerX" id="lyw-CP-0bQ"/>
+                            <constraint firstItem="6jc-di-3fE" firstAttribute="leading" secondItem="oBu-yD-0BU" secondAttribute="leading" id="pTj-18-ZxH"/>
+                            <constraint firstItem="6jc-di-3fE" firstAttribute="trailing" secondItem="oBu-yD-0BU" secondAttribute="trailing" id="rfl-F9-RVy"/>
+                            <constraint firstItem="okJ-Bp-rgs" firstAttribute="width" secondItem="wXl-kE-zUG" secondAttribute="width" id="rnk-0U-rgl"/>
                             <constraint firstAttribute="trailing" secondItem="KYy-id-kFe" secondAttribute="trailing" id="tZG-RT-fXF"/>
-                            <constraint firstItem="6jc-di-3fE" firstAttribute="top" secondItem="wXl-kE-zUG" secondAttribute="top" id="wwf-Vc-Jd9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oBu-yD-0BU"/>
                     </view>
                     <size key="freeformSize" width="375" height="537"/>
                     <connections>
+                        <outlet property="backButton" destination="Q9s-ma-YS2" id="DbX-Tm-8LJ"/>
                         <outlet property="errorMessageLabel" destination="Q0E-RA-CCm" id="r0S-Dx-ura"/>
+                        <outlet property="forwardButton" destination="MYc-i3-UKp" id="fI6-Yt-8xd"/>
                         <outlet property="progressBar" destination="KYy-id-kFe" id="bba-Cg-vcd"/>
+                        <outlet property="viewAppoggio" destination="okJ-Bp-rgs" id="5Fy-z8-cGl"/>
                         <outlet property="webView" destination="6jc-di-3fE" id="6QQ-NJ-fKJ"/>
                     </connections>
                 </viewController>

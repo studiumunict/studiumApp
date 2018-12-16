@@ -86,7 +86,6 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             viewControllerList[0].view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         
-        
         viewAppoggio.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height - (stackView.frame.height + courseNameLabel.frame.height + nameTeacherLabel.frame.height)) //definisco le dimensioni reali e di autolayout per la scrollView
         
         pageViewController.dataSource = self
@@ -105,24 +104,6 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     
         
         showcaseButtonView.backgroundColor = UIColor.buttonSelected
-        
-        showcaseButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToShowcaseView(_:))))
-        notifyButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToNotifyView(_:))))
-        syllabusButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToSyllabusView(_:))))
-        descriptionButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToDescriptionView(_:))))
-        documentsButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToDocumentsView(_:))))
-        bookingButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToBookingView(_:))))
-        
-        if teachingDataSource.notifyList.isEmpty {
-            customButtons(button: notifyButton, image: "markedBell")
-        } else {
-            customButtons(button: notifyButton, image: "bell")
-        }
-        customButtons(button: syllabusButton, image: "description") //da cambiare img
-        customButtons(button: showcaseButton, image: "showcase")
-        customButtons(button: descriptionButton, image: "description")
-        customButtons(button: documentsButton, image: "folder")
-        customButtons(button: bookingButton, image: "booking")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -273,6 +254,9 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
                 }
                 i += 1
             }
+        } else {
+            showcaseButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToShowcaseView(_:))))
+            customButtons(button: showcaseButton, image: "showcase", action: #selector(self.sendToShowcaseView(_:)))
         }
         
         if teachingDataSource.notifyList.isEmpty {
@@ -284,6 +268,13 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
                     break
                 }
                 i += 1
+            }
+        } else {
+            notifyButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToNotifyView(_:))))
+            if teachingDataSource.notifyList.isEmpty {
+                customButtons(button: notifyButton, image: "markedBell", action: #selector(self.sendToNotifyView(_:)))
+            } else {
+                customButtons(button: notifyButton, image: "bell", action: #selector(self.sendToNotifyView(_:)))
             }
         }
         
@@ -297,6 +288,9 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
                 }
                 i += 1
             }
+        } else {
+            syllabusButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToSyllabusView(_:))))
+            customButtons(button: syllabusButton, image: "description", action: #selector(self.sendToSyllabusView(_:)))
         }
         
         if teachingDataSource.descriptionText == nil || teachingDataSource.descriptionText.isEmpty {
@@ -309,6 +303,9 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
                 }
                 i += 1
             }
+        } else {
+            descriptionButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToDescriptionView(_:))))
+            customButtons(button: descriptionButton, image: "description", action: #selector(self.sendToDescriptionView(_:)))
         }
         
         if teachingDataSource.haveDocuments == nil || !teachingDataSource.haveDocuments {
@@ -321,6 +318,9 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
                 }
                 i += 1
             }
+        } else {
+            documentsButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToDocumentsView(_:))))
+            customButtons(button: documentsButton, image: "folder", action: #selector(self.sendToDocumentsView(_:)))
         }
         
         if teachingDataSource.haveBooking == nil || !teachingDataSource.haveBooking {
@@ -333,10 +333,13 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
                 }
                 i += 1
             }
+        } else {
+            bookingButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToBookingView(_:))))
+            customButtons(button: bookingButton, image: "booking", action: #selector(self.sendToBookingView(_:)))
         }
         
-        switch viewControllerList.count {
         
+        switch viewControllerList.count {
         case 2:
             for x in stackView.subviews {
                 stackView.addConstraint(x.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.5, constant: 0))
@@ -384,10 +387,11 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     }
     
     
-    func customButtons(button: UIButton!, image: String!){
+    func customButtons(button: UIButton!, image: String!, action: Selector?){
         let customImageView = UIImageView(frame: CGRect(x: button.frame.size.width/2 - 16, y: button.frame.size.height/2 - 15, width: 32, height: 30))
         customImageView.image = UIImage(named: image!)
         button.addSubview(customImageView)
+        button.addTarget(self, action: action!, for: UIControl.Event.touchUpInside)
     }
     
 
