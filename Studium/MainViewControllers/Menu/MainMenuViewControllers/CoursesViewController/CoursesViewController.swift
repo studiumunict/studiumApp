@@ -16,7 +16,7 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
     
     @IBOutlet weak var teachingsTableView: UITableView!
     
-   
+   // da aggiungere un header view alla table per dare spazio
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,8 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
         let buttonView = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
         buttonView.addSubview(imageView)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: buttonView)
-        
+        self.teachingsTableView.backgroundColor = UIColor.lightWhite
+        self.view.backgroundColor = UIColor.lightWhite
         
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 130//Menu sx/
@@ -58,11 +59,11 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
     
     func reloadSourceFromAPI(){
         
-        courseSharedDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "INFORMATICA L-31", courseCode: 31), teachingArray:
+        courseSharedDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "Materie date", courseCode: 31), teachingArray:
             [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)]))
         
         
-        courseSharedDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "MATEMATICA L-27", courseCode: 27), teachingArray: [Teaching.init(teachingName: "Elementi di Analisi matematica 1", teachingCode: 8675, teacherName: "Ornella Naselli", signedUp: false),Teaching.init(teachingName: "Algebra 1", teachingCode: 8760, teacherName: "Andrea Scapellato", signedUp: false)]))
+        courseSharedDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "Materie da dare", courseCode: 27), teachingArray: [Teaching.init(teachingName: "Elementi di Analisi matematica 1", teachingCode: 8675, teacherName: "Ornella Naselli", signedUp: false),Teaching.init(teachingName: "Algebra 1", teachingCode: 8760, teacherName: "Andrea Scapellato", signedUp: false)]))
         teachingsTableView.reloadData()
         
     }
@@ -124,7 +125,7 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
             }
             button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
             button.setTitleColor(UIColor.primaryBackground, for: .normal)
-            button.backgroundColor = UIColor.lightGray
+            button.backgroundColor = UIColor.lightSectionColor
             button.tag = section
             button.addTarget(self, action: #selector(self.removeOrExpandRows), for: .touchUpInside)
             
