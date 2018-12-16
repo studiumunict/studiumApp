@@ -22,6 +22,14 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate {
     var isLoaded: Bool = false
     var url: URL!
     
+    let reachability = Reachability()!
+    
+    
+    deinit {
+        reachability.stopNotifier()
+        NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,11 +62,25 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate {
         
     }
     
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super .viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        if !CheckInternet.isConnected() {
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+        do{
+            try reachability.startNotifier()
+        } catch {
+            print("could not start reachability notifier")
+        }
+        
+    }
+    
+    
+    
+    
+    @objc func reachabilityChanged(note: Notification) {
+        let reachability = note.object as! Reachability
+        
+        if reachability.connection == .none {
             if isLoaded {
                 webView.isHidden = false
                 viewAppoggio.isHidden = false
@@ -69,7 +91,7 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate {
                 errorMessageLabel.isHidden = false
                 errorMessageLabel.text = "La connessione ad Internet sembra essere offline."
             }
-            
+        
         } else {
             webView.isHidden = false
             viewAppoggio.isHidden = false
@@ -88,8 +110,7 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate {
         
     }
     
-    
-    
+
     private func customButtons(button: UIButton!, image: String!, rotazione: CGFloat!){
         let customImageView = UIImageView(frame: CGRect(x: button.frame.size.width/2 - 16, y: button.frame.size.height/2 - 10, width: 22, height: 22))
         customImageView.image = UIImage(named: image!)?.withRenderingMode(.alwaysTemplate)
@@ -104,6 +125,11 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate {
         button.isEnabled = flag
         button.alpha = flag == true ? 1 : 0.3
     }
+    
+    
+    
+    
+    
     
     
     // MARK: WebView
