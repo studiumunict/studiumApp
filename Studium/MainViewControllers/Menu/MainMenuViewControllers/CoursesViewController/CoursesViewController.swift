@@ -123,8 +123,8 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
                 rotateArrows180Degrees(button: button,animated: false)
             }
             button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-            button.setTitleColor(UIColor.lightWhite, for: .normal)
-            button.backgroundColor = UIColor.tableSectionColor
+            button.setTitleColor(UIColor.primaryBackground, for: .normal)
+            button.backgroundColor = UIColor.lightGray
             button.tag = section
             button.addTarget(self, action: #selector(self.removeOrExpandRows), for: .touchUpInside)
             

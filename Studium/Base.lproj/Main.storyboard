@@ -628,14 +628,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2nJ-AK-pH4">
-                                <rect key="frame" x="0.0" y="32" width="375" height="667"/>
+                                <rect key="frame" x="9.5" y="32" width="356" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="teachingCell" rowHeight="100" id="0c5-jT-CID" customClass="CDLTableViewCell" customModule="Studium" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                        <rect key="frame" x="0.0" y="28" width="356" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0c5-jT-CID" id="Eap-JJ-51d">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="356" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x5i-8Q-xAK">
@@ -644,7 +644,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="BAR-vX-VpX"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <color key="textColor" red="0.96879995200000002" green="0.96879995200000002" blue="0.96879995200000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="textColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_empty" translatesAutoresizingMaskIntoConstraints="NO" id="DkG-5a-1cS">
@@ -661,7 +661,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="raV-En-PvP"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
-                                                    <color key="textColor" red="0.91044991779999995" green="0.91044991779999995" blue="0.91044991779999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="textColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hTz-Ln-GJL">
@@ -671,7 +671,7 @@
                                                         <constraint firstAttribute="height" constant="21" id="aYc-g3-mwQ"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" red="0.91044991779999995" green="0.91044991779999995" blue="0.91044991779999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="textColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -700,7 +700,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="2nJ-AK-pH4" firstAttribute="centerX" secondItem="5Pz-Rb-gXw" secondAttribute="centerX" id="8q1-nv-sz7"/>
-                            <constraint firstItem="2nJ-AK-pH4" firstAttribute="width" secondItem="sjA-UN-im6" secondAttribute="width" id="HN5-cS-koa"/>
+                            <constraint firstItem="2nJ-AK-pH4" firstAttribute="width" secondItem="sjA-UN-im6" secondAttribute="width" multiplier="0.95" id="HN5-cS-koa"/>
                             <constraint firstItem="2nJ-AK-pH4" firstAttribute="height" secondItem="sjA-UN-im6" secondAttribute="height" id="SI6-7s-eGH"/>
                             <constraint firstItem="2nJ-AK-pH4" firstAttribute="centerY" secondItem="5Pz-Rb-gXw" secondAttribute="centerY" id="fIm-l8-Q30"/>
                         </constraints>
