@@ -15,6 +15,7 @@
 		139BCB6821BDE034005A750A /* DescriptionPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139BCB6721BDE034005A750A /* DescriptionPageViewController.swift */; };
 		139BCB6A21BDE057005A750A /* DocumentsPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139BCB6921BDE057005A750A /* DocumentsPagesViewController.swift */; };
 		139BCB6C21BDE0AF005A750A /* BookingPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139BCB6B21BDE0AF005A750A /* BookingPagesViewController.swift */; };
+		13A7D28321C6BE3A00F42193 /* CheckInternet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A7D28221C6BE3A00F42193 /* CheckInternet.swift */; };
 		13D86DDB21B9A3BF007638FD /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D86DDA21B9A3BF007638FD /* ExtensionUIColor.swift */; };
 		13E3A34721C140A6004BE8D8 /* NotifyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E3A34621C140A6004BE8D8 /* NotifyCell.swift */; };
 		13E3A34A21C1416E004BE8D8 /* NotifyTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E3A34921C1416E004BE8D8 /* NotifyTableDataSource.swift */; };
@@ -74,6 +75,7 @@
 		139BCB6721BDE034005A750A /* DescriptionPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionPageViewController.swift; sourceTree = "<group>"; };
 		139BCB6921BDE057005A750A /* DocumentsPagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsPagesViewController.swift; sourceTree = "<group>"; };
 		139BCB6B21BDE0AF005A750A /* BookingPagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingPagesViewController.swift; sourceTree = "<group>"; };
+		13A7D28221C6BE3A00F42193 /* CheckInternet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInternet.swift; sourceTree = "<group>"; };
 		13D86DDA21B9A3BF007638FD /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
 		13E3A34621C140A6004BE8D8 /* NotifyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyCell.swift; sourceTree = "<group>"; };
 		13E3A34921C1416E004BE8D8 /* NotifyTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyTableDataSource.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				9C06A22B21AB707500E695DB /* CDLClass.swift */,
 				9CFE72C221B95206001EB697 /* TeachingClass.swift */,
 				9CFE72C421B95331001EB697 /* HomeTableSectionClass.swift */,
+				13A7D28221C6BE3A00F42193 /* CheckInternet.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				13E3A34721C140A6004BE8D8 /* NotifyCell.swift in Sources */,
 				1311D89B21BBE82E00A09499 /* StudentClass.swift in Sources */,
 				9CFE72C521B95331001EB697 /* HomeTableSectionClass.swift in Sources */,
+				13A7D28321C6BE3A00F42193 /* CheckInternet.swift in Sources */,
 				9CFE9D7B21A8ADBC0030AE33 /* Studium.xcdatamodeld in Sources */,
 				9CFE9DAF21A8BC8F0030AE33 /* ProfileViewController.swift in Sources */,
 				9CFE72C321B95206001EB697 /* TeachingClass.swift in Sources */,

@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class SyllabusPageViewController: UIViewController, WKNavigationDelegate  {
+class SyllabusPageViewController: UIViewController, WKNavigationDelegate {
 
     @IBOutlet var errorMessageLabel: UILabel!
     @IBOutlet var webView: WKWebView!
@@ -19,8 +19,8 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate  {
     @IBOutlet var forwardButton: UIButton!
     
     var syllabusCode: String!
+    var isLoaded: Bool = false
     var url: URL!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +36,12 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate  {
         customButtons(button: backButton, image: "arrow", rotazione: (.pi)/2)
         customButtons(button: forwardButton, image: "arrow", rotazione: 3*(.pi)/2)
         
-        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
+        webView.navigationDelegate = self
+        
+        let webViewKeyPathsToObserve = ["loading", "estimatedProgress"]
+        for keyPath in webViewKeyPathsToObserve {
+            webView.addObserver(self, forKeyPath: keyPath, options: .new, context: nil)
+        }
         
         
         if syllabusCode != nil {
@@ -47,20 +52,45 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate  {
             webView.load(URLRequest(url: URL(string: "https://syllabus.unict.it/insegnamento.php?mod=" + syllabusCode!)!))
         }
         
-    
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super .viewDidAppear(animated)
         
-        if url != nil {
-            webView.load(URLRequest(url: url!))
+        if !CheckInternet.isConnected() {
+            if isLoaded {
+                webView.isHidden = false
+                viewAppoggio.isHidden = false
+                errorMessageLabel.isHidden = true
+            } else {
+                webView.isHidden = true
+                viewAppoggio.isHidden = true
+                errorMessageLabel.isHidden = false
+                errorMessageLabel.text = "La connessione ad Internet sembra essere offline."
+            }
+            
+        } else {
+            webView.isHidden = false
+            viewAppoggio.isHidden = false
+            errorMessageLabel.isHidden = true
+            
+            if !isLoaded {
+                if syllabusCode != nil {
+                    if syllabusCode!.last == "/"  {
+                        syllabusCode!.removeLast()
+                    }
+                    
+                    webView.load(URLRequest(url: URL(string: "https://syllabus.unict.it/insegnamento.php?mod=" + syllabusCode!)!))
+                }
+            }
         }
+        
     }
     
     
     
-    func customButtons(button: UIButton!, image: String!, rotazione: CGFloat!){
+    private func customButtons(button: UIButton!, image: String!, rotazione: CGFloat!){
         let customImageView = UIImageView(frame: CGRect(x: button.frame.size.width/2 - 16, y: button.frame.size.height/2 - 10, width: 22, height: 22))
         customImageView.image = UIImage(named: image!)?.withRenderingMode(.alwaysTemplate)
         customImageView.tintColor = UIColor.navigationBarColor
@@ -70,13 +100,26 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate  {
     }
     
     
+    private func setBackForwardButton(button: UIButton, flag: Bool) {
+        button.isEnabled = flag
+        button.alpha = flag == true ? 1 : 0.3
+    }
+    
     
     // MARK: WebView
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "estimatedProgress" {
+        switch keyPath {
+        case "estimatedProgress":
             progressBar.isHidden = webView.estimatedProgress == 1
             progressBar.setProgress(Float(webView.estimatedProgress), animated: true)
+        
+        case "loading":
+            setBackForwardButton(button: backButton, flag: webView.canGoBack)
+            setBackForwardButton(button: forwardButton, flag: webView.canGoForward)
+            
+        default:
+            break
         }
     }
     
@@ -86,6 +129,8 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate  {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("\n\n didFinish")
+        isLoaded = true
+        url = self.webView.url
     }
     
     func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
@@ -104,18 +149,14 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate  {
     
     
     
-    
-    
     @IBAction func backButtonPressed(_ sender: UIButton) {
-        if webView.canGoBack {
-            webView.goBack()
-        }
+        print("backButton Pressed")
+        webView.goBack()
     }
     
     @IBAction func forwardButtonPressed(_ sender: UIButton) {
-        if webView.canGoForward {
-            webView.goForward()
-        }
+        print("forwardButton Pressed")
+        webView.goForward()
     }
     
 }
