@@ -12,6 +12,7 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
     deinit{
         print("home deinit")
     }
+    var tabController : ManageCoursePageViewController!
     @IBOutlet weak var cdsSearchBar: UISearchBar!
     @IBOutlet weak var cdlTableView: UITableView!
     @IBOutlet weak var departmentsTableView: UITableView!
@@ -25,8 +26,11 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
     var signUpView : UIView!
     // var selectedDepartment : Department! // in base a questa var cambia il contenuto della tabella CoursesTable
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+       
+        
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 130 //Menu sx
@@ -69,8 +73,8 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
         imageView2.image = UIImage.init(named: "search")
         let buttonView2 = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 27.5))
         buttonView2.addSubview(imageView2)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: buttonView2)
-        self.navigationItem.rightBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.searchingClicked)))
+        self.tabController.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: buttonView2)
+        self.tabController.navigationItem.rightBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.searchingClicked)))
         
     }
     func setCancelIconOnSearchButton(){
@@ -78,8 +82,8 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
         imageView2.image = UIImage.init(named: "close")
         let buttonView2 = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 27.5))
         buttonView2.addSubview(imageView2)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: buttonView2)
-        self.navigationItem.rightBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.searchingClicked)))
+        self.tabController.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: buttonView2)
+        self.tabController.navigationItem.rightBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.searchingClicked)))
     }
     
     
@@ -101,7 +105,7 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: buttonView)
         
         */
-        setSearchIconOnSearchButton()
+       // setSearchIconOnSearchButton()
         let _ = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { (t) in
             self.showDepartmentTableAnimated()
         }
