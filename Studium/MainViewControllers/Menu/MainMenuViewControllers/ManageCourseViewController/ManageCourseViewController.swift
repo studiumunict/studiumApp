@@ -11,7 +11,7 @@ import UIKit
 class ManageCourseViewController: UIViewController, SWRevealViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.green
+       // self.view.backgroundColor = UIColor.green
         
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 130//Menu sx/
@@ -24,7 +24,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 160//Menu sx/
+            revealViewController().rearViewRevealWidth = 130//Menu sx/
             revealViewController().delegate = self
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }

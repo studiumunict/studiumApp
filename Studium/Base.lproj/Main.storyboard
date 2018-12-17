@@ -1238,7 +1238,7 @@
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="sendCourse:" destination="vtU-cg-YC9" eventType="touchUpInside" id="Ii0-W1-acg"/>
+                                                            <action selector="sendSignUpCourse:" destination="vtU-cg-YC9" eventType="touchUpInside" id="Ii0-W1-acg"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avvisi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GhJ-RP-TN8">
@@ -1270,28 +1270,38 @@
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="njd-vw-Q1Y"/>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XgF-zm-5yt">
+                                <rect key="frame" x="0.0" y="64" width="375" height="543"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="4Yn-M5-l57" firstAttribute="bottom" secondItem="TFO-jh-y7l" secondAttribute="bottom" id="5U8-9j-cKO"/>
                             <constraint firstItem="TFO-jh-y7l" firstAttribute="width" secondItem="zcA-SS-zFi" secondAttribute="width" id="97k-an-uZT"/>
                             <constraint firstItem="TFO-jh-y7l" firstAttribute="centerX" secondItem="4Yn-M5-l57" secondAttribute="centerX" id="Efa-9Y-EeE"/>
+                            <constraint firstItem="XgF-zm-5yt" firstAttribute="width" secondItem="4Yn-M5-l57" secondAttribute="width" id="Llt-h1-LK6"/>
+                            <constraint firstItem="XgF-zm-5yt" firstAttribute="centerX" secondItem="4Yn-M5-l57" secondAttribute="centerX" id="g5h-OK-PcQ"/>
+                            <constraint firstItem="TFO-jh-y7l" firstAttribute="top" secondItem="XgF-zm-5yt" secondAttribute="bottom" id="vgu-7S-Dzz"/>
+                            <constraint firstItem="XgF-zm-5yt" firstAttribute="top" secondItem="4Yn-M5-l57" secondAttribute="top" id="waX-gH-aXf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4Yn-M5-l57"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Suv-pq-u50"/>
                     <connections>
-                        <outlet property="courseButton" destination="ONR-Yj-Yv7" id="Qy1-A6-qg3"/>
-                        <outlet property="courseLabel" destination="GhJ-RP-TN8" id="bfb-Qd-orH"/>
-                        <outlet property="courseView" destination="1MI-hB-NWN" id="1Lx-ih-gKy"/>
                         <outlet property="manageCourseButton" destination="9KT-LJ-ESa" id="agu-l1-YyL"/>
-                        <outlet property="manageCourseLabel" destination="0fq-Ey-z2P" id="c9X-P4-fiq"/>
-                        <outlet property="manageCourseView" destination="Orn-se-FKO" id="mUP-gs-WfY"/>
+                        <outlet property="manageCourseButtonLabel" destination="0fq-Ey-z2P" id="c9X-P4-fiq"/>
+                        <outlet property="manageCourseButtonView" destination="Orn-se-FKO" id="mUP-gs-WfY"/>
+                        <outlet property="signUpCourseButton" destination="ONR-Yj-Yv7" id="Qy1-A6-qg3"/>
+                        <outlet property="signUpCourseButtonLabel" destination="GhJ-RP-TN8" id="bfb-Qd-orH"/>
+                        <outlet property="signUpCourseButtonView" destination="1MI-hB-NWN" id="1Lx-ih-gKy"/>
                         <outlet property="stackView" destination="TFO-jh-y7l" id="Ea1-AC-kkb"/>
+                        <outlet property="viewAppoggio" destination="XgF-zm-5yt" id="IVD-fY-A8K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6U0-0a-fKI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2065" y="-679"/>
+            <point key="canvasLocation" x="3553" y="34"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="XBP-Fl-KGW">
@@ -1302,7 +1312,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="XD2-Ya-88R" kind="relationship" relationship="rootViewController" id="Ihb-cQ-p48"/>
+                        <segue destination="vtU-cg-YC9" kind="relationship" relationship="rootViewController" id="GBK-EL-S1u"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nKa-SK-0hs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1312,22 +1322,10 @@
         <!--Gestisci corsi-->
         <scene sceneID="7a4-pX-Qck">
             <objects>
-                <viewController id="XD2-Ya-88R" customClass="ManageCourseViewController" customModule="Studium" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ManageCourseController" id="XD2-Ya-88R" customClass="ManageCourseViewController" customModule="Studium" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lns-jc-eQz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ryy-bn-TgP">
-                                <rect key="frame" x="114" y="318" width="124" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="iscriviti a un corso">
-                                    <color key="titleColor" red="0.20408648252487183" green="0.4718623161315918" blue="0.96479278802871704" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
-                                <connections>
-                                    <segue destination="z5Y-Js-uKB" kind="show" id="BFm-hW-Zw8"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Y7Y-yZ-8T1"/>
                     </view>
@@ -1335,7 +1333,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hpa-k6-cNR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3640" y="52"/>
+            <point key="canvasLocation" x="4081" y="-670"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nwx-Mp-bDx">
@@ -1679,13 +1677,13 @@
         <!--Iscriviti-->
         <scene sceneID="g1r-b1-ZNz">
             <objects>
-                <viewController id="z5Y-Js-uKB" customClass="BrowseAndSearchCoursesViewController" customModule="Studium" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BrowseAndSearchController" id="z5Y-Js-uKB" customClass="BrowseAndSearchCoursesViewController" customModule="Studium" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5TQ-4O-YA0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rPL-BB-rq8">
-                                <rect key="frame" x="9.5" y="111" width="356" height="556"/>
+                                <rect key="frame" x="9.5" y="67" width="356" height="600"/>
                                 <color key="backgroundColor" red="0.069202016140000003" green="0.069202016140000003" blue="0.069202016140000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="separatorColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
@@ -1756,7 +1754,7 @@
                                 </prototypes>
                             </tableView>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7EA-KM-1Sg">
-                                <rect key="frame" x="9.5" y="111" width="356" height="556"/>
+                                <rect key="frame" x="9.5" y="67" width="356" height="600"/>
                                 <color key="backgroundColor" red="0.9416838515" green="0.9416838515" blue="0.9416838515" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="departmentCell" rowHeight="50" id="0Mz-55-dr7" customClass="DepartmentTableViewCell" customModule="Studium" customModuleProvider="target">
@@ -1788,7 +1786,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6xB-q4-x4R">
-                                <rect key="frame" x="9.5" y="74" width="356" height="40"/>
+                                <rect key="frame" x="9.5" y="30" width="356" height="40"/>
                                 <color key="backgroundColor" red="0.91044991779999995" green="0.91044991779999995" blue="0.91044991779999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="F6V-Ff-33t"/>
@@ -1802,7 +1800,7 @@
                                 </connections>
                             </button>
                             <searchBar contentMode="redraw" placeholder=" Cerca un corso di studi" translatesAutoresizingMaskIntoConstraints="NO" id="bPb-G8-6uF">
-                                <rect key="frame" x="2" y="74" width="371" height="40"/>
+                                <rect key="frame" x="2" y="30" width="371" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="dk6-Ug-zda"/>
                                 </constraints>
@@ -1839,7 +1837,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="90q-Hv-ICS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4522" y="34"/>
+            <point key="canvasLocation" x="3082" y="-669"/>
         </scene>
         <!--Syllabus Page View Controller-->
         <scene sceneID="ogm-BG-oy7">
