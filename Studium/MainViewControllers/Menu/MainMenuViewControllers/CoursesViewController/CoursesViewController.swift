@@ -14,6 +14,7 @@ import UIKit
 
 class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, UITableViewDelegate,UITableViewDataSource {
     
+    @IBOutlet weak var categoriesLabel: UILabel!
     @IBOutlet weak var teachingsTableView: UITableView!
     
    // da aggiungere un header view alla table per dare spazio
@@ -21,6 +22,11 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.view.backgroundColor = UIColor.green
+        
+        categoriesLabel.backgroundColor = UIColor.elementsLikeNavBarColor
+        categoriesLabel.layer.cornerRadius = 5.0
+        categoriesLabel.clipsToBounds = true
+        
         teachingsTableView.delegate = self
         teachingsTableView.dataSource  = self
         
@@ -44,7 +50,7 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 160//Menu sx/
+            revealViewController().rearViewRevealWidth = 130//Menu sx/
             revealViewController().delegate = self
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
             self.navigationItem.leftBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:))))
@@ -60,10 +66,10 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
     func reloadSourceFromAPI(){
         
         courseSharedDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "Materie date", courseCode: 31), teachingArray:
-            [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)]))
+            [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)], setExpanded: true))
         
         
-        courseSharedDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "Materie da dare", courseCode: 27), teachingArray: [Teaching.init(teachingName: "Elementi di Analisi matematica 1", teachingCode: 8675, teacherName: "Ornella Naselli", signedUp: false),Teaching.init(teachingName: "Algebra 1", teachingCode: 8760, teacherName: "Andrea Scapellato", signedUp: false)]))
+        courseSharedDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "Materie da dare", courseCode: 27), teachingArray: [Teaching.init(teachingName: "Elementi di Analisi matematica 1", teachingCode: 8675, teacherName: "Ornella Naselli", signedUp: false),Teaching.init(teachingName: "Algebra 1", teachingCode: 8760, teacherName: "Andrea Scapellato", signedUp: false)], setExpanded: true))
         teachingsTableView.reloadData()
         
     }
@@ -78,37 +84,38 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-            return 50
+            return 45
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return 100
+            return 70
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = teachingsTableView.dequeueReusableCell(withIdentifier: "teachingCell") as! CDLTableViewCell
+        let cell = teachingsTableView.dequeueReusableCell(withIdentifier: "teachingCell") as! CoursesTableViewCell
         //modifico la cella e la mostro
         var dataElement : Teaching!
       
             dataElement = courseSharedDataSource[indexPath.section].teachings[indexPath.row]
         
-        cell.CDLnameLabel.text = dataElement.name
+        cell.teachingNameLabel.text = dataElement.name
         cell.teacherNameLabel.text = dataElement.teacherName
-        if dataElement.signedUp{
-            cell.signedUpImage.image = UIImage.init(named: "star_full")
-        }
-        else{
-            cell.signedUpImage.image = UIImage.init(named: "star_empty")
-        }
-        cell.codeLabel.text = String(dataElement.code)
+       
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        self.performSegue(withIdentifier: "segueToTeachingController", sender: indexPath)
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let  controller = segue.destination as? TeachingViewController{
+            let index = sender as! IndexPath
+                controller.teachingDataSource = courseSharedDataSource[index.section].teachings[index.row]
+        }
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
        
             
-            let button = UIButton.init(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
+            let button = UIButton.init(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 45))
             button.layer.cornerRadius = 5.0
             button.clipsToBounds = true
             
@@ -124,7 +131,7 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
                 rotateArrows180Degrees(button: button,animated: false)
             }
             button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-            button.setTitleColor(UIColor.primaryBackground, for: .normal)
+            button.setTitleColor(UIColor.elementsLikeNavBarColor, for: .normal)
             button.backgroundColor = UIColor.lightSectionColor
             button.tag = section
             button.addTarget(self, action: #selector(self.removeOrExpandRows), for: .touchUpInside)

@@ -188,7 +188,7 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
     func getTeachingsDuringSearch(serchedText : String){
         self.filteredCDLDataSource.removeAll()
         filteredCDLDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "INFORMATICA L-31", courseCode: 31), teachingArray:
-            [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)]))
+            [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)], setExpanded: true))
         self.cdlTableView.reloadData()
         
     }
@@ -235,10 +235,10 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
         if ofDepartment.code == 1 { //dipartimento di informatica
             print("scarico corsi dipartimento informtatica")
             CDLDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "INFORMATICA L-31", courseCode: 31), teachingArray:
-                [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)]))
+                [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)], setExpanded: false))
             
             
-            CDLDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "MATEMATICA L-27", courseCode: 27), teachingArray: [Teaching.init(teachingName: "Elementi di Analisi matematica 1 drl corso mz", teachingCode: 8675, teacherName: "Ornella Naselli", signedUp: false),Teaching.init(teachingName: "Algebra 1", teachingCode: 8760, teacherName: "Andrea Scapellato", signedUp: false)]))
+            CDLDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "MATEMATICA L-27", courseCode: 27), teachingArray: [Teaching.init(teachingName: "Elementi di Analisi matematica 1 drl corso mz", teachingCode: 8675, teacherName: "Ornella Naselli", signedUp: false),Teaching.init(teachingName: "Algebra 1", teachingCode: 8760, teacherName: "Andrea Scapellato", signedUp: false)], setExpanded: false))
             
         }
         
@@ -310,7 +310,7 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
             return 50
         }
         else {
-            return 100
+            return 70
         }
         
     }
@@ -354,7 +354,7 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if tableView == self.cdlTableView {
-            return 50
+            return 45
         }
         return 0
     }
@@ -362,7 +362,7 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if tableView == self.cdlTableView {
             
-            let button = UIButton.init(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
+            let button = UIButton.init(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 45))
             button.layer.cornerRadius = 5.0
             button.clipsToBounds = true
             
@@ -481,7 +481,7 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
             
         }
         else { //CDL table
-            let cell = cdlTableView.dequeueReusableCell(withIdentifier: "CDLCell") as! CDLTableViewCell
+            let cell = cdlTableView.dequeueReusableCell(withIdentifier: "teachingCell") as! BrowseAndSearchCourseTableViewCell
             //modifico la cella e la mostro
             var dataElement : Teaching!
             if self.cdsSearchBar.isFirstResponder || self.cdsSearchBar.text != ""{
@@ -492,15 +492,9 @@ class BrowseAndSearchCoursesViewController: UIViewController ,UIScrollViewDelega
                 dataElement = self.CDLDataSource[indexPath.section].teachings[indexPath.row]
             }
             
-            cell.CDLnameLabel.text = dataElement.name
+            cell.teachingNameLabel.text = dataElement.name
             cell.teacherNameLabel.text = dataElement.teacherName
-            if dataElement.signedUp{
-                cell.signedUpImage.image = UIImage.init(named: "star_full")
-            }
-            else{
-                cell.signedUpImage.image = UIImage.init(named: "star_empty")
-            }
-            cell.codeLabel.text = String(dataElement.code)
+            
             return cell
         }
     }

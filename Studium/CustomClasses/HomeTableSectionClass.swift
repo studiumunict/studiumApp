@@ -9,14 +9,15 @@
 import Foundation
 class HomeTableSection{
     var course = CDL()//sarà la section (1)
-    var expanded = false
+    var expanded : Bool!
     var teachings = [Teaching]() //saranno le row (array sottostante alla section)
     
     
     
-    init(cdl : CDL, teachingArray : [Teaching]){
+    init(cdl : CDL, teachingArray : [Teaching], setExpanded : Bool){
         self.course = cdl
         self.teachings = teachingArray
+        self.expanded = setExpanded
     }
     
 }
