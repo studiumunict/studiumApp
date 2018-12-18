@@ -237,6 +237,7 @@
 			children = (
 				9CFE9DAA21A8BC6B0030AE33 /* HomeViewController.swift */,
 				9C06A22621AB6BC500E695DB /* DepartmentTableViewCell.swift */,
+				9CFE72C021B9508E001EB697 /* CDLTableViewCell.swift */,
 			);
 			path = HomeViewController;
 			sourceTree = "<group>";
@@ -256,10 +257,7 @@
 		9C07EF3721C6ED4D00C4836B /* sharedResources */ = {
 			isa = PBXGroup;
 			children = (
-				9C07088D21C85C1100F7D296 /* CoursesTableViewCell.swift */,
 				9C06CA8521C67ACF00FA09DB /* staticArrayCourses.swift */,
-				9CFE72C021B9508E001EB697 /* CDLTableViewCell.swift */,
-				9C07088F21C8672800F7D296 /* BrowseAndSearchCourseTableViewCell.swift */,
 			);
 			path = sharedResources;
 			sourceTree = "<group>";
@@ -270,6 +268,7 @@
 				13E91D0421C7DB550007EF3E /* ManageCoursePageViewController.swift */,
 				9C0E501A21C3F7CE0055C4DD /* ManageCourseViewController.swift */,
 				9C0E501C21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift */,
+				9C07088F21C8672800F7D296 /* BrowseAndSearchCourseTableViewCell.swift */,
 			);
 			path = ManageCourseViewController;
 			sourceTree = "<group>";
@@ -277,6 +276,7 @@
 		9CFE72C821BA97FA001EB697 /* CoursesViewController */ = {
 			isa = PBXGroup;
 			children = (
+				9C07088D21C85C1100F7D296 /* CoursesTableViewCell.swift */,
 				9CFE72C921BA9814001EB697 /* CoursesViewController.swift */,
 			);
 			path = CoursesViewController;

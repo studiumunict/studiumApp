@@ -11,6 +11,7 @@ import UIKit
 class BrowseAndSearchCourseTableViewCell: UITableViewCell {
     @IBOutlet weak var teacherNameLabel: UILabel!
     @IBOutlet weak var teachingNameLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

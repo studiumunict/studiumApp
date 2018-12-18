@@ -12,6 +12,8 @@ class CoursesTableViewCell: UITableViewCell {
 
     @IBOutlet weak var teacherNameLabel: UILabel!
     @IBOutlet weak var teachingNameLabel: UILabel!
+    
+    @IBOutlet weak var arrowImage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,11 +21,18 @@ class CoursesTableViewCell: UITableViewCell {
         teacherNameLabel.textColor =  UIColor.subTitleGray
         teachingNameLabel.textColor =  UIColor.elementsLikeNavBarColor
         self.selectionStyle = .none
+        arrowImage.image = UIImage.init(named: "arrow")?.withRenderingMode(.alwaysTemplate)
+        arrowImage.tintColor = UIColor.elementsLikeNavBarColor
+        
+        arrowImage.transform = CGAffineTransform(rotationAngle: 3 * (.pi/2))
+    
+        
         
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+       
 
         // Configure the view for the selected state
     }

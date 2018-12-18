@@ -32,6 +32,13 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
+        imageView.image = UIImage.init(named: "menu")
+        let buttonView = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
+        buttonView.addSubview(imageView)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: buttonView)
+        
         setNavBarForManagement()
         self.viewAppoggio.backgroundColor =  UIColor.primaryBackground
         self.signUpCourseButtonView.backgroundColor = UIColor.clear
@@ -47,6 +54,7 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 130//Menu sx/
             revealViewController().delegate = self
+             self.navigationItem.leftBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:))))
             navControllerList[0].view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         
@@ -79,6 +87,7 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 130//Menu sx/
             revealViewController().delegate = self
+             self.navigationItem.leftBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:))))
             navControllerList[0].view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
     }
