@@ -34,7 +34,7 @@ class NotifyCell: UITableViewCell {
         selectionStyle = .none
         //#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)
         carret.image = UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate);
-        carret.tintColor = UIColor.navigationBarColor
+        carret.tintColor = UIColor.elementsLikeNavBarColor
         
         self.contentView.backgroundColor = UIColor.clear
         headerView.backgroundColor = UIColor.lightSectionColor
@@ -42,8 +42,8 @@ class NotifyCell: UITableViewCell {
         headerView.clipsToBounds = true
         
         
-        descriptionLabel.textColor = UIColor.navigationBarColor
-        titleLabel.textColor = UIColor.navigationBarColor
+        descriptionLabel.textColor = UIColor.elementsLikeNavBarColor
+        titleLabel.textColor = UIColor.elementsLikeNavBarColor
         dataLabel.textColor = UIColor.subTitleGray
     }
     

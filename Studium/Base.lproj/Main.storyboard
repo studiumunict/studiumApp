@@ -407,8 +407,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h3h-Dv-Yjt">
                                         <rect key="frame" x="62.5" y="0.0" width="62.5" height="60"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bFw-9a-Lds">
-                                                <rect key="frame" x="-0.5" y="0.0" width="62.5" height="60"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bFw-9a-Lds">
+                                                <rect key="frame" x="0.0" y="0.0" width="62.5" height="60"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqz-wd-gLo">
                                                         <rect key="frame" x="16.5" y="0.0" width="30" height="49"/>
@@ -467,8 +467,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmt-LH-szh">
                                         <rect key="frame" x="187.5" y="0.0" width="62.5" height="60"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LkZ-Qr-8AE">
-                                                <rect key="frame" x="1" y="0.0" width="62.5" height="60"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LkZ-Qr-8AE">
+                                                <rect key="frame" x="0.0" y="0.0" width="62.5" height="60"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQ5-CZ-8Ti">
                                                         <rect key="frame" x="16.5" y="0.0" width="30" height="49"/>
@@ -497,8 +497,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oWO-pt-zy9">
                                         <rect key="frame" x="250" y="0.0" width="62.5" height="60"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YJl-TD-iCO">
-                                                <rect key="frame" x="0.5" y="0.0" width="62.5" height="60"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YJl-TD-iCO">
+                                                <rect key="frame" x="0.0" y="0.0" width="62.5" height="60"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dR6-7M-Xej">
                                                         <rect key="frame" x="16.5" y="0.0" width="30" height="49"/>
