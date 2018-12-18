@@ -1410,6 +1410,9 @@
                         <viewLayoutGuide key="safeArea" id="Y7Y-yZ-8T1"/>
                     </view>
                     <navigationItem key="navigationItem" title="Gestisci corsi" id="JoH-8W-TmY"/>
+                    <connections>
+                        <outlet property="manageCoursesTableView" destination="EsK-SM-HaQ" id="Ztf-p1-wl7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hpa-k6-cNR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
