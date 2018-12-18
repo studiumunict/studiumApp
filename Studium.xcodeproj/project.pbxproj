@@ -16,6 +16,7 @@
 		139BCB6A21BDE057005A750A /* DocumentsPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139BCB6921BDE057005A750A /* DocumentsPagesViewController.swift */; };
 		139BCB6C21BDE0AF005A750A /* BookingPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139BCB6B21BDE0AF005A750A /* BookingPagesViewController.swift */; };
 		13A7D28621C6F25F00F42193 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A7D28521C6F25F00F42193 /* Reachability.swift */; };
+		13CC782321C93FB90052E579 /* PortaleStudentiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CC782221C93FB90052E579 /* PortaleStudentiViewController.swift */; };
 		13D86DDB21B9A3BF007638FD /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D86DDA21B9A3BF007638FD /* ExtensionUIColor.swift */; };
 		13E3A34721C140A6004BE8D8 /* NotifyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E3A34621C140A6004BE8D8 /* NotifyCell.swift */; };
 		13E3A34A21C1416E004BE8D8 /* NotifyTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E3A34921C1416E004BE8D8 /* NotifyTableDataSource.swift */; };
@@ -80,6 +81,7 @@
 		139BCB6B21BDE0AF005A750A /* BookingPagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingPagesViewController.swift; sourceTree = "<group>"; };
 		13A7D28421C6F25F00F42193 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		13A7D28521C6F25F00F42193 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		13CC782221C93FB90052E579 /* PortaleStudentiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortaleStudentiViewController.swift; sourceTree = "<group>"; };
 		13D86DDA21B9A3BF007638FD /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
 		13E3A34621C140A6004BE8D8 /* NotifyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyCell.swift; sourceTree = "<group>"; };
 		13E3A34921C1416E004BE8D8 /* NotifyTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyTableDataSource.swift; sourceTree = "<group>"; };
@@ -184,6 +186,14 @@
 				13A7D28521C6F25F00F42193 /* Reachability.swift */,
 			);
 			path = Reachability;
+			sourceTree = "<group>";
+		};
+		13CC782421C93FBE0052E579 /* PortaleStudentiViewController */ = {
+			isa = PBXGroup;
+			children = (
+				13CC782221C93FB90052E579 /* PortaleStudentiViewController.swift */,
+			);
+			path = PortaleStudentiViewController;
 			sourceTree = "<group>";
 		};
 		13E3A34521C1407D004BE8D8 /* NotifyPageViewController */ = {
@@ -369,6 +379,7 @@
 				9CFEB89B21BAA5AA0045FB54 /* DocumentsViewController */,
 				9CFEB89A21BAA59B0045FB54 /* ProfileViewController */,
 				9CFE72C821BA97FA001EB697 /* CoursesViewController */,
+				13CC782421C93FBE0052E579 /* PortaleStudentiViewController */,
 			);
 			path = MainMenuViewControllers;
 			sourceTree = "<group>";
@@ -625,6 +636,7 @@
 				9C06A22C21AB707500E695DB /* CDLClass.swift in Sources */,
 				13F8E3C221A9667200BBAD9B /* TeachingViewController.swift in Sources */,
 				139BCB6A21BDE057005A750A /* DocumentsPagesViewController.swift in Sources */,
+				13CC782321C93FB90052E579 /* PortaleStudentiViewController.swift in Sources */,
 				9C07089021C8672800F7D296 /* BrowseAndSearchCourseTableViewCell.swift in Sources */,
 				9CFE9DA521A8AE960030AE33 /* LoginViewController.swift in Sources */,
 				139BCB6C21BDE0AF005A750A /* BookingPagesViewController.swift in Sources */,

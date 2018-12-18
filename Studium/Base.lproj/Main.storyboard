@@ -1504,6 +1504,103 @@
             </objects>
             <point key="canvasLocation" x="5138.3999999999996" y="1160.8695652173915"/>
         </scene>
+        <!--Portale Studenti View Controller-->
+        <scene sceneID="4HH-br-Jpu">
+            <objects>
+                <viewController storyboardIdentifier="portaleStudentiController" id="ZQt-ao-TNW" customClass="PortaleStudentiViewController" customModule="Studium" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="74b-Hj-mRV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error message label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMc-mF-saJ">
+                                <rect key="frame" x="0.0" y="118" width="375" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="s1g-bc-Db8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="flM-iZ-QFK">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="622"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="21J-5P-9Gl">
+                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="j55-FQ-CR7">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="swM-JJ-ber">
+                                                <rect key="frame" x="0.0" y="0.0" width="125" height="45"/>
+                                                <connections>
+                                                    <action selector="backButtonPressed:" destination="YT5-uD-UXr" eventType="touchUpInside" id="Il3-Io-yOS"/>
+                                                    <action selector="backButtonPressed:" destination="ZQt-ao-TNW" eventType="touchUpInside" id="iYL-ZL-rWl"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pKK-ht-Szf">
+                                                <rect key="frame" x="125" y="0.0" width="125" height="45"/>
+                                                <connections>
+                                                    <action selector="forwardButtonPressed:" destination="ZQt-ao-TNW" eventType="touchUpInside" id="Xx2-7T-mgN"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2jg-jn-03a">
+                                                <rect key="frame" x="250" y="0.0" width="125" height="45"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="j55-FQ-CR7" firstAttribute="centerY" secondItem="21J-5P-9Gl" secondAttribute="centerY" id="E8p-xQ-Weo"/>
+                                    <constraint firstAttribute="height" constant="45" id="N4t-GF-b71"/>
+                                    <constraint firstItem="j55-FQ-CR7" firstAttribute="height" secondItem="21J-5P-9Gl" secondAttribute="height" id="rU2-ep-oT7"/>
+                                    <constraint firstItem="j55-FQ-CR7" firstAttribute="centerX" secondItem="21J-5P-9Gl" secondAttribute="centerX" id="xvP-ad-Yxu"/>
+                                    <constraint firstItem="j55-FQ-CR7" firstAttribute="width" secondItem="21J-5P-9Gl" secondAttribute="width" id="y8a-Nr-hfZ"/>
+                                </constraints>
+                            </view>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vy1-bI-Kvj">
+                                <rect key="frame" x="0.0" y="20" width="375" height="3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="3" id="cJz-Nw-z8D"/>
+                                </constraints>
+                            </progressView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="tMc-mF-saJ" firstAttribute="width" secondItem="74b-Hj-mRV" secondAttribute="width" id="3Re-1G-vvp"/>
+                            <constraint firstItem="tMc-mF-saJ" firstAttribute="centerX" secondItem="ekf-lH-xXd" secondAttribute="centerX" id="8io-Qn-cw2"/>
+                            <constraint firstItem="ekf-lH-xXd" firstAttribute="bottom" secondItem="21J-5P-9Gl" secondAttribute="bottom" id="Gmx-lC-8nn"/>
+                            <constraint firstItem="tMc-mF-saJ" firstAttribute="top" secondItem="ekf-lH-xXd" secondAttribute="top" constant="98" id="J7L-yU-V8I"/>
+                            <constraint firstItem="vy1-bI-Kvj" firstAttribute="centerX" secondItem="ekf-lH-xXd" secondAttribute="centerX" id="MKh-HW-GyD"/>
+                            <constraint firstItem="flM-iZ-QFK" firstAttribute="trailing" secondItem="ekf-lH-xXd" secondAttribute="trailing" id="Nww-CK-5iT"/>
+                            <constraint firstItem="21J-5P-9Gl" firstAttribute="width" secondItem="74b-Hj-mRV" secondAttribute="width" id="RTR-3U-Qs6"/>
+                            <constraint firstItem="vy1-bI-Kvj" firstAttribute="top" secondItem="ekf-lH-xXd" secondAttribute="top" id="SAL-tJ-GD9"/>
+                            <constraint firstItem="flM-iZ-QFK" firstAttribute="top" secondItem="74b-Hj-mRV" secondAttribute="top" id="WtW-P7-UPG"/>
+                            <constraint firstItem="21J-5P-9Gl" firstAttribute="top" secondItem="flM-iZ-QFK" secondAttribute="bottom" id="XCN-xS-TW7"/>
+                            <constraint firstItem="vy1-bI-Kvj" firstAttribute="width" secondItem="74b-Hj-mRV" secondAttribute="width" id="fyJ-ud-VUT"/>
+                            <constraint firstItem="21J-5P-9Gl" firstAttribute="centerX" secondItem="ekf-lH-xXd" secondAttribute="centerX" id="iKt-XJ-YDA"/>
+                            <constraint firstItem="flM-iZ-QFK" firstAttribute="leading" secondItem="ekf-lH-xXd" secondAttribute="leading" id="yaP-j9-bnu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ekf-lH-xXd"/>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="swM-JJ-ber" id="zcD-Cc-Q9o"/>
+                        <outlet property="errorMessageLabel" destination="tMc-mF-saJ" id="eyy-Ta-h7W"/>
+                        <outlet property="forwardButton" destination="pKK-ht-Szf" id="t3H-X2-fld"/>
+                        <outlet property="progressBar" destination="vy1-bI-Kvj" id="rP7-is-NCs"/>
+                        <outlet property="viewAppoggio" destination="21J-5P-9Gl" id="zgv-nZ-slP"/>
+                        <outlet property="webView" destination="flM-iZ-QFK" id="lMq-7U-p4b"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NLI-1Z-CLy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6352.8000000000002" y="1160.8695652173915"/>
+        </scene>
         <!--Description Page View Controller-->
         <scene sceneID="4xO-lV-xWb">
             <objects>
