@@ -26,6 +26,7 @@ class ProfileViewController: UIViewController, SWRevealViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.03487086296, green: 0.03488409892, blue: 0.0348691158, alpha: 1)
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
         imageView.image = UIImage.init(named: "menu")
         let buttonView = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))

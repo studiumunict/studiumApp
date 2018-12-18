@@ -12,7 +12,11 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
    
     
     //facciamo un for che setta tutte le section ad expanded, poi quando si rivà sul i miei corsi controller, si lasciano tutte expandend richiamando il reloaddata di quella tableview
+    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var categoryHeaderView: UIView!
+    @IBOutlet weak var removeCategoryButton: UIButton!
     
+    @IBOutlet weak var addCategoryButton: UIButton!
     
     @IBOutlet weak var manageCoursesTableView: UITableView!
     
@@ -27,6 +31,11 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
        // self.view.backgroundColor = UIColor.green
         self.manageCoursesTableView.backgroundColor = UIColor.lightWhite
         self.view.backgroundColor = UIColor.lightWhite
+        self.categoryHeaderView.backgroundColor = UIColor.elementsLikeNavBarColor
+        self.categoryLabel.textColor = UIColor.lightWhite
+        
+        self.categoryHeaderView.layer.cornerRadius = 5.0
+        self.categoryHeaderView.clipsToBounds = true
         
         manageCoursesTableView.delegate = self
         manageCoursesTableView.dataSource = self
@@ -195,8 +204,12 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         return courseSharedDataSource.count
     }
     
+    @IBAction func removeCategoryClicked(_ sender: Any) {
+    }
     
     
+    @IBAction func addCategoryClicked(_ sender: Any) {
+    }
     
 
 }

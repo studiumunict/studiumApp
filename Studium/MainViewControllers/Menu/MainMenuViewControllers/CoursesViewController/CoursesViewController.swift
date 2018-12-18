@@ -22,10 +22,13 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.view.backgroundColor = UIColor.green
+        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        
         
         categoriesLabel.backgroundColor = UIColor.elementsLikeNavBarColor
         categoriesLabel.layer.cornerRadius = 5.0
         categoriesLabel.clipsToBounds = true
+        self.view.backgroundColor = UIColor.primaryBackground
         
         teachingsTableView.delegate = self
         teachingsTableView.dataSource  = self

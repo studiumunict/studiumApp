@@ -21,7 +21,7 @@ extension UIColor{
     static var buttonSignUpSelect = #colorLiteral(red: 0.4939348698, green: 0.5002408624, blue: 0.5000324845, alpha: 1)
     static var subTitleGray = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
     static var lightSectionColor = #colorLiteral(red: 0.8595721126, green: 0.8635507226, blue: 0.8732736707, alpha: 1)
-    static var elementsLikeNavBarColor = #colorLiteral(red: 0.228349328, green: 0.2283941507, blue: 0.2283434272, alpha: 1)
+    static var elementsLikeNavBarColor = #colorLiteral(red: 0.1867129505, green: 0.1867512167, blue: 0.1867079437, alpha: 1)
   //  static var oscureViewColor = UIColor(red: 176, green: 176, blue: 176, alpha: 0.7) 
     
 }
