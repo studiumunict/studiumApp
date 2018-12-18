@@ -59,6 +59,9 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
             reloadSourceFromAPI();
             
         }
+        else{
+            teachingsTableView.reloadData()
+        }
         
         
     }
@@ -99,6 +102,10 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
         
         cell.teachingNameLabel.text = dataElement.name
         cell.teacherNameLabel.text = dataElement.teacherName
+        cell.arrowImage.image = UIImage.init(named: "arrow")?.withRenderingMode(.alwaysTemplate)
+        cell.arrowImage.tintColor = UIColor.elementsLikeNavBarColor
+        
+        cell.arrowImage.transform = CGAffineTransform(rotationAngle: 3 * (.pi/2))
        
         return cell
     }

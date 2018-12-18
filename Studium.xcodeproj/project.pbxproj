@@ -276,7 +276,6 @@
 		9CFE72C821BA97FA001EB697 /* CoursesViewController */ = {
 			isa = PBXGroup;
 			children = (
-				9C07088D21C85C1100F7D296 /* CoursesTableViewCell.swift */,
 				9CFE72C921BA9814001EB697 /* CoursesViewController.swift */,
 			);
 			path = CoursesViewController;
@@ -356,6 +355,7 @@
 			children = (
 				9C07EF3721C6ED4D00C4836B /* sharedResources */,
 				9CFE9DA721A8BBEE0030AE33 /* MenuTableViewController.swift */,
+				9C07088D21C85C1100F7D296 /* CoursesTableViewCell.swift */,
 				9CFE9DA921A8BC260030AE33 /* MainMenuViewControllers */,
 			);
 			path = Menu;

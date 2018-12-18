@@ -21,10 +21,7 @@ class CoursesTableViewCell: UITableViewCell {
         teacherNameLabel.textColor =  UIColor.subTitleGray
         teachingNameLabel.textColor =  UIColor.elementsLikeNavBarColor
         self.selectionStyle = .none
-        arrowImage.image = UIImage.init(named: "arrow")?.withRenderingMode(.alwaysTemplate)
-        arrowImage.tintColor = UIColor.elementsLikeNavBarColor
         
-        arrowImage.transform = CGAffineTransform(rotationAngle: 3 * (.pi/2))
     
         
         

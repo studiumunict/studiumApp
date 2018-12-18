@@ -11,7 +11,16 @@ import UIKit
 class ManageCourseViewController: UIViewController, SWRevealViewControllerDelegate, UITableViewDataSource, UITableViewDelegate {
    
     
+    //facciamo un for che setta tutte le section ad expanded, poi quando si rivà sul i miei corsi controller, si lasciano tutte expandend richiamando il reloaddata di quella tableview
+    
+    
     @IBOutlet weak var manageCoursesTableView: UITableView!
+    
+    func setAllExpanded(){
+        for sect in courseSharedDataSource{
+            sect.expanded = true
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,9 +50,12 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
             reloadSourceFromAPI();
             
         }
+        else{
+            self.setAllExpanded()
+        }
     }
     
-    func reloadSourceFromAPI(){
+    func reloadSourceFromAPI(){ // setta tutto ad expanded
         
         courseSharedDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "Materie date", courseCode: 31), teachingArray:
             [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)], setExpanded: true))
@@ -79,11 +91,14 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         
         cell.teachingNameLabel.text = dataElement.name
         cell.teacherNameLabel.text = dataElement.teacherName
+        cell.arrowImage.image =  UIImage.init(named: "menu")?.withRenderingMode(.alwaysTemplate)
+        cell.arrowImage.tintColor = UIColor.elementsLikeNavBarColor
+        cell.arrowImage.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "segueToTeachingController", sender: indexPath)
+      //  self.performSegue(withIdentifier: "segueToTeachingController", sender: indexPath)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let  controller = segue.destination as? TeachingViewController{
@@ -99,12 +114,12 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         button.layer.cornerRadius = 5.0
         button.clipsToBounds = true
         
-        
+        /*
         let arrowImageView = UIImageView.init(frame: CGRect(x: 10, y: button.frame.height/2 - 7.5, width: 15, height: 15))
         arrowImageView.image = UIImage.init(named: "arrow")?.withRenderingMode(.alwaysTemplate);
         arrowImageView.tintColor = UIColor.elementsLikeNavBarColor
         button.addSubview(arrowImageView)
-        
+        */
         
         
         button.setTitle(courseSharedDataSource[section].course.name, for: .normal)
@@ -115,7 +130,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         button.setTitleColor(UIColor.elementsLikeNavBarColor, for: .normal)
         button.backgroundColor = UIColor.lightSectionColor
         button.tag = section
-        button.addTarget(self, action: #selector(self.removeOrExpandRows), for: .touchUpInside)
+       // button.addTarget(self, action: #selector(self.removeOrExpandRows), for: .touchUpInside)
         
         
         
@@ -124,7 +139,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         
     }
     
-    @objc func removeOrExpandRows(button : UIButton ){
+   /* @objc func removeOrExpandRows(button : UIButton ){
         rotateArrows180Degrees(button: button,animated: true)
         let sect = button.tag
         var indices = [IndexPath]()
@@ -145,7 +160,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         }
         
     }
-    
+    */
     func rotateArrows180Degrees(button : UIButton,animated : Bool){
         for view in button.subviews{
             if let imageView = view as? UIImageView{
