@@ -178,6 +178,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     
     func getTeachingsDuringSearch(serchedText : String){
         self.filteredCDLDataSource.removeAll()
+        //chiamata api
         filteredCDLDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "INFORMATICA L-31", courseCode: 31), teachingArray:
             [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)], setExpanded: false))
         self.cdlTableView.reloadData()

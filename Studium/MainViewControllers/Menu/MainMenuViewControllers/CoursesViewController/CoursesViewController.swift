@@ -121,7 +121,8 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
             
             
             let arrowImageView = UIImageView.init(frame: CGRect(x: 10, y: button.frame.height/2 - 7.5, width: 15, height: 15))
-            arrowImageView.image = UIImage.init(named: "arrow");
+            arrowImageView.image = UIImage.init(named: "arrow")?.withRenderingMode(.alwaysTemplate);
+            arrowImageView.tintColor = UIColor.elementsLikeNavBarColor
             button.addSubview(arrowImageView)
             
         
