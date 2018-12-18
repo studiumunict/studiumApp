@@ -355,7 +355,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LJC-Gw-Xgn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1372" y="3383.658170914543"/>
+            <point key="canvasLocation" x="-1910" y="3393"/>
         </scene>
         <!--Teaching View Controller-->
         <scene sceneID="9Jr-ri-VGu">
@@ -1174,6 +1174,40 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.91044991779999995" green="0.91044991779999995" blue="0.91044991779999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" rowHeight="90" id="jHB-5z-x4n">
+                                        <rect key="frame" x="0.0" y="494" width="375" height="90"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jHB-5z-x4n" id="9aK-5M-Sn5">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="LqB-L5-lGq">
+                                                    <rect key="frame" x="40" y="9" width="45" height="45"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="45" id="2cU-cH-id8"/>
+                                                        <constraint firstAttribute="width" constant="45" id="dVs-uN-0ZJ"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Portale Studenti" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hB-g2-Hqm">
+                                                    <rect key="frame" x="-2.5" y="58" width="130" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="130" id="YuK-DO-COC"/>
+                                                        <constraint firstAttribute="height" constant="21" id="sML-E1-Lzj"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                                    <color key="textColor" red="0.32928388749999998" green="0.32928388749999998" blue="0.32928388749999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="5hB-g2-Hqm" firstAttribute="top" secondItem="LqB-L5-lGq" secondAttribute="bottom" constant="4" id="GkL-ED-o6S"/>
+                                                <constraint firstItem="LqB-L5-lGq" firstAttribute="leading" secondItem="9aK-5M-Sn5" secondAttribute="leading" constant="40" id="Izd-ph-Tjn"/>
+                                                <constraint firstItem="LqB-L5-lGq" firstAttribute="centerY" secondItem="9aK-5M-Sn5" secondAttribute="centerY" multiplier="0.7" id="QeV-EN-4CD"/>
+                                                <constraint firstItem="5hB-g2-Hqm" firstAttribute="centerX" secondItem="LqB-L5-lGq" secondAttribute="centerX" id="d6M-4C-69T"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.91044991779999995" green="0.91044991779999995" blue="0.91044991779999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -1188,6 +1222,7 @@
                         <segue destination="beZ-h2-o2w" kind="custom" identifier="pushToProfile" customClass="SWRevealViewControllerSeguePushController" id="z6D-2i-Zy3"/>
                         <segue destination="xpd-dY-FwG" kind="custom" identifier="pushToDocs" customClass="SWRevealViewControllerSeguePushController" id="5PY-b7-s99"/>
                         <segue destination="b87-Hr-5L1" kind="custom" identifier="pushToManageCourse" customClass="SWRevealViewControllerSeguePushController" id="aJU-FL-6pX"/>
+                        <segue destination="mJa-Lh-IdU" kind="custom" identifier="pushToPortaleStud" customClass="SWRevealViewControllerSeguePushController" id="feV-Mf-TEx"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hgC-Sa-lTn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1556,7 +1591,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error message label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMc-mF-saJ">
-                                <rect key="frame" x="0.0" y="118" width="375" height="70"/>
+                                <rect key="frame" x="0.0" y="162" width="375" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="s1g-bc-Db8"/>
                                 </constraints>
@@ -1565,7 +1600,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="flM-iZ-QFK">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="622"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="558"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -1593,11 +1628,14 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2jg-jn-03a">
                                                 <rect key="frame" x="250" y="0.0" width="125" height="45"/>
+                                                <connections>
+                                                    <action selector="homeButtonPressed:" destination="ZQt-ao-TNW" eventType="touchUpInside" id="4VS-p8-BT0"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="j55-FQ-CR7" firstAttribute="centerY" secondItem="21J-5P-9Gl" secondAttribute="centerY" id="E8p-xQ-Weo"/>
                                     <constraint firstAttribute="height" constant="45" id="N4t-GF-b71"/>
@@ -1607,7 +1645,7 @@
                                 </constraints>
                             </view>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vy1-bI-Kvj">
-                                <rect key="frame" x="0.0" y="20" width="375" height="3"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="cJz-Nw-z8D"/>
                                 </constraints>
@@ -1623,7 +1661,7 @@
                             <constraint firstItem="flM-iZ-QFK" firstAttribute="trailing" secondItem="ekf-lH-xXd" secondAttribute="trailing" id="Nww-CK-5iT"/>
                             <constraint firstItem="21J-5P-9Gl" firstAttribute="width" secondItem="74b-Hj-mRV" secondAttribute="width" id="RTR-3U-Qs6"/>
                             <constraint firstItem="vy1-bI-Kvj" firstAttribute="top" secondItem="ekf-lH-xXd" secondAttribute="top" id="SAL-tJ-GD9"/>
-                            <constraint firstItem="flM-iZ-QFK" firstAttribute="top" secondItem="74b-Hj-mRV" secondAttribute="top" id="WtW-P7-UPG"/>
+                            <constraint firstItem="flM-iZ-QFK" firstAttribute="top" secondItem="ekf-lH-xXd" secondAttribute="top" id="TCP-Ye-Abq"/>
                             <constraint firstItem="21J-5P-9Gl" firstAttribute="top" secondItem="flM-iZ-QFK" secondAttribute="bottom" id="XCN-xS-TW7"/>
                             <constraint firstItem="vy1-bI-Kvj" firstAttribute="width" secondItem="74b-Hj-mRV" secondAttribute="width" id="fyJ-ud-VUT"/>
                             <constraint firstItem="21J-5P-9Gl" firstAttribute="centerX" secondItem="ekf-lH-xXd" secondAttribute="centerX" id="iKt-XJ-YDA"/>
@@ -1631,10 +1669,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ekf-lH-xXd"/>
                     </view>
+                    <navigationItem key="navigationItem" id="jIb-ce-I61"/>
                     <connections>
                         <outlet property="backButton" destination="swM-JJ-ber" id="zcD-Cc-Q9o"/>
                         <outlet property="errorMessageLabel" destination="tMc-mF-saJ" id="eyy-Ta-h7W"/>
                         <outlet property="forwardButton" destination="pKK-ht-Szf" id="t3H-X2-fld"/>
+                        <outlet property="homeButton" destination="2jg-jn-03a" id="Km0-h1-fVD"/>
                         <outlet property="progressBar" destination="vy1-bI-Kvj" id="rP7-is-NCs"/>
                         <outlet property="viewAppoggio" destination="21J-5P-9Gl" id="zgv-nZ-slP"/>
                         <outlet property="webView" destination="flM-iZ-QFK" id="lMq-7U-p4b"/>
@@ -1642,7 +1682,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NLI-1Z-CLy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6352.8000000000002" y="1160.8695652173915"/>
+            <point key="canvasLocation" x="7292" y="1160.8695652173915"/>
         </scene>
         <!--Description Page View Controller-->
         <scene sceneID="4xO-lV-xWb">
@@ -1693,7 +1733,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Fr-Hb-mpA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="682" y="3384"/>
+            <point key="canvasLocation" x="143" y="3393"/>
         </scene>
         <!--Documents Page View Controller-->
         <scene sceneID="Z7w-SZ-CGb">
@@ -1728,7 +1768,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5BX-nl-pwd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1326" y="3384"/>
+            <point key="canvasLocation" x="790" y="3393"/>
         </scene>
         <!--Booking Page View Controller-->
         <scene sceneID="caJ-qU-oEk">
@@ -1763,7 +1803,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fmv-V8-ewL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2006" y="3384"/>
+            <point key="canvasLocation" x="1470" y="3393"/>
         </scene>
         <!--Notify Page View Controller-->
         <scene sceneID="5oB-r8-Wy2">
@@ -1909,7 +1949,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qw3-wL-UC0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-694" y="3384"/>
+            <point key="canvasLocation" x="-1233" y="3393"/>
         </scene>
         <!--Iscriviti-->
         <scene sceneID="g1r-b1-ZNz">
@@ -2157,7 +2197,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UK6-MZ-iYD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2.3999999999999999" y="3384.5577211394307"/>
+            <point key="canvasLocation" x="-538" y="3393"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="OiT-4E-YD6">
+            <objects>
+                <navigationController storyboardIdentifier="PortaleStudNavigation" automaticallyAdjustsScrollViewInsets="NO" id="mJa-Lh-IdU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nBE-tg-vL3">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ZQt-ao-TNW" kind="relationship" relationship="rootViewController" id="scA-hm-kkq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zUT-Iy-KSO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6352.8000000000002" y="1160.8695652173915"/>
         </scene>
     </scenes>
     <resources>

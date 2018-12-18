@@ -13,6 +13,7 @@ import UIKit
  var ProfileFrontController : UINavigationController! = nil
  var DocsFrontController : UINavigationController! = nil
  var ManageCourseFrontController : UINavigationController! = nil
+ var PortaleStudController : UINavigationController! = nil
 
 
 
@@ -92,6 +93,18 @@ class MenuTableViewController: UITableViewController, SWRevealViewControllerDele
             }
             
         }
+        else if indexPath.row == 5{
+            if PortaleStudController == nil {
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "PortaleStudNavigation") as! UINavigationController
+                let segue = SWRevealViewControllerSeguePushController.init(identifier: "pushToPortaleStud", source: self, destination: vc)
+                segue.perform()
+                PortaleStudController = vc
+            }
+            else{
+                self.revealViewController()?.pushFrontViewController(PortaleStudController, animated: true)
+            }
+            
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
        
@@ -104,7 +117,7 @@ class MenuTableViewController: UITableViewController, SWRevealViewControllerDele
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 5
+        return 6
     }
 
     /*
