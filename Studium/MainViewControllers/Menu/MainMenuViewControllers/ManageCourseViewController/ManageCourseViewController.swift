@@ -16,6 +16,8 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
        // self.view.backgroundColor = UIColor.green
+        self.manageCoursesTableView.backgroundColor = UIColor.lightWhite
+        self.view.backgroundColor = UIColor.lightWhite
         
         manageCoursesTableView.delegate = self
         manageCoursesTableView.dataSource = self
