@@ -231,7 +231,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     
     func completeTeachingDataSource(){
         //Scarica i dati dal db
-        teachingDataSource.completeDataSource(showcaseHTML: "https://github.com", syllabusCode: "14927", haveDocuments: false, haveBooking: false, descriptionText: "ciao")
+        teachingDataSource.completeDataSource(showcaseHTML: "https://www.apple.com/it/", syllabusCode: "14927", haveDocuments: false, haveBooking: false, descriptionText: "ciao")
         
         teachingDataSource.addNewNotify(date: "30/10/2018", title: "Date esami", message: "Giorno 2 novembre ci sarà la prima prova scritta.")
         teachingDataSource.addNewNotify(date: "25/11/2018", title: "Lezione rimandata", message: "Si avvisano gli studenti che giorno 26 novembre non ci sarà lezione.")
