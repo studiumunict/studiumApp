@@ -20,7 +20,6 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate {
     
     var syllabusCode: String!
     var isLoaded: Bool = false
-    var url: URL!
     
     let reachability = Reachability()!
     
@@ -53,10 +52,6 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate {
         
         
         if syllabusCode != nil {
-            if syllabusCode!.last == "/"  {
-                syllabusCode!.removeLast()
-            }
-            
             webView.load(URLRequest(url: URL(string: "https://syllabus.unict.it/insegnamento.php?mod=" + syllabusCode!)!))
         }
         
@@ -99,10 +94,6 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate {
             
             if !isLoaded {
                 if syllabusCode != nil {
-                    if syllabusCode!.last == "/"  {
-                        syllabusCode!.removeLast()
-                    }
-                    
                     webView.load(URLRequest(url: URL(string: "https://syllabus.unict.it/insegnamento.php?mod=" + syllabusCode!)!))
                 }
             }
@@ -156,7 +147,6 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("\n\n didFinish")
         isLoaded = true
-        url = self.webView.url
     }
     
     func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {

@@ -33,7 +33,7 @@ class Teaching{
     var looked: Bool! //TRUE: se è privata, FALSE: altrimenti
     var teacherName: String!
    
-    var haveShowcase: Bool!
+    var showcaseHTML: String!
     var haveDocuments: Bool!
     var haveBooking: Bool!
     var descriptionText: String!
@@ -50,10 +50,10 @@ class Teaching{
     }
     
     
-    func completeDataSource(haveShowcase: Bool?, syllabusCode: String?, haveDocuments: Bool?, haveBooking: Bool?, descriptionText: String?){
+    func completeDataSource(showcaseHTML: String?, syllabusCode: String?, haveDocuments: Bool?, haveBooking: Bool?, descriptionText: String?){
         
-        if let val = haveShowcase {
-            self.haveShowcase = val
+        if let val = showcaseHTML {
+            self.showcaseHTML = val
         }
         
         if let val = syllabusCode {
