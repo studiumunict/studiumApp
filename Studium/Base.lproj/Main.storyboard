@@ -312,31 +312,45 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vetrina vuota.." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PO1-77-CuU">
-                                <rect key="frame" x="112.5" y="128" width="150" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="hhx-tO-nyb"/>
-                                </constraints>
+                                <rect key="frame" x="129.5" y="128" width="116.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="pCK-LO-pk5">
-                                <rect key="frame" x="177.5" y="268.5" width="20" height="20"/>
-                            </activityIndicatorView>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F4K-8r-usB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="537"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="agW-L1-5Zo">
+                                <rect key="frame" x="0.0" y="20" width="375" height="3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="3" id="jA1-Iu-e1m"/>
+                                </constraints>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" red="0.96879995200000002" green="0.96879995200000002" blue="0.96879995200000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="PO1-77-CuU" firstAttribute="top" secondItem="tH0-kp-Dqu" secondAttribute="top" constant="108" id="1k1-b2-lHe"/>
                             <constraint firstItem="PO1-77-CuU" firstAttribute="centerX" secondItem="tH0-kp-Dqu" secondAttribute="centerX" id="303-BA-zt3"/>
-                            <constraint firstItem="pCK-LO-pk5" firstAttribute="centerY" secondItem="tH0-kp-Dqu" secondAttribute="centerY" id="EYh-Ba-TWs"/>
-                            <constraint firstItem="pCK-LO-pk5" firstAttribute="centerX" secondItem="tH0-kp-Dqu" secondAttribute="centerX" id="M2z-aG-Fu8"/>
+                            <constraint firstItem="F4K-8r-usB" firstAttribute="top" secondItem="Pql-5N-ws0" secondAttribute="top" id="829-c2-4a0"/>
+                            <constraint firstItem="F4K-8r-usB" firstAttribute="trailing" secondItem="tH0-kp-Dqu" secondAttribute="trailing" id="L61-Gw-XoT"/>
+                            <constraint firstItem="agW-L1-5Zo" firstAttribute="width" secondItem="Pql-5N-ws0" secondAttribute="width" id="M7c-zd-UK7"/>
+                            <constraint firstItem="agW-L1-5Zo" firstAttribute="top" secondItem="tH0-kp-Dqu" secondAttribute="top" id="ZE4-9c-CWv"/>
+                            <constraint firstItem="F4K-8r-usB" firstAttribute="leading" secondItem="tH0-kp-Dqu" secondAttribute="leading" id="eps-If-pNT"/>
+                            <constraint firstItem="agW-L1-5Zo" firstAttribute="centerX" secondItem="tH0-kp-Dqu" secondAttribute="centerX" id="fUe-4o-Wj9"/>
+                            <constraint firstItem="F4K-8r-usB" firstAttribute="bottom" secondItem="tH0-kp-Dqu" secondAttribute="bottom" id="gBC-yB-rPp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tH0-kp-Dqu"/>
                     </view>
                     <size key="freeformSize" width="375" height="537"/>
                     <connections>
                         <outlet property="errorMessageLabel" destination="PO1-77-CuU" id="yfZ-0S-mIZ"/>
-                        <outlet property="loadingIndicator" destination="pCK-LO-pk5" id="slC-UO-cIx"/>
+                        <outlet property="progressBar" destination="agW-L1-5Zo" id="eCK-ej-Kh9"/>
+                        <outlet property="webView" destination="F4K-8r-usB" id="k93-sC-FeT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LJC-Gw-Xgn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1967,7 +1981,10 @@
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KYy-id-kFe">
-                                <rect key="frame" x="0.0" y="20" width="375" height="2"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="3" id="2gy-VJ-4PI"/>
+                                </constraints>
                             </progressView>
                         </subviews>
                         <color key="backgroundColor" red="0.96879995200000002" green="0.96879995200000002" blue="0.96879995200000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
