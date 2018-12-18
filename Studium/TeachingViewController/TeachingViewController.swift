@@ -66,7 +66,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             let vc5 = sb.instantiateViewController(withIdentifier: "documentsPageViewController") as! DocumentsPageViewController
             let vc6 = sb.instantiateViewController(withIdentifier: "bookingPageViewController") as! BookingPageViewController
             
-            vc1.haveShowcase = teachingDataSource.haveShowcase
+            vc1.showcaseHTML = teachingDataSource.showcaseHTML
             vc2.notifyList = teachingDataSource.notifyList
             vc3.syllabusCode = teachingDataSource.syllabusCode
             vc4.descriptionText = teachingDataSource.descriptionText
@@ -231,7 +231,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     
     func completeTeachingDataSource(){
         //Scarica i dati dal db
-        teachingDataSource.completeDataSource(haveShowcase: true, syllabusCode: "14927", haveDocuments: false, haveBooking: false, descriptionText: "ciao")
+        teachingDataSource.completeDataSource(showcaseHTML: "https://github.com", syllabusCode: "14927", haveDocuments: false, haveBooking: false, descriptionText: "ciao")
         
         teachingDataSource.addNewNotify(date: "30/10/2018", title: "Date esami", message: "Giorno 2 novembre ci sarà la prima prova scritta.")
         teachingDataSource.addNewNotify(date: "25/11/2018", title: "Lezione rimandata", message: "Si avvisano gli studenti che giorno 26 novembre non ci sarà lezione.")
@@ -244,7 +244,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     func setPageViewController() {
         var i: Int
         
-        if teachingDataSource.haveShowcase == nil || !teachingDataSource.haveShowcase {
+        if teachingDataSource.showcaseHTML == nil || teachingDataSource.showcaseHTML.isEmpty {
             showcaseButtonView.isHidden = true
             i = 0
             for x in viewControllerList {
