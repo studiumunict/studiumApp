@@ -70,7 +70,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             vc2.notifyList = teachingDataSource.notifyList
             vc3.syllabusCode = teachingDataSource.syllabusCode
             vc4.descriptionText = teachingDataSource.descriptionText
-            vc5.haveDocuments = teachingDataSource.haveDocuments
+            vc5.documentsList = teachingDataSource.documentsList
             vc6.haveBooking = teachingDataSource.haveBooking
             
             return [vc1, vc2, vc3, vc4, vc5, vc6]
@@ -103,7 +103,12 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         navigationController?.view.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.secondaryBackground, thickness: 0.3)
     
         
-        showcaseButtonView.backgroundColor = UIColor.buttonSelected
+        for x in stackView.subviews {
+            if !x.isHidden {
+                x.backgroundColor = UIColor.buttonSelected
+                break
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -231,11 +236,20 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     
     func completeTeachingDataSource(){
         //Scarica i dati dal db
-        teachingDataSource.completeDataSource(showcaseHTML: "https://www.apple.com/it/", syllabusCode: "14927", haveDocuments: false, haveBooking: false, descriptionText: "ciao")
+        teachingDataSource.completeDataSource(showcaseHTML: nil, syllabusCode: "14927", haveBooking: false, descriptionText: nil)
         
         teachingDataSource.addNewNotify(date: "30/10/2018", title: "Date esami", message: "Giorno 2 novembre ci sarà la prima prova scritta.")
         teachingDataSource.addNewNotify(date: "25/11/2018", title: "Lezione rimandata", message: "Si avvisano gli studenti che giorno 26 novembre non ci sarà lezione.")
         teachingDataSource.addNewNotify(date: "05/12/2018", title: "Risultati della prova in itinere", message: "Tutti promossi. :)")
+        
+        
+        teachingDataSource.addNewDocument(path: "cartella1", type: .folder)
+        teachingDataSource.addNewDocument(path: "file1", type: .file)
+        teachingDataSource.addNewDocument(path: "file2", type: .file)
+        teachingDataSource.addNewDocument(path: "file3", type: .file)
+        teachingDataSource.documentsList[2].setPrev(prev: teachingDataSource.documentsList[0])
+        teachingDataSource.documentsList[3].setPrev(prev: teachingDataSource.documentsList[0])
+        
         
         courseNameLabel.text = teachingDataSource.name
         nameTeacherLabel.text = teachingDataSource.teacherName
@@ -308,7 +322,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             customButtons(button: descriptionButton, image: "description", action: #selector(self.sendToDescriptionView(_:)))
         }
         
-        if teachingDataSource.haveDocuments == nil || !teachingDataSource.haveDocuments {
+        if teachingDataSource.documentsList == nil || teachingDataSource.documentsList.isEmpty {
             documentsButtonView.isHidden = true
             i = 0
             for x in viewControllerList {

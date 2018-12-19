@@ -34,10 +34,10 @@ class Teaching{
     var teacherName: String!
    
     var showcaseHTML: String!
-    var haveDocuments: Bool!
     var haveBooking: Bool!
     var descriptionText: String!
     var notifyList: [Notify]!
+    var documentsList: [Docs]!
     var syllabusCode: String!
     
     
@@ -47,10 +47,11 @@ class Teaching{
         self.teacherName = teacherName
         self.signedUp = signedUp
         notifyList = [Notify]()
+        documentsList = [Docs]()
     }
     
     
-    func completeDataSource(showcaseHTML: String?, syllabusCode: String?, haveDocuments: Bool?, haveBooking: Bool?, descriptionText: String?){
+    func completeDataSource(showcaseHTML: String?, syllabusCode: String?, haveBooking: Bool?, descriptionText: String?) {
         
         if let val = showcaseHTML {
             self.showcaseHTML = val
@@ -58,10 +59,6 @@ class Teaching{
         
         if let val = syllabusCode {
             self.syllabusCode = val
-        }
-        
-        if let val = haveDocuments {
-            self.haveDocuments = val
         }
         
         if let val = haveBooking {
@@ -73,10 +70,15 @@ class Teaching{
         }
         
         notifyList = [Notify]()
+        documentsList = [Docs]()
     }
     
-    func addNewNotify(date: String?, title: String?, message: String?){
+    func addNewNotify(date: String?, title: String?, message: String?) {
         notifyList.append(Notify(date: date!, title: title!, message: message!))
+    }
+    
+    func addNewDocument(path: String, type: Docs.typeDocs) {
+        documentsList.append(Docs(path: path, type: type))
     }
     
 }
