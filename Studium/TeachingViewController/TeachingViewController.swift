@@ -244,11 +244,21 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         
         
         teachingDataSource.addNewDocument(path: "cartella1", type: .folder)
-        teachingDataSource.addNewDocument(path: "file1", type: .file)
+        teachingDataSource.addNewDocument(path: "file", type: .file)
+        teachingDataSource.addNewDocument(path: "file", type: .file)
+        teachingDataSource.addNewDocument(path: "file", type: .file)
+        teachingDataSource.addNewDocument(path: "file", type: .file)
+        teachingDataSource.addNewDocument(path: "file", type: .file)
+        teachingDataSource.addNewDocument(path: "file", type: .file)
+        teachingDataSource.addNewDocument(path: "file", type: .file)
+        teachingDataSource.addNewDocument(path: "file", type: .file)
+        teachingDataSource.addNewDocument(path: "file", type: .file)
+        teachingDataSource.addNewDocument(path: "file", type: .file)
+        teachingDataSource.addNewDocument(path: "file", type: .file)
         teachingDataSource.addNewDocument(path: "file2", type: .file)
         teachingDataSource.addNewDocument(path: "file3", type: .file)
-        teachingDataSource.documentsList[2].setPrev(prev: teachingDataSource.documentsList[0])
-        teachingDataSource.documentsList[3].setPrev(prev: teachingDataSource.documentsList[0])
+        teachingDataSource.documentsList[12].setPrev(prev: teachingDataSource.documentsList[0])
+        teachingDataSource.documentsList[13].setPrev(prev: teachingDataSource.documentsList[0])
         
         
         courseNameLabel.text = teachingDataSource.name

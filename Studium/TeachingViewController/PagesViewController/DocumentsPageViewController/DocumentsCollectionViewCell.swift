@@ -12,12 +12,12 @@ class DocumentsCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var imageDoc: UIImageView!
     @IBOutlet var titleDocLabel: UILabel!
-    @IBOutlet var numberOfSubDocLabel: UILabel!
+    @IBOutlet var descriptionDocLabel: UILabel!
     
     
     override func awakeFromNib() {
         titleDocLabel.textColor = UIColor.elementsLikeNavBarColor
-        numberOfSubDocLabel.textColor = UIColor.subTitleGray
+        descriptionDocLabel.textColor = UIColor.subTitleGray
     }
     
     
