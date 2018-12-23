@@ -20,5 +20,10 @@ class DocumentsCollectionViewCell: UICollectionViewCell {
         descriptionDocLabel.textColor = UIColor.subTitleGray
     }
     
+    func update(image imageString: String, title: String, description: String) {
+        self.imageDoc.image = UIImage(named: imageString)
+        self.titleDocLabel.text = title
+        self.descriptionDocLabel.text = description
+    }
     
 }

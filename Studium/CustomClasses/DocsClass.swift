@@ -10,10 +10,11 @@ import Foundation
 
 
 class Docs {
-    let path: String!
-    let type: typeDocs!
-    let canOpen: Bool!
+    let TypeDoc: typeDocs!
+    let CanOpen: Bool!
     
+    var ID = String()
+    var path: String!
     var prev: Docs!
     var next = [Docs]()
     
@@ -24,21 +25,37 @@ class Docs {
     
     init(path: String, type: typeDocs) {
         self.path = path
-        self.type = type
-        self.canOpen = true
+        self.TypeDoc = type
+        self.CanOpen = true
+        self.ID = addressOf(self)
     }
     
     func setPrev(prev: Docs!) {
         self.prev = prev
         
         if self.prev != nil {
-            self.prev.setNext(next: [self])
+            self.prev.setNext(items: [self])
         }
     }
     
-    func setNext(next: [Docs]) {
-        for x in next {
+    func setNext(items: [Docs]) {
+        for x in items {
             self.next.append(x)
         }
+    }
+    
+    private func addressOf<Docs>(_ o: Docs) -> String {
+        let addr = unsafeBitCast(o, to: Int.self)
+        return String(format: "%p", addr)
+    }
+}
+
+extension Docs: Equatable {
+    static func == (left: Docs, right: Docs) -> Bool {
+        return left.ID == right.ID
+    }
+    
+    static func != (left: Docs, right: Docs) -> Bool {
+        return left.ID != right.ID
     }
 }
