@@ -15,6 +15,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var categoryHeaderView: UIView!
     @IBOutlet weak var removeCategoryButton: UIButton!
+    var tabController : ManageCoursePageViewController!
     
     @IBOutlet weak var addCategoryButton: UIButton!
     
@@ -75,7 +76,15 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         
     }
     
-    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let item = courseSharedDataSource[sourceIndexPath.section].teachings[sourceIndexPath.row]
+        courseSharedDataSource[sourceIndexPath.section].teachings.remove(at: sourceIndexPath.row)
+        courseSharedDataSource[destinationIndexPath.section].teachings.insert(item, at: destinationIndexPath.row)
+        
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if courseSharedDataSource[section].expanded {
             return courseSharedDataSource[section].teachings.count
@@ -100,9 +109,9 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         
         cell.teachingNameLabel.text = dataElement.name
         cell.teacherNameLabel.text = dataElement.teacherName
-        cell.arrowImage.image =  UIImage.init(named: "menu")?.withRenderingMode(.alwaysTemplate)
-        cell.arrowImage.tintColor = UIColor.elementsLikeNavBarColor
-        cell.arrowImage.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        cell.arrowImage.image =  nil
+       // cell.arrowImage.tintColor = UIColor.elementsLikeNavBarColor
+       // cell.arrowImage.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         
         return cell
     }
@@ -203,6 +212,26 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     func numberOfSections(in tableView: UITableView) -> Int {
         return courseSharedDataSource.count
     }
+    
+    func setEditIconOnTabBar(){
+        let imageView2 = UIImageView(frame: CGRect(x: 0, y: 2.5, width: 25.5, height: 25))
+        imageView2.image = UIImage.init(named: "menu")
+        let buttonView2 = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 27.5))
+        buttonView2.addSubview(imageView2)
+        self.tabController.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: buttonView2)
+        self.tabController.navigationItem.rightBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.editClicked)))
+        
+    }
+    @objc func editClicked(){
+        if !self.manageCoursesTableView.isEditing {
+            self.manageCoursesTableView.setEditing(true, animated: true)
+        }
+        else{
+            self.manageCoursesTableView.setEditing(false, animated: true)
+        }
+       // self.manageCoursesTableView.isEditing = !self.manageCoursesTableView.isEditing
+    }
+    
     
     @IBAction func removeCategoryClicked(_ sender: Any) {
     }

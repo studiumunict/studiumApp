@@ -39,7 +39,7 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
         buttonView.addSubview(imageView)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: buttonView)
         
-        setNavBarForManagement()
+      
         self.viewAppoggio.backgroundColor =  UIColor.primaryBackground
         self.signUpCourseButtonView.backgroundColor = UIColor.clear
         self.manageCourseButtonView.backgroundColor = UIColor.buttonSelected
@@ -48,8 +48,11 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
             let nc2 = storyboard!.instantiateViewController(withIdentifier: "BrowseAndSearchController")
             let browseAndSearch = nc2 as! BrowseAndSearchCoursesViewController
             browseAndSearch.tabController = self
+            let manage = nc1 as! ManageCourseViewController
+            manage.tabController = self
             return [nc1, nc2]
         }()
+          setNavBarForManagement()
         
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 130//Menu sx/
@@ -192,8 +195,11 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
         }
     }
     func setNavBarForManagement(){
-        self.navigationItem.title =  "Gestisci corsi"
         self.navigationItem.rightBarButtonItem = nil
+        let manageVc = navControllerList[0] as! ManageCourseViewController
+        manageVc.setEditIconOnTabBar()
+        self.navigationItem.title =  "Gestisci corsi"
+       //
     }
     
 }

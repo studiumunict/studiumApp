@@ -728,7 +728,7 @@
             </objects>
             <point key="canvasLocation" x="1600.8" y="2005.5472263868066"/>
         </scene>
-        <!--Documents View Controller-->
+        <!--Documenti-->
         <scene sceneID="ibh-bv-0dj">
             <objects>
                 <viewController id="McH-c7-BFT" customClass="DocumentsViewController" customModule="Studium" customModuleProvider="target" sceneMemberID="viewController">
@@ -738,7 +738,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="bAA-9J-eDm"/>
                     </view>
-                    <navigationItem key="navigationItem" id="sIM-4c-vtn"/>
+                    <navigationItem key="navigationItem" title="Documenti" id="sIM-4c-vtn"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c1g-VP-hF7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1582,7 +1582,7 @@
             </objects>
             <point key="canvasLocation" x="5138.3999999999996" y="1160.8695652173915"/>
         </scene>
-        <!--Portale Studenti View Controller-->
+        <!--Portale studenti-->
         <scene sceneID="4HH-br-Jpu">
             <objects>
                 <viewController storyboardIdentifier="portaleStudentiController" id="ZQt-ao-TNW" customClass="PortaleStudentiViewController" customModule="Studium" customModuleProvider="target" sceneMemberID="viewController">
@@ -1669,7 +1669,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ekf-lH-xXd"/>
                     </view>
-                    <navigationItem key="navigationItem" id="jIb-ce-I61"/>
+                    <navigationItem key="navigationItem" title="Portale studenti" id="jIb-ce-I61"/>
                     <connections>
                         <outlet property="backButton" destination="swM-JJ-ber" id="zcD-Cc-Q9o"/>
                         <outlet property="errorMessageLabel" destination="tMc-mF-saJ" id="eyy-Ta-h7W"/>
