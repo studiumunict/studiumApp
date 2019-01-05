@@ -96,6 +96,36 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
     }
     
     
+    func revealController(_ revealController: SWRevealViewController!, didMoveTo position: FrontViewPosition) {
+        print("moved")
+        let manageController = navControllerList[0] as! ManageCourseViewController
+        switch position {
+            
+        case .right:
+            print("right")
+            //apri menu
+            if manageController.createCategoryTextField.isFirstResponder {
+                manageController.createCategoryTextField.resignFirstResponder()
+            }
+            
+            
+            break
+        case .left :
+            //chiudi menu
+            print("move to left")
+            if manageController.createCategoryView.isHidden ==  false{
+                manageController.createCategoryTextField.becomeFirstResponder()
+            }
+            
+            
+            break
+            
+        default:
+            break
+        }
+    }
+    
+    
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard completed else{return}
         if previousViewControllers.last == navControllerList[0] {

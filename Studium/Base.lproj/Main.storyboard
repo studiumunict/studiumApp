@@ -942,7 +942,6 @@
                         <outlet property="emailView" destination="rkU-8W-aQA" id="atc-Ec-b0w"/>
                         <outlet property="phoneNumberLabel" destination="Drf-tK-Phb" id="xYa-Qn-4eK"/>
                         <outlet property="phoneNumberView" destination="gug-9I-X96" id="PrZ-K3-Xoe"/>
-                        <outlet property="profileImageView" destination="L9d-1T-52n" id="883-aD-ZLb"/>
                         <outlet property="studentNameLabel" destination="xyC-cL-Hfu" id="ftQ-gr-AQi"/>
                         <outlet property="universityCodeLabel" destination="1uN-Hn-T6z" id="9be-lX-LCu"/>
                         <outlet property="universityCodeView" destination="8WN-E6-o11" id="vsA-DP-3CW"/>
@@ -966,7 +965,7 @@
                     </view>
                     <connections>
                         <segue destination="feH-IH-s8z" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="02q-i2-bUd"/>
-                        <segue destination="RIR-wf-nu1" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="l0s-eJ-CPt"/>
+                        <segue destination="vFC-hh-Ww0" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="ILE-d2-97B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ccA-by-o7M" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1018,7 +1017,7 @@
                                                         <constraint firstAttribute="height" constant="45" id="aVD-XG-mfy"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eT8-Sj-31B">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Naviga" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eT8-Sj-31B">
                                                     <rect key="frame" x="27.5" y="58" width="70" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="70" id="iac-kR-5kc"/>
@@ -2432,7 +2431,7 @@
         <image name="student" width="409.60000610351562" height="409.60000610351562"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YwA-o2-fQF"/>
+        <segue reference="ILE-d2-97B"/>
         <segue reference="035-UK-Tez"/>
     </inferredMetricsTieBreakers>
 </document>

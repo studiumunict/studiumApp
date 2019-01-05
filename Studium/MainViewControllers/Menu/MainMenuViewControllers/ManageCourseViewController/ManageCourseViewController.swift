@@ -30,17 +30,8 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        oscureView.backgroundColor = UIColor.primaryBackground
-        self.createCategoryView.backgroundColor = UIColor.primaryBackground
-        self.createCategoryView.layer.borderColor = UIColor.secondaryBackground.cgColor
-        self.createCategoryView.layer.borderWidth = 1.0
-        self.createCategoryView.layer.cornerRadius = 5.0
-        createCategoryLabel.textColor = UIColor.lightWhite
-        createCategoryLabel.font = UIFont.boldSystemFont(ofSize: 15)
-        createCategoryLabel.textAlignment = .center
-        createCategoryView.isHidden = true
-        oscureView.isHidden = true
-        createCategoryTextField.backgroundColor = UIColor.lightWhite
+        setUpCreateCategoryView()
+        manageCoursesTableView.setEditing(true, animated: false)
        // self.view.backgroundColor = UIColor.green
         self.manageCoursesTableView.backgroundColor = UIColor.lightWhite
         self.view.backgroundColor = UIColor.lightWhite
@@ -57,6 +48,8 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         }
         // Do any additional setup after loading the view.
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -89,6 +82,10 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         
     }
     
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String?
+    {
+        return "Rimuovi iscrizione"
+    }
     
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -164,14 +161,6 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
 
             button.addSubview(removeButton)
         }
-        /*
-        let arrowImageView = UIImageView.init(frame: CGRect(x: 10, y: button.frame.height/2 - 7.5, width: 15, height: 15))
-        arrowImageView.image = UIImage.init(named: "arrow")?.withRenderingMode(.alwaysTemplate);
-        arrowImageView.tintColor = UIColor.elementsLikeNavBarColor
-        button.addSubview(arrowImageView)
-        */
-        
-        
         button.setTitle(courseSharedDataSource[section].course.name, for: .normal)
         if courseSharedDataSource[section].expanded {
             rotateArrows180Degrees(button: button,animated: false)
@@ -218,29 +207,6 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
             self.present(alert, animated: true, completion: nil)
         }
     }
-    
-   /* @objc func removeOrExpandRows(button : UIButton ){
-        rotateArrows180Degrees(button: button,animated: true)
-        let sect = button.tag
-        var indices = [IndexPath]()
-        var row = 0;
-        
-        for _ in courseSharedDataSource[sect].teachings{ // salva tutti gli indici
-            indices.append(IndexPath.init(row: row, section: sect))
-            row += 1
-        }
-        
-        if courseSharedDataSource[sect].expanded == true{ //RIMUOVE LE RIGHE
-            courseSharedDataSource[sect].expanded = false
-            self.manageCoursesTableView.deleteRows(at: indices, with: .fade)
-        }
-        else{
-            courseSharedDataSource[sect].expanded = true
-            self.manageCoursesTableView.insertRows(at: indices, with: .fade)
-        }
-        
-    }
-    */
     func rotateArrows180Degrees(button : UIButton,animated : Bool){
         for view in button.subviews{
             if let imageView = view as? UIImageView{
@@ -334,11 +300,9 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         guard t != "" else{ return }
         let newCategory = HomeTableSection.init(cdl: CDL.init(courseName: t, courseCode: -1), teachingArray: [Teaching](), setExpanded: true)
         courseSharedDataSource.insert(newCategory, at: 0)
-        createCategoryTextField.text = nil
+        closeCreateCategoryViewAnimated()
         manageCoursesTableView.reloadData()
         manageCoursesTableView.setEditing(true, animated: true)
-        
-        closeCreateCategoryViewAnimated()
     }
     
     
@@ -355,27 +319,18 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     func enableMenuGesture(){
         
     }
-    func closeCreateCategoryViewAnimated(){
-        UIView.animate(withDuration: 0.5, animations: {
-            
-        }) { (f) in
-            
-        }
+    func setUpCreateCategoryView(){
+        oscureView.backgroundColor = UIColor.primaryBackground
+        self.createCategoryView.backgroundColor = UIColor.createCategoryViewColor
+        self.createCategoryView.layer.borderColor = UIColor.secondaryBackground.cgColor
+        self.createCategoryView.layer.borderWidth = 1.0
+        self.createCategoryView.layer.cornerRadius = 5.0
+        createCategoryLabel.textColor = UIColor.lightWhite
+        createCategoryLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        createCategoryLabel.textAlignment = .center
         createCategoryView.isHidden = true
         oscureView.isHidden = true
-        self.manageCoursesTableView.isUserInteractionEnabled = true
-        self.createCategoryTextField.resignFirstResponder()
-        self.tabController.navigationItem.rightBarButtonItem?.customView?.isUserInteractionEnabled = true
-        
-        
-    }
-    
-    func openCreateCategoryViewAnimated(){
-        self.tabController.navigationItem.rightBarButtonItem?.customView?.isUserInteractionEnabled = false
-        //let buttonFrame  = addCategoryButton.frame
-        oscureView.alpha = 0.0
-        //let newFrame = CGRect(x: 0, y: 0, width: self.view.frame.size.width * 0.9, height: 180)
-        createCategoryLabel.alpha = 0.0
+        createCategoryTextField.backgroundColor = UIColor.lightWhite
         let createCategoryButton = UIButton(frame: CGRect(x: createCategoryView.frame.size.width/2 - 5, y: 130 , width: 120, height: 50))
         let cancelButton = UIButton(frame: CGRect(x: createCategoryView.frame.size.width/2 - 115, y: 130, width: 120, height: 50))
         createCategoryButton.backgroundColor = UIColor.lightWhite
@@ -394,12 +349,55 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         
         createCategoryView.addSubview(createCategoryButton)
         createCategoryView.addSubview(cancelButton)
+    }
+    func closeCreateCategoryViewAnimated(){
+        UIView.animate(withDuration: 0.4, animations: {
+            //self.createCategoryView.frame = CGRect(x: self.addCategoryButton.frame.origin.x - 150, y: self.addCategoryButton.frame.origin.y - 80 , width: self.createCategoryView.frame.size.width, height: self.createCategoryView.frame.size.height)
+            self.createCategoryView.center = CGPoint(x: self.addCategoryButton.center.x + 10, y: self.addCategoryButton.center.y + 5)
+          //  self.createCategoryView.center = self.addCategoryButton.center
+              self.createCategoryView.transform = CGAffineTransform(scaleX: 0.15, y: 0.15)
+            self.oscureView.alpha = 0.6
+            
+        }) { (f) in
+            UIView.animate(withDuration: 0.2, animations: {
+                 self.createCategoryView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+                self.oscureView.alpha = 0.0
+            }, completion: { (f) in
+                self.createCategoryView.isHidden = true
+                self.oscureView.isHidden = true
+                self.manageCoursesTableView.isUserInteractionEnabled = true
+                self.createCategoryTextField.resignFirstResponder()
+                self.tabController.navigationItem.rightBarButtonItem?.customView?.isUserInteractionEnabled = true
+                self.createCategoryTextField.text =  nil
+               // self.createCategoryView.center =  initialCenter
+                
+            })
+            
+        }
+        
+        
+        
+    }
+    
+    
+    func openCreateCategoryViewAnimated(){
+        self.tabController.navigationItem.rightBarButtonItem?.customView?.isUserInteractionEnabled = false
+        //let buttonFrame  = addCategoryButton.frame
+        oscureView.alpha = 0.0
+        //let newFrame = CGRect(x: 0, y: 0, width: self.view.frame.size.width * 0.9, height: 180)
+        createCategoryLabel.alpha = 0.0
         oscureView.isHidden = false
         createCategoryView.isHidden = false
         let initialCenter =  createCategoryView.center
-       // createCategoryView.center = self.view.center
-        createCategoryView.frame = CGRect(x: addCategoryButton.frame.origin.x - 150, y: addCategoryButton.frame.origin.y - 80 , width: createCategoryView.frame.size.width, height: createCategoryView.frame.size.height)
-      //  createCategoryView.center =  addCategoryButton.center
+        self.createCategoryView.center = CGPoint(x: self.addCategoryButton.center.x + 10, y: self.addCategoryButton.center.y + 5)
+        //self.addCategoryButton.center
+        
+       
+       // createCategoryView.frame = CGRect(x: addCategoryButton.frame.origin.x - 150, y: addCategoryButton.frame.origin.y - 80 , width: createCategoryView.frame.size.width, height: createCategoryView.frame.size.height)
+      
+       // createCategoryView.isHidden = false
+        
+        
         self.createCategoryView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
         self.createCategoryView.alpha = 0.0
         UIView.animate(withDuration: 0.2, animations: {
@@ -407,7 +405,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
             self.createCategoryView.transform = CGAffineTransform(scaleX: 0.15, y: 0.15)
             self.createCategoryView.alpha = 0.8
         }) { (flag) in
-            UIView.animate(withDuration: 0.5, animations: {
+            UIView.animate(withDuration: 0.4, animations: {
                 self.oscureView.alpha = 0.9
                 self.createCategoryView.transform = .identity
                 //self.createCategoryView.center = CGPoint(x: self.view.center.x , y: self.view.center.y - 150 )

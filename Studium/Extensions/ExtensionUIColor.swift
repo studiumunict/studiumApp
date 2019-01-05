@@ -22,6 +22,7 @@ extension UIColor{
     static var subTitleGray = #colorLiteral(red: 0.3292481303, green: 0.3293089271, blue: 0.3292401433, alpha: 1)
     static var lightSectionColor = #colorLiteral(red: 0.8595721126, green: 0.8635507226, blue: 0.8732736707, alpha: 1)
     static var elementsLikeNavBarColor = #colorLiteral(red: 0.1867129505, green: 0.1867512167, blue: 0.1867079437, alpha: 1)
+    static var createCategoryViewColor = #colorLiteral(red: 0.09844832867, green: 0.09847258776, blue: 0.09844512492, alpha: 1)
   //  static var oscureViewColor = UIColor(red: 176, green: 176, blue: 176, alpha: 0.7) 
     
 }

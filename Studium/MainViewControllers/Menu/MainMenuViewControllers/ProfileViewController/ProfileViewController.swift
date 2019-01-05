@@ -7,11 +7,11 @@
 //
 
 import UIKit
+import Photos
 
-class ProfileViewController: UIViewController, SWRevealViewControllerDelegate {
+class ProfileViewController: UIViewController, SWRevealViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     
-    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var phoneNumberLabel: UILabel!
     @IBOutlet weak var universityCodeLabel: UILabel!
@@ -23,9 +23,69 @@ class ProfileViewController: UIViewController, SWRevealViewControllerDelegate {
     @IBOutlet weak var phoneNumberView: UIView!
     @IBOutlet weak var emailView: UIView!
     var profileDataSource: Student!
+    var imagePicker = UIImagePickerController()
     
+    /*func checkPermission() {
+        let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
+        switch photoAuthorizationStatus {
+        case .authorized:
+            print("Access is granted by user")
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization({
+                (newStatus) in
+                print("status is \(newStatus)")
+                if newStatus ==  PHAuthorizationStatus.authorized {
+                    /* do stuff here */
+                
+                    print("success")
+                }
+            })
+            print("It is not determined until now")
+        case .restricted:
+            // same same
+            print("User do not have access to photo album.")
+        case .denied:
+            // same same
+            print("User has denied the permission.")
+        }
+    }*/
+    func uploadSelectedimage(image : UIImage){
+        print("uploadImage")
+        
+        
+    }
+    @objc func imageTapped( tapGestureRecognizer: UITapGestureRecognizer){
+        print("imageTapped")
+        //let tappedImage = tapGestureRecognizer.view as! UIImageView
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+            print("Button capture")
+            imagePicker.sourceType = .savedPhotosAlbum;
+            imagePicker.allowsEditing = false
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            self.userImageView.contentMode = .scaleAspectFit
+            self.userImageView.image = pickedImage
+            uploadSelectedimage(image: pickedImage)
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        print("cancelled")
+        dismiss(animated: true, completion: nil)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        self.userImageView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(self.imageTapped(tapGestureRecognizer:))))
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        imagePicker.delegate =  self
+        self.userImageView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(self.imageTapped(tapGestureRecognizer:))))
+        userImageView.isUserInteractionEnabled =  true
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.03487086296, green: 0.03488409892, blue: 0.0348691158, alpha: 1)
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
         imageView.image = UIImage.init(named: "menu")
@@ -74,7 +134,7 @@ class ProfileViewController: UIViewController, SWRevealViewControllerDelegate {
         studentNameLabel.text = profileDataSource.name + " " + profileDataSource.surname
         emailLabel.text = profileDataSource.email
         phoneNumberLabel.text = profileDataSource.telNumber
-        profileImageView.image = profileDataSource.profileImage
+        userImageView.image = profileDataSource.profileImage
         
     }
     

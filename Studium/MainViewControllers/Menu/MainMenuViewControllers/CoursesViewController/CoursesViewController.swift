@@ -23,6 +23,10 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
         super.viewDidLoad()
         //self.view.backgroundColor = UIColor.green
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        CourseFrontController = self.navigationController
+        let _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (t) in
+            self.revealViewController().revealToggle(self)
+        }
         
         
         categoriesLabel.backgroundColor = UIColor.elementsLikeNavBarColor
@@ -46,6 +50,9 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
             revealViewController().delegate = self
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
             self.navigationItem.leftBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:))))
+            
+            
+            
         }
         // Do any additional setup after loading the view.
     }
@@ -57,6 +64,9 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
             revealViewController().delegate = self
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
             self.navigationItem.leftBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:))))
+            
+           
+            
         }
         if courseSharedDataSource.count == 0 {
             reloadSourceFromAPI();
@@ -132,23 +142,25 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
             button.layer.cornerRadius = 5.0
             button.clipsToBounds = true
             
-            
-            let arrowImageView = UIImageView.init(frame: CGRect(x: 10, y: button.frame.height/2 - 7.5, width: 15, height: 15))
-            arrowImageView.image = UIImage.init(named: "arrow")?.withRenderingMode(.alwaysTemplate);
-            arrowImageView.tintColor = UIColor.elementsLikeNavBarColor
-            button.addSubview(arrowImageView)
-            
+            if courseSharedDataSource[section].teachings.count > 0 {
+                let arrowImageView = UIImageView.init(frame: CGRect(x: 10, y: button.frame.height/2 - 7.5, width: 15, height: 15))
+                arrowImageView.image = UIImage.init(named: "arrow")?.withRenderingMode(.alwaysTemplate);
+                arrowImageView.tintColor = UIColor.elementsLikeNavBarColor
+                button.addSubview(arrowImageView)
+                if courseSharedDataSource[section].expanded {
+                    rotateArrows180Degrees(button: button,animated: false)
+                }
+                button.addTarget(self, action: #selector(self.removeOrExpandRows), for: .touchUpInside)
+            }
         
         
             button.setTitle(courseSharedDataSource[section].course.name, for: .normal)
-            if courseSharedDataSource[section].expanded {
-                rotateArrows180Degrees(button: button,animated: false)
-            }
+        
             button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
             button.setTitleColor(UIColor.elementsLikeNavBarColor, for: .normal)
             button.backgroundColor = UIColor.lightSectionColor
             button.tag = section
-            button.addTarget(self, action: #selector(self.removeOrExpandRows), for: .touchUpInside)
+        
             
             
             
