@@ -89,9 +89,11 @@ class DocumentsPageViewController: UIViewController, UICollectionViewDelegate, U
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.allowsMultipleSelection {
-            let cell = collectionView.cellForItem(at: indexPath)
-            selectionList.append(subList[indexPath.item])
+            if !selectionList.contains(subList[indexPath.item]){
+                selectionList.append(subList[indexPath.item])
+            }
             
+            let cell = collectionView.cellForItem(at: indexPath)
             cell?.backgroundColor = UIColor.lightSectionColor
             
         } else {
@@ -105,6 +107,10 @@ class DocumentsPageViewController: UIViewController, UICollectionViewDelegate, U
                 titleLabel.text = subList.first?.prev.path!
             } //else visualizza il file
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        cell.backgroundColor = cell.isSelected ? UIColor.lightSectionColor : UIColor.clear
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
