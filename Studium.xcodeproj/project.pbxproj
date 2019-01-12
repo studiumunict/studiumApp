@@ -168,7 +168,7 @@
 				13E3A34521C1407D004BE8D8 /* NotifyPageViewController */,
 				138E6E2721C458830000A747 /* SyllabusPageViewController.swift */,
 				139BCB6721BDE034005A750A /* DescriptionPageViewController.swift */,
-				13D3997421CA634F00B023B8 /* DocumentsPageViewController */,
+				139BCB6921BDE057005A750A /* DocumentsPagesViewController.swift */,
 				139BCB6B21BDE0AF005A750A /* BookingPagesViewController.swift */,
 			);
 			path = PagesViewController;
@@ -198,15 +198,6 @@
 				13CC782221C93FB90052E579 /* PortaleStudentiViewController.swift */,
 			);
 			path = PortaleStudentiViewController;
-			sourceTree = "<group>";
-		};
-		13D3997421CA634F00B023B8 /* DocumentsPageViewController */ = {
-			isa = PBXGroup;
-			children = (
-				139BCB6921BDE057005A750A /* DocumentsPagesViewController.swift */,
-				13D3997E21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift */,
-			);
-			path = DocumentsPageViewController;
 			sourceTree = "<group>";
 		};
 		13E3A34521C1407D004BE8D8 /* NotifyPageViewController */ = {
@@ -274,6 +265,7 @@
 				9CFE72C221B95206001EB697 /* TeachingClass.swift */,
 				9CFE72C421B95331001EB697 /* HomeTableSectionClass.swift */,
 				13D3997C21CACF1300B023B8 /* DocsClass.swift */,
+				13D3997E21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";

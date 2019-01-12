@@ -29,6 +29,7 @@ class DocumentsPageViewController: UIViewController, UICollectionViewDelegate, U
     var subList = [Docs]() //Lista contenente gli elementi di una cartella..
     var selectionList = [Docs]() //Lista contenente gli elementi della selezione multipla
     var folderEmptySelected: Docs!
+    var prevIndexItem: Int!
     
     
     override func viewDidLoad() {
@@ -101,10 +102,11 @@ class DocumentsPageViewController: UIViewController, UICollectionViewDelegate, U
                 if subList[indexPath.item].next.isEmpty {
                     folderEmptySelected = subList[indexPath.item]
                 }
+                prevIndexItem = indexPath.item
                 reloadList(currentDoc: subList[indexPath.item])
                 self.collectionView.reloadData()
                 backButton.isEnabled = true
-                titleLabel.text = subList.first?.prev.path!
+                titleLabel.text = subList.isEmpty ? folderEmptySelected.path! : subList.first?.prev.path!
             } //else visualizza il file
         }
     }
@@ -193,7 +195,12 @@ class DocumentsPageViewController: UIViewController, UICollectionViewDelegate, U
     
     
     @IBAction func backButtonBarSelected(_ sender: UIButton) {
-        reloadList(currentDoc: subList.first?.prev.prev)
+        if subList.isEmpty {
+            reloadList(currentDoc: folderEmptySelected.prev)
+        } else {
+            reloadList(currentDoc: documentsList[prevIndexItem].prev)
+        }
+        
         collectionView.reloadData()
         
         if subList.first?.prev == nil {
@@ -306,6 +313,7 @@ class DocumentsPageViewController: UIViewController, UICollectionViewDelegate, U
         didMultipleSelectionSelected()
         collectionView.reloadData()
         resetCell()
+        reloadDescriptionLabel()
     }
     
     var indexes = [Docs]()
