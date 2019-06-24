@@ -64,9 +64,6 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
             revealViewController().delegate = self
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
             self.navigationItem.leftBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:))))
-            
-           
-            
         }
         if courseSharedDataSource.count == 0 {
             reloadSourceFromAPI();

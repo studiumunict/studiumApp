@@ -14,8 +14,6 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     @IBOutlet var viewAppoggio: UIView! //Contiene la scrollView
     @IBOutlet var stackView: UIStackView!
     
-
-    
     @IBOutlet var courseNameLabel: UILabel!
     @IBOutlet var nameTeacherLabel: UILabel!
     
@@ -65,14 +63,12 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             let vc4 = sb.instantiateViewController(withIdentifier: "descriptionPageViewController") as! DescriptionPageViewController
             let vc5 = sb.instantiateViewController(withIdentifier: "documentsPageViewController") as! DocumentsPageViewController
             let vc6 = sb.instantiateViewController(withIdentifier: "bookingPageViewController") as! BookingPageViewController
-            
             vc1.showcaseHTML = teachingDataSource.showcaseHTML
             vc2.notifyList = teachingDataSource.notifyList
             vc3.syllabusCode = teachingDataSource.syllabusCode
             vc4.descriptionText = teachingDataSource.descriptionText
             vc5.documentsList = teachingDataSource.documentsList
             vc6.haveBooking = teachingDataSource.haveBooking
-            
             return [vc1, vc2, vc3, vc4, vc5, vc6]
         }()
         

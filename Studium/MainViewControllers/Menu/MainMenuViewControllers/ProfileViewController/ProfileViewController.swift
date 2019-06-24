@@ -116,19 +116,16 @@ class ProfileViewController: UIViewController, SWRevealViewControllerDelegate, U
         emailView.layer.cornerRadius =  7.0
         emailView.clipsToBounds = true
         
-        getStudent()
-        
-        
-        
-        
-        
-        
+        let thisStudent = getStudent()
+        setStudentDatainView(profileDataSource: thisStudent)
     }
     
-    func getStudent(){
-        
+    func getStudent() -> Student{
         profileDataSource = Student(codFiscale: "SCNSNR98P29C351C", code: "X81000123", name: "Simone Orazio", surname: "Scionti", telNumber: "12345678901", email: "ilking@dmi.unict.it", profileImage: UIImage.init(named: "logo"))
-        
+        return profileDataSource
+    }
+    
+    func setStudentDatainView(profileDataSource: Student){
         codFiscaleLabel.text = profileDataSource.codFiscale
         universityCodeLabel.text = profileDataSource.code
         studentNameLabel.text = profileDataSource.name + " " + profileDataSource.surname
@@ -140,7 +137,6 @@ class ProfileViewController: UIViewController, SWRevealViewControllerDelegate, U
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 130 //Menu sx
             revealViewController().delegate = self

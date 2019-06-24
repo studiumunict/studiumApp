@@ -100,15 +100,12 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
         print("moved")
         let manageController = navControllerList[0] as! ManageCourseViewController
         switch position {
-            
         case .right:
             print("right")
             //apri menu
             if manageController.createCategoryTextField.isFirstResponder {
                 manageController.createCategoryTextField.resignFirstResponder()
             }
-            
-            
             break
         case .left :
             //chiudi menu
@@ -116,7 +113,6 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
             if manageController.createCategoryView.isHidden ==  false{
                 manageController.createCategoryTextField.becomeFirstResponder()
             }
-            
             
             break
             
