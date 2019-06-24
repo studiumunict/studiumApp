@@ -18,6 +18,7 @@ class PortaleStudentiViewController: UIViewController, WKNavigationDelegate, SWR
     @IBOutlet var backButton: UIButton!
     @IBOutlet var forwardButton: UIButton!
     @IBOutlet var homeButton: UIButton!
+    let urlPortale = "https://studenti.smartedu.unict.it/WorkFlow2011/Logon/Logon.aspx?ReturnUrl=%2f"
     
     var isLoaded: Bool = false
     
@@ -64,8 +65,10 @@ class PortaleStudentiViewController: UIViewController, WKNavigationDelegate, SWR
         viewAppoggio.layer.borderColor = UIColor.primaryBackground.cgColor
         
         customButtons(button: backButton, image: "arrow", rotazione: (.pi)/2 )
-        customButtons(button: forwardButton, image: "arrow", rotazione: 3*(.pi)/2 )
+        
         customButtons(button: homeButton, image: "home", rotazione: nil)
+        
+        customButtons(button: forwardButton, image: "arrow", rotazione: 3*(.pi)/2 )
         
         webView.navigationDelegate = self
         
@@ -74,7 +77,7 @@ class PortaleStudentiViewController: UIViewController, WKNavigationDelegate, SWR
             webView.addObserver(self, forKeyPath: keyPath, options: .new, context: nil)
         }
         
-        webView.load(URLRequest(url: URL(string: "http://portalestudente.unict.it/portalestudente/mapServlet")!))
+        webView.load(URLRequest(url: URL(string: urlPortale)!))
     
         
     }
@@ -153,7 +156,7 @@ class PortaleStudentiViewController: UIViewController, WKNavigationDelegate, SWR
             errorMessageLabel.isHidden = true
             
             if !isLoaded {
-                webView.load(URLRequest(url: URL(string: "http://portalestudente.unict.it/portalestudente/mapServlet")!))
+                webView.load(URLRequest(url: URL(string: urlPortale)!))
             }
         }
         
@@ -229,7 +232,7 @@ class PortaleStudentiViewController: UIViewController, WKNavigationDelegate, SWR
     }
     
     @IBAction func homeButtonPressed(_ sender: UIButton) {
-        webView.load(URLRequest(url: URL(string: "http://portalestudente.unict.it/portalestudente/mapServlet")!))
+        webView.load(URLRequest(url: URL(string: urlPortale)!))
     }
 
 }

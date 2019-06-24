@@ -10,21 +10,18 @@ import UIKit
 
 
 class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
     @IBOutlet var errorMessageLabel: UILabel!
+    @IBOutlet weak var errorInfoDescriptionTextView: UITextView!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var descrizioneLabel: UILabel!
-    
     @IBOutlet var headerView: UIView!
     @IBOutlet var backButton: UIButton!
     @IBOutlet var addNewFolderButton: UIButton!
     @IBOutlet var selectButton: UIButton!
     @IBOutlet var titleLabel: UILabel!
-    
     @IBOutlet var selectedStackView: UIStackView!
     @IBOutlet var deleteButton: UIButton!
-    
-    
+
     var documentsList = [Docs]() //Completa
     var subList = [Docs]() //Lista contenente gli elementi di una cartella..
     var selectionList = [Docs]() //Lista contenente gli elementi della selezione multipla
@@ -34,59 +31,80 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //added comments
-        self.view.backgroundColor = UIColor.red
-        if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 130 //Menu sx
-            revealViewController().delegate = self
-            view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-        }
-        
-        reloadDocumentsList()
-        
-        if documentsList.isEmpty {
-            
-            errorMessageLabel.isHidden = false
-            errorMessageLabel.text = "Non ci sono documenti."
-            descrizioneLabel.isHidden = true
-            headerView.isHidden = true
-            selectedStackView.isHidden = true
-            collectionView.isHidden = true
-        
-        } else {
-            
-            collectionView.dataSource = self
-            collectionView.delegate = self
-            
-            reloadList(currentDoc: nil)
-            
-            headerView.backgroundColor = UIColor.lightWhite
-            headerView.layer.borderWidth = 0.5
-            headerView.layer.borderColor = UIColor.primaryBackground.cgColor
-            titleLabel.text = "Home"
-            backButton.titleLabel?.text = "Back"
-            backButton.isEnabled = false
-            backButton.titleLabel?.textColor = UIColor.elementsLikeNavBarColor
-            selectedStackView.layer.borderColor = UIColor.primaryBackground.cgColor
-            selectedStackView.layer.borderWidth = 0.5
-            selectedStackView.clipsToBounds = true
-            
-        }
-        
         self.view.backgroundColor = UIColor.lightWhite
         self.view.layer.borderColor = UIColor.primaryBackground.cgColor
         self.view.layer.borderWidth = 0.5
-        
+        setRevealViewControllerParameters()
+        loadDocumentsList()
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        if documentsList.isEmpty {
+            setControllerForEmptyList()
+        } else {
+            setControllerForListWithElements()
+        }
+       
     }
     override func viewDidAppear(_ animated: Bool) {
+        setRevealViewControllerParameters()
+    }
+    
+    func setErrorLabelText() {
+        errorMessageLabel.text = "Non ci sono documenti preferiti salvati."
+        errorInfoDescriptionTextView.text = "Puoi aggiungere un documento dalla sezione Documenti di un qualsiasi corso."
+    }
+    func hideElementsOfView() {
+        descrizioneLabel.isHidden = true
+        headerView.isHidden = true
+        selectedStackView.isHidden = true
+        collectionView.isHidden = true
+    }
+    
+    func showError() {
+        setErrorLabelText()
+        errorMessageLabel.isHidden = false
+        errorInfoDescriptionTextView.isHidden = false
+    }
+    
+    func setControllerForEmptyList(){
+        print("empty")
+        showError()
+        errorInfoDescriptionTextView.backgroundColor = self.view.backgroundColor
+        hideElementsOfView()
+    }
+    func setControllerForListWithElements(){
+        reloadList(currentDoc: nil)
+        headerView.backgroundColor = UIColor.lightWhite
+        headerView.layer.borderWidth = 0.5
+        headerView.layer.borderColor = UIColor.primaryBackground.cgColor
+        titleLabel.text = "Home"
+        backButton.titleLabel?.text = "Back"
+        backButton.isEnabled = false
+        backButton.titleLabel?.textColor = UIColor.elementsLikeNavBarColor
+        selectedStackView.layer.borderColor = UIColor.primaryBackground.cgColor
+        selectedStackView.layer.borderWidth = 0.5
+        selectedStackView.clipsToBounds = true
+        
+    }
+    
+    private func setRevealViewControllerParameters(){
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
+        imageView.image = UIImage.init(named: "menu")
+        let buttonView = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
+        buttonView.addSubview(imageView)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: buttonView)
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 130 //Menu sx
             revealViewController().delegate = self
+            self.navigationItem.leftBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:))))
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
     }
     
-    func reloadDocumentsList(){
+    func loadDocumentsList(){
+        //questa funzione tira fuori tutta la directory dal coredata.
+        //essa non viene utilizzata in DocumentsPageController.
+        
         
         documentsList.append(Docs(path: "cartella1", type: .folder))
         documentsList.append(Docs(path: "file1", type: .file))

@@ -35,7 +35,7 @@ class Teaching{
    
     var showcaseHTML: String!
     var haveBooking: Bool!
-    var descriptionText: String!
+    var descriptionText: String! // se nel sito è formattata in html potremmo prenderci l'html e mostrarlo in una webView. A quel punto rimarrebbe formattato allo stesso modo
     var notifyList: [Notify]!
     var documentsList: [Docs]!
     var syllabusCode: String!
@@ -79,6 +79,9 @@ class Teaching{
     
     func addNewDocument(path: String, type: Docs.typeDocs) {
         documentsList.append(Docs(path: path, type: type))
+    }
+    func setDescriptionText(description:String){
+        descriptionText = description
     }
     
 }

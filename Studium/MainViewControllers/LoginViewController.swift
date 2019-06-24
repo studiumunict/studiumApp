@@ -20,7 +20,7 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     var yearsDataSource = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        getAndAddLoginYears()
+        addLoginYears()
     
         loginButton.layer.cornerRadius = 7.0
         loginButton.clipsToBounds = true
@@ -44,7 +44,7 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         yearsPickerView.addGestureRecognizer(tap)
     }
     
-    func getAndAddLoginYears(){
+    func addLoginYears(){
         //dati da scaricare
         
         yearsDataSource.append("2018/2019")

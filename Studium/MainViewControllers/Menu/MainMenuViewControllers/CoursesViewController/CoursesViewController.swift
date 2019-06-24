@@ -133,8 +133,7 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-       
-            
+    
             let button = UIButton.init(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 45))
             button.layer.cornerRadius = 5.0
             button.clipsToBounds = true
@@ -150,20 +149,13 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
                 button.addTarget(self, action: #selector(self.removeOrExpandRows), for: .touchUpInside)
             }
         
-        
             button.setTitle(courseSharedDataSource[section].course.name, for: .normal)
-        
             button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
             button.setTitleColor(UIColor.elementsLikeNavBarColor, for: .normal)
             button.backgroundColor = UIColor.lightSectionColor
             button.tag = section
         
-            
-            
-            
             return button
-            
-       
     }
     
     @objc func removeOrExpandRows(button : UIButton ){

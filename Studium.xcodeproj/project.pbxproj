@@ -33,6 +33,7 @@
 		9C07089021C8672800F7D296 /* BrowseAndSearchCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C07088F21C8672800F7D296 /* BrowseAndSearchCourseTableViewCell.swift */; };
 		9C0E501B21C3F7CE0055C4DD /* ManageCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0E501A21C3F7CE0055C4DD /* ManageCourseViewController.swift */; };
 		9C0E501D21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0E501C21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift */; };
+		9CC86E3F22C0EC0F007567B1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CC86E3E22C0EC0F007567B1 /* WebKit.framework */; };
 		9CFE72C121B9508E001EB697 /* CDLTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE72C021B9508E001EB697 /* CDLTableViewCell.swift */; };
 		9CFE72C321B95206001EB697 /* TeachingClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE72C221B95206001EB697 /* TeachingClass.swift */; };
 		9CFE72C521B95331001EB697 /* HomeTableSectionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE72C421B95331001EB697 /* HomeTableSectionClass.swift */; };
@@ -107,6 +108,7 @@
 		9C07088F21C8672800F7D296 /* BrowseAndSearchCourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseAndSearchCourseTableViewCell.swift; sourceTree = "<group>"; };
 		9C0E501A21C3F7CE0055C4DD /* ManageCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCourseViewController.swift; sourceTree = "<group>"; };
 		9C0E501C21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseAndSearchCoursesViewController.swift; sourceTree = "<group>"; };
+		9CC86E3E22C0EC0F007567B1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		9CFE72C021B9508E001EB697 /* CDLTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDLTableViewCell.swift; sourceTree = "<group>"; };
 		9CFE72C221B95206001EB697 /* TeachingClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingClass.swift; sourceTree = "<group>"; };
 		9CFE72C421B95331001EB697 /* HomeTableSectionClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableSectionClass.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CC86E3F22C0EC0F007567B1 /* WebKit.framework in Frameworks */,
 				F1B1CA9919349ED5CFE1C280 /* Pods_Studium.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,6 +242,7 @@
 		3116D69C2086EA685ADD33FE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9CC86E3E22C0EC0F007567B1 /* WebKit.framework */,
 				ACC89C62786E9836B037027E /* Pods_Studium.framework */,
 				680AF054BAE403BD03DB8DA1 /* Pods_StudiumTests.framework */,
 				1CDF896A1C96AD896583B6F2 /* Pods_StudiumUITests.framework */,
@@ -843,7 +847,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 22WBCLURAG;
+				DEVELOPMENT_TEAM = 7JSR847A9P;
 				INFOPLIST_FILE = Studium/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -866,7 +870,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 22WBCLURAG;
+				DEVELOPMENT_TEAM = 7JSR847A9P;
 				INFOPLIST_FILE = Studium/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

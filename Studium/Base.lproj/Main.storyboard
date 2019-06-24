@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Wuc-p9-wJ8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Wuc-p9-wJ8">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -737,15 +737,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error message label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1j-fh-qOu">
-                                <rect key="frame" x="16" y="162" width="343" height="70"/>
+                                <rect key="frame" x="17.5" y="124" width="340" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="343" id="dOW-Cl-3Bi"/>
-                                    <constraint firstAttribute="height" constant="70" id="fsj-TD-RRE"/>
+                                    <constraint firstAttribute="width" constant="340" id="dOW-Cl-3Bi"/>
+                                    <constraint firstAttribute="height" constant="50" id="fsj-TD-RRE"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Lorem ipsum dolor sit er elit la" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlR-Yh-pmD">
+                                <rect key="frame" x="17.5" y="184" width="340" height="333.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="340" id="FpU-83-oOu"/>
+                                </constraints>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KgX-VT-ae1">
                                 <rect key="frame" x="0.0" y="64" width="375" height="40"/>
                                 <subviews>
@@ -902,8 +912,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="mlR-Yh-pmD" firstAttribute="centerX" secondItem="bAA-9J-eDm" secondAttribute="centerX" id="06a-Hj-ahq"/>
                             <constraint firstItem="6lt-Vd-RRd" firstAttribute="trailing" secondItem="bAA-9J-eDm" secondAttribute="trailing" id="1E5-gG-tMI"/>
+                            <constraint firstItem="mlR-Yh-pmD" firstAttribute="top" secondItem="v1j-fh-qOu" secondAttribute="bottom" constant="10" id="6NY-ZT-XWS"/>
                             <constraint firstItem="5f7-wf-01k" firstAttribute="top" secondItem="6lt-Vd-RRd" secondAttribute="bottom" constant="34" id="77C-Io-SfS"/>
+                            <constraint firstItem="mlR-Yh-pmD" firstAttribute="height" secondItem="tAw-O5-jEH" secondAttribute="height" multiplier="0.5" id="EBZ-07-7Dt"/>
                             <constraint firstItem="YPG-5Z-KZZ" firstAttribute="width" secondItem="tAw-O5-jEH" secondAttribute="width" id="FAy-4M-Wsc"/>
                             <constraint firstItem="5f7-wf-01k" firstAttribute="centerX" secondItem="bAA-9J-eDm" secondAttribute="centerX" id="KMf-In-Rrr"/>
                             <constraint firstItem="6lt-Vd-RRd" firstAttribute="leading" secondItem="bAA-9J-eDm" secondAttribute="leading" id="PtN-Ue-4v2"/>
@@ -914,7 +927,7 @@
                             <constraint firstItem="bAA-9J-eDm" firstAttribute="bottom" secondItem="5f7-wf-01k" secondAttribute="bottom" constant="4" id="oRa-Cv-nLr"/>
                             <constraint firstItem="KgX-VT-ae1" firstAttribute="width" secondItem="tAw-O5-jEH" secondAttribute="width" id="r3n-rk-3Ng"/>
                             <constraint firstItem="v1j-fh-qOu" firstAttribute="centerX" secondItem="bAA-9J-eDm" secondAttribute="centerX" id="soT-x6-A3X"/>
-                            <constraint firstItem="v1j-fh-qOu" firstAttribute="top" secondItem="bAA-9J-eDm" secondAttribute="top" constant="98" id="vnM-rj-AU8"/>
+                            <constraint firstItem="v1j-fh-qOu" firstAttribute="top" secondItem="bAA-9J-eDm" secondAttribute="top" constant="60" id="vnM-rj-AU8"/>
                             <constraint firstItem="KgX-VT-ae1" firstAttribute="top" secondItem="bAA-9J-eDm" secondAttribute="top" id="yXd-j0-05h"/>
                             <constraint firstItem="YPG-5Z-KZZ" firstAttribute="centerX" secondItem="bAA-9J-eDm" secondAttribute="centerX" id="zgz-CG-aFs"/>
                         </constraints>
@@ -927,6 +940,7 @@
                         <outlet property="collectionView" destination="6lt-Vd-RRd" id="cvJ-ns-1yv"/>
                         <outlet property="deleteButton" destination="eRM-Lk-72I" id="b9c-9b-cDq"/>
                         <outlet property="descrizioneLabel" destination="5f7-wf-01k" id="jxX-2k-c4O"/>
+                        <outlet property="errorInfoDescriptionTextView" destination="mlR-Yh-pmD" id="5kQ-P7-rO2"/>
                         <outlet property="errorMessageLabel" destination="v1j-fh-qOu" id="NKk-1O-kxN"/>
                         <outlet property="headerView" destination="KgX-VT-ae1" id="YOk-OF-hTI"/>
                         <outlet property="selectButton" destination="3mM-t3-o98" id="3As-dD-YVF"/>
@@ -1846,16 +1860,16 @@
                                                     <action selector="backButtonPressed:" destination="ZQt-ao-TNW" eventType="touchUpInside" id="iYL-ZL-rWl"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pKK-ht-Szf">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2jg-jn-03a">
                                                 <rect key="frame" x="125" y="0.0" width="125" height="45"/>
                                                 <connections>
-                                                    <action selector="forwardButtonPressed:" destination="ZQt-ao-TNW" eventType="touchUpInside" id="Xx2-7T-mgN"/>
+                                                    <action selector="homeButtonPressed:" destination="ZQt-ao-TNW" eventType="touchUpInside" id="4VS-p8-BT0"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2jg-jn-03a">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pKK-ht-Szf">
                                                 <rect key="frame" x="250" y="0.0" width="125" height="45"/>
                                                 <connections>
-                                                    <action selector="homeButtonPressed:" destination="ZQt-ao-TNW" eventType="touchUpInside" id="4VS-p8-BT0"/>
+                                                    <action selector="forwardButtonPressed:" destination="ZQt-ao-TNW" eventType="touchUpInside" id="Xx2-7T-mgN"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -2614,15 +2628,15 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow" width="102.40000152587891" height="102.40000152587891"/>
-        <image name="courses" width="47.261539459228516" height="47.261539459228516"/>
+        <image name="arrow" width="64" height="64"/>
+        <image name="courses" width="128" height="128"/>
         <image name="expand" width="16" height="16"/>
-        <image name="folder" width="46.428211212158203" height="46.428211212158203"/>
-        <image name="home" width="46.428211212158203" height="46.428211212158203"/>
+        <image name="folder" width="128" height="128"/>
+        <image name="home" width="128" height="128"/>
         <image name="logo" width="64" height="64"/>
-        <image name="showcase" width="45.623764038085938" height="45.623764038085938"/>
+        <image name="showcase" width="64" height="64"/>
         <image name="star_empty" width="24" height="24"/>
-        <image name="student" width="409.60000610351562" height="409.60000610351562"/>
+        <image name="student" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ILE-d2-97B"/>
