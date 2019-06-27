@@ -228,6 +228,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     
     
     
+    
     func completeTeachingDataSource(){
         //Scarica i dati dal db riguardanti questo corso. Il codice del corso utile a scaricare dal db, lo prende dai dati stessi che sono già pre impostati sul teachingDataSource.
         teachingDataSource.completeDataSource(showcaseHTML: nil, syllabusCode: "14927", haveBooking: false, descriptionText: nil)
@@ -237,7 +238,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         teachingDataSource.addNewNotify(date: "05/12/2018", title: "Risultati della prova in itinere", message: "Tutti promossi. :)")
         teachingDataSource.setDescriptionText(description: "Questa è la descrizione")
         
-       /* teachingDataSource.addNewDocument(path: "cartella1", type: .folder)
+        teachingDataSource.addNewDocument(path: "cartella1Ciao", type: .folder)
         teachingDataSource.addNewDocument(path: "file1", type: .file)
         teachingDataSource.addNewDocument(path: "file2", type: .file)
         teachingDataSource.addNewDocument(path: "file3", type: .file)
@@ -253,7 +254,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         teachingDataSource.addNewDocument(path: "file13", type: .file)
         teachingDataSource.documentsList[12].setPrev(prev: teachingDataSource.documentsList[0])
         teachingDataSource.documentsList[13].setPrev(prev: teachingDataSource.documentsList[0])
-        */
+        
         
         courseNameLabel.text = teachingDataSource.name
         nameTeacherLabel.text = teachingDataSource.teacherName
