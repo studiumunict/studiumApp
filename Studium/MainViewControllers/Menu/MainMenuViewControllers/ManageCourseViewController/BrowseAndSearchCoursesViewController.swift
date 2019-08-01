@@ -29,8 +29,7 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
         let buttonView2 = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 27.5))
         buttonView2.addSubview(imageView2)
         self.tabController.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: buttonView2)
-        self.tabController.navigationItem.rightBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.searchingClicked)))
-
+    self.tabController.navigationItem.rightBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.searchingClicked)))
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
