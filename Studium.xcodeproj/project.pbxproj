@@ -33,6 +33,7 @@
 		9C07089021C8672800F7D296 /* BrowseAndSearchCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C07088F21C8672800F7D296 /* BrowseAndSearchCourseTableViewCell.swift */; };
 		9C0E501B21C3F7CE0055C4DD /* ManageCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0E501A21C3F7CE0055C4DD /* ManageCourseViewController.swift */; };
 		9C0E501D21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0E501C21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift */; };
+		9C7ADB5522F31AF7009651FB /* BackendAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7ADB5422F31AF7009651FB /* BackendAPI.swift */; };
 		9CC86E3F22C0EC0F007567B1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CC86E3E22C0EC0F007567B1 /* WebKit.framework */; };
 		9CFE72C121B9508E001EB697 /* CDLTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE72C021B9508E001EB697 /* CDLTableViewCell.swift */; };
 		9CFE72C321B95206001EB697 /* TeachingClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE72C221B95206001EB697 /* TeachingClass.swift */; };
@@ -108,6 +109,7 @@
 		9C07088F21C8672800F7D296 /* BrowseAndSearchCourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseAndSearchCourseTableViewCell.swift; sourceTree = "<group>"; };
 		9C0E501A21C3F7CE0055C4DD /* ManageCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCourseViewController.swift; sourceTree = "<group>"; };
 		9C0E501C21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseAndSearchCoursesViewController.swift; sourceTree = "<group>"; };
+		9C7ADB5422F31AF7009651FB /* BackendAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAPI.swift; sourceTree = "<group>"; };
 		9CC86E3E22C0EC0F007567B1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		9CFE72C021B9508E001EB697 /* CDLTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDLTableViewCell.swift; sourceTree = "<group>"; };
 		9CFE72C221B95206001EB697 /* TeachingClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingClass.swift; sourceTree = "<group>"; };
@@ -293,6 +295,14 @@
 			path = ManageCourseViewController;
 			sourceTree = "<group>";
 		};
+		9C7ADB5322F31AC0009651FB /* Back-end-Adapter */ = {
+			isa = PBXGroup;
+			children = (
+				9C7ADB5422F31AF7009651FB /* BackendAPI.swift */,
+			);
+			path = "Back-end-Adapter";
+			sourceTree = "<group>";
+		};
 		9CFE72C821BA97FA001EB697 /* CoursesViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -326,6 +336,7 @@
 		9CFE9D7121A8ADBC0030AE33 /* Studium */ = {
 			isa = PBXGroup;
 			children = (
+				9C7ADB5322F31AC0009651FB /* Back-end-Adapter */,
 				9C06A22821AB6FE900E695DB /* CustomClasses */,
 				9CFE9D7221A8ADBC0030AE33 /* AppDelegate.swift */,
 				9CFE9D7C21A8ADBE0030AE33 /* Assets.xcassets */,
@@ -651,6 +662,7 @@
 				13CC782321C93FB90052E579 /* PortaleStudentiViewController.swift in Sources */,
 				9C07089021C8672800F7D296 /* BrowseAndSearchCourseTableViewCell.swift in Sources */,
 				9CFE9DA521A8AE960030AE33 /* LoginViewController.swift in Sources */,
+				9C7ADB5522F31AF7009651FB /* BackendAPI.swift in Sources */,
 				139BCB6C21BDE0AF005A750A /* BookingPagesViewController.swift in Sources */,
 				13E3A34721C140A6004BE8D8 /* NotifyCell.swift in Sources */,
 				1311D89B21BBE82E00A09499 /* StudentClass.swift in Sources */,

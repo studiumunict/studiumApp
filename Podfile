@@ -7,6 +7,7 @@ target 'Studium' do
 
   # Pods for Studium
   pod 'SWRevealViewController'
+  pod 'SOAPEngine'
 
   target 'StudiumTests' do
     inherit! :search_paths

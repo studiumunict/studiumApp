@@ -79,7 +79,9 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     
     
     @IBAction func loginButtonClicked(_ sender: Any) {
-          self.performSegue(withIdentifier: "segueToReveal", sender: nil)
+            let api = BackendAPI.getUniqueIstance()
+            api.login()
+          //self.performSegue(withIdentifier: "segueToReveal", sender: nil)
     }
     
     /*
