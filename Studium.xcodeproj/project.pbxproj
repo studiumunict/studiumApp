@@ -20,6 +20,7 @@
 		13D3997D21CACF1300B023B8 /* DocsClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D3997C21CACF1300B023B8 /* DocsClass.swift */; };
 		13D3997F21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D3997E21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift */; };
 		13D86DDB21B9A3BF007638FD /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D86DDA21B9A3BF007638FD /* ExtensionUIColor.swift */; };
+		13E39DCC22F9933800866BDE /* FileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E39DCB22F9933800866BDE /* FileDetailViewController.swift */; };
 		13E3A34721C140A6004BE8D8 /* NotifyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E3A34621C140A6004BE8D8 /* NotifyCell.swift */; };
 		13E3A34A21C1416E004BE8D8 /* NotifyTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E3A34921C1416E004BE8D8 /* NotifyTableDataSource.swift */; };
 		13E91D0521C7DB550007EF3E /* ManageCoursePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E91D0421C7DB550007EF3E /* ManageCoursePageViewController.swift */; };
@@ -89,6 +90,7 @@
 		13D3997C21CACF1300B023B8 /* DocsClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocsClass.swift; sourceTree = "<group>"; };
 		13D3997E21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsCollectionViewCell.swift; sourceTree = "<group>"; };
 		13D86DDA21B9A3BF007638FD /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
+		13E39DCB22F9933800866BDE /* FileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDetailViewController.swift; sourceTree = "<group>"; };
 		13E3A34621C140A6004BE8D8 /* NotifyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyCell.swift; sourceTree = "<group>"; };
 		13E3A34921C1416E004BE8D8 /* NotifyTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyTableDataSource.swift; sourceTree = "<group>"; };
 		13E91D0421C7DB550007EF3E /* ManageCoursePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCoursePageViewController.swift; sourceTree = "<group>"; };
@@ -376,6 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				9CFE9DA421A8AE960030AE33 /* LoginViewController.swift */,
+				13E39DCB22F9933800866BDE /* FileDetailViewController.swift */,
 				9CFE9DA621A8BBD10030AE33 /* Menu */,
 			);
 			path = MainViewControllers;
@@ -654,6 +657,7 @@
 				135D120F21B8092200DA9C69 /* ExtensionCALayer.swift in Sources */,
 				9C06CA8621C67ACF00FA09DB /* staticArrayCourses.swift in Sources */,
 				9CFE9DB121A8BC9A0030AE33 /* DocumentsViewController.swift in Sources */,
+				13E39DCC22F9933800866BDE /* FileDetailViewController.swift in Sources */,
 				9CFE9DA821A8BBEE0030AE33 /* MenuTableViewController.swift in Sources */,
 				9CFE72CA21BA9814001EB697 /* CoursesViewController.swift in Sources */,
 				9C06A22C21AB707500E695DB /* CDLClass.swift in Sources */,
@@ -859,7 +863,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7JSR847A9P;
+				DEVELOPMENT_TEAM = 22WBCLURAG;
 				INFOPLIST_FILE = Studium/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -882,7 +886,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7JSR847A9P;
+				DEVELOPMENT_TEAM = 22WBCLURAG;
 				INFOPLIST_FILE = Studium/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

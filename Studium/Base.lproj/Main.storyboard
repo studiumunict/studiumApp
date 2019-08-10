@@ -355,7 +355,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LJC-Gw-Xgn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1910" y="3393"/>
+            <point key="canvasLocation" x="-1239" y="3393"/>
         </scene>
         <!--Teaching View Controller-->
         <scene sceneID="9Jr-ri-VGu">
@@ -946,6 +946,7 @@
                         <outlet property="selectButton" destination="3mM-t3-o98" id="3As-dD-YVF"/>
                         <outlet property="selectedStackView" destination="YPG-5Z-KZZ" id="vwx-bf-aaG"/>
                         <outlet property="titleLabel" destination="AiK-ay-hXT" id="O74-qs-JDd"/>
+                        <segue destination="z1A-mO-0Fz" kind="show" identifier="segueToFileDetail" id="WF8-DZ-9ZD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c1g-VP-hF7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1973,7 +1974,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Fr-Hb-mpA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="143" y="3393"/>
+            <point key="canvasLocation" x="-538" y="3985"/>
         </scene>
         <!--Documents Page View Controller-->
         <scene sceneID="Z7w-SZ-CGb">
@@ -2173,11 +2174,12 @@
                         <outlet property="selectButton" destination="GgT-Eg-vpx" id="3q2-J3-mpM"/>
                         <outlet property="selectedStackView" destination="ex7-3V-h3x" id="IOg-wf-Pda"/>
                         <outlet property="titleLabel" destination="Vgt-yc-GZJ" id="lNy-dL-wV5"/>
+                        <segue destination="z1A-mO-0Fz" kind="show" identifier="segueToFileDetail" id="P6Q-lJ-ggD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5BX-nl-pwd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="789.60000000000002" y="3392.6536731634187"/>
+            <point key="canvasLocation" x="194" y="3393"/>
         </scene>
         <!--Booking Page View Controller-->
         <scene sceneID="caJ-qU-oEk">
@@ -2212,7 +2214,51 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fmv-V8-ewL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1470" y="3393"/>
+            <point key="canvasLocation" x="193" y="3985"/>
+        </scene>
+        <!--File Detail View Controller-->
+        <scene sceneID="o3H-jN-CUL">
+            <objects>
+                <viewController id="z1A-mO-0Fz" customClass="FileDetailViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mlS-d6-xTu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ntn-Ur-YXa">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="mJJ-cX-zi5">
+                                <rect key="frame" x="0.0" y="64" width="375" height="3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="3" id="Ag5-RA-bUD"/>
+                                </constraints>
+                            </progressView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mJJ-cX-zi5" firstAttribute="centerX" secondItem="4gF-yp-MaG" secondAttribute="centerX" id="6IJ-TV-0iN"/>
+                            <constraint firstItem="Ntn-Ur-YXa" firstAttribute="leading" secondItem="4gF-yp-MaG" secondAttribute="leading" id="8EC-LG-gqt"/>
+                            <constraint firstItem="4gF-yp-MaG" firstAttribute="trailing" secondItem="Ntn-Ur-YXa" secondAttribute="trailing" id="NGA-gv-5wY"/>
+                            <constraint firstItem="4gF-yp-MaG" firstAttribute="bottom" secondItem="Ntn-Ur-YXa" secondAttribute="bottom" id="R7Z-1T-X24"/>
+                            <constraint firstItem="Ntn-Ur-YXa" firstAttribute="top" secondItem="4gF-yp-MaG" secondAttribute="top" id="ag0-V2-X9K"/>
+                            <constraint firstItem="mJJ-cX-zi5" firstAttribute="top" secondItem="4gF-yp-MaG" secondAttribute="top" id="jVk-Hg-Ily"/>
+                            <constraint firstItem="mJJ-cX-zi5" firstAttribute="width" secondItem="mlS-d6-xTu" secondAttribute="width" id="mLI-3X-bem"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="4gF-yp-MaG"/>
+                    </view>
+                    <connections>
+                        <outlet property="progressView" destination="mJJ-cX-zi5" id="NWf-cW-ia6"/>
+                        <outlet property="webView" destination="Ntn-Ur-YXa" id="wHt-3c-yqK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="apm-2F-ArB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5137" y="2836"/>
         </scene>
         <!--Notify Page View Controller-->
         <scene sceneID="5oB-r8-Wy2">
@@ -2358,7 +2404,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qw3-wL-UC0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1233" y="3393"/>
+            <point key="canvasLocation" x="-1238" y="3985"/>
         </scene>
         <!--Iscriviti-->
         <scene sceneID="g1r-b1-ZNz">
@@ -2639,6 +2685,7 @@
         <image name="student" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="WF8-DZ-9ZD"/>
         <segue reference="ILE-d2-97B"/>
         <segue reference="035-UK-Tez"/>
     </inferredMetricsTieBreakers>

@@ -27,6 +27,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     var selectionList = [Docs]() //Lista contenente gli elementi della selezione multipla
     var folderEmptySelected: Docs!
     var prevIndexItem: Int!
+    var fileSelected: Docs!
     
 
     override func viewDidLoad() {
@@ -175,7 +176,11 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
                 self.collectionView.reloadData()
                 backButton.isEnabled = true
                 titleLabel.text = subList.isEmpty ? folderEmptySelected.path! : subList.first?.prev.path!
-            } //else visualizza il file
+            } else { //Visualizza il file
+                print("file selezionato:: \((subList[indexPath.item].path)!)")
+                fileSelected = subList[indexPath.item]
+                self.performSegue(withIdentifier: "segueToFileDetail", sender: nil)
+            }
         }
     }
     
@@ -395,6 +400,12 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         indexes.append(contentsOf: array)
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToFileDetail" {
+            (segue.destination as! FileDetailViewController).file = fileSelected
+        }
+    }
     
 
 }
