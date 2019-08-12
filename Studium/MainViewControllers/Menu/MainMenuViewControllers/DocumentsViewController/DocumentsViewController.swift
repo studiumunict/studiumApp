@@ -9,7 +9,7 @@
 import UIKit
 
 
-class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIDocumentInteractionControllerDelegate {
     @IBOutlet var errorMessageLabel: UILabel!
     @IBOutlet weak var errorInfoDescriptionTextView: UITextView!
     @IBOutlet var collectionView: UICollectionView!
@@ -29,6 +29,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     var prevIndexItem: Int!
     var fileSelected: Docs!
     
+    var documentController: UIDocumentInteractionController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,8 +45,10 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         } else {
             setControllerForListWithElements()
         }
-       
+        
+        documentController.delegate = self;
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         setRevealViewControllerParameters()
     }
@@ -54,6 +57,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         errorMessageLabel.text = "Non ci sono documenti preferiti salvati."
         errorInfoDescriptionTextView.text = "Puoi aggiungere un documento dalla sezione Documenti di un qualsiasi corso."
     }
+    
     func hideElementsOfView() {
         descrizioneLabel.isHidden = true
         headerView.isHidden = true
@@ -179,7 +183,9 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
             } else { //Visualizza il file
                 print("file selezionato:: \((subList[indexPath.item].path)!)")
                 fileSelected = subList[indexPath.item]
-                self.performSegue(withIdentifier: "segueToFileDetail", sender: nil)
+                
+                
+                
             }
         }
     }
@@ -401,11 +407,13 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     }
     
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueToFileDetail" {
-            (segue.destination as! FileDetailViewController).file = fileSelected
-        }
-    }
-    
+    /*private func openDocument(_ name: String) {
+        let fileURL =  Bundle.main.path(
+                                forResource: name.substring(..<name.firstIndex(of: ".")),
+                                ofType: name.substring(name.firstIndex(of: ".")...)
+                        )
+        documentController = UIDocumentInteractionController.init(URL: URL(fileURLWithPath: fileURL!))
+        //documentController.presentOptionsMenuFromRect(self.button.frame, inView: self.view, animated: true)
+    }*/
 
 }
