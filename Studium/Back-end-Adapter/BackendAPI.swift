@@ -8,9 +8,13 @@
 
 import UIKit
 import SOAPEngine64
+import Foundation
 
 @objcMembers class BackendAPI: NSObject {
     private var token = "4hu_mb@r3-m1_54-pr0pr10_c@-pp1_0gg1-4ccumud@mu,_kk1-d1c1_mb@ru77u,-1u_r1cu-d1_51!!!"
+    private var requestURL : String! = "http://ws1.unict.it/wscea/wsstudium/StudentService.asmx"
+    private var soapActionBaseURL : String! = "http://ws1.unict.it/stdata/"
+  
     private static var obj : BackendAPI!  = nil
     private override init(){}
     public static func getUniqueIstance() -> BackendAPI{
@@ -19,7 +23,6 @@ import SOAPEngine64
         }
         return obj
     }
-    
     
     private func startRequest() -> SOAPEngine{
         var request : SOAPEngine!
@@ -32,13 +35,39 @@ import SOAPEngine64
     }
 
     
-    private func getYearFromAcademicYear(academicYear: String) -> String{
-        let index = academicYear.index(academicYear.startIndex, offsetBy: 5)
-        let year = String(academicYear[index...])
-        return year
+    public func getYears(completion: @escaping ([String]?) -> Void){
+        let request = startRequest()
+        request.setValue(token, forKey: "token")
+        request.requestURL(requestURL,
+                           soapAction: soapActionBaseURL + "GetYears",
+                           completeWithDictionary: { (statusCode : Int,
+                            dict : [AnyHashable : Any]?) -> Void in
+                            let response :Dictionary = dict! as Dictionary
+                            let bodyDict =  response["Body"] as! [String:Any]
+                            let getYearsResult = bodyDict["GetYearsResponse"] as! [String:Any]
+                            let responseValue = getYearsResult["GetYearsResult"] as! String
+                            var resultArray : [String] = [String]()
+                            let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
+                            if let array = json as? [String] {
+                                for year in array {
+                                    // access all objects in array
+                                    let elem = Int(year)!
+                                    let prev = elem-1 //2019->2018
+                                    let academicYearString = String(prev) + "/" + String(elem)
+                                    resultArray.append(academicYearString)
+                                }
+                                completion(resultArray)
+                            }
+                            else{
+                                completion(nil)
+                            }
+        }) { (error : Error?) -> Void in
+            print(error ?? "Error")
+            completion(nil)
+        }
     }
     
-    public func login(username: String, password: String, academicYear: String){
+    public func login(username: String, password: String, academicYear: String, completion : @escaping (Bool)->Void){
         let request = startRequest()
         request.setValue(username, forKey: "username")
         let pin = PswEncryption.encode(s: password)
@@ -46,27 +75,33 @@ import SOAPEngine64
         let year =  getYearFromAcademicYear(academicYear: academicYear)
         request.setValue(year, forKey: "db")
         request.setValue(token, forKey: "token")
-        request.requestURL("http://ws1.unict.it/wscea/wsstudium/StudentService.asmx",
-                        soapAction: "http://ws1.unict.it/stdata/LoginCompact",
+        request.requestURL(requestURL,
+                        soapAction: soapActionBaseURL + "LoginCompact",
                         completeWithDictionary: { (statusCode : Int,
                             dict : [AnyHashable : Any]?) -> Void in
-                            
-                            let result:Dictionary = dict! as Dictionary
-                            print(result)
-                            print(statusCode)
-                            self.getUserData()
+                            let response :Dictionary = dict! as Dictionary
+                            let bodyDict =  response["Body"] as! [String:Any]
+                            let loginResult = bodyDict["LoginCompactResponse"] as! [String:Any]
+                            let responseValue = loginResult["LoginCompactResult"] as! String
+                            if responseValue == "1" {
+                                //save session
+                                let session = Session.getUniqueIstance()
+                                session.setActiveSessionParameters(username: username, encryptedPassword: pin, academicYear: academicYear)
+                                completion(true)
+                            }
+                            else{ completion(false) }
                             
         }) { (error : Error?) -> Void in
-            
-            print(error)
+            print(error ?? "Error")
+            completion(false)
         }
     }
     
-    public func getUserData(){
+    public func getCurrentUserData(){
         let request = startRequest()
             request.setValue("SCNSNR98P29C351C", forKey: "cf")
-        request.requestURL("http://ws1.unict.it//wscea/wsstudium/StudentService.asmx",
-                        soapAction: "http://ws1.unict.it/stdata/Utente",
+        request.requestURL(requestURL,
+                        soapAction: soapActionBaseURL + "Utente",
                         completeWithDictionary: { (statusCode : Int,
                             dict : [AnyHashable : Any]?) -> Void in
                             
@@ -76,12 +111,13 @@ import SOAPEngine64
                             
         }) { (error : Error?) -> Void in
             
-            print(error)
+            print(error ?? "Error")
         }
     }
     
-    
+    private func getYearFromAcademicYear(academicYear: String) -> String{
+        let index = academicYear.index(academicYear.startIndex, offsetBy: 5)
+        let year = String(academicYear[index...])
+        return year
+    }
 }
-
-
-

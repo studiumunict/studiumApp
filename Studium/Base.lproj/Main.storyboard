@@ -102,6 +102,15 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dati di accesso errati!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kWS-OH-Ak0">
+                                <rect key="frame" x="0.0" y="606" width="375" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="SoS-lW-4wY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" red="0.96879995200000002" green="0.96879995200000002" blue="0.96879995200000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.069202016140000003" green="0.069202016140000003" blue="0.069202016140000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -117,13 +126,17 @@
                             <constraint firstItem="pAi-ia-HNu" firstAttribute="centerX" secondItem="ftq-RX-tmK" secondAttribute="centerX" id="P9D-3y-Wzk"/>
                             <constraint firstItem="lGb-k0-eMY" firstAttribute="leading" secondItem="ftq-RX-tmK" secondAttribute="leading" constant="86" id="PcL-AU-lLc"/>
                             <constraint firstItem="cmT-NN-tzt" firstAttribute="centerY" secondItem="ftq-RX-tmK" secondAttribute="centerY" multiplier="0.25" id="PzJ-Fm-Maj"/>
+                            <constraint firstItem="kWS-OH-Ak0" firstAttribute="width" secondItem="IZe-ai-Is8" secondAttribute="width" id="V3d-ur-Hvn"/>
                             <constraint firstItem="lGb-k0-eMY" firstAttribute="centerY" secondItem="vHR-dQ-zxg" secondAttribute="centerY" id="X2K-NH-nXG"/>
                             <constraint firstItem="9KB-Ho-3Xk" firstAttribute="width" secondItem="IZe-ai-Is8" secondAttribute="width" multiplier="0.9" id="cCr-6A-fal"/>
+                            <constraint firstItem="kWS-OH-Ak0" firstAttribute="centerX" secondItem="ftq-RX-tmK" secondAttribute="centerX" id="vWQ-Je-vY8"/>
+                            <constraint firstItem="ftq-RX-tmK" firstAttribute="bottom" secondItem="kWS-OH-Ak0" secondAttribute="bottom" constant="40" id="z1A-2P-Xeg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ftq-RX-tmK"/>
                     </view>
                     <connections>
                         <outlet property="credentialLabel" destination="ehT-Fo-pW0" id="F5p-VK-gvC"/>
+                        <outlet property="errorLabel" destination="kWS-OH-Ak0" id="7fv-bo-oL9"/>
                         <outlet property="loginButton" destination="pAi-ia-HNu" id="ScP-bJ-mMf"/>
                         <outlet property="passwordTextField" destination="4s1-xN-HHm" id="mIj-wI-7he"/>
                         <outlet property="rememberMeSwitcher" destination="vHR-dQ-zxg" id="sFR-Be-Pwf"/>

@@ -10,6 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIGestureRecognizerDelegate {
 
+    @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var credentialLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
@@ -27,6 +28,9 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         
         credentialLabel.layer.cornerRadius = 7.0
         credentialLabel.clipsToBounds = true
+        
+        errorLabel.textColor =  UIColor.textRedColor
+        errorLabel.text = ""
     
         yearLabel.layer.cornerRadius = 7.0
         yearLabel.clipsToBounds = true
@@ -42,24 +46,23 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         tap.cancelsTouchesInView = false
         tap.delegate = self
         yearsPickerView.addGestureRecognizer(tap)
+        
+        
     }
     
     func addLoginYears(){
-        //dati da scaricare
-        
-        yearsDataSource.append("2018/2019")
-        yearsDataSource.append("2017/2018")
-        yearsDataSource.append("2016/2017")
-        yearsDataSource.append("2015/2016")
-        yearsDataSource.append("2014/2015")
-        
+        let api = BackendAPI.getUniqueIstance()
+        api.getYears(){ (years) in
+            guard years != nil else {return}
+            for year in years!{
+                self.yearsDataSource.append(year)
+            }
+            self.yearsPickerView.reloadAllComponents()
+        }
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true}
-    
-    
-    
     
     @objc func pickerTapped(tapRecognizer:UITapGestureRecognizer)
     {
@@ -77,28 +80,49 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         
     }
     
-    
+    private func controlDataFields() -> Bool{
+        resetErrors()
+        var result = true
+        if(usernameTextField.text == nil || usernameTextField.text == "") {
+            usernameTextField.layer.borderWidth = 2.0
+            usernameTextField.layer.borderColor = UIColor.textRedColor.cgColor
+            result = false
+        }
+        if(passwordTextField.text == nil || passwordTextField.text == "") {
+            passwordTextField.layer.borderWidth = 2.0
+            passwordTextField.layer.borderColor = UIColor.textRedColor.cgColor
+            result = false
+        }
+        return result
+    }
+    private func resetErrors(){
+        errorLabel.isHidden = true
+        usernameTextField.layer.borderWidth = 0.0
+        usernameTextField.layer.borderColor = UIColor.clear.cgColor
+        passwordTextField.layer.borderWidth = 0.0
+        passwordTextField.layer.borderColor = UIColor.clear.cgColor
+    }
     @IBAction func loginButtonClicked(_ sender: Any) {
-            let api = BackendAPI.getUniqueIstance()
-            api.login()
-            //api.getUserData()
-            //self.performSegue(withIdentifier: "segueToReveal", sender: nil)
+        guard controlDataFields() == true else {return}
+        let api = BackendAPI.getUniqueIstance()
+        let selectedYearIndex = yearsPickerView.selectedRow(inComponent: 0)
+        let selectedYear = yearsDataSource[selectedYearIndex]
+        api.login(username: usernameTextField.text!, password: passwordTextField.text!, academicYear: selectedYear) { (success) in
+            if success {
+                  self.performSegue(withIdentifier: "segueToReveal", sender: nil)
+            }
+            else{
+                print("User data error")
+                self.errorLabel.text = "Dati d'accesso errati!"
+                self.errorLabel.isHidden = false
+            }
+        }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         let titleData = yearsDataSource[row]
         let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        
         return myTitle
     }
     
@@ -107,7 +131,7 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-            return 5 //numero di anni nel picker, da scaricare dal db
+            return yearsDataSource.count //numero di anni nel picker, da scaricare dal db
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
