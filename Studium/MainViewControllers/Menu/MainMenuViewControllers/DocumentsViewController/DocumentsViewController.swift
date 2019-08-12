@@ -29,7 +29,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     var prevIndexItem: Int!
     var fileSelected: Docs!
     
-    var documentController: UIDocumentInteractionController!
+    //var documentController: UIDocumentInteractionController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +46,6 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
             setControllerForListWithElements()
         }
         
-        documentController.delegate = self;
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -113,7 +112,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         
         documentsList.append(Docs(path: "cartella1", type: .folder))
         documentsList.append(Docs(path: "file1", type: .file))
-        documentsList.append(Docs(path: "file2", type: .file))
+        documentsList.append(Docs(path: "Pattern.pdf", type: .file))
         documentsList.append(Docs(path: "file3", type: .file))
         documentsList.append(Docs(path: "file4", type: .file))
         documentsList.append(Docs(path: "file5", type: .file))
@@ -183,8 +182,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
             } else { //Visualizza il file
                 print("file selezionato:: \((subList[indexPath.item].path)!)")
                 fileSelected = subList[indexPath.item]
-                
-                
+                openDocument(fileSelected.path)
                 
             }
         }
@@ -407,13 +405,28 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     }
     
     
-    /*private func openDocument(_ name: String) {
-        let fileURL =  Bundle.main.path(
-                                forResource: name.substring(..<name.firstIndex(of: ".")),
-                                ofType: name.substring(name.firstIndex(of: ".")...)
+    private func openDocument(_ str: String) {
+        print("openDocument \(str)")
+        let dot = str.firstIndex(of: ".")!
+        
+        guard let url = Bundle.main.url(
+                            forResource: String(str[..<dot]),
+                            withExtension: String(str[str.index(after: dot)...])
                         )
-        documentController = UIDocumentInteractionController.init(URL: URL(fileURLWithPath: fileURL!))
-        //documentController.presentOptionsMenuFromRect(self.button.frame, inView: self.view, animated: true)
-    }*/
+        else { return }
+        
+        let documentController = UIDocumentInteractionController(url: url)
+        documentController.delegate = self;
+        documentController.presentPreview(animated: true)
+        print(url)
+        print(documentController.url!)
+    }
+    
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        print("ciao")
+        return self
+    }
+    
+    
 
 }

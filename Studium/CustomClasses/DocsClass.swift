@@ -15,6 +15,8 @@ class Docs {
     
     var ID = String()
     var path: String!
+    var title: String!
+    var suffix: String?
     var prev: Docs!
     var next = [Docs]()
     
@@ -28,6 +30,20 @@ class Docs {
         self.TypeDoc = type
         self.CanOpen = true
         self.ID = addressOf(self)
+        
+        if type == .file {
+            let dot = path.firstIndex(of: ".")!
+            title = String(path[..<dot])
+            suffix = String(path[path.index(after: dot)...])
+        } else {
+            suffix = nil
+            if path.lastIndex(of: "/") != nil {
+                let dot = path.lastIndex(of: "/")!
+                title = String(path[path.index(after: dot)...])
+            } else {
+                title = path
+            }
+        }
     }
     
     func setPrev(prev: Docs!) {
