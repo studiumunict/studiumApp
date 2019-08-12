@@ -8,7 +8,7 @@
 
 import Foundation
 class Session{
-    private var username : String!
+    var username : String!
     private var encryptedPassword : String!
     private var academicYear: String!
     private var isActive: Bool!
@@ -23,11 +23,23 @@ class Session{
         self.encryptedPassword = encryptedPassword
         isActive = true
     }
+   
     public static func getUniqueIstance() -> Session{
         if obj == nil{
             obj =  Session()
         }
         return obj
+    }
+    
+    public func restoreSession(completion: @escaping (Bool) -> Void){
+        if isActive == false {
+            completion(false)
+            return 
+        }
+        let api = BackendAPI.getUniqueIstance()
+        api.login(username: username, password: PswEncryption.decode(str: encryptedPassword), academicYear: academicYear) { (success) in
+            completion(success)
+        }
     }
     
     

@@ -77,7 +77,6 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
-        
     }
     
     private func controlDataFields() -> Bool{
@@ -107,6 +106,7 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         let api = BackendAPI.getUniqueIstance()
         let selectedYearIndex = yearsPickerView.selectedRow(inComponent: 0)
         let selectedYear = yearsDataSource[selectedYearIndex]
+        
         api.login(username: usernameTextField.text!, password: passwordTextField.text!, academicYear: selectedYear) { (success) in
             if success {
                   self.performSegue(withIdentifier: "segueToReveal", sender: nil)
