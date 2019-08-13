@@ -240,10 +240,14 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     func getDepartments(){
         let api = BackendAPI.getUniqueIstance()
         api.getDepartments(completion: { (jsonData) in
-            print(jsonData)
+            //print(jsonData)
             for dep in jsonData as! [Any]{
                 let depDict =  dep as! [String:Any]
-                self.departmentsDataSource.append(Department.init(depName: depDict["name"] as? String, depCode: depDict["code"] as? Int))
+                let depName = depDict["name"] as? String
+                var lowName = depName!.lowercased()
+                lowName.capitalizeFirstLetter()
+                //capitalize first letter
+                self.departmentsDataSource.append(Department.init(depName: lowName, depCode: depDict["code"] as? Int, id: depDict["id"] as? Int))
             }
             self.departmentsTableView.reloadData()
         })
