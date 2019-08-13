@@ -87,7 +87,6 @@ import Foundation
                                 //save session
                                 let session = Session.getUniqueIstance()
                                 session.setActiveSessionParameters(username: username, encryptedPassword: pin, academicYear: academicYear)
-                                self.getCurrentUserData()
                                 completion(true)
                             }
                             else{ completion(false) }
@@ -98,7 +97,7 @@ import Foundation
         }
     }
     
-    public func getCurrentUserData(){
+    public func getCurrentUserData(completion: @escaping (Any?)->Void){
         let requestName = "Utente"
         let request = startRequest()
         let session =  Session.getUniqueIstance()
@@ -113,24 +112,62 @@ import Foundation
                                 print("Restoring session")
                                 session.restoreSession(completion: { (success) in
                                     if(success){
-                                        self.getCurrentUserData()
+                                        self.getCurrentUserData() { (response) in
+                                            completion(response)
+                                        }
+                                    }
+                                    else{
+                                        completion(nil)
                                     }
                                 })
                             }
                             else{
-                                //questa torna direttamente un oggettoStudent o un oggetto Teacher.
-                                
-                                
-                                 let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
-                                
-                                //print(responseDict)
+                                let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
+                                completion(json)
+                                //print(json)
                             }
                             
         }) { (error : Error?) -> Void in
-            
             print(error ?? "Error")
+            completion(nil)
         }
     }
+    
+    public func getDepartments(completion: @escaping (Any?)->Void){
+        let requestName = "Father"
+        let request =  startRequest()
+        request.requestURL(requestURL,
+                           soapAction: soapActionBaseURL + requestName,
+                           completeWithDictionary: { (statusCode : Int,
+                            dict : [AnyHashable : Any]?) -> Void in
+                            let response = dict! as Dictionary
+                            let responseValue = self.parseResultToString(requestName: requestName, response: response)
+                            if responseValue == "noSession"{
+                                let session =  Session.getUniqueIstance()
+                                session.restoreSession() { (success) in
+                                    if success {
+                                        self.getDepartments(completion: { (response) in
+                                            completion(response)
+                                        })
+                                    }
+                                    else{
+                                        completion(nil)
+                                    }
+                                }
+                            }
+                            else{
+                                let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
+                                completion(json)
+                            }
+                            
+                            
+        }) { (error : Error?) -> Void in
+            print(error ?? "Error")
+            completion(nil)
+        }
+        
+    }
+    
     
     private func getYearFromAcademicYear(academicYear: String) -> String{
         let index = academicYear.index(academicYear.startIndex, offsetBy: 5)
