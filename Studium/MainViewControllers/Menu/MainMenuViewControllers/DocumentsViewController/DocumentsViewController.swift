@@ -415,18 +415,12 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
                         )
         else { return }
         
-        let documentController = UIDocumentInteractionController(url: url)
-        documentController.delegate = self;
-        documentController.presentPreview(animated: true)
-        print(url)
-        print(documentController.url!)
+        let vc = storyboard!.instantiateViewController(withIdentifier: "DocumentBrowserViewController") as! DocumentBrowserViewController
+        vc.documentController = UIDocumentInteractionController(url: url)
+        
+        self.present(vc, animated: true, completion: nil)
+        vc.openFile()
     }
-    
-    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
-        print("ciao")
-        return self
-    }
-    
     
 
 }
