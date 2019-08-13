@@ -22,7 +22,7 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     override func viewDidLoad() {
         super.viewDidLoad()
         addLoginYears()
-    
+        getSavedCredentials()
         loginButton.layer.cornerRadius = 7.0
         loginButton.clipsToBounds = true
         
@@ -101,6 +101,20 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         passwordTextField.layer.borderWidth = 0.0
         passwordTextField.layer.borderColor = UIColor.clear.cgColor
     }
+    private func saveCredentials(){
+        UserDefaults.standard.setValue(self.usernameTextField.text!, forKey: "username")
+        UserDefaults.standard.setValue(PswEncryption.encode(s: self.passwordTextField.text!) , forKey: "password")
+    }
+    
+    private func getSavedCredentials(){
+        if let username = UserDefaults.standard.value(forKey: "username") as? String{
+             self.usernameTextField.text = username
+        }
+        if let psw = UserDefaults.standard.value(forKey: "password") as? String{
+            self.passwordTextField.text = PswEncryption.decode(str: psw)
+        }
+    }
+    
     @IBAction func loginButtonClicked(_ sender: Any) {
         guard controlDataFields() == true else {return}
         let api = BackendAPI.getUniqueIstance()
@@ -109,7 +123,10 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         
         api.login(username: usernameTextField.text!, password: passwordTextField.text!, academicYear: selectedYear) { (success) in
             if success {
-                  self.performSegue(withIdentifier: "segueToReveal", sender: nil)
+                if self.rememberMeSwitcher.isOn{
+                   self.saveCredentials()
+                }
+                self.performSegue(withIdentifier: "segueToReveal", sender: nil)
             }
             else{
                 print("User data error")

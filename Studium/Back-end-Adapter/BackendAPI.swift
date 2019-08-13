@@ -168,6 +168,42 @@ import Foundation
         
     }
     
+    public func getCDL(id: String, completion: @escaping (Any?)->Void){
+        let requestName = "Categoria"
+        let request =  startRequest()
+        request.setValue(id, forKey: "id")
+        request.requestURL(requestURL,
+                           soapAction: soapActionBaseURL + requestName,
+                           completeWithDictionary: { (statusCode : Int,
+                            dict : [AnyHashable : Any]?) -> Void in
+                            let response = dict! as Dictionary
+                            let responseValue = self.parseResultToString(requestName: requestName, response: response)
+                            if responseValue == "noSession"{
+                                let session =  Session.getUniqueIstance()
+                                session.restoreSession() { (success) in
+                                    if success {
+                                        self.getCDL(id: id,completion: { (response) in
+                                            completion(response)
+                                        })
+                                    }
+                                    else{
+                                        completion(nil)
+                                    }
+                                }
+                            }
+                            else{
+                                let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
+                                completion(json)
+                            }
+                            
+                            
+        }) { (error : Error?) -> Void in
+            print(error ?? "Error")
+            completion(nil)
+        }
+        
+    }
+    
     
     private func getYearFromAcademicYear(academicYear: String) -> String{
         let index = academicYear.index(academicYear.startIndex, offsetBy: 5)

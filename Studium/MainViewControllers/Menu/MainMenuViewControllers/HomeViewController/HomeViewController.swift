@@ -224,7 +224,12 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     
     func getCDLAndTeachings(ofDepartment : Department){ //questa funzione scaricherà dal db
         self.CDLDataSource.removeAll()
-        if ofDepartment.code == 1 { //dipartimento di informatica
+        let api =  BackendAPI.getUniqueIstance()
+        api.getCDL(id: ofDepartment.code) { (JSONData) in
+            print(JSONData)
+        }
+        
+        /*if ofDepartment.code == 1 { //dipartimento di informatica
             print("scarico corsi dipartimento informtatica")
             CDLDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "INFORMATICA L-31", courseCode: 31), teachingArray:
                 [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)], setExpanded: false))
@@ -234,7 +239,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             
         }
         
-        self.cdlTableView.reloadData()
+        self.cdlTableView.reloadData()*/
     }
     
     func getDepartments(){
@@ -247,7 +252,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
                 var lowName = depName!.lowercased()
                 lowName.capitalizeFirstLetter()
                 //capitalize first letter
-                self.departmentsDataSource.append(Department.init(depName: lowName, depCode: depDict["code"] as? Int, id: depDict["id"] as? Int))
+                self.departmentsDataSource.append(Department.init(depName: lowName, depCode: depDict["code"] as? String, id: depDict["id"] as? Int))
             }
             self.departmentsTableView.reloadData()
         })

@@ -10,10 +10,10 @@ import Foundation
 class Department{
     
     var name :String!
-    var code :Int!
+    var code :String!
     var id: Int!
     
-    init(depName:String!, depCode:Int!, id: Int!) {
+    init(depName:String!, depCode:String!, id: Int!) {
         self.name = depName
         self.code = depCode
         self.id = id
