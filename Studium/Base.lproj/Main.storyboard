@@ -741,6 +741,21 @@
             </objects>
             <point key="canvasLocation" x="1600.8" y="2005.5472263868066"/>
         </scene>
+        <!--Document Browser View Controller-->
+        <scene sceneID="Eaz-hB-F7O">
+            <objects>
+                <viewController storyboardIdentifier="DocumentBrowserViewController" id="2NG-jm-jkz" customClass="DocumentBrowserViewController" customModule="Studium" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Riz-f8-psB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.14509803921568626" green="0.14509803921568626" blue="0.14509803921568626" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <viewLayoutGuide key="safeArea" id="CDD-HK-chv"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J7T-JX-Y7c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2228" y="3172"/>
+        </scene>
         <!--Documenti-->
         <scene sceneID="ibh-bv-0dj">
             <objects>
