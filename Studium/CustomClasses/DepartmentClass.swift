@@ -11,10 +11,12 @@ class Department{
     
     var name :String!
     var code :Int!
+    var id: Int!
     
-    init(depName:String!, depCode:Int!) {
+    init(depName:String!, depCode:Int!, id: Int!) {
         self.name = depName
         self.code = depCode
+        self.id = id
     }
     
     

@@ -116,16 +116,28 @@ class ProfileViewController: UIViewController, SWRevealViewControllerDelegate, U
         emailView.layer.cornerRadius =  7.0
         emailView.clipsToBounds = true
         
-        let thisStudent = getStudent()
-        setStudentDatainView(profileDataSource: thisStudent)
+        getStudent() { (student) in
+            self.profileDataSource = student
+            self.setStudentDatainViews()
+        }
+        
     }
     
-    func getStudent() -> Student{
-        profileDataSource = Student(codFiscale: "SCNSNR98P29C351C", code: "X81000123", name: "Simone Orazio", surname: "Scionti", telNumber: "12345678901", email: "ilking@dmi.unict.it", profileImage: UIImage.init(named: "logo"))
-        return profileDataSource
+    func getStudent(completion: @escaping (Student)->Void) {
+        let api = BackendAPI.getUniqueIstance()
+        api.getCurrentUserData() { (studentJSONData) in
+            let dict =  studentJSONData as! [String: Any]
+            var phone : String!
+            if dict["phone"] as! String == ""{
+                phone = "Nessun numero telefonico specificato"
+            }
+            else{ phone = dict["phone"] as? String }
+            let student = Student(codFiscale: dict["username"] as? String , code: dict["officialcode"] as? String, name: dict["firstname"] as? String, surname: dict["lastname"] as? String,telNumber: phone, email: dict["email"] as? String, profileImage: UIImage.init(named: "logo"))
+            completion(student)
+        }
     }
     
-    func setStudentDatainView(profileDataSource: Student){
+    func setStudentDatainViews(){
         codFiscaleLabel.text = profileDataSource.codFiscale
         universityCodeLabel.text = profileDataSource.code
         studentNameLabel.text = profileDataSource.name + " " + profileDataSource.surname

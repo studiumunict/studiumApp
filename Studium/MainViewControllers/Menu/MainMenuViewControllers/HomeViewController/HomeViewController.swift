@@ -238,8 +238,22 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     }
     
     func getDepartments(){
-        departmentsDataSource.append(Department.init(depName: "Matematica e Informatica", depCode: 1))
-        departmentsDataSource.append(Department.init(depName: "Ingegneria informatica", depCode: 2))
+        let api = BackendAPI.getUniqueIstance()
+        api.getDepartments(completion: { (jsonData) in
+            //print(jsonData)
+            for dep in jsonData as! [Any]{
+                let depDict =  dep as! [String:Any]
+                let depName = depDict["name"] as? String
+                var lowName = depName!.lowercased()
+                lowName.capitalizeFirstLetter()
+                //capitalize first letter
+                self.departmentsDataSource.append(Department.init(depName: lowName, depCode: depDict["code"] as? Int, id: depDict["id"] as? Int))
+            }
+            self.departmentsTableView.reloadData()
+        })
+        
+        //departmentsDataSource.append(Department.init(depName: "Matematica e Informatica", depCode: 1))
+        //departmentsDataSource.append(Department.init(depName: "Ingegneria informatica", depCode: 2))
     }
     
     

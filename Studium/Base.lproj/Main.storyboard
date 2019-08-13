@@ -267,7 +267,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="JMn-nv-wB3"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <state key="normal" title="Seleziona un dipartimento">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -2652,7 +2652,7 @@
         <image name="student" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ILE-d2-97B"/>
-        <segue reference="035-UK-Tez"/>
+        <segue reference="PQQ-En-RsV"/>
+        <segue reference="rDa-ii-Lwh"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -21,7 +21,7 @@ class MenuTableViewController: UITableViewController, SWRevealViewControllerDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.tableView.allowsSelection = true
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -34,6 +34,7 @@ class MenuTableViewController: UITableViewController, SWRevealViewControllerDele
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0{
+            print("HomeClicked")
             if HomeFrontController == nil {
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "HomeNavigation") as! UINavigationController
                 let segue = SWRevealViewControllerSeguePushController.init(identifier: "pushToHome", source: self, destination: vc)
