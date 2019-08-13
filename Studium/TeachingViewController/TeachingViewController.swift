@@ -262,7 +262,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         
         pullNotify()
         pullDescription()
-        pullDocuments()
+        //pullDocuments()
         
         courseNameLabel.text = teachingDataSource.name
         nameTeacherLabel.text = teachingDataSource.teacherName

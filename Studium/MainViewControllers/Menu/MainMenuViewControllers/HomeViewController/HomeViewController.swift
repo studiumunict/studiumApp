@@ -122,12 +122,14 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         
         departmentsSelectButton.layer.cornerRadius = 5.0
         departmentsSelectButton.clipsToBounds = true
+        departmentsSelectButton.titleEdgeInsets = .init(top: 0, left: 40, bottom: 0, right: 40)
         
         // Do any additional setup after loading the view.
     }
     
     
     func showSearchBarAnimated(){
+        print("mostro searchbar")
         setCancelIconOnSearchButton()
         self.cdsSearchBar.alpha = 0.0
         self.cdsSearchBar.isHidden = false
@@ -140,6 +142,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         }
         
         self.cdsSearchBar.becomeFirstResponder()
+        self.cdsSearchBar.placeholder =  "Cerca un insegnamento"
         self.filteredCDLDataSource.removeAll()
         self.cdlTableView.reloadData()
         UIView.animate(withDuration: 0.4, animations: {
@@ -176,12 +179,38 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         }
     }
     
-    func getTeachingsDuringSearch(serchedText : String){
-        self.filteredCDLDataSource.removeAll()
+    func getTeachingsDuringSearch(searchedText : String){
+      
+        let api = BackendAPI.getUniqueIstance()
+        api.searchCourse(searchedText: searchedText) { (JSONData) in
+            //print(JSONData)
+            
+            var teachings = [Teaching]()
+            for teaching in JSONData as! [Any]{
+                let teach = teaching as! [String:Any]
+                let teachTitle = teach["title"] as! String
+                var teachTitleLowercased = teachTitle.lowercased()
+                teachTitleLowercased.capitalizeFirstLetter()
+                let newTeach = Teaching.init(teachingName: teachTitleLowercased, category: teach["category"] as! String, teachingCode: teach["code"] as! String, teacherName: teach["tutorname"] as! String, signedUp: false)
+                teachings.append(newTeach)
+            }
+            var newCDL : CDL
+            if(teachings.count == 0){
+                newCDL = CDL.init(courseName: "Nessun insegnamento trovato", courseCode: nil, courseId: nil, parent: nil)
+            }
+            else{
+                 newCDL = CDL.init(courseName: "Insegnamenti trovati", courseCode: nil, courseId: nil, parent: nil)
+            }
+            let tableSection = HomeTableSection.init(cdl: newCDL, teachingArray: teachings, setExpanded: true)
+            self.filteredCDLDataSource.removeAll()
+            
+            self.filteredCDLDataSource.append(tableSection)
+            self.cdlTableView.reloadData()
+        }
         //chiamata api
-        filteredCDLDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "INFORMATICA L-31", courseCode: 31), teachingArray:
+        /*filteredCDLDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "INFORMATICA L-31", courseCode: 31), teachingArray:
             [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)], setExpanded: false))
-        self.cdlTableView.reloadData()
+        self.cdlTableView.reloadData()*/
         
     }
     
@@ -189,7 +218,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         if self.searchTimer == nil && searchBar.text != "" {
             self.searchTimer  = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (t) in
               //  print("cerco testo 1", searchBar.text!)
-                self.getTeachingsDuringSearch(serchedText: searchBar.text!)
+                self.getTeachingsDuringSearch(searchedText: searchBar.text!)
                 self.searchTimer = nil
             }
         }
@@ -197,7 +226,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             self.searchTimer.invalidate()
             self.searchTimer  = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (t) in
                 //print("cerco testo 2", searchBar.text!)
-                self.getTeachingsDuringSearch(serchedText: searchBar.text!)
+                self.getTeachingsDuringSearch(searchedText: searchBar.text!)
                 self.searchTimer = nil
             }
         }
@@ -209,8 +238,6 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         }
         
     }
-    
-    
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
        // print("beginEditingSearch")
@@ -225,8 +252,31 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     func getCDLAndTeachings(ofDepartment : Department){ //questa funzione scaricherà dal db
         self.CDLDataSource.removeAll()
         let api =  BackendAPI.getUniqueIstance()
-        api.getCDL(id: ofDepartment.code) { (JSONData) in
-            print(JSONData)
+        api.getCDL(departmentCode: ofDepartment.code) { (JSONData) in
+            for cdl in JSONData as! [Any]{
+                let corso = cdl as! [String:Any]
+                //creo cdl
+                let newCDL = CDL.init(courseName: corso["name"] as? String, courseCode: corso["code"] as? String, courseId: corso["id"] as? Int, parent: corso["parent"] as? String)
+                //scarico insegnamenti del cdl
+                var teachings = [Teaching]()
+                api.getTeachings(CDLCode: newCDL.code, completion: { (JSONData) in
+                   print("CHIAMATA API")
+                    //print(JSONData)
+                    for teaching in JSONData as! [Any]{
+                        let teach = teaching as! [String:Any]
+                        let teachTitle = teach["title"] as! String
+                        var teachTitleLowercased = teachTitle.lowercased()
+                        teachTitleLowercased.capitalizeFirstLetter()
+                        let newTeach = Teaching.init(teachingName: teachTitleLowercased, category: teach["category"] as! String, teachingCode: teach["code"] as! String, teacherName: teach["tutorname"] as! String, signedUp: false)
+                        teachings.append(newTeach)
+                    }
+                   //salvo il singolo corso di laurea con tutti i suoi insegnamenti
+                   let tableSection = HomeTableSection.init(cdl: newCDL, teachingArray: teachings, setExpanded: false)
+                    self.CDLDataSource.append(tableSection)
+                    self.cdlTableView.reloadData()
+                })
+            }
+            
         }
         
         /*if ofDepartment.code == 1 { //dipartimento di informatica
@@ -264,6 +314,8 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.departmentsTableView{
+            self.CDLDataSource.removeAll()
+            self.cdlTableView.reloadData()
             self.departmentsSelectButton.setTitleColor(UIColor.darkGray, for: .normal)
             self.departmentsSelectButton.setTitle(self.departmentsDataSource[indexPath.row].name, for: .normal)
             self.view.endEditing(true)
@@ -274,7 +326,6 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         }
         else {
             self.performSegue(withIdentifier: "segueToTeachingController", sender: indexPath)
-            
         }
     }
     
@@ -361,6 +412,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             let button = UIButton.init(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
             button.layer.cornerRadius = 5.0
             button.clipsToBounds = true
+            //button.titleRect(forContentRect: CGRect(x: 20, y: 0, width: button.frame.width - 40, height: button.frame.height))
             
             
             let arrowImageView = UIImageView.init(frame: CGRect(x: 10, y: button.frame.height/2 - 7.5, width: 15, height: 15))
@@ -383,6 +435,9 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             
             button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
             button.setTitleColor(UIColor.lightWhite, for: .normal)
+            //button.titleLabel?.adjustsFontSizeToFitWidth = true
+            button.titleEdgeInsets = .init(top: 0, left: 40, bottom: 0, right: 40)
+            //button.titleLabel?.frame = CGRect(x: 100, y: 0, width: button.frame.width - 200, height: button.frame.height)
             button.backgroundColor = UIColor.tableSectionColor
             button.tag = section
             button.addTarget(self, action: #selector(self.removeOrExpandRows), for: .touchUpInside)

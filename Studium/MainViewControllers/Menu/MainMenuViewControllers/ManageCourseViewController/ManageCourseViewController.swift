@@ -73,12 +73,12 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
       /*  courseSharedDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "Materie date", courseCode: 31), teachingArray:
             [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)], setExpanded: true))
         */
-        
+      /*
         courseSharedDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "Materie da dare", courseCode: -1), teachingArray: [Teaching.init(teachingName: "Elementi di Analisi matematica 1", teachingCode: 8675, teacherName: "Ornella Naselli", signedUp: false),Teaching.init(teachingName: "Algebra 1", teachingCode: 8760, teacherName: "Andrea Scapellato", signedUp: false)], setExpanded: true))
         manageCoursesTableView.reloadData()
         
         courseSharedDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "I miei corsi (default)", courseCode: -1), teachingArray:
-            [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)], setExpanded: true))
+            [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)], setExpanded: true))*/
         
     }
     
@@ -298,7 +298,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         print("creo")
         guard let t =  createCategoryTextField.text else{ return }
         guard t != "" else{ return }
-        let newCategory = HomeTableSection.init(cdl: CDL.init(courseName: t, courseCode: -1), teachingArray: [Teaching](), setExpanded: true)
+        let newCategory = HomeTableSection.init(cdl: CDL.init(courseName: t, courseCode: "-1", courseId: -1, parent: ""), teachingArray: [Teaching](), setExpanded: true)
         courseSharedDataSource.insert(newCategory, at: 0)
         closeCreateCategoryViewAnimated()
         manageCoursesTableView.reloadData()

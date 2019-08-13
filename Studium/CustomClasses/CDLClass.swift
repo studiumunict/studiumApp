@@ -11,15 +11,19 @@ import Foundation
 class CDL{ //corsi di laurea (es. informatica l-31)
     
     var name :String!
-    var code :Int!
+    var code :String!
+    var id: Int!
+    var parent: String!
     
     init() {
         self.name = nil
         self.code = nil
     }
-    init(courseName:String!, courseCode:Int!) {
+    init(courseName:String!, courseCode:String!, courseId: Int!, parent: String!) {
         self.name = courseName
         self.code = courseCode
+        self.id = courseId
+        self.parent = parent
     }
     
     

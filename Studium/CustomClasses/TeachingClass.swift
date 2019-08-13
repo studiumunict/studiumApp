@@ -26,9 +26,9 @@ class Notify { //Struttura contenente il titolo, data e corpo del messaggio di u
 
 
 class Teaching{
-    
+    var category: String!
     var name: String!
-    var code: Int!
+    var code: String!
     var signedUp : Bool! //TRUE: se sei iscritto, FALSE: altrimenti
     var looked: Bool! //TRUE: se è privata, FALSE: altrimenti
     var teacherName: String!
@@ -41,11 +41,12 @@ class Teaching{
     var syllabusCode: String!
     
     
-    init(teachingName: String, teachingCode: Int, teacherName: String, signedUp: Bool) {
+    init(teachingName: String, category: String, teachingCode: String, teacherName: String, signedUp: Bool) {
         self.name = teachingName
         self.code = teachingCode
         self.teacherName = teacherName
         self.signedUp = signedUp
+        self.category = category
         notifyList = [Notify]()
         documentsList = [Docs]()
     }

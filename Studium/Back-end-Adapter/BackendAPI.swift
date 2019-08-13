@@ -168,10 +168,10 @@ import Foundation
         
     }
     
-    public func getCDL(id: String, completion: @escaping (Any?)->Void){
-        let requestName = "Categoria"
+    public func getCDL(departmentCode: String, completion: @escaping (Any?)->Void){
+        let requestName = "ChildNew"
         let request =  startRequest()
-        request.setValue(id, forKey: "id")
+        request.setValue(departmentCode, forKey: "id")
         request.requestURL(requestURL,
                            soapAction: soapActionBaseURL + requestName,
                            completeWithDictionary: { (statusCode : Int,
@@ -182,7 +182,77 @@ import Foundation
                                 let session =  Session.getUniqueIstance()
                                 session.restoreSession() { (success) in
                                     if success {
-                                        self.getCDL(id: id,completion: { (response) in
+                                        self.getCDL(departmentCode: departmentCode ,completion: { (response) in
+                                            completion(response)
+                                        })
+                                    }
+                                    else{
+                                        completion(nil)
+                                    }
+                                }
+                            }
+                            else{
+                                let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
+                                completion(json)
+                            }
+                            
+                            
+        }) { (error : Error?) -> Void in
+            print(error ?? "Error")
+            completion(nil)
+        }
+        
+    }
+    public func getTeachings(CDLCode: String, completion: @escaping (Any?)->Void){
+        let requestName = "CoursesAdd"
+        let request =  startRequest()
+        request.setValue(CDLCode, forKey: "id")
+        request.requestURL(requestURL,
+                           soapAction: soapActionBaseURL + requestName,
+                           completeWithDictionary: { (statusCode : Int,
+                            dict : [AnyHashable : Any]?) -> Void in
+                            let response = dict! as Dictionary
+                            let responseValue = self.parseResultToString(requestName: requestName, response: response)
+                            if responseValue == "noSession"{
+                                let session =  Session.getUniqueIstance()
+                                session.restoreSession() { (success) in
+                                    if success {
+                                        self.getTeachings(CDLCode: CDLCode ,completion: { (response) in
+                                            completion(response)
+                                        })
+                                    }
+                                    else{
+                                        completion(nil)
+                                    }
+                                }
+                            }
+                            else{
+                                let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
+                                completion(json)
+                            }
+                            
+                            
+        }) { (error : Error?) -> Void in
+            print(error ?? "Error")
+            completion(nil)
+        }
+        
+    }
+    public func searchCourse(searchedText : String, completion: @escaping (Any?)->Void){
+        let requestName = "CercaCorso"
+        let request =  startRequest()
+        request.setValue(searchedText, forKey: "stringa")
+        request.requestURL(requestURL,
+                           soapAction: soapActionBaseURL + requestName,
+                           completeWithDictionary: { (statusCode : Int,
+                            dict : [AnyHashable : Any]?) -> Void in
+                            let response = dict! as Dictionary
+                            let responseValue = self.parseResultToString(requestName: requestName, response: response)
+                            if responseValue == "noSession"{
+                                let session =  Session.getUniqueIstance()
+                                session.restoreSession() { (success) in
+                                    if success {
+                                        self.searchCourse(searchedText: searchedText ,completion: { (response) in
                                             completion(response)
                                         })
                                     }
