@@ -9,7 +9,7 @@
 import UIKit
 
 
-class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIDocumentInteractionControllerDelegate {
     @IBOutlet var errorMessageLabel: UILabel!
     @IBOutlet weak var errorInfoDescriptionTextView: UITextView!
     @IBOutlet var collectionView: UICollectionView!
@@ -29,6 +29,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     var prevIndexItem: Int!
     var fileSelected: Docs!
     
+    //var documentController: UIDocumentInteractionController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,8 +45,9 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         } else {
             setControllerForListWithElements()
         }
-       
+        
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         setRevealViewControllerParameters()
     }
@@ -54,6 +56,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         errorMessageLabel.text = "Non ci sono documenti preferiti salvati."
         errorInfoDescriptionTextView.text = "Puoi aggiungere un documento dalla sezione Documenti di un qualsiasi corso."
     }
+    
     func hideElementsOfView() {
         descrizioneLabel.isHidden = true
         headerView.isHidden = true
@@ -109,7 +112,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         
         documentsList.append(Docs(path: "cartella1", type: .folder))
         documentsList.append(Docs(path: "file1", type: .file))
-        documentsList.append(Docs(path: "file2", type: .file))
+        documentsList.append(Docs(path: "Pattern.pdf", type: .file))
         documentsList.append(Docs(path: "file3", type: .file))
         documentsList.append(Docs(path: "file4", type: .file))
         documentsList.append(Docs(path: "file5", type: .file))
@@ -179,7 +182,8 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
             } else { //Visualizza il file
                 print("file selezionato:: \((subList[indexPath.item].path)!)")
                 fileSelected = subList[indexPath.item]
-                self.performSegue(withIdentifier: "segueToFileDetail", sender: nil)
+                openDocument(fileSelected.path)
+                
             }
         }
     }
@@ -401,11 +405,28 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     }
     
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueToFileDetail" {
-            (segue.destination as! FileDetailViewController).file = fileSelected
-        }
+    private func openDocument(_ str: String) {
+        print("openDocument \(str)")
+        let dot = str.firstIndex(of: ".")!
+        
+        guard let url = Bundle.main.url(
+                            forResource: String(str[..<dot]),
+                            withExtension: String(str[str.index(after: dot)...])
+                        )
+        else { return }
+        
+        let documentController = UIDocumentInteractionController(url: url)
+        documentController.delegate = self;
+        documentController.presentPreview(animated: true)
+        print(url)
+        print(documentController.url!)
     }
+    
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        print("ciao")
+        return self
+    }
+    
     
 
 }
