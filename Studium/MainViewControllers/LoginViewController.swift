@@ -46,18 +46,24 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         tap.cancelsTouchesInView = false
         tap.delegate = self
         yearsPickerView.addGestureRecognizer(tap)
+       // self.loginButton.isEnabled = false
         
         
     }
-    
+    func showErrorWarning(){
+        errorLabel.text = "Il Server UNICT non risponde al momento."
+    }
     func addLoginYears(){
         let api = BackendAPI.getUniqueIstance()
         api.getYears(){ (years) in
-            guard years != nil else {return}
+            guard years != nil else {
+                self.showErrorWarning()
+                return}
             for year in years!{
                 self.yearsDataSource.append(year)
             }
             self.yearsPickerView.reloadAllComponents()
+            self.loginButton.isEnabled = true
         }
     }
     
@@ -126,7 +132,13 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
                 if self.rememberMeSwitcher.isOn{
                    self.saveCredentials()
                 }
-                self.performSegue(withIdentifier: "segueToReveal", sender: nil)
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController")
+                controller.modalPresentationStyle = .fullScreen
+                self.present(controller, animated: true, completion: nil)
+                
+                //non faccio segue perchè ios 13 ha cambiato i segue.
+               // self.performSegue(withIdentifier: "segueToReveal", sender: nil)
             }
             else{
                 print("User data error")

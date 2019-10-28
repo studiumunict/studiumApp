@@ -83,6 +83,7 @@ class ProfileViewController: UIViewController, SWRevealViewControllerDelegate, U
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.modalPresentationStyle = .fullScreen
         imagePicker.delegate =  self
         self.userImageView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(self.imageTapped(tapGestureRecognizer:))))
         userImageView.isUserInteractionEnabled =  true
@@ -128,7 +129,8 @@ class ProfileViewController: UIViewController, SWRevealViewControllerDelegate, U
         api.getCurrentUserData() { (studentJSONData) in
             let dict =  studentJSONData as! [String: Any]
             var phone : String!
-            if dict["phone"] as! String == ""{
+            
+            if dict["phone"] is NSNull || dict["phone"] as! String == ""{
                 phone = "Nessun numero telefonico specificato"
             }
             else{ phone = dict["phone"] as? String }
@@ -140,7 +142,7 @@ class ProfileViewController: UIViewController, SWRevealViewControllerDelegate, U
     func setStudentDatainViews(){
         codFiscaleLabel.text = profileDataSource.codFiscale
         universityCodeLabel.text = profileDataSource.code
-        studentNameLabel.text = profileDataSource.name + " " + profileDataSource.surname
+        //studentNameLabel.text = profileDataSource.name + " " + profileDataSource.surname
         emailLabel.text = profileDataSource.email
         phoneNumberLabel.text = profileDataSource.telNumber
         userImageView.image = profileDataSource.profileImage

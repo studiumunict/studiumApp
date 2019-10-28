@@ -16,12 +16,10 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     @IBOutlet weak var cdlTableView: UITableView!
     @IBOutlet weak var departmentsTableView: UITableView!
     @IBOutlet weak var departmentsSelectButton: UIButton!
-   // @IBOutlet weak var departmentsTextField: UITextField!
     var departmentsDataSource = [Department]()
     var CDLDataSource = [HomeTableSection]()
     var filteredCDLDataSource = [HomeTableSection]()
     var searchTimer : Timer!
-   // var selectedDepartment : Department! // in base a questa var cambia il contenuto della tabella CoursesTable
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(true)
@@ -131,6 +129,8 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     func showSearchBarAnimated(){
         print("mostro searchbar")
         setCancelIconOnSearchButton()
+       
+       
         self.cdsSearchBar.alpha = 0.0
         self.cdsSearchBar.isHidden = false
         if departmentsTableView.isHidden == false {
@@ -143,6 +143,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         
         self.cdsSearchBar.becomeFirstResponder()
         self.cdsSearchBar.placeholder =  "Cerca un insegnamento"
+        
         self.filteredCDLDataSource.removeAll()
         self.cdlTableView.reloadData()
         UIView.animate(withDuration: 0.4, animations: {
@@ -168,11 +169,9 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         }
     }
     @objc func searchingClicked(){
-        
         if self.cdsSearchBar.isHidden {
            showSearchBarAnimated()
            print("inizio ricerca")
-        
         }
         else{
             hideSearchBarAnimated()
@@ -180,7 +179,6 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     }
     
     func getTeachingsDuringSearch(searchedText : String){
-      
         let api = BackendAPI.getUniqueIstance()
         api.searchCourse(searchedText: searchedText) { (JSONData) in
             //print(JSONData)
@@ -207,11 +205,6 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             self.filteredCDLDataSource.append(tableSection)
             self.cdlTableView.reloadData()
         }
-        //chiamata api
-        /*filteredCDLDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "INFORMATICA L-31", courseCode: 31), teachingArray:
-            [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)], setExpanded: false))
-        self.cdlTableView.reloadData()*/
-        
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -278,24 +271,13 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             }
             
         }
-        
-        /*if ofDepartment.code == 1 { //dipartimento di informatica
-            print("scarico corsi dipartimento informtatica")
-            CDLDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "INFORMATICA L-31", courseCode: 31), teachingArray:
-                [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)], setExpanded: false))
-            
-            
-            CDLDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "MATEMATICA L-27", courseCode: 27), teachingArray: [Teaching.init(teachingName: "Elementi di Analisi matematica 1", teachingCode: 8675, teacherName: "Ornella Naselli", signedUp: false),Teaching.init(teachingName: "Algebra 1", teachingCode: 8760, teacherName: "Andrea Scapellato", signedUp: false)], setExpanded: false))
-            
-        }
-        
-        self.cdlTableView.reloadData()*/
     }
     
     func getDepartments(){
         let api = BackendAPI.getUniqueIstance()
         api.getDepartments(completion: { (jsonData) in
             //print(jsonData)
+            if jsonData == nil {return}
             for dep in jsonData as! [Any]{
                 let depDict =  dep as! [String:Any]
                 let depName = depDict["name"] as? String
@@ -306,9 +288,6 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             }
             self.departmentsTableView.reloadData()
         })
-        
-        //departmentsDataSource.append(Department.init(depName: "Matematica e Informatica", depCode: 1))
-        //departmentsDataSource.append(Department.init(depName: "Ingegneria informatica", depCode: 2))
     }
     
     

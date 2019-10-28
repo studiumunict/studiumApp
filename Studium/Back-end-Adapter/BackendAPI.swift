@@ -44,7 +44,9 @@ import Foundation
                            completeWithDictionary: { (statusCode : Int,
                             dict : [AnyHashable : Any]?) -> Void in
                             let response :Dictionary = dict! as Dictionary
+                            
                             let responseValue = self.parseResultToString(requestName: requestName, response: response)
+                            print(responseValue)
                             var resultArray : [String] = [String]()
                             let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
                             if let years = json as? [String] {
@@ -106,7 +108,9 @@ import Foundation
                         soapAction: soapActionBaseURL + requestName,
                         completeWithDictionary: { (statusCode : Int,
                             dict : [AnyHashable : Any]?) -> Void in
+                            
                             let response = dict! as Dictionary
+                            print(response)
                             let responseValue = self.parseResultToString(requestName: requestName, response: response)
                             if responseValue == "noSession"{
                                 print("Restoring session")
