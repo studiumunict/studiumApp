@@ -59,7 +59,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         
-        if courseSharedDataSource.count == 0 {
+        if courseSharedDataSource.count == 1 {
             reloadSourceFromAPI();
             
         }
@@ -73,11 +73,11 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
       /*  courseSharedDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "Materie date", courseCode: 31), teachingArray:
             [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)], setExpanded: true))
         */
-      /*
-        courseSharedDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "Materie da dare", courseCode: -1), teachingArray: [Teaching.init(teachingName: "Elementi di Analisi matematica 1", teachingCode: 8675, teacherName: "Ornella Naselli", signedUp: false),Teaching.init(teachingName: "Algebra 1", teachingCode: 8760, teacherName: "Andrea Scapellato", signedUp: false)], setExpanded: true))
+        courseSharedDataSource.insert(HomeTableSection.init(cdl: CDL.init(courseName: "Materie da dare", courseCode: "-1"), teachingArray: [Teaching.init(teachingName: "Elementi di Analisi matematica 1",category: "CAT1", teachingCode: "8675", teacherName: "Ornella Naselli", signedUp: false),Teaching.init(teachingName: "Algebra 1", category: "CAT2", teachingCode: "8702", teacherName: "Andrea Scapellato", signedUp: false)], setExpanded: true), at: 0)
+        
         manageCoursesTableView.reloadData()
         
-        courseSharedDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "I miei corsi (default)", courseCode: -1), teachingArray:
+       /* courseSharedDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "I miei corsi (default)", courseCode: "-1"), teachingArray:
             [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)], setExpanded: true))*/
         
     }

@@ -65,7 +65,7 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
             self.navigationItem.leftBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:))))
         }
-        if courseSharedDataSource.count == 0 {
+        if courseSharedDataSource.count == 1 {
             reloadSourceFromAPI();
             
         }
@@ -77,7 +77,8 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
     }
     
     func reloadSourceFromAPI(){
-        
+        courseSharedDataSource.insert(HomeTableSection.init(cdl: CDL.init(courseName: "Materie da dare", courseCode: "-1"), teachingArray: [Teaching.init(teachingName: "Elementi di Analisi matematica 1",category: "CAT1", teachingCode: "8675", teacherName: "Ornella Naselli", signedUp: false),Teaching.init(teachingName: "Algebra 1", category: "CAT2", teachingCode: "8702", teacherName: "Andrea Scapellato", signedUp: false)], setExpanded: true), at: 0)
+               
        /* courseSharedDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "Materie date", courseCode: 31), teachingArray:
             [Teaching.init(teachingName: "Matematica discreta(M-Z)", teachingCode: 1375, teacherName: "Andrea Scapellato", signedUp: true),Teaching.init(teachingName: "Fondamenti di informatica(M-Z)", teachingCode: 6723,teacherName: "Franco Barbanera", signedUp: false)], setExpanded: true))
         */

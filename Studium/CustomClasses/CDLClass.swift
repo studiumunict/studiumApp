@@ -26,5 +26,8 @@ class CDL{ //corsi di laurea (es. informatica l-31)
         self.parent = parent
     }
     
-    
+    init(courseName:String!, courseCode:String!) {
+        self.name = courseName
+        self.code = courseCode
+    }
 }

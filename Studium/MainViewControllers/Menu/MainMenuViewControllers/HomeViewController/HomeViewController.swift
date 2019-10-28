@@ -184,6 +184,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             //print(JSONData)
             
             var teachings = [Teaching]()
+            if(JSONData == nil) {return}
             for teaching in JSONData as! [Any]{
                 let teach = teaching as! [String:Any]
                 let teachTitle = teach["title"] as! String
@@ -246,6 +247,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         self.CDLDataSource.removeAll()
         let api =  BackendAPI.getUniqueIstance()
         api.getCDL(departmentCode: ofDepartment.code) { (JSONData) in
+            if JSONData == nil {return}
             for cdl in JSONData as! [Any]{
                 let corso = cdl as! [String:Any]
                 //creo cdl
@@ -255,6 +257,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
                 api.getTeachings(CDLCode: newCDL.code, completion: { (JSONData) in
                    print("CHIAMATA API")
                     //print(JSONData)
+                    if(JSONData == nil) {return}
                     for teaching in JSONData as! [Any]{
                         let teach = teaching as! [String:Any]
                         let teachTitle = teach["title"] as! String

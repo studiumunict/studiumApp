@@ -7,6 +7,6 @@
 //
 
 import Foundation
-var courseSharedDataSource = [HomeTableSection]()
+var courseSharedDataSource : [HomeTableSection] = [HomeTableSection.init(cdl: CDL.init(courseName: "Default", courseCode: "-1"), teachingArray: [Teaching](), setExpanded: true)]
 
 
