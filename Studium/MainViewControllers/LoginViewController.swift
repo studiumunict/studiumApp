@@ -135,10 +135,26 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController")
                 controller.modalPresentationStyle = .fullScreen
-                self.present(controller, animated: true, completion: nil)
-                
-                //non faccio segue perchè ios 13 ha cambiato i segue.
-               // self.performSegue(withIdentifier: "segueToReveal", sender: nil)
+                //prendi le info studente e costruisci l'istanza singleton
+                api.getCurrentUserData() { (studentJSONData) in
+                    let dict =  studentJSONData as! [String: Any]
+                    var phone : String!
+                    
+                    if dict["phone"] is NSNull || dict["phone"] as! String == ""{
+                        phone = "Nessun numero telefonico specificato"
+                    }
+                    
+                    else{ phone = dict["phone"] as? String }
+                    //print(dict["id"] as! String)
+                    _ = Student.getUniqueIstance(id: String(dict["id"] as! Int), codFiscale: dict["username"] as? String , code: dict["officialcode"] as? String, name: dict["firstname"] as? String, surname: dict["lastname"] as? String,telNumber: phone, email: dict["email"] as? String, profileImage: UIImage.init(named: "logo"))
+                    if Student.getUniqueIstance().name == nil && Student.getUniqueIstance().surname == nil {
+                        Student.getUniqueIstance().name = ""
+                        Student.getUniqueIstance().surname = ""
+                    }
+                    self.present(controller, animated: true, completion: nil)
+                    //non faccio segue perchè ios 13 ha cambiato i segue.
+                    // self.performSegue(withIdentifier: "segueToReveal", sender: nil)
+                }
             }
             else{
                 print("User data error")

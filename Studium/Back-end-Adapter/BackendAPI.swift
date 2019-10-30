@@ -98,12 +98,87 @@ import Foundation
             completion(false)
         }
     }
+    public func getMyCoursesCategories(completion: @escaping (Any?)->Void){
+           let requestName = "Categoria" //"MyCourses"
+           let request = startRequest()
+           let session =  Session.getUniqueIstance()
+           request.setValue(Student.getUniqueIstance().id , forKey: "id")
+           request.requestURL(requestURL,
+                           soapAction: soapActionBaseURL + requestName,
+                           completeWithDictionary: { (statusCode : Int,
+                               dict : [AnyHashable : Any]?) -> Void in
+                               
+                               let response = dict! as Dictionary
+                               print(response)
+                               let responseValue = self.parseResultToString(requestName: requestName, response: response)
+                               if responseValue == "noSession"{
+                                   print("Restoring session")
+                                   session.restoreSession(completion: { (success) in
+                                       if(success){
+                                           self.getMyCoursesCategories() { (response) in
+                                               completion(response)
+                                           }
+                                       }
+                                       else{
+                                           completion(nil)
+                                       }
+                                   })
+                               }
+                               else{
+                                   let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
+                                   completion(json)
+                                   //print(json)
+                               }
+                               
+           }) { (error : Error?) -> Void in
+               print(error ?? "Error")
+               completion(nil)
+           }
+       }
+    public func getMyCourses(completion: @escaping (Any?)->Void){
+        let requestName = "MyCourses"
+        let request = startRequest()
+        let session =  Session.getUniqueIstance()
+        request.setValue(Student.getUniqueIstance().id , forKey: "id")
+        request.requestURL(requestURL,
+                        soapAction: soapActionBaseURL + requestName,
+                        completeWithDictionary: { (statusCode : Int,
+                            dict : [AnyHashable : Any]?) -> Void in
+                            
+                            let response = dict! as Dictionary
+                            print(response)
+                            let responseValue = self.parseResultToString(requestName: requestName, response: response)
+                            if responseValue == "noSession"{
+                                print("Restoring session")
+                                session.restoreSession(completion: { (success) in
+                                    if(success){
+                                        self.getMyCourses() { (response) in
+                                            completion(response)
+                                        }
+                                    }
+                                    else{
+                                        completion(nil)
+                                    }
+                                })
+                            }
+                            else{
+                                let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
+                                completion(json)
+                                //print(json)
+                            }
+                            
+        }) { (error : Error?) -> Void in
+            print(error ?? "Error")
+            completion(nil)
+        }
+    }
     
     public func getCurrentUserData(completion: @escaping (Any?)->Void){
         let requestName = "Utente"
         let request = startRequest()
         let session =  Session.getUniqueIstance()
-        request.setValue(session.username , forKey: "cf")
+        print("Username cf: ",session.username!)
+        request.setValue("CSTTTV99D06C351B" , forKey: "cf")
         request.requestURL(requestURL,
                         soapAction: soapActionBaseURL + requestName,
                         completeWithDictionary: { (statusCode : Int,
@@ -287,8 +362,8 @@ import Foundation
     
     private func parseResultToString(requestName: String, response: [AnyHashable : Any]) -> String{
         let bodyDict =  response["Body"] as! [String:Any]
-        let utenteResult = bodyDict[requestName+"Response"] as! [String:Any]
-        let responseValue = utenteResult[requestName+"Result"] as! String
+        let result = bodyDict[requestName+"Response"] as! [String:Any]
+        let responseValue = result[requestName+"Result"] as! String
         return responseValue
     }
     

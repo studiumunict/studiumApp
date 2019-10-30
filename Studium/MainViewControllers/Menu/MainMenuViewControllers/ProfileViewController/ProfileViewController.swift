@@ -117,14 +117,16 @@ class ProfileViewController: UIViewController, SWRevealViewControllerDelegate, U
         emailView.layer.cornerRadius =  7.0
         emailView.clipsToBounds = true
         
-        getStudent() { (student) in
+        profileDataSource = Student.getUniqueIstance() //ce l'abbiamo salvato dal login
+        self.setStudentDatainViews()
+        /*getStudent() { (student) in
             self.profileDataSource = student
             self.setStudentDatainViews()
-        }
+        }*/
         
     }
     
-    func getStudent(completion: @escaping (Student)->Void) {
+   /*func getStudent(completion: @escaping (Student)->Void) {
         let api = BackendAPI.getUniqueIstance()
         api.getCurrentUserData() { (studentJSONData) in
             let dict =  studentJSONData as! [String: Any]
@@ -137,12 +139,12 @@ class ProfileViewController: UIViewController, SWRevealViewControllerDelegate, U
             let student = Student(codFiscale: dict["username"] as? String , code: dict["officialcode"] as? String, name: dict["firstname"] as? String, surname: dict["lastname"] as? String,telNumber: phone, email: dict["email"] as? String, profileImage: UIImage.init(named: "logo"))
             completion(student)
         }
-    }
+    }*/
     
     func setStudentDatainViews(){
         codFiscaleLabel.text = profileDataSource.codFiscale
         universityCodeLabel.text = profileDataSource.code
-        //studentNameLabel.text = profileDataSource.name + " " + profileDataSource.surname
+        studentNameLabel.text = profileDataSource.name + " " + profileDataSource.surname
         emailLabel.text = profileDataSource.email
         phoneNumberLabel.text = profileDataSource.telNumber
         userImageView.image = profileDataSource.profileImage
