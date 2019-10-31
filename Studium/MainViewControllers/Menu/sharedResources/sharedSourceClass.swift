@@ -24,7 +24,7 @@ class SharedSource: NSObject {
     private func getRowIndexByCategory(cat: String) -> Int{
            var i = 0
            for row in courseSharedDataSource{
-               print(row.course, " _------_", cat)
+               //print(row.course, " _------_", cat)
                if row.course.code == cat{
                    print("Trovato indice", i , "Categpria ", cat)
                    return i }
@@ -34,6 +34,8 @@ class SharedSource: NSObject {
     }
     
     public func reloadSourceFromAPI(completion: @escaping (Bool) -> Void){
+        courseSharedDataSource.removeAll()
+        courseSharedDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "Default", courseCode: "0"), teachingArray: [Teaching](), setExpanded: true)) 
         let api = BackendAPI.getUniqueIstance()
         api.getMyCoursesCategories { (JSONData) in
             //print("Categorie",JSONData)
@@ -52,7 +54,6 @@ class SharedSource: NSObject {
                        
                        }
                     completion(true)
-                   // self.teachingsTableView.reloadData()
             }
         }
     }

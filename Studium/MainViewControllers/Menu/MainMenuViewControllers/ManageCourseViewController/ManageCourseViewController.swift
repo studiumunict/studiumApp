@@ -69,11 +69,13 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
             
         }
         else{
+            self.manageCoursesTableView.reloadData()
             self.setAllExpanded()
         }
     }
     
-   
+    
+  
     
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String?
     {
@@ -85,14 +87,30 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let item = sharedSource.courseSharedDataSource[sourceIndexPath.section].teachings[sourceIndexPath.row]
+        if sourceIndexPath.section == destinationIndexPath.section {return}
+        let courseCode = sharedSource.courseSharedDataSource[sourceIndexPath.section].teachings[sourceIndexPath.row].code
+        let newCatCode = sharedSource.courseSharedDataSource[destinationIndexPath.section].course.code
+    
+        let api = BackendAPI.getUniqueIstance()
+        
+        api.moveCourse(codCourse: courseCode!, newCat: newCatCode!) { (JSONResponse) in
+            print(JSONResponse ?? "null")
+            self.sharedSource.reloadSourceFromAPI { (flag) in
+                tableView.reloadData()
+            }
+        }
+        /*let item = sharedSource.courseSharedDataSource[sourceIndexPath.section].teachings[sourceIndexPath.row]
         sharedSource.courseSharedDataSource[sourceIndexPath.section].teachings.remove(at: sourceIndexPath.row)
         sharedSource.courseSharedDataSource[destinationIndexPath.section].teachings.insert(item, at: destinationIndexPath.row)
         //tableView.reloadRows(at: [destinationIndexPath], with: .none)
-       tableView.reloadData()
+        
+       tableView.reloadData()*/
+        
+        
         
         
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if sharedSource.courseSharedDataSource[section].expanded {
             return sharedSource.courseSharedDataSource[section].teachings.count
@@ -112,7 +130,6 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         let cell = manageCoursesTableView.dequeueReusableCell(withIdentifier: "teachingCell") as! CoursesTableViewCell
         //modifico la cella e la mostro
         var dataElement : Teaching!
-        
         dataElement = sharedSource.courseSharedDataSource[indexPath.section].teachings[indexPath.row]
         
         cell.teachingNameLabel.text = dataElement.name
@@ -179,8 +196,11 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         return UITableViewCell.EditingStyle.delete
     }*/
     func signOutCourse(indexPath : IndexPath){
-        
-        
+        let code = sharedSource.courseSharedDataSource[indexPath.section].teachings[indexPath.row].code
+        let api  = BackendAPI.getUniqueIstance()
+        api.deleteCourse(codCourse: code!) { (JSONResponse) in
+            print(JSONResponse ?? "null")
+        }
         sharedSource.courseSharedDataSource[indexPath.section].teachings.remove(at: indexPath.row)
     }
     
@@ -252,7 +272,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
             self.dismiss(animated: true, completion: nil)
             }))
         alert.addAction(UIAlertAction(title: "Conferma", style: .default, handler: { action in
-            var items = [Teaching]()
+            /*var items = [Teaching]()
             for item in self.sharedSource.courseSharedDataSource[section].teachings{
                 items.append(item)
                 
@@ -260,7 +280,15 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
             self.sharedSource.courseSharedDataSource.remove(at: section)
             self.sharedSource.courseSharedDataSource[self.sharedSource.courseSharedDataSource.count-1].teachings.append(contentsOf: items)
             //self.manageCoursesTableView.reloadSections(IndexSet(arrayLiteral: section), with: UITableView.RowAnimation.left)
-            self.manageCoursesTableView.reloadData()
+            self.manageCoursesTableView.reloadData()*/
+            let api = BackendAPI.getUniqueIstance()
+            api.deleteCategory(idCat: self.sharedSource.courseSharedDataSource[section].course.code) { (JSONResponse) in
+                print(JSONResponse ?? "null")
+                self.sharedSource.reloadSourceFromAPI { (flag) in
+                     self.manageCoursesTableView.reloadData()
+                }
+               
+            }
             
             self.dismiss(animated: true, completion: nil)
             
@@ -288,14 +316,22 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     }
     
     @objc func createCategoryWithName(button : UIButton){
-        print("creo")
+        print("creo categoria")
         guard let t =  createCategoryTextField.text else{ return }
         guard t != "" else{ return }
-        let newCategory = HomeTableSection.init(cdl: CDL.init(courseName: t, courseCode: "-1", courseId: -1, parent: ""), teachingArray: [Teaching](), setExpanded: true)
+        let api = BackendAPI.getUniqueIstance()
+        api.createCategory(catTitle: t) { (JSONResponse) in
+            print(JSONResponse ?? "null")
+            self.sharedSource.reloadSourceFromAPI { (flag) in
+                self.manageCoursesTableView.reloadData()
+            }
+            self.manageCoursesTableView.setEditing(true, animated: true)
+            self.closeCreateCategoryViewAnimated()
+        }
+        /*let newCategory = HomeTableSection.init(cdl: CDL.init(courseName: t, courseCode: "-1", courseId: -1, parent: ""), teachingArray: [Teaching](), setExpanded: true)
         sharedSource.courseSharedDataSource.insert(newCategory, at: 0)
         closeCreateCategoryViewAnimated()
-        manageCoursesTableView.reloadData()
-        manageCoursesTableView.setEditing(true, animated: true)
+        manageCoursesTableView.reloadData()*/
     }
     
     

@@ -139,6 +139,8 @@ import Foundation
         let requestName = "MyCourses"
         let request = startRequest()
         let session =  Session.getUniqueIstance()
+        
+       //print("ID = ***** ",Student.getUniqueIstance().id)
         request.setValue(Student.getUniqueIstance().id , forKey: "id")
         request.requestURL(requestURL,
                         soapAction: soapActionBaseURL + requestName,
@@ -172,13 +174,209 @@ import Foundation
             completion(nil)
         }
     }
+    public func moveCourse(codCourse: String, newCat: String, completion: @escaping (Any?)->Void){
+        let requestName = "MoveCourse"
+        let request = startRequest()
+        let session =  Session.getUniqueIstance()
+        //Student.getUniqueIstance().codFiscale
+        request.setValue(Student.getUniqueIstance().id, forKey: "id")
+        request.setValue(codCourse, forKey: "code")
+        request.setValue(newCat, forKey: "cat")
+        request.requestURL(requestURL,
+                        soapAction: soapActionBaseURL + requestName,
+                        completeWithDictionary: { (statusCode : Int,
+                            dict : [AnyHashable : Any]?) -> Void in
+                            
+                            let response = dict! as Dictionary
+                            print(response)
+                            let responseValue = self.parseResultToString(requestName: requestName, response: response)
+                            if responseValue == "noSession"{
+                                print("Restoring session")
+                                session.restoreSession(completion: { (success) in
+                                    if(success){
+                                        self.moveCourse(codCourse: codCourse, newCat: newCat) { (response) in
+                                            completion(response)
+                                        }
+                                    }
+                                    else{
+                                        completion(nil)
+                                    }
+                                })
+                            }
+                            else{
+                                let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
+                                completion(json)
+                                //print(json)
+                            }
+                            
+        }) { (error : Error?) -> Void in
+            print(error ?? "Error")
+            completion(nil)
+        }
+    }
+    
+    public func addCourse(codCourse: String, completion: @escaping (Any?)->Void){
+        let requestName = "AddCourse"
+        let request = startRequest()
+        let session =  Session.getUniqueIstance()
+        //Student.getUniqueIstance().codFiscale
+        request.setValue(Student.getUniqueIstance().id, forKey: "user")
+        request.setValue(codCourse, forKey: "course")
+        request.requestURL(requestURL,
+                        soapAction: soapActionBaseURL + requestName,
+                        completeWithDictionary: { (statusCode : Int,
+                            dict : [AnyHashable : Any]?) -> Void in
+                            
+                            let response = dict! as Dictionary
+                            print(response)
+                            let responseValue = self.parseResultToString(requestName: requestName, response: response)
+                            if responseValue == "noSession"{
+                                print("Restoring session")
+                                session.restoreSession(completion: { (success) in
+                                    if(success){
+                                        self.addCourse(codCourse: codCourse) { (response) in
+                                            completion(response)
+                                        }
+                                    }
+                                    else{
+                                        completion(nil)
+                                    }
+                                })
+                            }
+                            else{
+                                let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
+                                completion(json)
+                                //print(json)
+                            }
+                            
+        }) { (error : Error?) -> Void in
+            print(error ?? "Error")
+            completion(nil)
+        }
+    }
+    public func deleteCourse(codCourse: String, completion: @escaping (Any?)->Void){
+        let requestName = "RemoveCourse"
+        let request = startRequest()
+        let session =  Session.getUniqueIstance()
+        //Student.getUniqueIstance().codFiscale
+        request.setValue(Student.getUniqueIstance().id, forKey: "user")
+        request.setValue(codCourse, forKey: "course")
+        request.requestURL(requestURL,
+                        soapAction: soapActionBaseURL + requestName,
+                        completeWithDictionary: { (statusCode : Int,
+                            dict : [AnyHashable : Any]?) -> Void in
+                            
+                            let response = dict! as Dictionary
+                            print(response)
+                            let responseValue = self.parseResultToString(requestName: requestName, response: response)
+                            if responseValue == "noSession"{
+                                print("Restoring session")
+                                session.restoreSession(completion: { (success) in
+                                    if(success){
+                                        self.deleteCourse(codCourse: codCourse) { (response) in
+                                            completion(response)
+                                        }
+                                    }
+                                    else{
+                                        completion(nil)
+                                    }
+                                })
+                            }
+                            else{
+                                let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
+                                completion(json)
+                                //print(json)
+                            }
+                            
+        }) { (error : Error?) -> Void in
+            print(error ?? "Error")
+            completion(nil)
+        }
+    }
+    
+    public func deleteCategory(idCat: String, completion: @escaping (Any?)->Void){
+        let requestName = "DeleteCategory" //"MyCourses"
+        let request = startRequest()
+        let session =  Session.getUniqueIstance()
+        //Student.getUniqueIstance().codFiscale
+        request.setValue(Student.getUniqueIstance().id, forKey: "user")
+        request.setValue(idCat, forKey: "id")
+        request.requestURL(requestURL,
+                        soapAction: soapActionBaseURL + requestName,
+                        completeWithDictionary: { (statusCode : Int,
+                            dict : [AnyHashable : Any]?) -> Void in
+                            
+                            let response = dict! as Dictionary
+                            print(response)
+                            let responseValue = self.parseResultToString(requestName: requestName, response: response)
+                            if responseValue == "noSession"{
+                                print("Restoring session")
+                                session.restoreSession(completion: { (success) in
+                                    if(success){
+                                        self.deleteCategory(idCat: idCat) { (response) in
+                                            completion(response)
+                                        }
+                                    }
+                                    else{
+                                        completion(nil)
+                                    }
+                                })
+                            }
+                            else{
+                                let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
+                                completion(json)
+                            }
+                            
+        }) { (error : Error?) -> Void in
+            print(error ?? "Error")
+            completion(nil)
+        }
+    }
+    public func createCategory(catTitle: String, completion: @escaping (Any?)->Void){
+        let requestName = "CreateCategory" //"MyCourses"
+        let request = startRequest()
+        let session =  Session.getUniqueIstance()
+        print("Creo categoria cod fisc : ", Student.getUniqueIstance().codFiscale)
+        request.setValue(Student.getUniqueIstance().id, forKey: "user")
+        request.setValue(catTitle, forKey: "title")
+        request.requestURL(requestURL,
+                        soapAction: soapActionBaseURL + requestName,
+                        completeWithDictionary: { (statusCode : Int,
+                            dict : [AnyHashable : Any]?) -> Void in
+                            
+                            let response = dict! as Dictionary
+                            print(response)
+                            let responseValue = self.parseResultToString(requestName: requestName, response: response)
+                            if responseValue == "noSession"{
+                                print("Restoring session")
+                                session.restoreSession(completion: { (success) in
+                                    if(success){
+                                        self.createCategory(catTitle: catTitle) { (response) in
+                                            completion(response)
+                                        }
+                                    }
+                                    else{
+                                        completion(nil)
+                                    }
+                                })
+                            }
+                            else{
+                                let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
+                                completion(json)
+                            }
+                            
+        }) { (error : Error?) -> Void in
+            print(error ?? "Error")
+            completion(nil)
+        }
+    }
     
     public func getCurrentUserData(completion: @escaping (Any?)->Void){
         let requestName = "Utente"
         let request = startRequest()
         let session =  Session.getUniqueIstance()
         print("Username cf: ",session.username!)
-        request.setValue("CSTTTV99D06C351B" , forKey: "cf")
+        request.setValue(session.username! , forKey: "cf")
         request.requestURL(requestURL,
                         soapAction: soapActionBaseURL + requestName,
                         completeWithDictionary: { (statusCode : Int,
@@ -203,7 +401,6 @@ import Foundation
                             else{
                                 let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
                                 completion(json)
-                                //print(json)
                             }
                             
         }) { (error : Error?) -> Void in

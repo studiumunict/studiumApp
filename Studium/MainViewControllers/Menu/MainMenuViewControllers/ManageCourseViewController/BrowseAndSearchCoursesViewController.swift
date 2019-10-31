@@ -97,7 +97,28 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
             return cell
         }
     }
-    
+    @objc func confirmSignup(sender: UIButton) {
+        let indexPath = sender.accessibilityElements![0] as! IndexPath
+        let courseCode : String
+        if self.cdsSearchBar.isFirstResponder || self.cdsSearchBar.text != ""{
+            courseCode = self.filteredCDLDataSource[indexPath.section].teachings[indexPath.row].code
+        }
+        else{
+            courseCode = self.CDLDataSource[indexPath.section].teachings[indexPath.row].code
+        }
+        let api =  BackendAPI.getUniqueIstance()
+        api.addCourse(codCourse: courseCode) { (JSONResponse) in
+            print(JSONResponse ??  "null")
+            print("iscritto");
+            SharedSource.getUniqueIstance().reloadSourceFromAPI { (flag) in
+            }
+        }
+        
+        
+        //chiama la funzione che fa comparire "Iscrizione effettuata! Il corso è stato inserito nella sezione i miei corsi."
+        // Questa funzione poi chiama hideSignupViewAnimated
+        hideSignUpViewAnimated(button: sender)
+    }
     func showSignUpViewAnimated(teachingName : String, teacherName : String , signedUp : Bool, indexPath : IndexPath){
         self.navigationItem.rightBarButtonItem?.customView?.isUserInteractionEnabled = false
         
@@ -136,12 +157,15 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
         signUpButton.backgroundColor = UIColor.lightWhite
         cancelButton.backgroundColor = UIColor.lightWhite
         signUpButton.setTitleColor(UIColor.textBlueColor, for: .normal)
+        signUpButton.accessibilityElements = [IndexPath]()
+        signUpButton.accessibilityElements?.append(indexPath)
+        signUpButton.addTarget(self, action: #selector(confirmSignup(sender:)), for: .touchUpInside)
         signUpButton.setTitle("Iscriviti", for: .normal)
         cancelButton.setTitle("Annulla", for: .normal)
         cancelButton.setTitleColor(UIColor.textRedColor, for: .normal)
-        cancelButton.addTarget(self, action: #selector(hideSignUpViewAnimated), for: .touchUpInside)
         cancelButton.accessibilityElements = [IndexPath]()
         cancelButton.accessibilityElements?.append(indexPath)
+        cancelButton.addTarget(self, action: #selector(hideSignUpViewAnimated), for: .touchUpInside)
         signUpButton.layer.cornerRadius = 5.0
         cancelButton.layer.cornerRadius = 5.0
         

@@ -76,8 +76,6 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
         else{
             teachingsTableView.reloadData()
         }
-        
-        
     }
     
    

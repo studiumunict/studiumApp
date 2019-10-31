@@ -225,7 +225,6 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
         let manageVc = navControllerList[0] as! ManageCourseViewController
         manageVc.setEditIconOnTabBar()
         self.navigationItem.title =  "Gestisci corsi"
-       //
     }
     
 }
