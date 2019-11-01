@@ -15,10 +15,6 @@ class NotifyPageViewController: UIViewController, UITableViewDelegate {
     fileprivate var dataSource = NotifyTableDataSource()
     
     var notifyList: [Notify]!
-    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,23 +25,22 @@ class NotifyPageViewController: UIViewController, UITableViewDelegate {
         
         
         if notifyList != nil && notifyList.count > 0 {
-            
             errorMessageLabel.isHidden = true
             tableView.isHidden = false
             setupTableView()
-            
-            var i: Int = notifyList.count-1
-            while i >= 0 {
-                dataSource.items.append(ContentCell(data: notifyList[i].date, title: notifyList[i].title, description: notifyList[i].message))
-                i -= 1
+            for notify in notifyList{
+               // print("Title: ", notify.title)
+               // print("Content: ", notify.message!)
+                dataSource.items.append(ContentCell(data: notify.date, title: notify.title, description: notify.message))
+                
             }
-            
         } else {
             
             errorMessageLabel.isHidden = false
             errorMessageLabel.text = "Questo insegnamento non ha ancora inoltrato avvisi."
             tableView.isHidden = true
         }
+        
     }
     
     private func setupTableView() {
@@ -77,4 +72,7 @@ class NotifyPageViewController: UIViewController, UITableViewDelegate {
         tableView.endUpdates()
     }
     
+    deinit{
+        print("Deinit notifyPage")
+    }
 }

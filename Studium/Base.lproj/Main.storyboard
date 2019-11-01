@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Wuc-p9-wJ8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Wuc-p9-wJ8">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1728,16 +1728,38 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zFU-DL-rcL">
+                                        <rect key="frame" x="167.5" y="135" width="100" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="2uP-gf-GJY"/>
+                                            <constraint firstAttribute="width" constant="100" id="cun-M5-Gy2"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <state key="normal" title="Conferma"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Z6-Sl-RY0">
+                                        <rect key="frame" x="69.5" y="135" width="100" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="5q2-ef-1Yc"/>
+                                            <constraint firstAttribute="height" constant="40" id="LJd-qX-duh"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="bZ1-gS-alY"/>
+                                        </constraints>
+                                        <state key="normal" title="Annulla"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="1YL-J3-Djm"/>
+                                    <constraint firstItem="5Z6-Sl-RY0" firstAttribute="centerX" secondItem="C9U-lI-mFP" secondAttribute="centerX" constant="-49" id="3Af-hM-NQj"/>
                                     <constraint firstItem="4FI-sn-ddP" firstAttribute="centerX" secondItem="C9U-lI-mFP" secondAttribute="centerX" id="3tl-lL-BQg"/>
+                                    <constraint firstItem="zFU-DL-rcL" firstAttribute="centerX" secondItem="C9U-lI-mFP" secondAttribute="centerX" constant="49" id="BSO-P9-CwZ"/>
                                     <constraint firstItem="4FI-sn-ddP" firstAttribute="width" secondItem="C9U-lI-mFP" secondAttribute="width" multiplier="0.8" id="JFt-vs-pPk"/>
                                     <constraint firstItem="Scj-Tv-8hz" firstAttribute="centerX" secondItem="C9U-lI-mFP" secondAttribute="centerX" id="Nzv-0y-PID"/>
                                     <constraint firstItem="Scj-Tv-8hz" firstAttribute="width" secondItem="C9U-lI-mFP" secondAttribute="width" id="P7Q-Fi-DcY"/>
                                     <constraint firstItem="4FI-sn-ddP" firstAttribute="top" secondItem="Scj-Tv-8hz" secondAttribute="bottom" constant="15" id="aC3-gY-QhG"/>
                                     <constraint firstItem="Scj-Tv-8hz" firstAttribute="top" secondItem="C9U-lI-mFP" secondAttribute="top" constant="20" id="rOl-SH-BQY"/>
+                                    <constraint firstAttribute="bottom" secondItem="5Z6-Sl-RY0" secondAttribute="bottom" constant="25" id="sOb-PC-1vU"/>
+                                    <constraint firstAttribute="bottom" secondItem="zFU-DL-rcL" secondAttribute="bottom" constant="25" id="vhQ-0l-29I"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1763,8 +1785,10 @@
                     <navigationItem key="navigationItem" title="Gestisci corsi" id="JoH-8W-TmY"/>
                     <connections>
                         <outlet property="addCategoryButton" destination="Rd2-Wa-UqC" id="Lzm-M7-WjA"/>
+                        <outlet property="cancelButton" destination="5Z6-Sl-RY0" id="gWA-x7-FJH"/>
                         <outlet property="categoryHeaderView" destination="qKt-ua-eoQ" id="kJg-G6-IU4"/>
                         <outlet property="categoryLabel" destination="272-8w-V1e" id="BSg-Rl-8zW"/>
+                        <outlet property="createCategoryButton" destination="zFU-DL-rcL" id="Mlu-zs-JRe"/>
                         <outlet property="createCategoryLabel" destination="Scj-Tv-8hz" id="vUg-Es-1WO"/>
                         <outlet property="createCategoryTextField" destination="4FI-sn-ddP" id="myB-RN-HrJ"/>
                         <outlet property="createCategoryView" destination="C9U-lI-mFP" id="crd-IO-SYc"/>

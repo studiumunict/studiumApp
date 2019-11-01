@@ -245,10 +245,13 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     
     func getCDLAndTeachings(ofDepartment : Department){ //questa funzione scaricherà dal db
         self.CDLDataSource.removeAll()
+        self.cdlTableView.reloadData()
         let api =  BackendAPI.getUniqueIstance()
         api.getCDL(departmentCode: ofDepartment.code) { (JSONData) in
             if JSONData == nil {return}
-            for cdl in JSONData as! [Any]{
+            var i = 0
+            let JSONArray = JSONData as! [Any]
+            for cdl in JSONArray{
                 let corso = cdl as! [String:Any]
                 //creo cdl
                 let newCDL = CDL.init(courseName: corso["name"] as? String, courseCode: corso["code"] as? String, courseId: corso["id"] as? Int, parent: corso["parent"] as? String)
@@ -269,7 +272,10 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
                    //salvo il singolo corso di laurea con tutti i suoi insegnamenti
                    let tableSection = HomeTableSection.init(cdl: newCDL, teachingArray: teachings, setExpanded: false)
                     self.CDLDataSource.append(tableSection)
-                    self.cdlTableView.reloadData()
+                    if i == JSONArray.count-1 {
+                        self.cdlTableView.reloadData()
+                    }
+                    i += 1
                 })
             }
             

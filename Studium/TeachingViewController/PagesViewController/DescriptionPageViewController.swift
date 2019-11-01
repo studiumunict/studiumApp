@@ -33,6 +33,8 @@ class DescriptionPageViewController: UIViewController {
             errorMessageLabel.text = "Questo insegnamento non è stato ancora descritto."
         }
     }
-
+    deinit{
+        print("Deinit descriptionPage")
+    }
 
 }

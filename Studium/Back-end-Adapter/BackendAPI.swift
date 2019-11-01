@@ -174,6 +174,7 @@ import Foundation
             completion(nil)
         }
     }
+    
     public func moveCourse(codCourse: String, newCat: String, completion: @escaping (Any?)->Void){
         let requestName = "MoveCourse"
         let request = startRequest()
@@ -371,6 +372,45 @@ import Foundation
         }
     }
     
+    public func getAvvisi(codCourse: String, completion: @escaping (Any?)->Void){
+        let requestName = "Avvisi"
+        let request = startRequest()
+        let session =  Session.getUniqueIstance()
+        //Student.getUniqueIstance().codFiscale
+        request.setValue(codCourse, forKey: "course")
+         request.setValue(Student.getUniqueIstance().id, forKey: "userid")
+        request.requestURL(requestURL,
+                        soapAction: soapActionBaseURL + requestName,
+                        completeWithDictionary: { (statusCode : Int,
+                            dict : [AnyHashable : Any]?) -> Void in
+                            
+                            let response = dict! as Dictionary
+                            print(response)
+                            let responseValue = self.parseResultToString(requestName: requestName, response: response)
+                            if responseValue == "noSession"{
+                                print("Restoring session")
+                                session.restoreSession(completion: { (success) in
+                                    if(success){
+                                        self.getAvvisi(codCourse: codCourse) { (response) in
+                                            completion(response)
+                                        }
+                                    }
+                                    else{
+                                        completion(nil)
+                                    }
+                                })
+                            }
+                            else{
+                                let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
+                                completion(json)
+                                //print(json)
+                            }
+                            
+        }) { (error : Error?) -> Void in
+            print(error ?? "Error")
+            completion(nil)
+        }
+    }
     public func getCurrentUserData(completion: @escaping (Any?)->Void){
         let requestName = "Utente"
         let request = startRequest()

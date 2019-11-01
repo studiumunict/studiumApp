@@ -14,6 +14,10 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     
     @IBOutlet weak var createCategoryTextField: UITextField!
     @IBOutlet weak var createCategoryLabel: UILabel!
+    
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var createCategoryButton: UIButton!
+    
     //facciamo un for che setta tutte le section ad expanded, poi quando si rivà sul i miei corsi controller, si lasciano tutte expandend richiamando il reloaddata di quella tableview
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var categoryHeaderView: UIView!
@@ -362,9 +366,9 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         oscureView.isHidden = true
         createCategoryTextField.backgroundColor = UIColor.lightWhite
         //let createCategoryButton = UIButton(frame: CGRect(x: createCategoryView.frame.size.width/2 - 5, y: 130 , width: 120, height: 50))
-        let createCategoryButton = UIButton(frame: CGRect(x: createCategoryView.center.x   , y: 130 , width: 100, height: 40))
+        //let createCategoryButton = UIButton(frame: CGRect(x: createCategoryView.center.x   , y: 130 , width: 100, height: 40))
         //let cancelButton = UIButton(frame: CGRect(x: createCategoryView.frame.size.width/2 - 115, y: 130, width: 120, height: 50))
-        let cancelButton = UIButton(frame: CGRect(x: createCategoryView.center.x - 100 , y: 130, width: 100, height: 40))
+        //let cancelButton = UIButton(frame: CGRect(x: createCategoryView.center.x - 100 , y: 130, width: 100, height: 40))
         createCategoryButton.backgroundColor = UIColor.lightWhite
         cancelButton.backgroundColor = UIColor.lightWhite
         createCategoryButton.setTitleColor(UIColor.textBlueColor, for: .normal)

@@ -51,39 +51,74 @@ class Teaching{
         documentsList = [Docs]()
     }
     
-    
-    func completeDataSource(showcaseHTML: String?, syllabusCode: String?, haveBooking: Bool?, descriptionText: String?) {
-        
-        if let val = showcaseHTML {
-            self.showcaseHTML = val
+    func completeTeachingData(completion: @escaping (Bool)->Void){
+        self.downloadNotify { (flag) in
+            self.downloadDocuments { (flag1) in
+                self.downloadDescription { (flag2) in
+                     completion(true)
+                }
+            }
         }
-        
-        if let val = syllabusCode {
-            self.syllabusCode = val
+    }
+   
+    private func downloadNotify(completion: @escaping (Bool)->Void){
+        let api =  BackendAPI.getUniqueIstance()
+        api.getAvvisi(codCourse: self.code) { (JSONResponse) in
+            //print(JSONResponse)
+            let JSONArray = JSONResponse as! [Any]
+            for avviso in JSONArray{
+                let avvisoDict = avviso as! [String: Any]
+                self.notifyList.append(Notify(date: avvisoDict["data"] as? String, title: avvisoDict["title"] as? String, message: avvisoDict["content"] as? String ))
+            }
+            completion(true)
         }
-        
-        if let val = haveBooking {
-            self.haveBooking = val
-        }
-        
-        if let val = descriptionText {
-            self.descriptionText = val
-        }
-        
-        notifyList = [Notify]()
-        documentsList = [Docs]()
+    }
+    private func downloadDocuments(completion: @escaping (Bool)->Void){
+        completion(true)
     }
     
-    func addNewNotify(date: String?, title: String?, message: String?) {
-        notifyList.append(Notify(date: date!, title: title!, message: message!))
+    private func downloadDescription(completion: @escaping (Bool)->Void){
+        self.descriptionText = "Descrizione"
+        completion(true)
     }
     
-    func addNewDocument(path: String, type: Docs.typeDocs) {
+    
+    
+    
+    
+  
+    
+/*func addNewDocument(path: String, type: Docs.typeDocs) {
         documentsList.append(Docs(path: path, type: type))
-    }
-    func setDescriptionText(description:String){
-        descriptionText = description
-    }
+    }*/
+  
     
+    
+    
+      /* func completeDataSource(showcaseHTML: String?, syllabusCode: String?, haveBooking: Bool?, descriptionText: String?) {
+           
+           if let val = showcaseHTML {
+               self.showcaseHTML = val
+           }
+           
+           if let val = syllabusCode {
+               self.syllabusCode = val
+           }
+           
+           if let val = haveBooking {
+               self.haveBooking = val
+           }
+           
+           if let val = descriptionText {
+               self.descriptionText = val
+           }
+           
+           notifyList = [Notify]()
+           documentsList = [Docs]()
+       }*/
+    deinit{
+        
+        print("Deinit TeachingClass")
+    }
 }
 
