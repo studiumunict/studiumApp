@@ -152,8 +152,8 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
         teacherNameLabel.font = UIFont.boldSystemFont(ofSize: 13)
         teacherNameLabel.textAlignment = .center
         teacherNameLabel.alpha = 0.0
-        let signUpButton = UIButton(frame: CGRect(x: signUpView.frame.size.width/2 - 5, y: 100 , width: 120, height: 50))
-        let cancelButton = UIButton(frame: CGRect(x: signUpView.frame.size.width/2 - 115, y: 100, width: 120, height: 50))
+        let signUpButton = UIButton(frame: CGRect(x: signUpView.frame.size.width/2 - 0.5, y: 100 , width: 100, height: 40))
+        let cancelButton = UIButton(frame: CGRect(x: signUpView.frame.size.width/2 - 100 + 0.5 , y: 100, width: 100, height: 40))
         signUpButton.backgroundColor = UIColor.lightWhite
         cancelButton.backgroundColor = UIColor.lightWhite
         signUpButton.setTitleColor(UIColor.textBlueColor, for: .normal)
@@ -162,6 +162,8 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
         signUpButton.addTarget(self, action: #selector(confirmSignup(sender:)), for: .touchUpInside)
         signUpButton.setTitle("Iscriviti", for: .normal)
         cancelButton.setTitle("Annulla", for: .normal)
+        cancelButton.titleLabel?.font = UIFont(name: "System", size: 9)
+        signUpButton.titleLabel?.font = UIFont(name: "System", size: 9)
         cancelButton.setTitleColor(UIColor.textRedColor, for: .normal)
         cancelButton.accessibilityElements = [IndexPath]()
         cancelButton.accessibilityElements?.append(indexPath)

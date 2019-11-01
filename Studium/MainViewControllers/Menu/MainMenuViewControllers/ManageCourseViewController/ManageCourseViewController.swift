@@ -69,8 +69,9 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
             
         }
         else{
-            self.manageCoursesTableView.reloadData()
             self.setAllExpanded()
+            self.manageCoursesTableView.reloadData()
+            
         }
     }
     
@@ -360,18 +361,22 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         createCategoryView.isHidden = true
         oscureView.isHidden = true
         createCategoryTextField.backgroundColor = UIColor.lightWhite
-        let createCategoryButton = UIButton(frame: CGRect(x: createCategoryView.frame.size.width/2 - 5, y: 130 , width: 120, height: 50))
-        let cancelButton = UIButton(frame: CGRect(x: createCategoryView.frame.size.width/2 - 115, y: 130, width: 120, height: 50))
+        //let createCategoryButton = UIButton(frame: CGRect(x: createCategoryView.frame.size.width/2 - 5, y: 130 , width: 120, height: 50))
+        let createCategoryButton = UIButton(frame: CGRect(x: createCategoryView.center.x   , y: 130 , width: 100, height: 40))
+        //let cancelButton = UIButton(frame: CGRect(x: createCategoryView.frame.size.width/2 - 115, y: 130, width: 120, height: 50))
+        let cancelButton = UIButton(frame: CGRect(x: createCategoryView.center.x - 100 , y: 130, width: 100, height: 40))
         createCategoryButton.backgroundColor = UIColor.lightWhite
         cancelButton.backgroundColor = UIColor.lightWhite
         createCategoryButton.setTitleColor(UIColor.textBlueColor, for: .normal)
-        createCategoryButton.setTitle("Crea", for: .normal)
+        createCategoryButton.setTitle("Conferma", for: .normal)
         cancelButton.setTitle("Annulla", for: .normal)
         cancelButton.setTitleColor(UIColor.textRedColor, for: .normal)
         cancelButton.addTarget(self, action: #selector(closeCreateCategory), for: .touchUpInside)
         createCategoryButton.addTarget(self, action: #selector(createCategoryWithName), for: .touchUpInside)
         createCategoryButton.layer.cornerRadius = 5.0
         cancelButton.layer.cornerRadius = 5.0
+        cancelButton.titleLabel?.font = UIFont(name: "System", size: 9)
+        createCategoryButton.titleLabel?.font = UIFont(name: "System", size: 9)
         cancelButton.layer.addBorder(edge: .right, color: #colorLiteral(red: 0.9961728454, green: 0.9902502894, blue: 1, alpha: 1), thickness: 0.5)
         roundRightRadius(radius: 5.0, view: createCategoryButton)
         roundLeftRadius(radius: 5.0, view: cancelButton)
