@@ -34,6 +34,7 @@
 		9C07089021C8672800F7D296 /* BrowseAndSearchCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C07088F21C8672800F7D296 /* BrowseAndSearchCourseTableViewCell.swift */; };
 		9C0E501B21C3F7CE0055C4DD /* ManageCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0E501A21C3F7CE0055C4DD /* ManageCourseViewController.swift */; };
 		9C0E501D21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0E501C21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift */; };
+		9C2C63CD237311BB0063F9C7 /* NotifyClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2C63CC237311BB0063F9C7 /* NotifyClass.swift */; };
 		9C454F1323016B070071F81F /* PswEncryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C454F1223016B070071F81F /* PswEncryption.swift */; };
 		9C454F1523016DA70071F81F /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C454F1423016DA70071F81F /* Session.swift */; };
 		9C7ADB5522F31AF7009651FB /* BackendAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7ADB5422F31AF7009651FB /* BackendAPI.swift */; };
@@ -114,6 +115,7 @@
 		9C07088F21C8672800F7D296 /* BrowseAndSearchCourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseAndSearchCourseTableViewCell.swift; sourceTree = "<group>"; };
 		9C0E501A21C3F7CE0055C4DD /* ManageCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCourseViewController.swift; sourceTree = "<group>"; };
 		9C0E501C21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseAndSearchCoursesViewController.swift; sourceTree = "<group>"; };
+		9C2C63CC237311BB0063F9C7 /* NotifyClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyClass.swift; sourceTree = "<group>"; };
 		9C454F1223016B070071F81F /* PswEncryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PswEncryption.swift; sourceTree = "<group>"; };
 		9C454F1423016DA70071F81F /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		9C7ADB5422F31AF7009651FB /* BackendAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAPI.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				13D3997C21CACF1300B023B8 /* DocsClass.swift */,
 				13D3997E21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift */,
 				1380ED502302F2440063F79F /* DocumentBrowserViewController.swift */,
+				9C2C63CC237311BB0063F9C7 /* NotifyClass.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 			isa = PBXGroup;
 			children = (
 				9CFE9DA421A8AE960030AE33 /* LoginViewController.swift */,
+				9C07EF3721C6ED4D00C4836B /* sharedResources */,
 				9CFE9DA621A8BBD10030AE33 /* Menu */,
 			);
 			path = MainViewControllers;
@@ -396,7 +400,6 @@
 		9CFE9DA621A8BBD10030AE33 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				9C07EF3721C6ED4D00C4836B /* sharedResources */,
 				9CFE9DA721A8BBEE0030AE33 /* MenuTableViewController.swift */,
 				9C07088D21C85C1100F7D296 /* CoursesTableViewCell.swift */,
 				9CFE9DA921A8BC260030AE33 /* MainMenuViewControllers */,
@@ -694,6 +697,7 @@
 				9CFE9D7321A8ADBC0030AE33 /* AppDelegate.swift in Sources */,
 				9CFE72C121B9508E001EB697 /* CDLTableViewCell.swift in Sources */,
 				9C07088E21C85C1100F7D296 /* CoursesTableViewCell.swift in Sources */,
+				9C2C63CD237311BB0063F9C7 /* NotifyClass.swift in Sources */,
 				9C454F1323016B070071F81F /* PswEncryption.swift in Sources */,
 				13E91D0521C7DB550007EF3E /* ManageCoursePageViewController.swift in Sources */,
 				13E3A34A21C1416E004BE8D8 /* NotifyTableDataSource.swift in Sources */,

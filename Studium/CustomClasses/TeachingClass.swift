@@ -8,23 +8,6 @@
 
 import Foundation
 
-class Notify { //Struttura contenente il titolo, data e corpo del messaggio di un Avviso
-    var date: String!
-    var title: String!
-    var message: String!
-    
-    init(){}
-    
-    init(date: String!, title: String!, message: String!){
-        self.date = date
-        self.title = title
-        self.message = message
-    }
-}
-
-
-
-
 class Teaching{
     var category: String!
     var name: String!
@@ -39,9 +22,11 @@ class Teaching{
     var notifyList: [Notify]!
     var documentsList: [Docs]!
     var syllabusCode: String!
+    private var isCompleted = false
     
     
     init(teachingName: String, category: String, teachingCode: String, teacherName: String, signedUp: Bool) {
+        print("Init TeachingClass")
         self.name = teachingName
         self.code = teachingCode
         self.teacherName = teacherName
@@ -50,11 +35,16 @@ class Teaching{
         notifyList = [Notify]()
         documentsList = [Docs]()
     }
+    func refreshTeachingData(completion: @escaping(Bool)->Void){
+        
+    }
     
     func completeTeachingData(completion: @escaping (Bool)->Void){
+        guard isCompleted == false else { completion(false); return}
         self.downloadNotify { (flag) in
             self.downloadDocuments { (flag1) in
                 self.downloadDescription { (flag2) in
+                    self.isCompleted = true
                      completion(true)
                 }
             }

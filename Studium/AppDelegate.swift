@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         let storyboard =  UIStoryboard.init(name: "Main", bundle: nil)
         //self.window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController")
-        
+       
         self.window?.makeKeyAndVisible()
         UIApplication.shared.statusBarStyle = .lightContent
         return true

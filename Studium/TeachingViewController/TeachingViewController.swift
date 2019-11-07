@@ -11,6 +11,7 @@ import UIKit
 class TeachingViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, SWRevealViewControllerDelegate {
 
     
+    @IBOutlet weak var oscureLoadingView: UIView!
     @IBOutlet var viewAppoggio: UIView! //Contiene la scrollView
     @IBOutlet var stackView: UIStackView!
     
@@ -50,13 +51,33 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     
     
     
-    
+    func setOscureView(){
+        
+        oscureLoadingView.backgroundColor = UIColor.oscureColor
+        oscureLoadingView.alpha = 1.0
+        let spinner = UIActivityIndicatorView(frame: CGRect(x: self.view.frame.width/2 - 30, y: self.view.frame.height/2-200, width: 60, height: 60))
+        oscureLoadingView.addSubview(spinner)
+        if #available(iOS 13.0, *) {
+            spinner.style = .large
+        } else {
+            // Fallback on earlier versions
+        }
+        spinner.startAnimating()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         courseNameLabel.text = teachingDataSource.name
         nameTeacherLabel.text = teachingDataSource.teacherName
-        
+        self.navigationController?.navigationBar.barTintColor = UIColor.clear
         //fai comparire una oscureView di Caricamento mentre vengono scaricati i dati
+        self.setOscureView()
+        self.oscureLoadingView.layer.zPosition = 2
+      // self.oscureLoadingView.alpha = 0.8
+        self.stackView.isHidden = true
+        //let oscureView = createOscureView()
+        //self.view.addSubview(oscureView)
+        
+        
         teachingDataSource.completeTeachingData { (flag) in
             self.istantiateViewControllers()
             self.stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -65,6 +86,20 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             self.pageViewController.delegate = self
             self.setPageControllerLayouts()
             self.setPanGestureOnFirstController()
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                self.oscureLoadingView.alpha = 0.0
+            }) { (flag1) in
+                self.oscureLoadingView.isHidden = true
+            }
+            //show stackView
+            self.stackView.alpha = 0.0
+            self.stackView.isHidden = false
+            UIView.animate(withDuration: 0.5) {
+                self.stackView.alpha = 1.0
+            }
+           
+            
         }
     }
     

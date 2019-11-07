@@ -31,7 +31,7 @@ class NotifyPageViewController: UIViewController, UITableViewDelegate {
             for notify in notifyList{
                // print("Title: ", notify.title)
                // print("Content: ", notify.message!)
-                dataSource.items.append(ContentCell(data: notify.date, title: notify.title, description: notify.message))
+                 dataSource.items.append(ContentCell(data: notify.date, title: notify.title, description: notify.message))
                 
             }
         } else {
@@ -52,25 +52,29 @@ class NotifyPageViewController: UIViewController, UITableViewDelegate {
         
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    
+  /* func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Cell selected")
         let cell = tableView.cellForRow(at: indexPath) as! NotifyCell
-        
-        cell.state = .expanded
-        dataSource.addExpandedIndexPath(indexPath)
-        
+        if cell.state == .collapsed { cell.state = .expanded }
+        else{ cell.state = .collapsed }
+        //cell.state = .expanded
+        //dataSource.addExpandedIndexPath(indexPath)
+        //tableView.reloadData()
         tableView.beginUpdates()
         tableView.endUpdates()
-    }
+    }*/
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    /*func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! NotifyCell
         
         cell.state = .collapsed
-        dataSource.removeExpandedIndexPath(indexPath)
+       // dataSource.removeExpandedIndexPath(indexPath)
         
         tableView.beginUpdates()
         tableView.endUpdates()
-    }
+    }*/
     
     deinit{
         print("Deinit notifyPage")

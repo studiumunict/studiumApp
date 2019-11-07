@@ -14,7 +14,7 @@ import Foundation
     private var token = "4hu_mb@r3-m1_54-pr0pr10_c@-pp1_0gg1-4ccumud@mu,_kk1-d1c1_mb@ru77u,-1u_r1cu-d1_51!!!"
     private var requestURL : String! = "http://ws1.unict.it/wscea/wsstudium/StudentService.asmx"
     private var soapActionBaseURL : String! = "http://ws1.unict.it/stdata/"
-  
+    
     private static var obj : BackendAPI!  = nil
     private override init(){}
     public static func getUniqueIstance() -> BackendAPI{
@@ -27,6 +27,7 @@ import Foundation
     private func startRequest() -> SOAPEngine{
         var request : SOAPEngine!
         request = SOAPEngine()
+        request.licenseKey = "PPezHrHEFSTeJjlEJ9MX7PHySnjiX0yzoX/SFl3fu9hnAbzl8cUIt104fvU1khwuEQ7rXgJmQ1DOIXJRDUUjNA=="
         request.userAgent = "SOAPEngine"
         request.actionNamespaceSlash = true
         request.responseHeader = true // use only for non standard MS-SOAP service

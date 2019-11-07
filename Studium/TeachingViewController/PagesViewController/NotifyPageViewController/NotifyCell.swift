@@ -7,14 +7,11 @@
 //
 
 import UIKit
+import WebKit
 
 class NotifyCell: UITableViewCell {
     
-    enum CellState {
-        case collapsed
-        case expanded
-    }
-    
+    @IBOutlet weak var descriptionMessageWebView: WKWebView!
     @IBOutlet private weak var stackView: UIStackView!
     @IBOutlet private weak var dataLabel: UILabel!
     @IBOutlet private weak var titleLabel: UILabel!
@@ -22,14 +19,8 @@ class NotifyCell: UITableViewCell {
     @IBOutlet private weak var carret: UIImageView!
     @IBOutlet private weak var headerView: UIView!
     @IBOutlet private weak var descriptionView: UIView!
-    
-    
-    var state: CellState = .collapsed {
-        didSet {
-            toggle()
-        }
-    }
-    
+    var isCollapsed = true
+   
     override func awakeFromNib() {
         selectionStyle = .none
         //#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)
@@ -40,31 +31,32 @@ class NotifyCell: UITableViewCell {
         headerView.backgroundColor = UIColor.lightSectionColor
         headerView.layer.cornerRadius = 5.0
         headerView.clipsToBounds = true
-        
+        let gesture:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toggle))
+        gesture.numberOfTapsRequired = 1
+        headerView.isUserInteractionEnabled = true
+        headerView.addGestureRecognizer(gesture)
         
         descriptionLabel.textColor = UIColor.elementsLikeNavBarColor
         titleLabel.textColor = UIColor.elementsLikeNavBarColor
         dataLabel.textColor = UIColor.subTitleGray
+        
+        self.stackView.arrangedSubviews[1].isHidden = true
     }
     
     
-    func update(data: String, title: String, description: String) {
+    func setInfo(data: String, title: String, description: String) {
         dataLabel.text = data
         titleLabel.text = title
         descriptionLabel.text = description
     }
     
-    private func toggle() {
-        hideStackView(toHidden: stateIsCollapsed())
+    @objc private func toggle() {
+        collapseOrExpandDescription()
         rotateArrows180Degrees(imageView: carret, animated: true)
     }
     
-    private func stateIsCollapsed() -> Bool {
-        return state == .collapsed
-    }
-    
     private func rotateArrows180Degrees(imageView: UIImageView, animated: Bool){
-        if !stateIsCollapsed() {
+        if !isCollapsed{
             if animated{
                 UIView.animate(withDuration: 0.2) {
                     imageView.transform = CGAffineTransform(rotationAngle: .pi)
@@ -86,12 +78,19 @@ class NotifyCell: UITableViewCell {
         }
     }
     
-    private func hideStackView(toHidden hidden: Bool){
-        UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions(), animations: {
-            self.stackView.arrangedSubviews[1].isHidden = hidden
-        }, completion: nil)
+    private func collapseOrExpandDescription(){
+        if self.isCollapsed { self.isCollapsed = false; }
+        else{ self.isCollapsed = true }
+        UIView.animate(withDuration: 0.3) {
+              self.stackView.arrangedSubviews[1].isHidden = self.isCollapsed
+        }
+        self.updateSuperTableView()
     }
     
-    
+    private func updateSuperTableView(){
+        let tableView = self.superview as? UITableView
+        tableView?.beginUpdates()
+        tableView?.endUpdates()
+    }
     
 }

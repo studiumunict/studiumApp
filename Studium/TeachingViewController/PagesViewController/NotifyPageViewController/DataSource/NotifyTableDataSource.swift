@@ -31,26 +31,26 @@ class NotifyTableDataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! NotifyCell
         
-        cell.update(data: self[indexPath].data, title: self[indexPath].title, description: self[indexPath].description)
+        cell.setInfo(data: items[indexPath.row].data, title: items[indexPath.row].title, description: items[indexPath.row].description)
         
-        cell.state = cellIsExpanded(at: indexPath) ? .expanded : .collapsed
+        //cell.state = cellIsExpanded(at: indexPath) ? .expanded : .collapsed
         
         return cell
     }
     
-    func cellIsExpanded(at indexPath: IndexPath) -> Bool {
+    /*func cellIsExpanded(at indexPath: IndexPath) -> Bool {
         return indexPaths.contains(indexPath)
-    }
+    }*/
     
-    func addExpandedIndexPath(_ indexPath: IndexPath) {
+    /*func addExpandedIndexPath(_ indexPath: IndexPath) {
         indexPaths.insert(indexPath)
     }
     
     func removeExpandedIndexPath(_ indexPath: IndexPath) {
         indexPaths.remove(indexPath)
-    }
+    }*/
     
-    subscript(indexPath: IndexPath) -> ContentCell {
+    /*subscript(indexPath: IndexPath) -> ContentCell {
         return items[indexPath.row]
-    }
+    }*/
 }
