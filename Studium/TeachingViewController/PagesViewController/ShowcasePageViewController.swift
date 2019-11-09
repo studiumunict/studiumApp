@@ -14,7 +14,7 @@ class ShowcasePageViewController: UIViewController, WKNavigationDelegate {
     @IBOutlet var errorMessageLabel: UILabel!
     @IBOutlet var webView: WKWebView!
     @IBOutlet var progressBar: UIProgressView!
-    
+    var isFirstController = false
     var showcaseHTML: String!
     var isLoaded: Bool = false
     

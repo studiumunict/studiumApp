@@ -25,9 +25,13 @@ class Notify { //Struttura contenente il titolo, data e corpo del messaggio di u
         var str = text.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
         str = str.replacingOccurrences(of: "&#39;", with: "'", options: .caseInsensitive, range: nil)
         str = str.replacingOccurrences(of: "&nbsp;", with: "", options: .caseInsensitive, range: nil)
-        str = str.replacingOccurrences(of: "&ograve;", with: "ò", options: .caseInsensitive, range: nil)
         str = str.replacingOccurrences(of: "&quot;", with: "\"", options: .caseInsensitive, range: nil)
-        str = str.replacingOccurrences(of: "&rsquo;", with: "'", options: .caseInsensitive, range: nil)    
+        str = str.replacingOccurrences(of: "&rsquo;", with: "'", options: .caseInsensitive, range: nil)
+        str = str.replacingOccurrences(of: "&agrave;", with: "à", options: .caseInsensitive, range: nil)
+        str = str.replacingOccurrences(of: "&egrave;", with: "è", options: .caseInsensitive, range: nil)
+        str = str.replacingOccurrences(of: "&igrave;", with: "ì", options: .caseInsensitive, range: nil)
+        str = str.replacingOccurrences(of: "&ograve;", with: "ò", options: .caseInsensitive, range: nil)
+        str = str.replacingOccurrences(of: "&ugrave;", with: "ù", options: .caseInsensitive, range: nil)
         var i = str.count-1
         var char = false
         while(i >= 0 && !char){

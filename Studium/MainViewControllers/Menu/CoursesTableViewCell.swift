@@ -20,6 +20,7 @@ class CoursesTableViewCell: UITableViewCell {
         
         teacherNameLabel.textColor =  UIColor.subTitleGray
         teachingNameLabel.textColor =  UIColor.elementsLikeNavBarColor
+        self.showsReorderControl = true
         self.selectionStyle = .none
     }
 

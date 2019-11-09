@@ -32,10 +32,18 @@ class NotifyTableDataSource: NSObject, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! NotifyCell
         
         cell.setInfo(data: items[indexPath.row].data, title: items[indexPath.row].title, description: items[indexPath.row].description)
-        
+        if cell.isCollapsed == false{
+            print("Espansa")
+        }
         //cell.state = cellIsExpanded(at: indexPath) ? .expanded : .collapsed
         
         return cell
+    }
+    
+    func insertNotifies(sourceArray: [Notify]){
+        for notify in sourceArray{
+            self.items.append(ContentCell(data: notify.date, title: notify.title, description: notify.message))
+        }
     }
     
     /*func cellIsExpanded(at indexPath: IndexPath) -> Bool {

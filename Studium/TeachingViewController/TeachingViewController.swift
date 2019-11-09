@@ -81,11 +81,11 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         teachingDataSource.completeTeachingData { (flag) in
             self.istantiateViewControllers()
             self.stackView.translatesAutoresizingMaskIntoConstraints = false
-            self.setPageViewController()
+            self.setPageViewControllerSubviewsNumber()
             self.pageViewController.dataSource = self
             self.pageViewController.delegate = self
             self.setPageControllerLayouts()
-            self.setPanGestureOnFirstController()
+           // self.setPanGestureOnFirstController()
             
             UIView.animate(withDuration: 0.5, animations: {
                 self.oscureLoadingView.alpha = 0.0
@@ -103,29 +103,86 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         }
     }
     
-    private func setPanGestureOnFirstController(){
+   /* private func setPanGestureOnFirstController(){
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 130//Menu sx/
             revealViewController().delegate = self
             viewControllerList[0].view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
-    }
+    }*/
     private func istantiateViewControllers(){
         viewControllerList = {
+            var activeControllerLists = [UIViewController]()
             let sb = storyboard!
-            let vc1 = sb.instantiateViewController(withIdentifier: "showcasePageViewController") as! ShowcasePageViewController
-            let vc2 = sb.instantiateViewController(withIdentifier: "notifyPageViewController") as! NotifyPageViewController
-            let vc3 = sb.instantiateViewController(withIdentifier: "syllabusPageViewController") as! SyllabusPageViewController
-            let vc4 = sb.instantiateViewController(withIdentifier: "descriptionPageViewController") as! DescriptionPageViewController
-            let vc5 = sb.instantiateViewController(withIdentifier: "documentsPageViewController") as! DocumentsPageViewController
-            let vc6 = sb.instantiateViewController(withIdentifier: "bookingPageViewController") as! BookingPageViewController
-            vc1.showcaseHTML = teachingDataSource.showcaseHTML
-            vc2.notifyList = teachingDataSource.notifyList
-            vc3.syllabusCode = teachingDataSource.syllabusCode
-            vc4.descriptionText = teachingDataSource.descriptionText
-            vc5.documentsList = teachingDataSource.documentsList
-            vc6.haveBooking = teachingDataSource.haveBooking
-            return [vc1, vc2, vc3, vc4, vc5, vc6]
+            if teachingDataSource.showcaseHTML != nil && !teachingDataSource.showcaseHTML.isEmpty{
+                let vc = sb.instantiateViewController(withIdentifier: "showcasePageViewController") as! ShowcasePageViewController
+                vc.showcaseHTML = teachingDataSource.showcaseHTML
+                activeControllerLists.append(vc)
+                showcaseButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToShowcaseView(_:))))
+                customButtons(button: showcaseButton, image: "showcase", action: #selector(self.sendToShowcaseView(_:)))
+                
+            }
+            else{ showcaseButtonView.isHidden = true }
+            
+            if !teachingDataSource.notifyList.isEmpty{
+                let vc = sb.instantiateViewController(withIdentifier: "notifyPageViewController") as! NotifyPageViewController
+                vc.dataSource.insertNotifies(sourceArray: teachingDataSource.notifyList)
+                activeControllerLists.append(vc)
+                notifyButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToNotifyView(_:))))
+                           if teachingDataSource.notifyList.isEmpty {
+                               customButtons(button: notifyButton, image: "markedBell", action: #selector(self.sendToNotifyView(_:)))
+                           } else {
+                               customButtons(button: notifyButton, image: "bell", action: #selector(self.sendToNotifyView(_:)))
+                           }
+              
+            }
+            else{ notifyButtonView.isHidden = true }
+            
+            if teachingDataSource.syllabusCode != nil && !teachingDataSource.syllabusCode.isEmpty{
+                 let vc = sb.instantiateViewController(withIdentifier: "syllabusPageViewController") as! SyllabusPageViewController
+                    vc.syllabusCode = teachingDataSource.syllabusCode
+                activeControllerLists.append(vc)
+                syllabusButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToSyllabusView(_:))))
+                customButtons(button: syllabusButton, image: "description", action: #selector(self.sendToSyllabusView(_:)))
+               
+            }
+            else{ syllabusButtonView.isHidden = true }
+            
+            
+            if teachingDataSource.descriptionText != nil && !teachingDataSource.descriptionText.isEmpty{
+                let vc = sb.instantiateViewController(withIdentifier: "descriptionPageViewController") as! DescriptionPageViewController
+                vc.descriptionText = teachingDataSource.descriptionText
+                activeControllerLists.append(vc)
+                descriptionButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToDescriptionView(_:))))
+                customButtons(button: descriptionButton, image: "description", action: #selector(self.sendToDescriptionView(_:)))
+                
+            }
+            else{ descriptionButtonView.isHidden =  true }
+            
+            if teachingDataSource.documentsList != nil && !teachingDataSource.documentsList.isEmpty{
+                 let vc = sb.instantiateViewController(withIdentifier: "documentsPageViewController") as! DocumentsPageViewController
+                 vc.documentsList = teachingDataSource.documentsList
+                activeControllerLists.append(vc)
+                documentsButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToDocumentsView(_:))))
+                customButtons(button: documentsButton, image: "folder", action: #selector(self.sendToDocumentsView(_:)))
+               
+            }
+            else{ documentsButtonView.isHidden = true }
+           
+            
+            if teachingDataSource.haveBooking != nil && teachingDataSource.haveBooking{
+                
+                let vc = sb.instantiateViewController(withIdentifier: "bookingPageViewController") as! BookingPageViewController
+                 vc.haveBooking = teachingDataSource.haveBooking
+                activeControllerLists.append(vc)
+                bookingButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToBookingView(_:))))
+                customButtons(button: bookingButton, image: "booking", action: #selector(self.sendToBookingView(_:)))
+               
+                
+            }
+            else{ bookingButtonView.isHidden = true }
+            
+            return activeControllerLists
         }()
     }
     private func setPageControllerLayouts(){
@@ -149,195 +206,12 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
                 }
             }
     }
+
     
-    /*
-    func completeTeachingDataSource(completion: @escaping (Any?)->Void){
-        //Scarica i dati dal db riguardanti questo corso. Il codice del corso utile a scaricare dal db, lo prende dai dati stessi che sono già pre impostati sul teachingDataSource.
-        //teachingDataSource.completeDataSource(showcaseHTML: nil, syllabusCode: "14927", haveBooking: false, descriptionText: nil)
-        
-        pullNotify()
-        pullDescription()
-        pullDocuments()
-        
-        
-    }*/
-    
-    
-    
-    /*
-    fileprivate func pullNotify() {
-        let api =  BackendAPI.getUniqueIstance()
-        api.getAvvisi(codCourse: teachingDataSource.code) { (JSONResponse) in
-            print(JSONResponse)
-            let JSONArray = JSONResponse as! [Any]
-            for avviso in JSONArray{
-                let avvisoDict = avviso as! [String: Any]
-                self.teachingDataSource.addNewNotify(date: avvisoDict["data"] as? String, title: avvisoDict["title"] as? String, message: avvisoDict["content"] as? String)
-            }
-        }
-        
-        teachingDataSource.addNewNotify(date: "30/10/2018", title: "Date esami", message: "Giorno 2 novembre ci sarà la prima prova scritta.")
-        teachingDataSource.addNewNotify(date: "25/11/2018", title: "Lezione rimandata", message: "Si avvisano gli studenti che giorno 26 novembre non ci sarà lezione.")
-        teachingDataSource.addNewNotify(date: "05/12/2018", title: "Risultati della prova in itinere", message: "Tutti promossi. :)")
-    }
-    
-    fileprivate func pullDescription() {
-        teachingDataSource.setDescriptionText(description: "Questa è la descrizione")
-    }
-    
-    fileprivate func pullDocuments() {
-        teachingDataSource.addNewDocument(path: "./cartella1Ciao", type: .folder)
-        teachingDataSource.addNewDocument(path: "./file1", type: .file)
-        teachingDataSource.addNewDocument(path: "./file2", type: .file)
-        teachingDataSource.addNewDocument(path: "./file3", type: .file)
-        teachingDataSource.addNewDocument(path: "./file4", type: .file)
-        teachingDataSource.addNewDocument(path: "./file5", type: .file)
-        teachingDataSource.addNewDocument(path: "./file6", type: .file)
-        teachingDataSource.addNewDocument(path: "./file7", type: .file)
-        teachingDataSource.addNewDocument(path: "./file8", type: .file)
-        teachingDataSource.addNewDocument(path: "./file9", type: .file)
-        teachingDataSource.addNewDocument(path: "./file10", type: .file)
-        teachingDataSource.addNewDocument(path: "./file11", type: .file)
-        teachingDataSource.addNewDocument(path: "./file12", type: .file)
-        teachingDataSource.addNewDocument(path: "./file13", type: .file)
-        teachingDataSource.documentsList[12].setPrev(prev: teachingDataSource.documentsList[0])
-        teachingDataSource.documentsList[13].setPrev(prev: teachingDataSource.documentsList[0])
-    }
-    
-    */
-    
-    
-    private func setPageViewController() {
-        var i: Int
-        
-        if teachingDataSource.showcaseHTML == nil || teachingDataSource.showcaseHTML.isEmpty {
-            showcaseButtonView.isHidden = true
-            i = 0
-            for x in viewControllerList {
-                if x is ShowcasePageViewController {
-                    viewControllerList.remove(at: i)
-                    break
-                }
-                i += 1
-            }
-        } else {
-            showcaseButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToShowcaseView(_:))))
-            customButtons(button: showcaseButton, image: "showcase", action: #selector(self.sendToShowcaseView(_:)))
-        }
-        
-        if teachingDataSource.notifyList.isEmpty {
-            notifyButtonView.isHidden = true
-            i = 0
-            for x in viewControllerList {
-                if x is NotifyPageViewController {
-                    viewControllerList.remove(at: i)
-                    break
-                }
-                i += 1
-            }
-        } else {
-            notifyButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToNotifyView(_:))))
-            if teachingDataSource.notifyList.isEmpty {
-                customButtons(button: notifyButton, image: "markedBell", action: #selector(self.sendToNotifyView(_:)))
-            } else {
-                customButtons(button: notifyButton, image: "bell", action: #selector(self.sendToNotifyView(_:)))
-            }
-        }
-        
-        if teachingDataSource.syllabusCode == nil || teachingDataSource.syllabusCode.isEmpty {
-            syllabusButtonView.isHidden = true
-            i = 0
-            for x in viewControllerList {
-                if x is SyllabusPageViewController {
-                    viewControllerList.remove(at: i)
-                    break
-                }
-                i += 1
-            }
-        } else {
-            syllabusButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToSyllabusView(_:))))
-            customButtons(button: syllabusButton, image: "description", action: #selector(self.sendToSyllabusView(_:)))
-        }
-        
-        if teachingDataSource.descriptionText == nil || teachingDataSource.descriptionText.isEmpty {
-            descriptionButtonView.isHidden = true
-            i = 0
-            for x in viewControllerList {
-                if x is DescriptionPageViewController {
-                    viewControllerList.remove(at: i)
-                    break
-                }
-                i += 1
-            }
-        } else {
-            descriptionButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToDescriptionView(_:))))
-            customButtons(button: descriptionButton, image: "description", action: #selector(self.sendToDescriptionView(_:)))
-        }
-        
-        if teachingDataSource.documentsList == nil || teachingDataSource.documentsList.isEmpty {
-            documentsButtonView.isHidden = true
-            i = 0
-            for x in viewControllerList {
-                if x is DocumentsPageViewController {
-                    viewControllerList.remove(at: i)
-                    break
-                }
-                i += 1
-            }
-        } else {
-            documentsButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToDocumentsView(_:))))
-            customButtons(button: documentsButton, image: "folder", action: #selector(self.sendToDocumentsView(_:)))
-        }
-        
-        if teachingDataSource.haveBooking == nil || !teachingDataSource.haveBooking {
-            bookingButtonView.isHidden = true
-            i = 0
-            for x in viewControllerList {
-                if x is BookingPageViewController {
-                    viewControllerList.remove(at: i)
-                    break
-                }
-                i += 1
-            }
-        } else {
-            bookingButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToBookingView(_:))))
-            customButtons(button: bookingButton, image: "booking", action: #selector(self.sendToBookingView(_:)))
-        }
-        
-        
-        switch viewControllerList.count {
-        case 2:
-            for x in stackView.subviews {
-                stackView.addConstraint(x.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.5, constant: 0))
-            }
-        
-        case 3:
-            for x in stackView.subviews {
-                stackView.addConstraint(x.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 1/3, constant: 0))
-            }
-            
-        case 4:
-            for x in stackView.subviews {
-                stackView.addConstraint(x.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.25, constant: 0))
-            }
-            
-        case 5:
-            for x in stackView.subviews {
-                stackView.addConstraint(x.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.2, constant: 0))
-            }
-            
-        case 6:
-            for x in stackView.subviews {
-                stackView.addConstraint(x.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 1/6, constant: 0))
-            }
-            
-        case 7:
-            for x in stackView.subviews {
-                stackView.addConstraint(x.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 1/7, constant: 0))
-            }
-        
-        default:
-            break
+    private func setPageViewControllerSubviewsNumber() {
+        for x in stackView.subviews {
+            stackView.addConstraint(x.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 1 /
+                CGFloat(viewControllerList.count), constant: 0))
         }
     }
     
@@ -429,25 +303,22 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         bookingButtonView.backgroundColor = UIColor.buttonSelected
     }
 
+    /*func setRevealControllerGesture(){
+        //Definire le dimensioni dei menu
+        if revealViewController() != nil {
+            revealViewController().rearViewRevealWidth = 130//Menu sx
+            revealViewController().delegate = self
+           if viewControllerList != nil{
+            viewControllerList[0].view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+           }
+        }
+    }*/
     override func viewWillAppear(_ animated: Bool) {
          super.viewWillAppear(animated)
-         
          navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-         
-         //Quando apre le view, se il menu' è aperto lo chiude
          if (revealViewController().frontViewPosition != FrontViewPosition.left) {
              revealViewController().frontViewPosition = .left
          }
-         
-         //Definire le dimensioni dei menu
-         if revealViewController() != nil {
-             revealViewController().rearViewRevealWidth = 130//Menu sx
-             revealViewController().delegate = self
-            if viewControllerList != nil{
-             viewControllerList[0].view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-            }
-         }
-         
      }
      
      

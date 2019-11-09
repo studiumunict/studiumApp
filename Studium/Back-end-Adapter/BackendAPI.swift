@@ -377,9 +377,8 @@ import Foundation
         let requestName = "Avvisi"
         let request = startRequest()
         let session =  Session.getUniqueIstance()
-        //Student.getUniqueIstance().codFiscale
         request.setValue(codCourse, forKey: "course")
-         request.setValue(Student.getUniqueIstance().id, forKey: "userid")
+        request.setValue(Student.getUniqueIstance().id, forKey: "userid")
         request.requestURL(requestURL,
                         soapAction: soapActionBaseURL + requestName,
                         completeWithDictionary: { (statusCode : Int,

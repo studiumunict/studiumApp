@@ -9,10 +9,11 @@
 import UIKit
 
 class BookingPageViewController: UIViewController {
-
+    
     @IBOutlet var errorMessageLabel: UILabel!
     
     var haveBooking: Bool!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

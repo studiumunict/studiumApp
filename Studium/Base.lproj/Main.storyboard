@@ -1654,6 +1654,7 @@
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="00f-Ir-xuy">
                                                     <rect key="frame" x="331" y="22.5" width="15" height="15"/>
+                                                    <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="15" id="L9Z-Or-E8A"/>
                                                         <constraint firstAttribute="height" constant="15" id="TgI-5g-fTR"/>

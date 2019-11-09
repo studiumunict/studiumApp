@@ -20,7 +20,7 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate {
     
     var syllabusCode: String!
     var isLoaded: Bool = false
-    
+   
     let reachability = Reachability()!
     
     

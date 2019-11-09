@@ -51,6 +51,7 @@ class NotifyCell: UITableViewCell {
     }
     
     @objc private func toggle() {
+        print("Apertura cella")
         collapseOrExpandDescription()
         rotateArrows180Degrees(imageView: carret, animated: true)
     }
@@ -91,6 +92,7 @@ class NotifyCell: UITableViewCell {
         let tableView = self.superview as? UITableView
         tableView?.beginUpdates()
         tableView?.endUpdates()
+        
     }
     
 }
