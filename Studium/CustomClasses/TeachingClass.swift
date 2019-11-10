@@ -35,6 +35,8 @@ class Teaching{
         notifyList = [Notify]()
         documentsList = [Docs]()
     }
+    
+   
     func refreshTeachingData(completion: @escaping(Bool)->Void){
         
     }
@@ -42,15 +44,30 @@ class Teaching{
     func completeTeachingData(completion: @escaping (Bool)->Void){
         guard isCompleted == false else { completion(false); return}
         self.downloadNotify { (flag) in
-            self.downloadDocuments { (flag1) in
+            self.downloadRootFiles { (flag1) in
                 self.downloadDescription { (flag2) in
                     self.isCompleted = true
+                    self.syllabusCode = self.code
                      completion(true)
                 }
             }
         }
     }
    
+    private func downloadRootFiles(completion: @escaping(Bool)-> Void){
+        let api = BackendAPI.getUniqueIstance()
+        api.getCourseDocuments(codCourse: self.code, path: "mbareRoot") { (JSONResponse) in
+            let JSONArray = JSONResponse as! [Any]
+            for doc in JSONArray{
+                let docDict = doc as! [String:Any]
+                print("*****Appendo Doc*****")
+                self.documentsList.append(Docs.init(title: docDict["title"] as! String, path: docDict["path"] as! String, type: docDict["type"] as! String, uploaded: docDict["insert"] as! String, lastUpdate: docDict["updated"] as! String, size: docDict["size"] as! Int))
+            }
+            completion(true)
+        }
+    }
+       
+    
     private func downloadNotify(completion: @escaping (Bool)->Void){
         let api =  BackendAPI.getUniqueIstance()
         api.getAvvisi(codCourse: self.code) { (JSONResponse) in
@@ -63,49 +80,25 @@ class Teaching{
             completion(true)
         }
     }
-    private func downloadDocuments(completion: @escaping (Bool)->Void){
-        completion(true)
-    }
+    /*private func downloadDocuments(completion: @escaping (Bool)->Void){
+        let api =  BackendAPI.getUniqueIstance()
+        api.getCourseDocuments(codCourse: self.code, path: "mbareRoot") { (JSONResponse) in
+            print(JSONResponse ?? "NULL")
+            completion(true)
+        }
+        
+    }*/
     
     private func downloadDescription(completion: @escaping (Bool)->Void){
-        self.descriptionText = "Descrizione"
-        completion(true)
+        //self.descriptionText = "Descrizione"
+        let api = BackendAPI.getUniqueIstance()
+        api.getCourseDescription(codCourse: self.code) { (JSONResponse) in
+            print("Descrizione", JSONResponse ?? "NULL")
+            completion(true)
+        }
+       
     }
-    
-    
-    
-    
-    
-  
-    
-/*func addNewDocument(path: String, type: Docs.typeDocs) {
-        documentsList.append(Docs(path: path, type: type))
-    }*/
-  
-    
-    
-    
-      /* func completeDataSource(showcaseHTML: String?, syllabusCode: String?, haveBooking: Bool?, descriptionText: String?) {
-           
-           if let val = showcaseHTML {
-               self.showcaseHTML = val
-           }
-           
-           if let val = syllabusCode {
-               self.syllabusCode = val
-           }
-           
-           if let val = haveBooking {
-               self.haveBooking = val
-           }
-           
-           if let val = descriptionText {
-               self.descriptionText = val
-           }
-           
-           notifyList = [Notify]()
-           documentsList = [Docs]()
-       }*/
+
     deinit{
         
         print("Deinit TeachingClass")

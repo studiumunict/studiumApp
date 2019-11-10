@@ -164,7 +164,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
                  vc.documentsList = teachingDataSource.documentsList
                 activeControllerLists.append(vc)
                 documentsButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToDocumentsView(_:))))
-                customButtons(button: documentsButton, image: "folder", action: #selector(self.sendToDocumentsView(_:)))
+                customButtons(button: documentsButton, image: "folder_1", action: #selector(self.sendToDocumentsView(_:)))
                
             }
             else{ documentsButtonView.isHidden = true }

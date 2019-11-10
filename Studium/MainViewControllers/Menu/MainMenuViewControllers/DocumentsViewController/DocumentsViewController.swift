@@ -108,7 +108,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     func loadDocumentsList(){
         //questa funzione tira fuori tutta la directory dal coredata.
         //essa non viene utilizzata in DocumentsPageController.
-        
+        /*
         
         documentsList.append(Docs(path: "cartella1", type: .folder))
         documentsList.append(Docs(path: "file1", type: .file))
@@ -125,7 +125,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         documentsList.append(Docs(path: "file12", type: .file))
         documentsList.append(Docs(path: "file13", type: .file))
         documentsList[12].setPrev(prev: documentsList[0])
-        documentsList[13].setPrev(prev: documentsList[0])
+        documentsList[13].setPrev(prev: documentsList[0])*/
     }
     
     
@@ -142,13 +142,13 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         
         switch subList[indexPath.item].TypeDoc {
         case .file?:
-            cell.update(image: "showcase", title: subList[indexPath.item].path!, description: "")
+            cell.update(image: "showcase", title: subList[indexPath.item].title!, description: "")
             
         case .folder?:
             if subList[indexPath.item].next.count == 1 {
-                cell.update(image: "folder", title: subList[indexPath.item].path!, description: "1 elemento")
+                cell.update(image: "folder_1", title: subList[indexPath.item].title!, description: "1 elemento")
             } else {
-                cell.update(image: "folder", title: subList[indexPath.item].path!, description: String(subList[indexPath.item].next.count) + " elementi")
+                cell.update(image: "folder_1", title: subList[indexPath.item].title!, description: String(subList[indexPath.item].next.count) + " elementi")
             }
             
         default:
@@ -289,7 +289,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     }
     
     @IBAction func addNewFolderSelected(_ sender: UIButton) {
-        let newFolder = Docs(path: "Nuova cartella", type: .folder)
+        let newFolder = Docs(title: "Nuova cartella", path: "/Nuova cartella", type: .folder)
         
         if subList.isEmpty {
             newFolder.setPrev(prev: folderEmptySelected)
