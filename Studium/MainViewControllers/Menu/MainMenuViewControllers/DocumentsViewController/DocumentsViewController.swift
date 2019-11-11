@@ -22,13 +22,14 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     @IBOutlet var selectedStackView: UIStackView!
     @IBOutlet var deleteButton: UIButton!
 
-    var documentsList = [Docs]() //Completa
-    var subList = [Docs]() //Lista contenente gli elementi di una cartella..
-    var selectionList = [Docs]() //Lista contenente gli elementi della selezione multipla
-    var folderEmptySelected: Docs!
-    var prevIndexItem: Int!
-    var fileSelected: Docs!
-    
+    //var documentsList = [Docs]() //Completa
+    //var subList = [Docs]() //Lista contenente gli elementi di una cartella..
+    //var selectionList = [Docs]() //Lista contenente gli elementi della selezione multipla
+    //var folderEmptySelected: Docs!
+    //var prevIndexItem: Int!
+    //var actualFolder : Docs!
+    //var fileSelected: Docs!
+    var fs = DocSystem() //contiene tutti gli elementi a partire da root. E' un albero.
     //var documentController: UIDocumentInteractionController!
 
     override func viewDidLoad() {
@@ -37,10 +38,10 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         self.view.layer.borderColor = UIColor.primaryBackground.cgColor
         self.view.layer.borderWidth = 0.5
         setRevealViewControllerParameters()
-        loadDocumentsList()
+        //loadDocumentsList()
         collectionView.dataSource = self
         collectionView.delegate = self
-        if documentsList.isEmpty {
+        if fs.currentFolder.childs.count == 0 {
             setControllerForEmptyList()
         } else {
             setControllerForListWithElements()
@@ -77,21 +78,22 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         hideElementsOfView()
     }
     func setControllerForListWithElements(){
-        reloadList(currentDoc: nil)
+        //reloadList(atDoc: nil)
         headerView.backgroundColor = UIColor.lightWhite
         headerView.layer.borderWidth = 0.5
         headerView.layer.borderColor = UIColor.primaryBackground.cgColor
-        titleLabel.text = "Home"
+        titleLabel.text = "/Home"
         backButton.titleLabel?.text = "Back"
         backButton.isEnabled = false
         backButton.titleLabel?.textColor = UIColor.elementsLikeNavBarColor
         selectedStackView.layer.borderColor = UIColor.primaryBackground.cgColor
         selectedStackView.layer.borderWidth = 0.5
         selectedStackView.clipsToBounds = true
+        reloadDescriptionLabel()
         
     }
     
-    private func setRevealViewControllerParameters(){
+    internal func setRevealViewControllerParameters(){
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
         imageView.image = UIImage.init(named: "menu")
         let buttonView = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
@@ -108,24 +110,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     func loadDocumentsList(){
         //questa funzione tira fuori tutta la directory dal coredata.
         //essa non viene utilizzata in DocumentsPageController.
-        /*
         
-        documentsList.append(Docs(path: "cartella1", type: .folder))
-        documentsList.append(Docs(path: "file1", type: .file))
-        documentsList.append(Docs(path: "Pattern.pdf", type: .file))
-        documentsList.append(Docs(path: "file3", type: .file))
-        documentsList.append(Docs(path: "file4", type: .file))
-        documentsList.append(Docs(path: "file5", type: .file))
-        documentsList.append(Docs(path: "file6", type: .file))
-        documentsList.append(Docs(path: "file7", type: .file))
-        documentsList.append(Docs(path: "file8", type: .file))
-        documentsList.append(Docs(path: "file9", type: .file))
-        documentsList.append(Docs(path: "file10", type: .file))
-        documentsList.append(Docs(path: "file11", type: .file))
-        documentsList.append(Docs(path: "file12", type: .file))
-        documentsList.append(Docs(path: "file13", type: .file))
-        documentsList[12].setPrev(prev: documentsList[0])
-        documentsList[13].setPrev(prev: documentsList[0])*/
     }
     
     
@@ -134,21 +119,21 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return subList.count
+        return fs.currentFolder.childs.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "docsCell", for: indexPath) as! DocumentsCollectionViewCell
         
-        switch subList[indexPath.item].TypeDoc {
+        switch fs.currentFolder.childs[indexPath.item].type {
         case .file?:
-            cell.update(image: "showcase", title: subList[indexPath.item].title!, description: "")
+            cell.update(image: "showcase", title: fs.currentFolder.childs[indexPath.item].title!, description: "")
             
         case .folder?:
-            if subList[indexPath.item].next.count == 1 {
-                cell.update(image: "folder_1", title: subList[indexPath.item].title!, description: "1 elemento")
+            if fs.currentFolder.childs[indexPath.item].childs.count == 1 {
+                cell.update(image: "folder_1", title: fs.currentFolder.childs[indexPath.item].title!, description: "1 elemento")
             } else {
-                cell.update(image: "folder_1", title: subList[indexPath.item].title!, description: String(subList[indexPath.item].next.count) + " elementi")
+                cell.update(image: "folder_1", title: fs.currentFolder.childs[indexPath.item].title!, description: String(fs.currentFolder.childs[indexPath.item].childs.count) + " elementi")
             }
             
         default:
@@ -161,7 +146,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView.allowsMultipleSelection {
+      /*  if collectionView.allowsMultipleSelection {
             if !selectionList.contains(subList[indexPath.item]){
                 selectionList.append(subList[indexPath.item])
             }
@@ -169,30 +154,28 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
             let cell = collectionView.cellForItem(at: indexPath)
             cell?.backgroundColor = UIColor.lightSectionColor
             
-        } else {
-            if subList[indexPath.item].TypeDoc == .folder {
-                if subList[indexPath.item].next.isEmpty {
-                    folderEmptySelected = subList[indexPath.item]
-                }
-                prevIndexItem = indexPath.item
-                reloadList(currentDoc: subList[indexPath.item])
-                self.collectionView.reloadData()
+        } else { //abbiamo cliccato una folder*/
+            if fs.currentFolder.childs[indexPath.item].type == .folder {
                 backButton.isEnabled = true
-                titleLabel.text = subList.isEmpty ? folderEmptySelected.path! : subList.first?.prev.path!
+                titleLabel.text = fs.currentFolder.childs[indexPath.item].path
+                fs.goToChild(childDoc: fs.currentFolder.childs[indexPath.item])
+                self.collectionView.reloadData()
+                self.reloadDescriptionLabel()
+            
             } else { //Visualizza il file
-                print("file selezionato:: \((subList[indexPath.item].path)!)")
-                fileSelected = subList[indexPath.item]
-                openDocument(fileSelected.path)
+            print("file selezionato:: \((fs.currentFolder.childs[indexPath.item].path)!)")
+                //fileSelected = subList[indexPath.item]
+            openDocument(fs.currentFolder.childs[indexPath.item].path)
                 
             }
         }
-    }
+    
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         cell.backgroundColor = cell.isSelected ? UIColor.lightSectionColor : UIColor.clear
     }
     
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+   /* func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         guard collectionView.allowsMultipleSelection else {
             return
         }
@@ -217,7 +200,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         
         cell?.backgroundColor = UIColor.clear
         selectionList.remove(at: i)
-    }
+    }*/
     
     
     //Margini
@@ -239,56 +222,28 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     }
     
     
-    //Rispetto a currentDocs, popola subList con i suoi successori
-    private func reloadList(currentDoc: Docs!) {
-        subList.removeAll()
-        
-        if currentDoc != nil {
-            for x in documentsList {
-                if x == currentDoc {
-                    for z in x.next {
-                        subList.append(z)
-                    }
-                }
-            }
-        } else {
-            for x in documentsList {
-                if x.prev == nil {
-                    subList.append(x)
-                }
-            }
-        }
-        
-        reloadDescriptionLabel()
-    }
+  
     
-    private func reloadDescriptionLabel() {
-        if subList.count == 1 {
+    internal func reloadDescriptionLabel() {
+        if fs.currentFolder.childs.count == 1 {
             descrizioneLabel.text = "1 elemento"
         } else {
-            descrizioneLabel.text = String(subList.count) + " elementi"
+            descrizioneLabel.text = String(fs.currentFolder.childs.count) + " elementi"
         }
     }
     
     
     @IBAction func backButtonBarSelected(_ sender: UIButton) {
-        if subList.isEmpty {
-            reloadList(currentDoc: folderEmptySelected.prev)
-        } else {
-            reloadList(currentDoc: documentsList[prevIndexItem].prev)
-        }
-        
-        collectionView.reloadData()
-        
-        if subList.first?.prev == nil {
+        titleLabel.text = fs.currentFolder.parent.path
+        fs.goToParent()
+        self.collectionView.reloadData()
+        if fs.currentFolder.parent == nil {
             backButton.isEnabled = false
-            titleLabel.text = "Home"
-        } else {
-            titleLabel.text = subList.first?.prev.path!
         }
+        reloadDescriptionLabel()
     }
     
-    @IBAction func addNewFolderSelected(_ sender: UIButton) {
+    /*@IBAction func addNewFolderSelected(_ sender: UIButton) {
         let newFolder = Docs(title: "Nuova cartella", path: "/Nuova cartella", type: .folder)
         
         if subList.isEmpty {
@@ -302,13 +257,13 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         
         collectionView.reloadData()
         reloadDescriptionLabel()
-    }
+    }*/
     
-    @IBAction func didMultipleSelectionButtonSelected(_ sender: UIButton) {
+    /*@IBAction func didMultipleSelectionButtonSelected(_ sender: UIButton) {
         didMultipleSelectionSelected()
-    }
+    }*/
     
-    private func didMultipleSelectionSelected() {
+   /* internal func didMultipleSelectionSelected() {
         if collectionView.allowsMultipleSelection {
             selectButton.titleLabel?.text = "Seleziona"
             collectionView.allowsMultipleSelection = false
@@ -322,9 +277,9 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         addNewFolderButton.isEnabled = !collectionView.allowsMultipleSelection
         descrizioneLabel.isHidden = collectionView.allowsMultipleSelection
         selectedStackView.isHidden = !collectionView.allowsMultipleSelection
-    }
+    }*/
     
-    private func resetCell() {
+    /*private func resetCell() {
         if selectionList.isEmpty {
             for i in 0..<subList.count {
                 let cell = collectionView.cellForItem(at: IndexPath(item: i, section: 0))
@@ -348,9 +303,9 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
             
             selectionList.removeFirst()
         }
-    }
+    }*/
     
-    @IBAction func deleteButtonSelected(_ sender: UIButton) {
+    /*@IBAction func deleteButtonSelected(_ sender: UIButton) {
         var i: Int, j: Int
         
         while !selectionList.isEmpty {
@@ -390,11 +345,11 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         didMultipleSelectionSelected()
         collectionView.reloadData()
         resetCell()
-    }
+    }*/
     
-    var indexes = [Docs]()
+    //var indexes = [Docs]()
     
-    private func removeDocsInDocumentsListRecursive(array: [Docs]) {
+   /* internal func removeDocsInDocumentsListRecursive(array: [Docs]) {
         for item in array {
             if item.TypeDoc == .folder && !item.next.isEmpty {
                 removeDocsInDocumentsListRecursive(array: item.next)
@@ -403,9 +358,9 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         
         indexes.append(contentsOf: array)
     }
+    */
     
-    
-    private func openDocument(_ str: String) {
+    internal func openDocument(_ str: String) {
         print("openDocument \(str)")
         let dot = str.firstIndex(of: ".")!
         

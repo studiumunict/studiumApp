@@ -28,7 +28,39 @@ class DocumentsPageViewController: DocumentsViewController{
         //il metodo non fa nulla perchè il chiamante ha già settato i documenti.
         print("Error: documenti già impostati dal chiamante")
     }
-    
+    /*override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+           if collectionView.allowsMultipleSelection {
+               if !selectionList.contains(subList[indexPath.item]){
+                   selectionList.append(subList[indexPath.item])
+               }
+               
+               let cell = collectionView.cellForItem(at: indexPath)
+               cell?.backgroundColor = UIColor.lightSectionColor
+               
+           } else { //abbiamo cliccato una folder
+               if subList[indexPath.item].TypeDoc == .folder {
+                   if subList[indexPath.item].next.isEmpty {
+                       folderEmptySelected = subList[indexPath.item]
+                   }
+                   prevIndexItem = indexPath.item
+                    print("prevIndexItem = ",prevIndexItem)
+                /*let api = BackendAPI.getUniqueIstance()
+                api.download*/
+                
+                   reloadList(atDoc: subList[indexPath.item])
+                   self.collectionView.reloadData()
+                   backButton.isEnabled = true
+                   //titleLabel.text = subList.isEmpty ? folderEmptySelected.path! : subList.first?.prev.path!
+                   titleLabel.text = documentsList[indexPath.item].path
+
+               } else { //Visualizza il file
+                   print("file selezionato:: \((subList[indexPath.item].path)!)")
+                   fileSelected = subList[indexPath.item]
+                   openDocument(fileSelected.path)
+                   
+               }
+           }
+       }*/
   
     
     

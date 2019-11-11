@@ -18,7 +18,7 @@
 		139BCB6C21BDE0AF005A750A /* BookingPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139BCB6B21BDE0AF005A750A /* BookingPagesViewController.swift */; };
 		13A7D28621C6F25F00F42193 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A7D28521C6F25F00F42193 /* Reachability.swift */; };
 		13CC782321C93FB90052E579 /* PortaleStudentiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CC782221C93FB90052E579 /* PortaleStudentiViewController.swift */; };
-		13D3997D21CACF1300B023B8 /* DocsClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D3997C21CACF1300B023B8 /* DocsClass.swift */; };
+		13D3997D21CACF1300B023B8 /* DocClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D3997C21CACF1300B023B8 /* DocClass.swift */; };
 		13D3997F21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D3997E21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift */; };
 		13D86DDB21B9A3BF007638FD /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D86DDA21B9A3BF007638FD /* ExtensionUIColor.swift */; };
 		13E3A34721C140A6004BE8D8 /* NotifyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E3A34621C140A6004BE8D8 /* NotifyCell.swift */; };
@@ -34,6 +34,7 @@
 		9C07089021C8672800F7D296 /* BrowseAndSearchCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C07088F21C8672800F7D296 /* BrowseAndSearchCourseTableViewCell.swift */; };
 		9C0E501B21C3F7CE0055C4DD /* ManageCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0E501A21C3F7CE0055C4DD /* ManageCourseViewController.swift */; };
 		9C0E501D21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0E501C21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift */; };
+		9C1BBD432378F01F003EEB9A /* DocSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1BBD422378F01F003EEB9A /* DocSystem.swift */; };
 		9C2C63CD237311BB0063F9C7 /* NotifyClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2C63CC237311BB0063F9C7 /* NotifyClass.swift */; };
 		9C454F1323016B070071F81F /* PswEncryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C454F1223016B070071F81F /* PswEncryption.swift */; };
 		9C454F1523016DA70071F81F /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C454F1423016DA70071F81F /* Session.swift */; };
@@ -92,7 +93,7 @@
 		13A7D28421C6F25F00F42193 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		13A7D28521C6F25F00F42193 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		13CC782221C93FB90052E579 /* PortaleStudentiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortaleStudentiViewController.swift; sourceTree = "<group>"; };
-		13D3997C21CACF1300B023B8 /* DocsClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocsClass.swift; sourceTree = "<group>"; };
+		13D3997C21CACF1300B023B8 /* DocClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocClass.swift; sourceTree = "<group>"; };
 		13D3997E21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsCollectionViewCell.swift; sourceTree = "<group>"; };
 		13D86DDA21B9A3BF007638FD /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
 		13E3A34621C140A6004BE8D8 /* NotifyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyCell.swift; sourceTree = "<group>"; };
@@ -115,6 +116,7 @@
 		9C07088F21C8672800F7D296 /* BrowseAndSearchCourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseAndSearchCourseTableViewCell.swift; sourceTree = "<group>"; };
 		9C0E501A21C3F7CE0055C4DD /* ManageCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCourseViewController.swift; sourceTree = "<group>"; };
 		9C0E501C21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseAndSearchCoursesViewController.swift; sourceTree = "<group>"; };
+		9C1BBD422378F01F003EEB9A /* DocSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocSystem.swift; sourceTree = "<group>"; };
 		9C2C63CC237311BB0063F9C7 /* NotifyClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyClass.swift; sourceTree = "<group>"; };
 		9C454F1223016B070071F81F /* PswEncryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PswEncryption.swift; sourceTree = "<group>"; };
 		9C454F1423016DA70071F81F /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -281,10 +283,11 @@
 				9C06A22B21AB707500E695DB /* CDLClass.swift */,
 				9CFE72C221B95206001EB697 /* TeachingClass.swift */,
 				9CFE72C421B95331001EB697 /* HomeTableSectionClass.swift */,
-				13D3997C21CACF1300B023B8 /* DocsClass.swift */,
+				13D3997C21CACF1300B023B8 /* DocClass.swift */,
 				13D3997E21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift */,
 				1380ED502302F2440063F79F /* DocumentBrowserViewController.swift */,
 				9C2C63CC237311BB0063F9C7 /* NotifyClass.swift */,
+				9C1BBD422378F01F003EEB9A /* DocSystem.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -661,7 +664,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CFE9DAB21A8BC6B0030AE33 /* HomeViewController.swift in Sources */,
-				13D3997D21CACF1300B023B8 /* DocsClass.swift in Sources */,
+				13D3997D21CACF1300B023B8 /* DocClass.swift in Sources */,
 				139BCB6621BDDFD5005A750A /* NotifyPageViewController.swift in Sources */,
 				13D3997F21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift in Sources */,
 				138E6E2821C458830000A747 /* SyllabusPageViewController.swift in Sources */,
@@ -698,6 +701,7 @@
 				9CFE72C121B9508E001EB697 /* CDLTableViewCell.swift in Sources */,
 				9C07088E21C85C1100F7D296 /* CoursesTableViewCell.swift in Sources */,
 				9C2C63CD237311BB0063F9C7 /* NotifyClass.swift in Sources */,
+				9C1BBD432378F01F003EEB9A /* DocSystem.swift in Sources */,
 				9C454F1323016B070071F81F /* PswEncryption.swift in Sources */,
 				13E91D0521C7DB550007EF3E /* ManageCoursePageViewController.swift in Sources */,
 				13E3A34A21C1416E004BE8D8 /* NotifyTableDataSource.swift in Sources */,
