@@ -53,31 +53,10 @@ class NotifyCell: UITableViewCell {
     @objc private func toggle() {
         print("Apertura cella")
         collapseOrExpandDescription()
-        rotateArrows180Degrees(imageView: carret, animated: true)
+        let SSAnimator = CoreSSAnimation.getUniqueIstance()
+        SSAnimator.rotate180Degrees(view: carret, animated: true)
     }
     
-    private func rotateArrows180Degrees(imageView: UIImageView, animated: Bool){
-        if !isCollapsed{
-            if animated{
-                UIView.animate(withDuration: 0.2) {
-                    imageView.transform = CGAffineTransform(rotationAngle: .pi)
-                }
-            }
-            else {
-                imageView.transform = CGAffineTransform(rotationAngle: .pi)
-            }
-        
-        } else {
-            if animated {
-                UIView.animate(withDuration: 0.2) {
-                    imageView.transform = .identity
-                }
-            }
-            else{
-                imageView.transform = .identity
-            }
-        }
-    }
     
     private func collapseOrExpandDescription(){
         if self.isCollapsed { self.isCollapsed = false; }

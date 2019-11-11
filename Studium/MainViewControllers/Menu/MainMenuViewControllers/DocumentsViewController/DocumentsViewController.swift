@@ -11,7 +11,7 @@ import UIKit
 
 class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIDocumentInteractionControllerDelegate {
     @IBOutlet var errorMessageLabel: UILabel!
-    @IBOutlet weak var errorInfoDescriptionTextView: UITextView!
+   // @IBOutlet weak var errorInfoDescriptionTextView: UITextView!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var descrizioneLabel: UILabel!
     @IBOutlet var headerView: UIView!
@@ -19,16 +19,10 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     @IBOutlet var addNewFolderButton: UIButton!
     @IBOutlet var selectButton: UIButton!
     @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var selectedStackView: UIStackView!
-    @IBOutlet var deleteButton: UIButton!
-
-    //var documentsList = [Docs]() //Completa
-    //var subList = [Docs]() //Lista contenente gli elementi di una cartella..
-    //var selectionList = [Docs]() //Lista contenente gli elementi della selezione multipla
-    //var folderEmptySelected: Docs!
-    //var prevIndexItem: Int!
-    //var actualFolder : Docs!
-    //var fileSelected: Docs!
+   
+    @IBOutlet weak var selectedActionButton: UIButton!
+    
+    var selectionList = [Doc]() //Lista contenente gli elementi della selezione multipla
     var fs = DocSystem() //contiene tutti gli elementi a partire da root. E' un albero.
     //var documentController: UIDocumentInteractionController!
 
@@ -41,12 +35,14 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         //loadDocumentsList()
         collectionView.dataSource = self
         collectionView.delegate = self
+        //fs.currentFolder.addChild(item: Doc.init(title: "Titolo1", path: "/titolo1", type: .folder))
+       
         if fs.currentFolder.childs.count == 0 {
-            setControllerForEmptyList()
+            setEmptyContentLayout()
         } else {
-            setControllerForListWithElements()
+            setFullContentLayout()
         }
-        
+        reloadCollectionView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -55,42 +51,45 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     
     func setErrorLabelText() {
         errorMessageLabel.text = "Non ci sono documenti preferiti salvati."
-        errorInfoDescriptionTextView.text = "Puoi aggiungere un documento dalla sezione Documenti di un qualsiasi corso."
+        //errorInfoDescriptionTextView.text = "Puoi aggiungere un documento dalla sezione Documenti di un qualsiasi corso."
     }
     
     func hideElementsOfView() {
         descrizioneLabel.isHidden = true
         headerView.isHidden = true
-        selectedStackView.isHidden = true
         collectionView.isHidden = true
+        selectedActionButton.isHidden = true
     }
     
     func showError() {
         setErrorLabelText()
         errorMessageLabel.isHidden = false
-        errorInfoDescriptionTextView.isHidden = false
+        errorMessageLabel.layer.zPosition = 2
+        //errorInfoDescriptionTextView.isHidden = false
     }
     
-    func setControllerForEmptyList(){
-        print("empty")
+    func setEmptyContentLayout(){
+        setErrorLabelText()
         showError()
-        errorInfoDescriptionTextView.backgroundColor = self.view.backgroundColor
+        //errorInfoDescriptionTextView.backgroundColor = self.view.backgroundColor
         hideElementsOfView()
     }
-    func setControllerForListWithElements(){
-        //reloadList(atDoc: nil)
+    func setHeaderViewLayout(){
         headerView.backgroundColor = UIColor.lightWhite
         headerView.layer.borderWidth = 0.5
         headerView.layer.borderColor = UIColor.primaryBackground.cgColor
-        titleLabel.text = "/Home"
-        backButton.titleLabel?.text = "Back"
-        backButton.isEnabled = false
-        backButton.titleLabel?.textColor = UIColor.elementsLikeNavBarColor
-        selectedStackView.layer.borderColor = UIColor.primaryBackground.cgColor
-        selectedStackView.layer.borderWidth = 0.5
-        selectedStackView.clipsToBounds = true
+        titleLabel.text = fs.currentFolder.title
+    }
+    func setSelectedActionButtonLayout(){
+        selectedActionButton.clipsToBounds = true
+        selectedActionButton.layer.cornerRadius = 7.0
+        selectedActionButton.isHidden = true
+    }
+    
+    func setFullContentLayout(){
+        setHeaderViewLayout()
         reloadDescriptionLabel()
-        
+        setSelectedActionButtonLayout()
     }
     
     internal func setRevealViewControllerParameters(){
@@ -110,9 +109,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     func loadDocumentsList(){
         //questa funzione tira fuori tutta la directory dal coredata.
         //essa non viene utilizzata in DocumentsPageController.
-        
     }
-    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -124,84 +121,80 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "docsCell", for: indexPath) as! DocumentsCollectionViewCell
-        
-        switch fs.currentFolder.childs[indexPath.item].type {
-        case .file?:
+        let cellType = fs.currentFolder.childs[indexPath.item].type
+        if cellType == .file {
             cell.update(image: "showcase", title: fs.currentFolder.childs[indexPath.item].title!, description: "")
-            
-        case .folder?:
+        }
+        else{
             if fs.currentFolder.childs[indexPath.item].childs.count == 1 {
                 cell.update(image: "folder_1", title: fs.currentFolder.childs[indexPath.item].title!, description: "1 elemento")
             } else {
                 cell.update(image: "folder_1", title: fs.currentFolder.childs[indexPath.item].title!, description: String(fs.currentFolder.childs[indexPath.item].childs.count) + " elementi")
             }
-            
-        default:
-            break
         }
-        
-        cell.backgroundColor = UIColor.clear
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      /*  if collectionView.allowsMultipleSelection {
-            if !selectionList.contains(subList[indexPath.item]){
-                selectionList.append(subList[indexPath.item])
-            }
-            
+        if collectionView.allowsMultipleSelection {
+            selectionList.append(fs.currentFolder.childs[indexPath.item])
             let cell = collectionView.cellForItem(at: indexPath)
             cell?.backgroundColor = UIColor.lightSectionColor
-            
-        } else { //abbiamo cliccato una folder*/
+            selectedActionButton.isEnabled = true
+        }
+        else { //abbiamo cliccato una folder
             if fs.currentFolder.childs[indexPath.item].type == .folder {
                 backButton.isEnabled = true
-                titleLabel.text = fs.currentFolder.childs[indexPath.item].path
+                titleLabel.text = fs.currentFolder.childs[indexPath.item].title
                 fs.goToChild(childDoc: fs.currentFolder.childs[indexPath.item])
-                self.collectionView.reloadData()
-                self.reloadDescriptionLabel()
-            
-            } else { //Visualizza il file
-            print("file selezionato:: \((fs.currentFolder.childs[indexPath.item].path)!)")
-                //fileSelected = subList[indexPath.item]
-            openDocument(fs.currentFolder.childs[indexPath.item].path)
-                
+                reloadCollectionView()
+            }
+            else { //Visualizza il file
+                print("file selezionato:: \((fs.currentFolder.childs[indexPath.item].path)!)")
+                openDocument(fs.currentFolder.childs[indexPath.item].path)
             }
         }
+    }
     
+    func setBackButtonState(){
+        if fs.currentFolder.parent == nil{
+            self.backButton.isEnabled = false
+        }
+        else {
+            self.backButton.isEnabled = true
+        }
+    }
+    func reloadTitleLabel(){
+        self.titleLabel.text = fs.currentFolder.title
+    }
     
+    func reloadCollectionView(){
+        self.setBackButtonState()
+        self.collectionView.reloadData()
+        self.reloadTitleLabel()
+        self.reloadDescriptionLabel()
+    }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         cell.backgroundColor = cell.isSelected ? UIColor.lightSectionColor : UIColor.clear
     }
     
-   /* func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard collectionView.allowsMultipleSelection else {
-            return
-        }
-        
-        guard !selectionList.isEmpty else {
-            return
-        }
-        
-        let cell = collectionView.cellForItem(at: indexPath)
-        
-        guard cell?.backgroundColor != UIColor.clear else {
-            return
-        }
-        
+    func getSelectedCellIndex(cellTitle: String) -> Int {
         var i: Int = 0
-        for x in selectionList {
-            if x == subList[indexPath.item] {
-                break
-            }
+        for doc in selectionList {
+            if cellTitle == doc.title { return i }
             i += 1
         }
-        
-        cell?.backgroundColor = UIColor.clear
-        selectionList.remove(at: i)
-    }*/
+        return -1
+    }
     
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard collectionView.allowsMultipleSelection else { return }
+        let cell = collectionView.cellForItem(at: indexPath) as! DocumentsCollectionViewCell
+        let index = getSelectedCellIndex(cellTitle: cell.titleDocLabel.text!)
+        cell.backgroundColor = UIColor.clear
+        selectionList.remove(at: index)
+        if selectionList.count == 0 { selectedActionButton.isEnabled = false }
+    }
     
     //Margini
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -210,7 +203,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     
     // Dimensioni della cella
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (self.view.frame.width - 30) / 3, height: 135)
+        return CGSize(width: (self.view.frame.width - 30) / 3, height: 113)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -220,9 +213,6 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
-    
-    
-  
     
     internal func reloadDescriptionLabel() {
         if fs.currentFolder.childs.count == 1 {
@@ -234,17 +224,13 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     
     
     @IBAction func backButtonBarSelected(_ sender: UIButton) {
-        titleLabel.text = fs.currentFolder.parent.path
         fs.goToParent()
-        self.collectionView.reloadData()
-        if fs.currentFolder.parent == nil {
-            backButton.isEnabled = false
-        }
-        reloadDescriptionLabel()
+        reloadCollectionView()
     }
     
-    /*@IBAction func addNewFolderSelected(_ sender: UIButton) {
-        let newFolder = Docs(title: "Nuova cartella", path: "/Nuova cartella", type: .folder)
+   /* @IBAction func addNewFolderSelected(_ sender: UIButton) {
+        
+        let newFolder = Docs(title: "Nuova cartella", path: fs.currentFolder.path + "/Nuova cartella", type: .folder)
         
         if subList.isEmpty {
             newFolder.setPrev(prev: folderEmptySelected)
@@ -258,52 +244,45 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         collectionView.reloadData()
         reloadDescriptionLabel()
     }*/
+    private func hideSelectedActionButton(){
+        selectedActionButton.isHidden = true
+    }
+    private func showSelectedActionButton(){
+        selectedActionButton.isEnabled = false // prima si devono selezionare elementi
+        selectedActionButton.isHidden = false
+    }
     
-    /*@IBAction func didMultipleSelectionButtonSelected(_ sender: UIButton) {
-        didMultipleSelectionSelected()
-    }*/
-    
-   /* internal func didMultipleSelectionSelected() {
+    @IBAction func didMultipleSelectionSelected() {
         if collectionView.allowsMultipleSelection {
-            selectButton.titleLabel?.text = "Seleziona"
+            selectButton.isSelected = false
             collectionView.allowsMultipleSelection = false
-            resetCell()
+            deselectAllCells()
+            setBackButtonState()
+            addNewFolderButton.isEnabled = true
+            hideSelectedActionButton()
         } else {
-            selectButton.titleLabel?.text = "Fatto"
             collectionView.allowsMultipleSelection = true
+            backButton.isEnabled = false
+            addNewFolderButton.isEnabled = false
+            selectButton.isSelected = true
+            showSelectedActionButton()
         }
-        
-        backButton.isEnabled = subList.first?.prev != nil && !collectionView.allowsMultipleSelection
-        addNewFolderButton.isEnabled = !collectionView.allowsMultipleSelection
-        descrizioneLabel.isHidden = collectionView.allowsMultipleSelection
-        selectedStackView.isHidden = !collectionView.allowsMultipleSelection
-    }*/
+    }
     
-    /*private func resetCell() {
-        if selectionList.isEmpty {
-            for i in 0..<subList.count {
-                let cell = collectionView.cellForItem(at: IndexPath(item: i, section: 0))
-                cell?.backgroundColor = UIColor.clear
-            }
-            return
+    internal func deselectAllCells(){
+        for i in 0..<fs.currentFolder.childs.count {
+            let cell = collectionView.cellForItem(at: IndexPath(item: i, section: 0))
+            cell?.backgroundColor = UIColor.clear
+            cell?.isSelected = false
         }
+        selectionList.removeAll()
+        return
+    }
+    
+   
+    @IBAction func selectedActionButtonClicked(_ sender: Any) {
         
-        var i: Int
-        while !selectionList.isEmpty {
-            i = 0
-            for item in subList {
-                if item == selectionList[0] {
-                    let cell = collectionView.cellForItem(at: IndexPath(item: i, section: 0))
-                    cell?.backgroundColor = UIColor.clear
-                    
-                    break
-                }
-                i += 1
-            }
-            
-            selectionList.removeFirst()
-        }
-    }*/
+    }
     
     /*@IBAction func deleteButtonSelected(_ sender: UIButton) {
         var i: Int, j: Int

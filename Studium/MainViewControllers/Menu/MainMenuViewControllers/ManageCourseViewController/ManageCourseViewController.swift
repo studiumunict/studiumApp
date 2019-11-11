@@ -178,7 +178,8 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         }
         button.setTitle(sharedSource.courseSharedDataSource[section].course.name, for: .normal)
         if sharedSource.courseSharedDataSource[section].expanded {
-            rotateArrows180Degrees(button: button,animated: false)
+            let SSAnimator = CoreSSAnimation.getUniqueIstance()
+            SSAnimator.rotate180Degrees(view: button, animated: false)
         }
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.setTitleColor(UIColor.elementsLikeNavBarColor, for: .normal)
@@ -225,35 +226,6 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
             self.present(alert, animated: true, completion: nil)
         }
     }
-    func rotateArrows180Degrees(button : UIButton,animated : Bool){
-        for view in button.subviews{
-            if let imageView = view as? UIImageView{
-                if imageView.transform == .identity{
-                    if animated{
-                        UIView.animate(withDuration: 0.2) {
-                            imageView.transform = CGAffineTransform(rotationAngle: .pi)
-                        }
-                    }
-                    else {
-                        imageView.transform = CGAffineTransform(rotationAngle: .pi)
-                    }
-                    
-                }
-                else{
-                    if animated {
-                        UIView.animate(withDuration: 0.2) {
-                            imageView.transform = .identity
-                        }
-                    }
-                    else{
-                        imageView.transform = .identity
-                    }
-                }
-            }
-        }
-    }
-    
-    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return sharedSource.courseSharedDataSource.count
@@ -333,10 +305,6 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
             self.manageCoursesTableView.setEditing(true, animated: true)
             self.closeCreateCategoryViewAnimated()
         }
-        /*let newCategory = HomeTableSection.init(cdl: CDL.init(courseName: t, courseCode: "-1", courseId: -1, parent: ""), teachingArray: [Teaching](), setExpanded: true)
-        sharedSource.courseSharedDataSource.insert(newCategory, at: 0)
-        closeCreateCategoryViewAnimated()
-        manageCoursesTableView.reloadData()*/
     }
     
     
@@ -365,10 +333,6 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         createCategoryView.isHidden = true
         oscureView.isHidden = true
         createCategoryTextField.backgroundColor = UIColor.lightWhite
-        //let createCategoryButton = UIButton(frame: CGRect(x: createCategoryView.frame.size.width/2 - 5, y: 130 , width: 120, height: 50))
-        //let createCategoryButton = UIButton(frame: CGRect(x: createCategoryView.center.x   , y: 130 , width: 100, height: 40))
-        //let cancelButton = UIButton(frame: CGRect(x: createCategoryView.frame.size.width/2 - 115, y: 130, width: 120, height: 50))
-        //let cancelButton = UIButton(frame: CGRect(x: createCategoryView.center.x - 100 , y: 130, width: 100, height: 40))
         createCategoryButton.backgroundColor = UIColor.lightWhite
         cancelButton.backgroundColor = UIColor.lightWhite
         createCategoryButton.setTitleColor(UIColor.textBlueColor, for: .normal)
@@ -384,81 +348,30 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         cancelButton.layer.addBorder(edge: .right, color: #colorLiteral(red: 0.9961728454, green: 0.9902502894, blue: 1, alpha: 1), thickness: 0.5)
         roundRightRadius(radius: 5.0, view: createCategoryButton)
         roundLeftRadius(radius: 5.0, view: cancelButton)
-        
         createCategoryView.addSubview(createCategoryButton)
         createCategoryView.addSubview(cancelButton)
     }
     func closeCreateCategoryViewAnimated(){
-        UIView.animate(withDuration: 0.4, animations: {
-            //self.createCategoryView.frame = CGRect(x: self.addCategoryButton.frame.origin.x - 150, y: self.addCategoryButton.frame.origin.y - 80 , width: self.createCategoryView.frame.size.width, height: self.createCategoryView.frame.size.height)
-            self.createCategoryView.center = CGPoint(x: self.addCategoryButton.center.x + 10, y: self.addCategoryButton.center.y + 5)
-          //  self.createCategoryView.center = self.addCategoryButton.center
-              self.createCategoryView.transform = CGAffineTransform(scaleX: 0.15, y: 0.15)
-            self.oscureView.alpha = 0.6
-            
-        }) { (f) in
-            UIView.animate(withDuration: 0.2, animations: {
-                 self.createCategoryView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-                self.oscureView.alpha = 0.0
-            }, completion: { (f) in
-                self.createCategoryView.isHidden = true
-                self.oscureView.isHidden = true
-                self.manageCoursesTableView.isUserInteractionEnabled = true
-                self.createCategoryTextField.resignFirstResponder()
-                self.tabController.navigationItem.rightBarButtonItem?.customView?.isUserInteractionEnabled = true
-                self.createCategoryTextField.text =  nil
-               // self.createCategoryView.center =  initialCenter
-                
-            })
-            
+        let SSAnimator = CoreSSAnimation.getUniqueIstance()
+        SSAnimator.collapseViewInSourceView(viewToCollapse: self.createCategoryView, elementsInsideView: nil, sourceView: self.addCategoryButton, oscureView: self.oscureView) { (flag) in
+            self.manageCoursesTableView.isUserInteractionEnabled = true
+            self.createCategoryTextField.resignFirstResponder()
+            self.tabController.navigationItem.rightBarButtonItem?.customView?.isUserInteractionEnabled = true
+            self.createCategoryTextField.text =  nil
+            //self.view.endEditing(true)
         }
-        
-        
-        
     }
     
     
     func openCreateCategoryViewAnimated(){
         self.tabController.navigationItem.rightBarButtonItem?.customView?.isUserInteractionEnabled = false
-        //let buttonFrame  = addCategoryButton.frame
-        oscureView.alpha = 0.0
-        //let newFrame = CGRect(x: 0, y: 0, width: self.view.frame.size.width * 0.9, height: 180)
-        createCategoryLabel.alpha = 0.0
-        oscureView.isHidden = false
-        createCategoryView.isHidden = false
-        let initialCenter =  createCategoryView.center
-        self.createCategoryView.center = CGPoint(x: self.addCategoryButton.center.x + 10, y: self.addCategoryButton.center.y + 5)
-        //self.addCategoryButton.center
-        
-       
-       // createCategoryView.frame = CGRect(x: addCategoryButton.frame.origin.x - 150, y: addCategoryButton.frame.origin.y - 80 , width: createCategoryView.frame.size.width, height: createCategoryView.frame.size.height)
-      
-       // createCategoryView.isHidden = false
-        
-        
-        self.createCategoryView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-        self.createCategoryView.alpha = 0.0
-        UIView.animate(withDuration: 0.2, animations: {
-            self.oscureView.alpha = 0.6
-            self.createCategoryView.transform = CGAffineTransform(scaleX: 0.15, y: 0.15)
-            self.createCategoryView.alpha = 0.8
-        }) { (flag) in
-            UIView.animate(withDuration: 0.4, animations: {
-                self.oscureView.alpha = 0.9
-                self.createCategoryView.transform = .identity
-                //self.createCategoryView.center = CGPoint(x: self.view.center.x , y: self.view.center.y - 150 )
-                self.createCategoryView.center =  initialCenter
-                //porta a 1 gli alpha degli elementi della view
-                self.createCategoryLabel.alpha = 1.0
-                self.createCategoryView.alpha = 1.0
-                
-            }) { (f) in
-                self.manageCoursesTableView.isUserInteractionEnabled = false
-                self.createCategoryTextField.becomeFirstResponder()
-                
-            }
+        let SSAnimator = CoreSSAnimation.getUniqueIstance()
+        var subviews = [UIView]()
+        subviews.append(self.createCategoryLabel)
+        SSAnimator.expandViewFromSourceView(viewToOpen: self.createCategoryView, elementsInsideView: subviews, sourceView: addCategoryButton, oscureView: self.oscureView) { (flag) in
+            self.manageCoursesTableView.isUserInteractionEnabled = false
+            self.createCategoryTextField.becomeFirstResponder()
         }
-        
     }
     
     

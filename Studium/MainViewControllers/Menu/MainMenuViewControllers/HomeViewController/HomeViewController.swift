@@ -406,18 +406,19 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             let arrowImageView = UIImageView.init(frame: CGRect(x: 10, y: button.frame.height/2 - 7.5, width: 15, height: 15))
             arrowImageView.image = UIImage.init(named: "arrow");
             button.addSubview(arrowImageView)
-            
+            let SSAnimator = CoreSSAnimation.getUniqueIstance()
             
             if self.cdsSearchBar.isFirstResponder || self.cdsSearchBar.text != ""{
                 button.setTitle(filteredCDLDataSource[section].course.name, for: .normal)
+                
                 if filteredCDLDataSource[section].expanded {
-                    rotateArrows180Degrees(button: button,animated: false)
+                    SSAnimator.rotate180Degrees(view: button,animated: false)
                 }
             }
             else{
                 button.setTitle(CDLDataSource[section].course.name, for: .normal)
                 if CDLDataSource[section].expanded {
-                    rotateArrows180Degrees(button: button,animated: false)
+                    SSAnimator.rotate180Degrees(view: button,animated: false)
                 }
             }
             
@@ -439,37 +440,11 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         return nil
     }
     
-    func rotateArrows180Degrees(button : UIButton,animated : Bool){
-        for view in button.subviews{
-            if let imageView = view as? UIImageView{
-                if imageView.transform == .identity{
-                    if animated{
-                        UIView.animate(withDuration: 0.2) {
-                            imageView.transform = CGAffineTransform(rotationAngle: .pi)
-                        }
-                    }
-                    else {
-                        imageView.transform = CGAffineTransform(rotationAngle: .pi)
-                    }
-                   
-                }
-                else{
-                    if animated {
-                        UIView.animate(withDuration: 0.2) {
-                            imageView.transform = .identity
-                        }
-                    }
-                    else{
-                          imageView.transform = .identity
-                    }
-                }
-            }
-        }
-    }
     
     
     @objc func removeOrExpandRows(button : UIButton ){
-        rotateArrows180Degrees(button: button,animated: true)
+        let SSAnimator = CoreSSAnimation.getUniqueIstance()
+        SSAnimator.rotate180Degrees(view: button, animated: true)
         let sect = button.tag
         var indices = [IndexPath]()
         var row = 0;

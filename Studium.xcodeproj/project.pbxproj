@@ -39,6 +39,7 @@
 		9C454F1323016B070071F81F /* PswEncryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C454F1223016B070071F81F /* PswEncryption.swift */; };
 		9C454F1523016DA70071F81F /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C454F1423016DA70071F81F /* Session.swift */; };
 		9C7ADB5522F31AF7009651FB /* BackendAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7ADB5422F31AF7009651FB /* BackendAPI.swift */; };
+		9CBDB9CF2379C6AD00A015A4 /* CoreSSAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBDB9CE2379C6AD00A015A4 /* CoreSSAnimation.swift */; };
 		9CC86E3F22C0EC0F007567B1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CC86E3E22C0EC0F007567B1 /* WebKit.framework */; };
 		9CF6175F2302EFA1001D3E77 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF6175E2302EFA1001D3E77 /* StringExtension.swift */; };
 		9CFE72C121B9508E001EB697 /* CDLTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE72C021B9508E001EB697 /* CDLTableViewCell.swift */; };
@@ -121,6 +122,7 @@
 		9C454F1223016B070071F81F /* PswEncryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PswEncryption.swift; sourceTree = "<group>"; };
 		9C454F1423016DA70071F81F /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		9C7ADB5422F31AF7009651FB /* BackendAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAPI.swift; sourceTree = "<group>"; };
+		9CBDB9CE2379C6AD00A015A4 /* CoreSSAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreSSAnimation.swift; sourceTree = "<group>"; };
 		9CC86E3E22C0EC0F007567B1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		9CF6175E2302EFA1001D3E77 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		9CFE72C021B9508E001EB697 /* CDLTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDLTableViewCell.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				1380ED502302F2440063F79F /* DocumentBrowserViewController.swift */,
 				9C2C63CC237311BB0063F9C7 /* NotifyClass.swift */,
 				9C1BBD422378F01F003EEB9A /* DocSystem.swift */,
+				9CBDB9CE2379C6AD00A015A4 /* CoreSSAnimation.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -706,6 +709,7 @@
 				13E91D0521C7DB550007EF3E /* ManageCoursePageViewController.swift in Sources */,
 				13E3A34A21C1416E004BE8D8 /* NotifyTableDataSource.swift in Sources */,
 				9C06A22A21AB700200E695DB /* DepartmentClass.swift in Sources */,
+				9CBDB9CF2379C6AD00A015A4 /* CoreSSAnimation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

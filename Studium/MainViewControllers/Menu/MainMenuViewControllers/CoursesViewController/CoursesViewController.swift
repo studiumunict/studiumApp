@@ -8,10 +8,6 @@
 
 import UIKit
 
-
-
-
-
 class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var categoriesLabel: UILabel!
@@ -78,10 +74,6 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
         }
     }
     
-   
-    
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if sharedSource.courseSharedDataSource[section].expanded {
               return sharedSource.courseSharedDataSource[section].teachings.count
@@ -135,7 +127,8 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
                 arrowImageView.tintColor = UIColor.elementsLikeNavBarColor
                 button.addSubview(arrowImageView)
                 if sharedSource.courseSharedDataSource[section].expanded {
-                    rotateArrows180Degrees(button: button,animated: false)
+                    let SSAnimator = CoreSSAnimation.getUniqueIstance()
+                    SSAnimator.rotate180Degrees(view: button, animated: false)
                 }
                 button.addTarget(self, action: #selector(self.removeOrExpandRows), for: .touchUpInside)
             }
@@ -150,7 +143,8 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
     }
     
     @objc func removeOrExpandRows(button : UIButton ){
-        rotateArrows180Degrees(button: button,animated: true)
+        let SSAnimator = CoreSSAnimation.getUniqueIstance()
+        SSAnimator.rotate180Degrees(view: button, animated: true)
         let sect = button.tag
         var indices = [IndexPath]()
         var row = 0;
@@ -171,50 +165,8 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
         
     }
     
-    func rotateArrows180Degrees(button : UIButton,animated : Bool){
-        for view in button.subviews{
-            if let imageView = view as? UIImageView{
-                if imageView.transform == .identity{
-                    if animated{
-                        UIView.animate(withDuration: 0.2) {
-                            imageView.transform = CGAffineTransform(rotationAngle: .pi)
-                        }
-                    }
-                    else {
-                        imageView.transform = CGAffineTransform(rotationAngle: .pi)
-                    }
-                    
-                }
-                else{
-                    if animated {
-                        UIView.animate(withDuration: 0.2) {
-                            imageView.transform = .identity
-                        }
-                    }
-                    else{
-                        imageView.transform = .identity
-                    }
-                }
-            }
-        }
-    }
-    
-    
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return sharedSource.courseSharedDataSource.count
     }
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

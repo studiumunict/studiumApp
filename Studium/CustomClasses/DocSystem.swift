@@ -10,7 +10,7 @@ import Foundation
 
 class DocSystem {
     //var documentsList = [Doc]()
-    let root = Doc.init(title: "Root", path: "/Home", type: "folder", uploaded: "", lastUpdate: "", size: 0)
+    let root = Doc.init(title: "Root", path: "Home", type: "folder", uploaded: "", lastUpdate: "", size: 0)
     var currentFolder : Doc!
     
     init() {
