@@ -1,5 +1,5 @@
 //
-//  CDEFileSystem+CoreDataClass.swift
+//  CDEFileSystemCoreDataClass.swift
 //  
 //
 //  Created by Francesco Petrosino on 12/11/2019.
