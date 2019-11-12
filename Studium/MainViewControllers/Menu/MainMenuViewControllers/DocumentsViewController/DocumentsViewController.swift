@@ -27,8 +27,10 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     @IBOutlet weak var createFolderConfirmButton: UIButton!
     @IBOutlet weak var createFolderView: UIView!
     var selectionList = [Doc]() //Lista contenente gli elementi della selezione multipla
-    var fs = DocSystem() //contiene tutti gli elementi a partire da root. E' un albero.
-
+    
+    //var fs = DocSystem() //contiene tutti gli elementi a partire da root. E' un albero.
+    var fs: DocSystem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.lightWhite
@@ -36,6 +38,14 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         self.view.layer.borderWidth = 0.5
         self.createFolderView.isHidden = true
         self.oscureView.isHidden = true
+        
+        if let tmpFS = CoreDataController.shared.getFileSystem() {
+            fs = tmpFS
+        } else {
+            fs = DocSystem()
+            CoreDataController.shared.saveFileSystem(fs)
+        }
+        
         setRevealViewControllerParameters()
         //loadDocumentsList()
         collectionView.dataSource = self
