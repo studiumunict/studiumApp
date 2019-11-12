@@ -57,6 +57,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         oscureLoadingView.alpha = 1.0
         let spinner = UIActivityIndicatorView(frame: CGRect(x: self.view.frame.width/2 - 30, y: self.view.frame.height/2-200, width: 60, height: 60))
         oscureLoadingView.addSubview(spinner)
+        spinner.layer.zPosition = 3
         if #available(iOS 13.0, *) {
             spinner.style = .large
         } else {
@@ -327,7 +328,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
      
      func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
          
-         guard let vcIndex = viewControllerList.index(of: viewController) else {
+         guard let vcIndex = viewControllerList.firstIndex(of: viewController) else {
              return nil
          }
          
@@ -346,7 +347,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
      
      func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
          
-         guard let vcIndex = viewControllerList.index(of: viewController) else {
+         guard let vcIndex = viewControllerList.firstIndex(of: viewController) else {
              return nil
          }
          

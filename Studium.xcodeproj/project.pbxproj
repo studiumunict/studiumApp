@@ -527,14 +527,16 @@
 				TargetAttributes = {
 					9CFE9D6E21A8ADBC0030AE33 = {
 						CreatedOnToolsVersion = 10.1;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1120;
 					};
 					9CFE9D8521A8ADBE0030AE33 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1120;
 						TestTargetID = 9CFE9D6E21A8ADBC0030AE33;
 					};
 					9CFE9D9021A8ADBE0030AE33 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1120;
 						TestTargetID = 9CFE9D6E21A8ADBC0030AE33;
 					};
 				};
@@ -898,7 +900,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Studium/Studium-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -920,7 +922,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Unict.it.Studium;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Studium/Studium-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -931,7 +933,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7JSR847A9P;
 				INFOPLIST_FILE = StudiumTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -940,7 +944,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Unict.it.StudiumTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Studium.app/Studium";
 			};
@@ -952,7 +956,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7JSR847A9P;
 				INFOPLIST_FILE = StudiumTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -961,7 +967,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Unict.it.StudiumTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Studium.app/Studium";
 			};
@@ -972,7 +978,9 @@
 			baseConfigurationReference = 7B2EB8B6FB4CA8EFFB172DA4 /* Pods-StudiumUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7JSR847A9P;
 				INFOPLIST_FILE = StudiumUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -981,7 +989,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Unict.it.StudiumUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Studium;
 			};
@@ -993,6 +1001,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7JSR847A9P;
 				INFOPLIST_FILE = StudiumUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1001,7 +1010,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Unict.it.StudiumUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Studium;
 			};

@@ -144,7 +144,7 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        guard let vcIndex = navControllerList.index(of: viewController) else {
+        guard let vcIndex = navControllerList.firstIndex(of: viewController) else {
             return nil
         }
         
@@ -165,7 +165,7 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        guard let vcIndex = navControllerList.index(of: viewController) else {
+        guard let vcIndex = navControllerList.firstIndex(of: viewController) else {
             return nil
         }
         
