@@ -41,11 +41,63 @@ class CoreDataController {
     
     
     
+// MARK: CDEFileSystem
     
+    ///Salva nel CoreData il riferimento al fs, passato come parametro
+    func saveFileSystem(_ obj: DocSystem) {
+        do {
+            let results = try self.context.fetch(CDEFileSystem.fetchRequest() as NSFetchRequest<CDEFileSystem>)
+        
+            if results.isEmpty {
+                print("[CDC - saveFileSystem]: Salvo l'object fs")
+                
+                let tmp = CDEFileSystem(entity: NSEntityDescription.entity(forEntityName: "CDEFileSystem", in: self.context)!, insertInto: self.context)
+                
+                tmp.setValue(obj, forKey: "fs")
+                
+                CoreDataController.shared.saveContext(anyError: "[CDC]: Impossibile salvare l'object fs")
+                
+            } else {
+                print("[CDC - saveFileSystem]: object fs presente")
+            }
+            
+        } catch let error {
+            print("[CDC]: \(error)")
+        }
+    }
     
+    ///Rimuove l'unico fs salvato nel CoreData
+    func removeFileSystem() {
+        do {
+            let results = try self.context.fetch(CDEFileSystem.fetchRequest() as NSFetchRequest<CDEFileSystem>)
+            
+            for x in results {
+                CoreDataController.shared.context.delete(x)
+            }
+            
+            CoreDataController.shared.saveContext(anyError: "[CDC]: Impossibile eliminare il fs")
+            
+        } catch let error {
+            print("[CDC]: \(error)")
+        }
+    }
     
-    
-    
-    
-    
+    ///Prende l'unico fs salvato nel CoreData altrimenti restituisce nil
+    func getFileSystem() -> DocSystem? {
+        do {
+            let results = try self.context.fetch(CDEFileSystem.fetchRequest() as NSFetchRequest<CDEFileSystem>)
+            
+            if results.first != nil {
+                //return (results.first!.value(forKey: "fs") as! DocSystem)
+                return results.first!.fs
+            }
+        
+        } catch let error {
+            print("[CDC]: \(error)")
+        }
+        
+        print("[CDC - getFileSystem]: non è stato trovato alcun fs salvato nel CoreData")
+        return nil
+    }
+
 }
