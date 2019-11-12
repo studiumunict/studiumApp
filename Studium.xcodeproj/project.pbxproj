@@ -20,6 +20,7 @@
 		13CC782321C93FB90052E579 /* PortaleStudentiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CC782221C93FB90052E579 /* PortaleStudentiViewController.swift */; };
 		13D3997D21CACF1300B023B8 /* DocClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D3997C21CACF1300B023B8 /* DocClass.swift */; };
 		13D3997F21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D3997E21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift */; };
+		13D3F45A237AE88E00D0D4EB /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D3F459237AE88E00D0D4EB /* CoreDataController.swift */; };
 		13D86DDB21B9A3BF007638FD /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D86DDA21B9A3BF007638FD /* ExtensionUIColor.swift */; };
 		13E3A34721C140A6004BE8D8 /* NotifyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E3A34621C140A6004BE8D8 /* NotifyCell.swift */; };
 		13E3A34A21C1416E004BE8D8 /* NotifyTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E3A34921C1416E004BE8D8 /* NotifyTableDataSource.swift */; };
@@ -96,6 +97,7 @@
 		13CC782221C93FB90052E579 /* PortaleStudentiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortaleStudentiViewController.swift; sourceTree = "<group>"; };
 		13D3997C21CACF1300B023B8 /* DocClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocClass.swift; sourceTree = "<group>"; };
 		13D3997E21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsCollectionViewCell.swift; sourceTree = "<group>"; };
+		13D3F459237AE88E00D0D4EB /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		13D86DDA21B9A3BF007638FD /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
 		13E3A34621C140A6004BE8D8 /* NotifyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyCell.swift; sourceTree = "<group>"; };
 		13E3A34921C1416E004BE8D8 /* NotifyTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyTableDataSource.swift; sourceTree = "<group>"; };
@@ -218,6 +220,22 @@
 				13CC782221C93FB90052E579 /* PortaleStudentiViewController.swift */,
 			);
 			path = PortaleStudentiViewController;
+			sourceTree = "<group>";
+		};
+		13D3F457237AE82A00D0D4EB /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				13D3F459237AE88E00D0D4EB /* CoreDataController.swift */,
+				13D3F458237AE87200D0D4EB /* CoreDataEntity */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		13D3F458237AE87200D0D4EB /* CoreDataEntity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreDataEntity;
 			sourceTree = "<group>";
 		};
 		13E3A34521C1407D004BE8D8 /* NotifyPageViewController */ = {
@@ -357,6 +375,7 @@
 		9CFE9D7121A8ADBC0030AE33 /* Studium */ = {
 			isa = PBXGroup;
 			children = (
+				13D3F457237AE82A00D0D4EB /* CoreData */,
 				9C7ADB5322F31AC0009651FB /* Back-end-Adapter */,
 				9C06A22821AB6FE900E695DB /* CustomClasses */,
 				9CFE9D7221A8ADBC0030AE33 /* AppDelegate.swift */,
@@ -700,6 +719,7 @@
 				9C0E501D21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift in Sources */,
 				13D86DDB21B9A3BF007638FD /* ExtensionUIColor.swift in Sources */,
 				9C0E501B21C3F7CE0055C4DD /* ManageCourseViewController.swift in Sources */,
+				13D3F45A237AE88E00D0D4EB /* CoreDataController.swift in Sources */,
 				9C06A22721AB6BC500E695DB /* DepartmentTableViewCell.swift in Sources */,
 				1380ED512302F2440063F79F /* DocumentBrowserViewController.swift in Sources */,
 				9CFE9D7321A8ADBC0030AE33 /* AppDelegate.swift in Sources */,
