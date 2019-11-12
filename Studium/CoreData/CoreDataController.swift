@@ -53,7 +53,7 @@ class CoreDataController {
                 
                 let tmp = CDEFileSystem(entity: NSEntityDescription.entity(forEntityName: "CDEFileSystem", in: self.context)!, insertInto: self.context)
                 
-                tmp.setValue(obj, forKey: "fs")
+                tmp.setFs(obj)
                 
                 CoreDataController.shared.saveContext(anyError: "[CDC]: Impossibile salvare l'object fs")
                 
