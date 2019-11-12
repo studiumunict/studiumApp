@@ -24,7 +24,7 @@ class Notify { //Struttura contenente il titolo, data e corpo del messaggio di u
     private func parseHTMLText(text: String)-> String{
         var str = text.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
         str = str.replacingOccurrences(of: "&#39;", with: "'", options: .caseInsensitive, range: nil)
-         str = str.replacingOccurrences(of: "&#039;", with: "'", options: .caseInsensitive, range: nil)
+        str = str.replacingOccurrences(of: "&#039;", with: "'", options: .caseInsensitive, range: nil)
         str = str.replacingOccurrences(of: "&nbsp;", with: "", options: .caseInsensitive, range: nil)
         str = str.replacingOccurrences(of: "&quot;", with: "\"", options: .caseInsensitive, range: nil)
         str = str.replacingOccurrences(of: "&rsquo;", with: "'", options: .caseInsensitive, range: nil)

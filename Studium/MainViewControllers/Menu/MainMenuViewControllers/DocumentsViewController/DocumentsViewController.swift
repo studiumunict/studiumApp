@@ -11,7 +11,6 @@ import UIKit
 
 class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIDocumentInteractionControllerDelegate {
     @IBOutlet var errorMessageLabel: UILabel!
-   // @IBOutlet weak var errorInfoDescriptionTextView: UITextView!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var descrizioneLabel: UILabel!
     @IBOutlet var headerView: UIView!
@@ -19,24 +18,32 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     @IBOutlet var addNewFolderButton: UIButton!
     @IBOutlet var selectButton: UIButton!
     @IBOutlet var titleLabel: UILabel!
-   
     @IBOutlet weak var selectedActionButton: UIButton!
-    
+    var actionsView: UIView!
+    @IBOutlet var oscureView : UIView!
+    @IBOutlet weak var createFolderLabel: UILabel!
+    @IBOutlet weak var createFolderTextField: UITextField!
+    @IBOutlet weak var createFolderCancelButton: UIButton!
+    @IBOutlet weak var createFolderConfirmButton: UIButton!
+    @IBOutlet weak var createFolderView: UIView!
     var selectionList = [Doc]() //Lista contenente gli elementi della selezione multipla
     var fs = DocSystem() //contiene tutti gli elementi a partire da root. E' un albero.
-    //var documentController: UIDocumentInteractionController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.lightWhite
         self.view.layer.borderColor = UIColor.primaryBackground.cgColor
         self.view.layer.borderWidth = 0.5
+        self.createFolderView.isHidden = true
+        self.oscureView.isHidden = true
         setRevealViewControllerParameters()
         //loadDocumentsList()
         collectionView.dataSource = self
         collectionView.delegate = self
+        setUpOscureView()
+        setUpCreateFolderView()
         //fs.currentFolder.addChild(item: Doc.init(title: "Titolo1", path: "/titolo1", type: .folder))
-       
+        
         if fs.currentFolder.childs.count == 0 {
             setEmptyContentLayout()
         } else {
@@ -51,7 +58,6 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     
     func setErrorLabelText() {
         errorMessageLabel.text = "Non ci sono documenti preferiti salvati."
-        //errorInfoDescriptionTextView.text = "Puoi aggiungere un documento dalla sezione Documenti di un qualsiasi corso."
     }
     
     func hideElementsOfView() {
@@ -65,7 +71,6 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         setErrorLabelText()
         errorMessageLabel.isHidden = false
         errorMessageLabel.layer.zPosition = 2
-        //errorInfoDescriptionTextView.isHidden = false
     }
     
     func setEmptyContentLayout(){
@@ -90,20 +95,6 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         setHeaderViewLayout()
         reloadDescriptionLabel()
         setSelectedActionButtonLayout()
-    }
-    
-    internal func setRevealViewControllerParameters(){
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
-        imageView.image = UIImage.init(named: "menu")
-        let buttonView = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
-        buttonView.addSubview(imageView)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: buttonView)
-        if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 130 //Menu sx
-            revealViewController().delegate = self
-            self.navigationItem.leftBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:))))
-            view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-        }
     }
     
     func loadDocumentsList(){
@@ -223,36 +214,34 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     }
     
     
-    @IBAction func backButtonBarSelected(_ sender: UIButton) {
+    @IBAction func backButtonBarClicked(_ sender: UIButton) {
         fs.goToParent()
         reloadCollectionView()
     }
     
-   /* @IBAction func addNewFolderSelected(_ sender: UIButton) {
-        
-        let newFolder = Docs(title: "Nuova cartella", path: fs.currentFolder.path + "/Nuova cartella", type: .folder)
-        
-        if subList.isEmpty {
-            newFolder.setPrev(prev: folderEmptySelected)
-        } else {
-            newFolder.setPrev(prev: subList.first?.prev)
+    @IBAction func addNewFolderClicked(_ sender: UIButton) {
+        let SSAnimator = CoreSSAnimation.getUniqueIstance()
+        SSAnimator.expandViewFromSourceView(viewToOpen: self.createFolderView, elementsInsideView: nil, sourceView: self.addNewFolderButton, oscureView: self.oscureView) { (flag) in
+            self.createFolderTextField.becomeFirstResponder()
         }
-        
-        documentsList.append(newFolder)
-        subList.append(newFolder)
-        
-        collectionView.reloadData()
-        reloadDescriptionLabel()
-    }*/
+    }
     private func hideSelectedActionButton(){
-        selectedActionButton.isHidden = true
+        let SSAnimator = CoreSSAnimation.getUniqueIstance()
+        SSAnimator.closeViewWithFadeIn(viewToClose: self.selectedActionButton) { (flag) in
+           
+        }
+        //selectedActionButton.isHidden = true
     }
     private func showSelectedActionButton(){
-        selectedActionButton.isEnabled = false // prima si devono selezionare elementi
-        selectedActionButton.isHidden = false
+         // prima si devono selezionare elementi
+        //selectedActionButton.isHidden = false
+        let SSAnimator = CoreSSAnimation.getUniqueIstance()
+        SSAnimator.openViewWithFadeIn(viewToOpen: self.selectedActionButton) { (flag) in
+            self.selectedActionButton.isEnabled = false
+        }
     }
     
-    @IBAction func didMultipleSelectionSelected() {
+    @IBAction func multipleSelectionClicked() {
         if collectionView.allowsMultipleSelection {
             selectButton.isSelected = false
             collectionView.allowsMultipleSelection = false
@@ -278,66 +267,128 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         selectionList.removeAll()
         return
     }
+    internal func setUpOscureView(){
+        //oscureView = UIView.init(frame: self.view.frame)
+        oscureView.backgroundColor = UIColor.primaryBackground
+        oscureView.alpha = 0.0
+        //oscureView.layer.zPosition = 0
+        //self.view.addSubview(oscureView)
+    }
+    internal func setUpMoveActionButton()-> UIButton{
+        return UIButton()
+    }
+    internal func setUpDeleteActionButton()-> UIButton{
+        return UIButton()
+    }
+    internal func setUpAddInFavouriteActionButton()-> UIButton{
+        return UIButton()
+    }
+    internal func setUpActionButton()-> UIButton{
+        return UIButton()
+    }
+    internal func setUpActionsViewLayout(){
+        let newFrame = CGRect(x: 0, y: 0, width: self.view.frame.size.width * 0.9, height: 180)
+        self.actionsView = UIView.init(frame: newFrame)
+        self.view.addSubview(actionsView)
+        self.actionsView.backgroundColor = UIColor.primaryBackground
+        self.actionsView.layer.borderColor = UIColor.secondaryBackground.cgColor
+        self.actionsView.layer.borderWidth = 1.0
+        self.actionsView.layer.cornerRadius = 5.0
+        self.actionsView.transform = CGAffineTransform(scaleX: 1, y: 0.01)
+        self.actionsView.alpha = 0.0
+        self.actionsView.layer.zPosition = 2
+    }
     
+    internal func setUpCreateFolderLabel(){
+        createFolderLabel.textColor = UIColor.lightWhite
+        createFolderLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        createFolderLabel.textAlignment = .center
+    }
+    internal func setUpCreateFolderTextField(){
+        createFolderTextField.backgroundColor = UIColor.lightWhite
+    }
+    @IBAction func createFolderWithName(){
+        if createFolderTextField.text != nil && createFolderTextField.text != "" {
+             let SSAnimator = CoreSSAnimation.getUniqueIstance()
+             SSAnimator.collapseViewInSourceView(viewToCollapse: self.createFolderView, elementsInsideView: nil, sourceView: self.addNewFolderButton, oscureView: self.oscureView) { (flag) in
+                        print("collapsed create folder")
+                        self.createFolderTextField.resignFirstResponder()
+                        let newFolder = Doc(title: self.createFolderTextField.text!, path: self.fs.currentFolder.path + self.createFolderTextField.text!, type: .folder)
+                        newFolder.setParent(prev: self.fs.currentFolder)
+                        self.fs.currentFolder.addChild(item: newFolder)
+                        self.reloadCollectionView()
+                        self.createFolderTextField.text = ""
+                 }
+        }
+        else{return}
+        
+       
+    }
+    @IBAction func closeCreateFolderView(){
+        let SSAnimator = CoreSSAnimation.getUniqueIstance()
+            SSAnimator.collapseViewInSourceView(viewToCollapse: self.createFolderView, elementsInsideView: nil, sourceView: self.addNewFolderButton, oscureView: self.oscureView) { (flag) in
+                       print("collapsed create folder")
+                    self.createFolderTextField.resignFirstResponder()
+                    self.createFolderTextField.text = ""
+                }
+    }
+    internal func setUpCreateFolderConfirmButton(){
+        createFolderConfirmButton.backgroundColor = UIColor.lightWhite
+        createFolderConfirmButton.setTitleColor(UIColor.textBlueColor, for: .normal)
+        createFolderConfirmButton.setTitle("Conferma", for: .normal)
+        createFolderConfirmButton.layer.cornerRadius = 5.0
+        createFolderConfirmButton.titleLabel?.font = UIFont(name: "System", size: 9)
+        //createFolderConfirmButton.layer.zPosition = 3
+        roundRightRadius(radius: 5.0, view: createFolderConfirmButton)
+    }
+    
+    internal func setUpCreateFolderCancelButton(){
+        createFolderCancelButton.backgroundColor = UIColor.lightWhite
+        createFolderCancelButton.setTitle("Annulla", for: .normal)
+        createFolderCancelButton.setTitleColor(UIColor.textRedColor, for: .normal)
+        createFolderCancelButton.layer.cornerRadius = 5.0
+        createFolderCancelButton.titleLabel?.font = UIFont(name: "System", size: 9)
+        createFolderCancelButton.isEnabled = true
+        //createFolderCancelButton.layer.zPosition = 3
+        createFolderCancelButton.layer.addBorder(edge: .right, color: #colorLiteral(red: 0.9961728454, green: 0.9902502894, blue: 1, alpha: 1), thickness: 0.5)
+        roundLeftRadius(radius: 5.0, view: createFolderCancelButton)
+    }
+    internal func setUpCreateFolderView(){
+        setUpCreateFolderLabel()
+        setUpCreateFolderTextField()
+        setUpCreateFolderCancelButton()
+        setUpCreateFolderConfirmButton()
+        createFolderView.backgroundColor = UIColor.createCategoryViewColor
+        createFolderView.layer.borderColor = UIColor.secondaryBackground.cgColor
+        createFolderView.layer.borderWidth = 1.0
+        createFolderView.layer.cornerRadius = 5.0
+        //createFolderView.layer.zPosition = 3
+          
+        //createFolderView.addSubview(createFolderConfirmButton)
+        //createFolderView.addSubview(createFolderCancelButton)
+       }
+    internal func setupActionsView(){
+        setUpActionsViewLayout()
+        let moveActionButton = setUpMoveActionButton() //presente solo in miei documenti
+        let deleteActionButton = setUpDeleteActionButton() //presente solo in miei documenti
+        let addInFavouriteActionButton = setUpAddInFavouriteActionButton() //presente solo in pageController
+        let cancelActionButton = setUpActionButton() //sempre presente
+        self.actionsView.addSubview(moveActionButton)
+        self.actionsView.addSubview(deleteActionButton)
+        self.actionsView.addSubview(addInFavouriteActionButton)
+        self.actionsView.addSubview(cancelActionButton)
+    }
    
     @IBAction func selectedActionButtonClicked(_ sender: Any) {
-        
-    }
-    
-    /*@IBAction func deleteButtonSelected(_ sender: UIButton) {
-        var i: Int, j: Int
-        
-        while !selectionList.isEmpty {
-            i = 0
-            for item in subList {
-                if item == selectionList[0] {
-                    subList.remove(at: i)
-                    break
-                }
-                i += 1
-            }
+        setupActionsView()
+        setUpOscureView()
+        let SSAnimator = CoreSSAnimation.getUniqueIstance()
+        SSAnimator.expandViewFromSourceFrame(sourceFrame: self.selectedActionButton.frame, viewToExpand: self.actionsView, elementsInsideView: nil, oscureView: self.oscureView) { (flag) in
             
-            i = 0
-            for item in documentsList {
-                if item == selectionList[0] {
-                    if item.TypeDoc == .folder {
-                        removeDocsInDocumentsListRecursive(array: item.next)
-                        while !indexes.isEmpty {
-                            j = 0
-                            for x in documentsList {
-                                if x == indexes[0] {
-                                    documentsList.remove(at: j)
-                                }
-                                j += 1
-                            }
-                            indexes.removeFirst()
-                        }
-                    }
-                    documentsList.remove(at: i)
-                    break
-                }
-                i += 1
-            }
-            selectionList.removeFirst()
         }
-        
-        didMultipleSelectionSelected()
-        collectionView.reloadData()
-        resetCell()
-    }*/
-    
-    //var indexes = [Docs]()
-    
-   /* internal func removeDocsInDocumentsListRecursive(array: [Docs]) {
-        for item in array {
-            if item.TypeDoc == .folder && !item.next.isEmpty {
-                removeDocsInDocumentsListRecursive(array: item.next)
-            }
-        }
-        
-        indexes.append(contentsOf: array)
     }
-    */
+    
+
     
     internal func openDocument(_ str: String) {
         print("openDocument \(str)")
@@ -356,5 +407,46 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         vc.openFile()
     }
     
+    internal func setRevealViewControllerParameters(){
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
+        imageView.image = UIImage.init(named: "menu")
+        let buttonView = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
+        buttonView.addSubview(imageView)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: buttonView)
+        if revealViewController() != nil {
+            revealViewController().rearViewRevealWidth = 130 //Menu sx
+            revealViewController().delegate = self
+            self.navigationItem.leftBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:))))
+            view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+        }
+    }
+    func roundLeftRadius(radius:CGFloat, view : UIView) {
+          self.roundCorners(corners: [UIRectCorner.topLeft, UIRectCorner.bottomLeft], radius:radius, view: view)
+      }
+      
+      func roundRightRadius(radius:CGFloat, view : UIView) {
+          self.roundCorners(corners: [UIRectCorner.topRight, UIRectCorner.bottomRight], radius:radius, view: view)
+      }
+      
+      func roundCorners(corners:UIRectCorner, radius:CGFloat, view : UIView) {
+          let bounds = view.bounds
+          
+          let maskPath = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+          
+          let maskLayer = CAShapeLayer()
+          maskLayer.frame = bounds
+          maskLayer.path = maskPath.cgPath
+          
+          view.layer.mask = maskLayer
+          
+          let frameLayer = CAShapeLayer()
+          frameLayer.frame = bounds
+          frameLayer.path = maskPath.cgPath
+          frameLayer.strokeColor = UIColor.secondaryBackground.cgColor
+          frameLayer.lineWidth = 3.0
+          frameLayer.fillColor = nil
+          
+          view.layer.addSublayer(frameLayer)
+      }
 
 }

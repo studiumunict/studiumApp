@@ -346,8 +346,8 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         cancelButton.titleLabel?.font = UIFont(name: "System", size: 9)
         createCategoryButton.titleLabel?.font = UIFont(name: "System", size: 9)
         cancelButton.layer.addBorder(edge: .right, color: #colorLiteral(red: 0.9961728454, green: 0.9902502894, blue: 1, alpha: 1), thickness: 0.5)
-        roundRightRadius(radius: 5.0, view: createCategoryButton)
         roundLeftRadius(radius: 5.0, view: cancelButton)
+        roundRightRadius(radius: 5.0, view: createCategoryButton)
         createCategoryView.addSubview(createCategoryButton)
         createCategoryView.addSubview(cancelButton)
     }
@@ -368,7 +368,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         let SSAnimator = CoreSSAnimation.getUniqueIstance()
         var subviews = [UIView]()
         subviews.append(self.createCategoryLabel)
-        SSAnimator.expandViewFromSourceView(viewToOpen: self.createCategoryView, elementsInsideView: subviews, sourceView: addCategoryButton, oscureView: self.oscureView) { (flag) in
+        SSAnimator.expandViewFromSourceView(viewToOpen: self.createCategoryView, elementsInsideView: subviews, sourceView: self.addCategoryButton, oscureView: self.oscureView) { (flag) in
             self.manageCoursesTableView.isUserInteractionEnabled = false
             self.createCategoryTextField.becomeFirstResponder()
         }
