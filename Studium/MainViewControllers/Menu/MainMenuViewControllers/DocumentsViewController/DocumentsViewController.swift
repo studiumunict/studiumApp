@@ -360,6 +360,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         label.text = "Gestisci documenti selezionati"
         label.textColor = UIColor.lightWhite
         label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 15)
         label.center = CGPoint(x: actionsView.center.x, y: actionsView.center.y/3)
         return label
     }
@@ -393,6 +394,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     internal func setUpCreateFolderLabel(){
         createFolderLabel.textColor = UIColor.lightWhite
         createFolderLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        //UIFont.systemFont(ofSize: 20, weight: .semibold)
         createFolderLabel.textAlignment = .center
     }
     internal func setUpCreateFolderTextField(){
