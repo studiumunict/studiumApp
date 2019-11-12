@@ -39,12 +39,13 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         self.createFolderView.isHidden = true
         self.oscureView.isHidden = true
         
-        if let tmpFS = CoreDataController.shared.getFileSystem() {
+        //non fare questo, questo deve essere fatto solo se è il caso corretto, per adesso mi basta avere la funzione che prende il fs dal coredata, poi me la sbtigo io
+        /*if let tmpFS = CoreDataController.shared.getFileSystem() {
             fs = tmpFS
         } else {
-            fs = DocSystem()
+            fs = DocSystem(autoSave: <#T##Bool#>)
             CoreDataController.shared.saveFileSystem(fs)
-        }
+        }*/
         
         setRevealViewControllerParameters()
         //loadDocumentsList()

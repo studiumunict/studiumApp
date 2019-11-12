@@ -33,7 +33,7 @@ class Teaching{
         self.signedUp = signedUp
         self.category = category
         notifyList = [Notify]()
-        fs = DocSystem()
+        fs = DocSystem(autoSave: false)
         description = [DescriptionBlock]()
     }
     
