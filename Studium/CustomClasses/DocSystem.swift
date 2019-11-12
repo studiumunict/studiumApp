@@ -8,25 +8,37 @@
 
 import Foundation
 
-class DocSystem {
+public class DocSystem: NSObject, NSCoding {
+    
     //var documentsList = [Doc]()
-    let root = Doc.init(title: "Root", path: "Home", type: "folder", uploaded: "", lastUpdate: "", size: 0)
+    var root = Doc.init(title: "Root", path: "Home", type: "folder", uploaded: "", lastUpdate: "", size: 0)
     var currentFolder : Doc!
     
-    init() {
+    override init() {
         currentFolder = root
         root.parent = nil
     }
     
-    public func getCurrentDocs() -> [Doc]{
+    func getCurrentDocs() -> [Doc]{
         return currentFolder.childs
     }
     
-    public func goToParent(){
+    func goToParent(){
         currentFolder = currentFolder.parent
     }
-    public func goToChild(childDoc: Doc){
+    
+    func goToChild(childDoc: Doc){
         currentFolder = childDoc
+    }
+    
+    public func encode(with coder: NSCoder) {
+        coder.encode(root, forKey: "root")
+        coder.encode(currentFolder, forKey: "currentFolder")
+    }
+    
+    required public init?(coder: NSCoder) {
+        root = coder.decodeObject(forKey: "root") as! Doc
+        currentFolder = coder.decodeObject(forKey: "currentFolder") as? Doc
     }
     
 }
