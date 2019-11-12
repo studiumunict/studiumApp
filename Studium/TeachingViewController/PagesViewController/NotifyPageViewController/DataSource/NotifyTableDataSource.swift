@@ -14,15 +14,13 @@ struct ContentCell {
     let description: String!
 }
 
-
-
 class NotifyTableDataSource: NSObject, UITableViewDataSource {
     
-    private let cellIdentifier = "notifyCell"
+    internal let cellIdentifier = "notifyCell"
     
     var items: [ContentCell] = []
     
-    fileprivate var indexPaths: Set<IndexPath> = []
+    //fileprivate var indexPaths: Set<IndexPath> = []
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count

@@ -18,7 +18,7 @@ class Teaching{
    
     var showcaseHTML: String!
     var haveBooking: Bool!
-    var descriptionText: String! // se nel sito è formattata in html potremmo prenderci l'html e mostrarlo in una webView. A quel punto rimarrebbe formattato allo stesso modo
+    var description: [DescriptionBlock]! // se nel sito è formattata in html potremmo prenderci l'html e mostrarlo in una webView. A quel punto rimarrebbe formattato allo stesso modo
     var notifyList: [Notify]!
     var fs : DocSystem!
     var syllabusCode: String!
@@ -34,6 +34,7 @@ class Teaching{
         self.category = category
         notifyList = [Notify]()
         fs = DocSystem()
+        description = [DescriptionBlock]()
     }
     
    
@@ -44,13 +45,13 @@ class Teaching{
     func completeTeachingData(completion: @escaping (Bool)->Void){
         guard isCompleted == false else { completion(false); return}
         self.downloadNotify { (flag) in
-            self.downloadDocuments(path: "mbareRoot", prev: self.fs.currentFolder) { (flag1) in
+           // self.downloadDocuments(path: "mbareRoot", prev: self.fs.currentFolder) { (flag1) in
                 self.downloadDescription { (flag2) in
                     self.isCompleted = true
                     self.syllabusCode = self.code
-                        completion(true)
+                    completion(true)
                 }
-            }
+           // }
         }
     }
    
@@ -137,8 +138,16 @@ class Teaching{
         let api = BackendAPI.getUniqueIstance()
         api.getCourseDescription(codCourse: self.code) { (JSONResponse) in
             print("**************************Descrizione", JSONResponse ?? "NULL")
+            let JSONArray = JSONResponse as! [Any]
+            for descBlock in JSONArray{
+                let descriptionBlock = descBlock as! [String: Any]
+                let blockTitle = descriptionBlock["title"] as! String
+                let blockContent = descriptionBlock["content"] as! String
+                //print("-------Blocco descrizione:-------- ",blockTitle, " ", blockContent)
+                let descBlock = DescriptionBlock(title: blockTitle, contentHTML: blockContent)
+                self.description.append(descBlock)
+            }
             completion(true)
-            //self.descriptionText  =  parseHTMLText(text: JJSONResponse)
         }
        
     }

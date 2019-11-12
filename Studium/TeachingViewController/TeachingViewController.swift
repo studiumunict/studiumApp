@@ -150,9 +150,9 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             else{ syllabusButtonView.isHidden = true }
             
             
-            if teachingDataSource.descriptionText != nil && !teachingDataSource.descriptionText.isEmpty{
+            if teachingDataSource.description.count > 0 {
                 let vc = sb.instantiateViewController(withIdentifier: "descriptionPageViewController") as! DescriptionPageViewController
-                vc.descriptionText = teachingDataSource.descriptionText
+                vc.descriptionBlocks = teachingDataSource.description
                 activeControllerLists.append(vc)
                 descriptionButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToDescriptionView(_:))))
                 customButtons(button: descriptionButton, image: "description", action: #selector(self.sendToDescriptionView(_:)))

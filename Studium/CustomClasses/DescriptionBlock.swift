@@ -1,25 +1,19 @@
 //
-//  NotifyClass.swift
+//  DescriptionBlock.swift
 //  Studium
 //
-//  Created by Simone Scionti on 06/11/2019.
+//  Created by Simone Scionti on 12/11/2019.
 //  Copyright © 2019 Unict.it. All rights reserved.
 //
 
 import Foundation
-
-
-class Notify { //Struttura contenente il titolo, data e corpo del messaggio di un Avviso
-    var date: String!
-    var title: String!
-    var message: String!
+class DescriptionBlock{
+    var title : String!
+    var contentHTML : String!
     
-    init(){}
-    
-    init(date: String!, title: String!, message: String!){
-        self.date = date
+    init(title: String, contentHTML: String){
         self.title = title
-        self.message = parseHTMLText(text: message)
+        self.contentHTML = parseHTMLText(text: contentHTML)
     }
     private func parseHTMLText(text: String)-> String{
         var str = text.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
@@ -33,8 +27,30 @@ class Notify { //Struttura contenente il titolo, data e corpo del messaggio di u
         str = str.replacingOccurrences(of: "&igrave;", with: "ì", options: .caseInsensitive, range: nil)
         str = str.replacingOccurrences(of: "&ograve;", with: "ò", options: .caseInsensitive, range: nil)
         str = str.replacingOccurrences(of: "&ugrave;", with: "ù", options: .caseInsensitive, range: nil)
+        str = str.replacingOccurrences(of: "/*", with: "", options: .caseInsensitive, range: nil)
+        str = str.replacingOccurrences(of: "*/", with: "", options: .caseInsensitive, range: nil)
         str = str.replacingOccurrences(of: "    ", with: "", options: .caseInsensitive, range: nil)
+       /* var i = str.count-1
+        var char = false
+        while(i >= 0 && !char){
+            if(str[i] != " "){
+                char = true
+            }
+            else{i-=1}
+        }
+        var finalStr = String(str.dropLast(str.count-1-i))
+        i = 0
+        var lastIndex = -1
+        while (i < finalStr.count && !char){
+            let index = finalStr.firstIndex(of: " ")
+            if(index == lastIndex + 1){
+                finalStr.remove(at: index)
+            }
+            else{ break }
+            i+=1
+        }
+        print("Elimino i primi", i)
+        finalStr = String(finalStr.dropFirst(i))*/
         return str
     }
 }
-

@@ -14,7 +14,7 @@ class DescriptionPageViewController: UIViewController {
     @IBOutlet var descriptionTextView: UITextView!
     @IBOutlet var errorMessageLabel: UILabel!
     
-    var descriptionText: String!
+    var descriptionBlocks = [DescriptionBlock]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +23,7 @@ class DescriptionPageViewController: UIViewController {
         self.view.layer.borderColor = UIColor.primaryBackground.cgColor
         self.view.layer.borderWidth = 0.5
         
-        if descriptionText != nil {
+        /*if descriptionText != nil {
             descriptionTextView.isHidden = false
             errorMessageLabel.isHidden = true
             descriptionTextView.text = descriptionText!
@@ -31,7 +31,8 @@ class DescriptionPageViewController: UIViewController {
             descriptionTextView.isHidden = true
             errorMessageLabel.isHidden = false
             errorMessageLabel.text = "Questo insegnamento non è stato ancora descritto."
-        }
+        }*/
+        self.descriptionTextView.text = descriptionBlocks[1].contentHTML
     }
     deinit{
         print("Deinit descriptionPage")
