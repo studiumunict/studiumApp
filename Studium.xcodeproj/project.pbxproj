@@ -37,7 +37,8 @@
 		9C0E501D21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0E501C21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift */; };
 		9C14FE74237B1C9B00069D11 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C14FE73237B1C9B00069D11 /* DescriptionTableViewCell.swift */; };
 		9C14FE76237B1CC400069D11 /* DescriptionTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C14FE75237B1CC400069D11 /* DescriptionTableViewDataSource.swift */; };
-		9C14FE82237B2BB400069D11 /* CoreDataEntity in Resources */ = {isa = PBXBuildFile; fileRef = 9C14FE81237B2BB400069D11 /* CoreDataEntity */; };
+		9C14FE85237B2C1A00069D11 /* CDEFileSystemCoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C14FE84237B2C1A00069D11 /* CDEFileSystemCoreDataClass.swift */; };
+		9C14FE87237B2C1D00069D11 /* CDEFileSystemCoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C14FE86237B2C1D00069D11 /* CDEFileSystemCoreDataProperties.swift */; };
 		9C1BBD432378F01F003EEB9A /* DocSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1BBD422378F01F003EEB9A /* DocSystem.swift */; };
 		9C27B34B237B0DB500242958 /* DescriptionBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C27B34A237B0DB500242958 /* DescriptionBlock.swift */; };
 		9C2C63CD237311BB0063F9C7 /* NotifyClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2C63CC237311BB0063F9C7 /* NotifyClass.swift */; };
@@ -125,7 +126,8 @@
 		9C0E501C21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseAndSearchCoursesViewController.swift; sourceTree = "<group>"; };
 		9C14FE73237B1C9B00069D11 /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		9C14FE75237B1CC400069D11 /* DescriptionTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewDataSource.swift; sourceTree = "<group>"; };
-		9C14FE81237B2BB400069D11 /* CoreDataEntity */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CoreDataEntity; sourceTree = "<group>"; };
+		9C14FE84237B2C1A00069D11 /* CDEFileSystemCoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDEFileSystemCoreDataClass.swift; sourceTree = "<group>"; };
+		9C14FE86237B2C1D00069D11 /* CDEFileSystemCoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDEFileSystemCoreDataProperties.swift; sourceTree = "<group>"; };
 		9C1BBD422378F01F003EEB9A /* DocSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocSystem.swift; sourceTree = "<group>"; };
 		9C27B34A237B0DB500242958 /* DescriptionBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionBlock.swift; sourceTree = "<group>"; };
 		9C2C63CC237311BB0063F9C7 /* NotifyClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyClass.swift; sourceTree = "<group>"; };
@@ -234,7 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				13D3F459237AE88E00D0D4EB /* CoreDataController.swift */,
-				9C14FE81237B2BB400069D11 /* CoreDataEntity */,
+				9C14FE83237B2C0E00069D11 /* Entity */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -342,6 +344,15 @@
 				9C14FE75237B1CC400069D11 /* DescriptionTableViewDataSource.swift */,
 			);
 			path = DescriptionPageController;
+			sourceTree = "<group>";
+		};
+		9C14FE83237B2C0E00069D11 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				9C14FE84237B2C1A00069D11 /* CDEFileSystemCoreDataClass.swift */,
+				9C14FE86237B2C1D00069D11 /* CDEFileSystemCoreDataProperties.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		9C7ADB5322F31AC0009651FB /* Back-end-Adapter */ = {
@@ -599,7 +610,6 @@
 			files = (
 				9CFE9D8021A8ADBE0030AE33 /* LaunchScreen.storyboard in Resources */,
 				9CFE9D7D21A8ADBE0030AE33 /* Assets.xcassets in Resources */,
-				9C14FE82237B2BB400069D11 /* CoreDataEntity in Resources */,
 				9CFE9D7821A8ADBC0030AE33 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -705,6 +715,7 @@
 				139BCB6621BDDFD5005A750A /* NotifyPageViewController.swift in Sources */,
 				13D3997F21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift in Sources */,
 				138E6E2821C458830000A747 /* SyllabusPageViewController.swift in Sources */,
+				9C14FE85237B2C1A00069D11 /* CDEFileSystemCoreDataClass.swift in Sources */,
 				139BCB6421BDDC71005A750A /* ShowcasePageViewController.swift in Sources */,
 				9C27B34B237B0DB500242958 /* DescriptionBlock.swift in Sources */,
 				135D120F21B8092200DA9C69 /* ExtensionCALayer.swift in Sources */,
@@ -738,6 +749,7 @@
 				9C06A22721AB6BC500E695DB /* DepartmentTableViewCell.swift in Sources */,
 				1380ED512302F2440063F79F /* DocumentBrowserViewController.swift in Sources */,
 				9CFE9D7321A8ADBC0030AE33 /* AppDelegate.swift in Sources */,
+				9C14FE87237B2C1D00069D11 /* CDEFileSystemCoreDataProperties.swift in Sources */,
 				9CFE72C121B9508E001EB697 /* CDLTableViewCell.swift in Sources */,
 				9C07088E21C85C1100F7D296 /* CoursesTableViewCell.swift in Sources */,
 				9C2C63CD237311BB0063F9C7 /* NotifyClass.swift in Sources */,
@@ -925,7 +937,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 22WBCLURAG;
+				DEVELOPMENT_TEAM = 7JSR847A9P;
 				INFOPLIST_FILE = Studium/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -948,7 +960,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 22WBCLURAG;
+				DEVELOPMENT_TEAM = 7JSR847A9P;
 				INFOPLIST_FILE = Studium/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
