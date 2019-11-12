@@ -1,5 +1,5 @@
 //
-//  CDEFileSystem+CoreDataProperties.swift
+//  CDEFileSystemCoreDataProperties.swift
 //  
 //
 //  Created by Francesco Petrosino on 12/11/2019.
