@@ -48,7 +48,7 @@ class Teaching{
                 self.downloadDescription { (flag2) in
                     self.isCompleted = true
                     self.syllabusCode = self.code
-                     completion(true)
+                        completion(true)
                 }
             }
         }
@@ -66,7 +66,7 @@ class Teaching{
                 self.fs.currentFolder.addChild(item: item)
                 if(docDict["type"] as! String == "folder") {
                     self.downloadDocuments(path: docDict["path"] as! String, prev: item) { (flag2) in
-                        print("Scaricati anche i secondi")
+                        //print("Scaricati anche i secondi")
                     }
                 }
             }
@@ -96,7 +96,7 @@ class Teaching{
             let JSONArray = JSONResponse as! [Any]
             for doc in JSONArray{
                 let docDict = doc as! [String:Any]
-                print("*****Appendo Doc*****")
+                //print("*****Appendo Doc*****")
                 let item = Doc.init(title: docDict["title"] as! String, path: docDict["path"] as! String, type: docDict["type"] as! String, uploaded: docDict["insert"] as! String, lastUpdate: docDict["updated"] as! String, size: docDict["size"] as! Int)
                 item.setParent(prev: prev)
                 prev.addChild(item: item)
@@ -131,15 +131,14 @@ class Teaching{
             print(JSONResponse ?? "NULL")
             completion(true)
         }
-        
     }*/
-    
     private func downloadDescription(completion: @escaping (Bool)->Void){
         //self.descriptionText = "Descrizione"
         let api = BackendAPI.getUniqueIstance()
         api.getCourseDescription(codCourse: self.code) { (JSONResponse) in
-            print("Descrizione", JSONResponse ?? "NULL")
+            print("**************************Descrizione", JSONResponse ?? "NULL")
             completion(true)
+            //self.descriptionText  =  parseHTMLText(text: JJSONResponse)
         }
        
     }

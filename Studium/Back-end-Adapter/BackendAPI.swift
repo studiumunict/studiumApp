@@ -296,6 +296,7 @@ import Foundation
         }
     }
     
+    
     public func deleteCategory(idCat: String, completion: @escaping (Any?)->Void){
         let requestName = "DeleteCategory" //"MyCourses"
         let request = startRequest()
