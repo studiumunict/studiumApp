@@ -21,8 +21,6 @@
 		13D3997D21CACF1300B023B8 /* DocClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D3997C21CACF1300B023B8 /* DocClass.swift */; };
 		13D3997F21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D3997E21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift */; };
 		13D3F45A237AE88E00D0D4EB /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D3F459237AE88E00D0D4EB /* CoreDataController.swift */; };
-		13D3F465237B088C00D0D4EB /* CDEFileSystem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D3F464237B088C00D0D4EB /* CDEFileSystem+CoreDataClass.swift */; };
-		13D3F466237B088C00D0D4EB /* CDEFileSystem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D3F463237B088C00D0D4EB /* CDEFileSystem+CoreDataProperties.swift */; };
 		13D86DDB21B9A3BF007638FD /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D86DDA21B9A3BF007638FD /* ExtensionUIColor.swift */; };
 		13E3A34721C140A6004BE8D8 /* NotifyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E3A34621C140A6004BE8D8 /* NotifyCell.swift */; };
 		13E3A34A21C1416E004BE8D8 /* NotifyTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E3A34921C1416E004BE8D8 /* NotifyTableDataSource.swift */; };
@@ -103,8 +101,6 @@
 		13D3997C21CACF1300B023B8 /* DocClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocClass.swift; sourceTree = "<group>"; };
 		13D3997E21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsCollectionViewCell.swift; sourceTree = "<group>"; };
 		13D3F459237AE88E00D0D4EB /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
-		13D3F463237B088C00D0D4EB /* CDEFileSystem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDEFileSystem+CoreDataProperties.swift"; path = "/Users/Francesco/Desktop/Studium/studiumApp/Studium/CoreData/CoreDataEntity/CDEFileSystem+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
-		13D3F464237B088C00D0D4EB /* CDEFileSystem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDEFileSystem+CoreDataClass.swift"; path = "/Users/Francesco/Desktop/Studium/studiumApp/Studium/CoreData/CoreDataEntity/CDEFileSystem+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		13D86DDA21B9A3BF007638FD /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
 		13E3A34621C140A6004BE8D8 /* NotifyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyCell.swift; sourceTree = "<group>"; };
 		13E3A34921C1416E004BE8D8 /* NotifyTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyTableDataSource.swift; sourceTree = "<group>"; };
@@ -236,18 +232,8 @@
 			isa = PBXGroup;
 			children = (
 				13D3F459237AE88E00D0D4EB /* CoreDataController.swift */,
-				13D3F458237AE87200D0D4EB /* CoreDataEntity */,
 			);
 			path = CoreData;
-			sourceTree = "<group>";
-		};
-		13D3F458237AE87200D0D4EB /* CoreDataEntity */ = {
-			isa = PBXGroup;
-			children = (
-				13D3F464237B088C00D0D4EB /* CDEFileSystem+CoreDataClass.swift */,
-				13D3F463237B088C00D0D4EB /* CDEFileSystem+CoreDataProperties.swift */,
-			);
-			path = CoreDataEntity;
 			sourceTree = "<group>";
 		};
 		13E3A34521C1407D004BE8D8 /* NotifyPageViewController */ = {
@@ -711,7 +697,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CFE9DAB21A8BC6B0030AE33 /* HomeViewController.swift in Sources */,
-				13D3F466237B088C00D0D4EB /* CDEFileSystem+CoreDataProperties.swift in Sources */,
 				13D3997D21CACF1300B023B8 /* DocClass.swift in Sources */,
 				139BCB6621BDDFD5005A750A /* NotifyPageViewController.swift in Sources */,
 				13D3997F21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift in Sources */,
@@ -730,7 +715,6 @@
 				13CC782321C93FB90052E579 /* PortaleStudentiViewController.swift in Sources */,
 				9C07089021C8672800F7D296 /* BrowseAndSearchCourseTableViewCell.swift in Sources */,
 				9CFE9DA521A8AE960030AE33 /* LoginViewController.swift in Sources */,
-				13D3F465237B088C00D0D4EB /* CDEFileSystem+CoreDataClass.swift in Sources */,
 				9C7ADB5522F31AF7009651FB /* BackendAPI.swift in Sources */,
 				139BCB6C21BDE0AF005A750A /* BookingPagesViewController.swift in Sources */,
 				9C454F1523016DA70071F81F /* Session.swift in Sources */,
