@@ -27,9 +27,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     @IBOutlet weak var createFolderConfirmButton: UIButton!
     @IBOutlet weak var createFolderView: UIView!
     var selectionList = [Doc]() //Lista contenente gli elementi della selezione multipla
-    
-    //var fs = DocSystem() //contiene tutti gli elementi a partire da root. E' un albero.
-    var fs: DocSystem!
+    internal var fs: TempDocSystem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,21 +36,12 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         self.view.layer.borderWidth = 0.5
         self.createFolderView.isHidden = true
         self.oscureView.isHidden = true
-        
-        //non fare questo, questo deve essere fatto solo se è il caso corretto, per adesso mi basta avere la funzione che prende il fs dal coredata, poi me la sbtigo io
-        
-        
         setRevealViewControllerParameters()
-        //loadDocumentsList()
         collectionView.dataSource = self
         collectionView.delegate = self
         setUpOscureView()
         setUpCreateFolderView()
         fillDocSystem()
-        let item = Doc.init(title: "Titolo1", path: "/titolo1", type: "folder")
-        fs.appendChild(toDoc: fs.currentFolder, child: item)
-        //fs.currentFolder.addChild(item: item )
-        //item.parent = fs.currentFolder
         if fs.currentFolder.childs.count == 0 {
             setEmptyContentLayout()
         } else {
@@ -60,17 +49,8 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         }
         reloadCollectionView()
     }
-    
-    internal func fillDocSystem(){
-        if let coreDataFS = CoreDataController.shared.getFileSystem() {
-            fs = coreDataFS
-            print("Trovato core data FS")
-            //CoreDataController.shared.removeFileSystem()
-            //fs = DocSystem(autoSave: true)
-        } else {
-            fs = DocSystem(autoSave: true)
-            //CoreDataController.shared.saveFileSystem(fs)
-        }
+    internal func fillDocSystem(){ //fileSystemPermanente
+        fs = PermanentDocSystem.getUniqueIstance()
     }
     override func viewDidAppear(_ animated: Bool) {
         setRevealViewControllerParameters()
@@ -203,7 +183,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         let cell = collectionView.cellForItem(at: indexPath) as! DocumentsCollectionViewCell
         let index = getSelectedCellIndex(cellTitle: cell.titleDocLabel.text!)
         cell.backgroundColor = UIColor.clear
-        if index < selectionList.count-1 {
+        if index < selectionList.count {
              selectionList.remove(at: index)
         }
         if selectionList.count == 0 { selectedActionButton.isEnabled = false }
@@ -234,7 +214,6 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
             descrizioneLabel.text = String(fs.currentFolder.childs.count) + " elementi"
         }
     }
-    
     
     @IBAction func backButtonBarClicked(_ sender: UIButton) {
         fs.goToParent()
@@ -416,8 +395,9 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
                         print("collapsed create folder")
                         self.createFolderTextField.resignFirstResponder()
                         let newFolder = Doc(title: self.createFolderTextField.text!, path: self.fs.currentFolder.path + self.createFolderTextField.text!, type: "folder")
-                        newFolder.setParent(prev: self.fs.currentFolder)
-                        self.fs.currentFolder.addChild(item: newFolder)
+                        self.fs.appendChild(toDoc: self.fs.currentFolder, child: newFolder)
+                        //newFolder.setParent(prev: self.fs.currentFolder)
+                       // self.fs.currentFolder.addChild(item: newFolder)
                         self.reloadCollectionView()
                         self.createFolderTextField.text = ""
                  }

@@ -8,24 +8,28 @@
 
 import Foundation
 
-public class DocSystem: NSObject, NSCoding {
+public class TempDocSystem: NSObject, NSCoding {
     
-    //var documentsList = [Doc]()
     var root = Doc.init(title: "Root", path: "Home", type: "folder", uploaded: "", lastUpdate: "", size: 0)
     var currentFolder : Doc!
-    var autoSave : Bool!
     
-    init(autoSave :Bool) {
+    override init() {
         super.init()
         currentFolder = root
         root.parent = nil
-        self.autoSave = autoSave
+    }
+    
+    func appendChilds(toDoc: Doc, childs: [Doc]){
+        for child in childs{
+            toDoc.addChild(item: child)
+            child.setParent(prev: toDoc)
+        }
     }
     func appendChild(toDoc: Doc, child: Doc){
         toDoc.addChild(item:child)
         child.setParent(prev: toDoc)
-        if(autoSave) { CoreDataController.shared.saveFileSystem(self) }//salva nel coreData
     }
+    
     func removeChild(doc: Doc){
         
     }
@@ -44,13 +48,11 @@ public class DocSystem: NSObject, NSCoding {
     public func encode(with coder: NSCoder) {
         coder.encode(root, forKey: "root")
         coder.encode(currentFolder, forKey: "currentFolder")
-        coder.encode(autoSave, forKey: "autoSave")
     }
     
     required public init?(coder: NSCoder) {
         root = coder.decodeObject(forKey: "root") as! Doc
         currentFolder = coder.decodeObject(forKey: "currentFolder") as? Doc
-        autoSave = coder.decodeObject(forKey: "autoSave") as? Bool
     }
     
 }

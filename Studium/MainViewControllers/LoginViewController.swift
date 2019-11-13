@@ -46,7 +46,7 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         tap.cancelsTouchesInView = false
         tap.delegate = self
         yearsPickerView.addGestureRecognizer(tap)
-       // self.loginButton.isEnabled = false
+        self.loginButton.isEnabled = false
         
         
     }

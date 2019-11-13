@@ -14,10 +14,10 @@ public class CDEFileSystem: NSManagedObject {
 
     public override func awakeFromInsert() {
         super.awakeFromInsert()
-        fs = DocSystem(autoSave: true)
+        fs = PermanentDocSystem()
     }
     
-    func setFs(_ obj: DocSystem) {
+    func setFs(_ obj: PermanentDocSystem) {
         fs = obj
     }
     

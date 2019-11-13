@@ -44,26 +44,28 @@ class CoreDataController {
 // MARK: CDEFileSystem
     
     ///Salva nel CoreData il riferimento al fs, passato come parametro
-    func saveFileSystem(_ obj: DocSystem) {
-        do {
-            let results = try self.context.fetch(CDEFileSystem.fetchRequest() as NSFetchRequest<CDEFileSystem>)
+    func saveFileSystem(_ obj: PermanentDocSystem) {
+        //do {
+           // let results = try self.context.fetch(CDEFileSystem.fetchRequest() as NSFetchRequest<CDEFileSystem>)
         
-            if results.isEmpty {
-                print("[CDC - saveFileSystem]: Salvo l'object fs")
+            //if results.isEmpty {
+            removeFileSystem() //non è la maniera corretta questa
+            print("[CDC - saveFileSystem]: Salvo l'object fs")
                 
-                let tmp = CDEFileSystem(entity: NSEntityDescription.entity(forEntityName: "CDEFileSystem", in: self.context)!, insertInto: self.context)
+            let tmp = CDEFileSystem(entity: NSEntityDescription.entity(forEntityName: "CDEFileSystem", in: self.context)!, insertInto: self.context)
                 
-                tmp.setFs(obj)
+            tmp.setFs(obj)
+            //print("Numero elementi figli di root" ,obj.currentFolder.childs.count)
+        
+            CoreDataController.shared.saveContext(anyError: "[CDC]: Impossibile salvare l'object fs")
                 
-                CoreDataController.shared.saveContext(anyError: "[CDC]: Impossibile salvare l'object fs")
-                
-            } else {
-                print("[CDC - saveFileSystem]: object fs presente")
-            }
+           // } else {
+            //    print("[CDC - saveFileSystem]: object fs presente")
+            //}
             
-        } catch let error {
-            print("[CDC]: \(error)")
-        }
+        //} catch let error {
+          //  print("[CDC]: \(error)")
+        //}
     }
     
     ///Rimuove l'unico fs salvato nel CoreData
@@ -83,7 +85,7 @@ class CoreDataController {
     }
     
     ///Prende l'unico fs salvato nel CoreData altrimenti restituisce nil
-    func getFileSystem() -> DocSystem? {
+    func getFileSystem() -> PermanentDocSystem? {
         do {
             let results = try self.context.fetch(CDEFileSystem.fetchRequest() as NSFetchRequest<CDEFileSystem>)
             

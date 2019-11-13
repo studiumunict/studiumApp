@@ -17,7 +17,6 @@ class Doc : NSObject, NSCoding {
     var lastUpdate : String!
     var uploaded : String!
     var size :Int!
-    var suffix: String?
     var parent: Doc!
     var childs = [Doc]()
     
@@ -86,7 +85,8 @@ class Doc : NSObject, NSCoding {
         coder.encode(uploaded, forKey: "uploaded")
         coder.encode(type, forKey: "type")
         coder.encode(path, forKey: "path")
-        
+        coder.encode(parent, forKey: "parent")
+        coder.encode(childs, forKey: "childs")
     }
     
     required public init?(coder: NSCoder) {
@@ -97,6 +97,8 @@ class Doc : NSObject, NSCoding {
         uploaded = coder.decodeObject( forKey: "uploaded") as? String
         type = coder.decodeObject(forKey: "type") as? String
         path = coder.decodeObject( forKey: "path") as? String
+        parent = coder.decodeObject( forKey: "parent") as? Doc
+        childs = coder.decodeObject( forKey: "childs") as! [Doc]
     }
     
 }

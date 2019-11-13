@@ -16,6 +16,6 @@ extension CDEFileSystem {
         return NSFetchRequest<CDEFileSystem>(entityName: "CDEFileSystem")
     }
 
-    @NSManaged public var fs: DocSystem
+    @NSManaged var fs: PermanentDocSystem
 
 }

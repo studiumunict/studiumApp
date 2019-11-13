@@ -20,7 +20,7 @@ class Teaching{
     var haveBooking: Bool!
     var description: [DescriptionBlock]! // se nel sito è formattata in html potremmo prenderci l'html e mostrarlo in una webView. A quel punto rimarrebbe formattato allo stesso modo
     var notifyList: [Notify]!
-    var fs : DocSystem!
+    var fs : TempDocSystem!
     var syllabusCode: String!
     private var isCompleted = false
     
@@ -33,7 +33,7 @@ class Teaching{
         self.signedUp = signedUp
         self.category = category
         notifyList = [Notify]()
-        fs = DocSystem(autoSave: false)
+        fs = TempDocSystem()
         description = [DescriptionBlock]()
     }
     
