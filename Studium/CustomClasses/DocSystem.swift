@@ -13,18 +13,21 @@ public class DocSystem: NSObject, NSCoding {
     //var documentsList = [Doc]()
     var root = Doc.init(title: "Root", path: "Home", type: "folder", uploaded: "", lastUpdate: "", size: 0)
     var currentFolder : Doc!
-    var autoSave = false
+    var autoSave : Bool!
     
     init(autoSave :Bool) {
+        super.init()
         currentFolder = root
         root.parent = nil
         self.autoSave = autoSave
     }
     func appendChild(toDoc: Doc, child: Doc){
-        toDoc.addChild(item:toDoc)
+        toDoc.addChild(item:child)
         child.setParent(prev: toDoc)
-    
-        if(autoSave) { }//salva nel coreData
+        if(autoSave) { CoreDataController.shared.saveFileSystem(self) }//salva nel coreData
+    }
+    func removeChild(doc: Doc){
+        
     }
     func getCurrentDocs() -> [Doc]{
         return currentFolder.childs
@@ -47,7 +50,7 @@ public class DocSystem: NSObject, NSCoding {
     required public init?(coder: NSCoder) {
         root = coder.decodeObject(forKey: "root") as! Doc
         currentFolder = coder.decodeObject(forKey: "currentFolder") as? Doc
-        autoSave = coder.decodeObject(forKey: "autoSave") as! Bool
+        autoSave = coder.decodeObject(forKey: "autoSave") as? Bool
     }
     
 }

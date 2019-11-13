@@ -626,8 +626,7 @@ import Foundation
                                 let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
                                 completion(json)
                             }
-                            
-                            
+                        
         }) { (error : Error?) -> Void in
             print(error ?? "Error")
             completion(nil)
@@ -669,7 +668,6 @@ import Foundation
         }
         
     }
-    
     
     private func getYearFromAcademicYear(academicYear: String) -> String{
         let index = academicYear.index(academicYear.startIndex, offsetBy: 5)

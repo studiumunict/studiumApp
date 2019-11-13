@@ -14,6 +14,10 @@ class DocumentsPageViewController: DocumentsViewController{
     //il suo DOcumentsDataSource è già dettato dal chiamante(teachingViewController)
     //deve essere fatto override del metodo evento : selectedFile()
     //esso deve permettere di aggiungere il file ai preferiti. Questo deve scaricare il file ed inserirlo in una cartella con il nome del corso. Poi questa cartella dev estar enella directory. Tutto ciò deve essere salvato sul coreData, in modo da essere poi tirato fuori con la funziona loadFiles() nell documentsViewController.
+    override func fillDocSystem() {
+        //non fa nulla perchè lo scarichiamo dal server
+    }
+    
     
     //in realtà queste funzioni non verranno mai invocate, perchè quando non ci sono documenti, la pagina è proprio nascosta. Se spuntasse la pagina, queste funzioni permetterebero di mostrare errore all'utente per l'assenza di documenti.
     override func setErrorLabelText() {

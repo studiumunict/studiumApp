@@ -32,7 +32,7 @@ class DescriptionPageViewController: UIViewController {
             errorMessageLabel.isHidden = false
             errorMessageLabel.text = "Questo insegnamento non è stato ancora descritto."
         }*/
-        self.descriptionTextView.text = descriptionBlocks[1].contentHTML
+        self.descriptionTextView.text = descriptionBlocks[0].contentHTML
     }
     deinit{
         print("Deinit descriptionPage")

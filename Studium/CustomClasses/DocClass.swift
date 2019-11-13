@@ -9,9 +9,9 @@
 import Foundation
 
 
-class Doc {
-    let type: docType!
-    let canOpen: Bool!
+class Doc : NSObject, NSCoding {
+    var type: String!
+    var canOpen: Bool!
     var path: String!
     var title: String!
     var lastUpdate : String!
@@ -21,11 +21,11 @@ class Doc {
     var parent: Doc!
     var childs = [Doc]()
     
-    enum docType {
+    /*enum docType {
         case file
         case folder
-    }
-    init(title: String, path: String, type: docType) {
+    }*/
+    init(title: String, path: String, type: String) {
         self.title = title
         self.path = path
         self.type = type
@@ -59,15 +59,15 @@ class Doc {
        }
     
     init(title: String, path: String, type: String, uploaded: String, lastUpdate: String, size: Int) {
-        self.title = title
+        super.init()
+        //self.title = title
         self.path = path
-        if type == "folder" {self.type = .folder }
-        else{ self.type = .file }
+        self.type = type
         self.uploaded = uploaded
         self.lastUpdate = lastUpdate
         self.size = size
         self.canOpen = true
-        self.title = self.parseHTMLText(text: self.title)
+        self.title = self.parseHTMLText(text: title)
     }
     
     func setParent(prev: Doc!) {
@@ -76,6 +76,27 @@ class Doc {
     
     func addChild(item: Doc) {
         self.childs.append(item)
+    }
+    
+    public func encode(with coder: NSCoder) {
+        coder.encode(title, forKey: "title")
+        coder.encode(canOpen, forKey: "canOpen")
+        coder.encode(size, forKey: "size")
+        coder.encode(lastUpdate, forKey: "lastUpdate")
+        coder.encode(uploaded, forKey: "uploaded")
+        coder.encode(type, forKey: "type")
+        coder.encode(path, forKey: "path")
+        
+    }
+    
+    required public init?(coder: NSCoder) {
+        title = coder.decodeObject( forKey: "title") as? String
+        canOpen = coder.decodeObject( forKey: "canOpen") as? Bool
+        size = coder.decodeObject( forKey: "size") as? Int
+        lastUpdate = coder.decodeObject( forKey: "lastUpdate") as? String
+        uploaded = coder.decodeObject( forKey: "uploaded") as? String
+        type = coder.decodeObject(forKey: "type") as? String
+        path = coder.decodeObject( forKey: "path") as? String
     }
     
 }

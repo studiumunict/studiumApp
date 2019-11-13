@@ -31,7 +31,6 @@ class PswEncryption{
             }
             i+=1
             j-=1
-            
         }
         return resp;    }
     

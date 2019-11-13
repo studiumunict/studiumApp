@@ -40,12 +40,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         self.oscureView.isHidden = true
         
         //non fare questo, questo deve essere fatto solo se è il caso corretto, per adesso mi basta avere la funzione che prende il fs dal coredata, poi me la sbtigo io
-        /*if let tmpFS = CoreDataController.shared.getFileSystem() {
-            fs = tmpFS
-        } else {
-            fs = DocSystem(autoSave: <#T##Bool#>)
-            CoreDataController.shared.saveFileSystem(fs)
-        }*/
+        
         
         setRevealViewControllerParameters()
         //loadDocumentsList()
@@ -53,9 +48,11 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         collectionView.delegate = self
         setUpOscureView()
         setUpCreateFolderView()
-        let item = Doc.init(title: "Titolo1", path: "/titolo1", type: .folder)
-        fs.currentFolder.addChild(item: item )
-        item.parent = fs.currentFolder
+        fillDocSystem()
+        let item = Doc.init(title: "Titolo1", path: "/titolo1", type: "folder")
+        fs.appendChild(toDoc: fs.currentFolder, child: item)
+        //fs.currentFolder.addChild(item: item )
+        //item.parent = fs.currentFolder
         if fs.currentFolder.childs.count == 0 {
             setEmptyContentLayout()
         } else {
@@ -64,6 +61,17 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         reloadCollectionView()
     }
     
+    internal func fillDocSystem(){
+        if let coreDataFS = CoreDataController.shared.getFileSystem() {
+            fs = coreDataFS
+            print("Trovato core data FS")
+            //CoreDataController.shared.removeFileSystem()
+            //fs = DocSystem(autoSave: true)
+        } else {
+            fs = DocSystem(autoSave: true)
+            //CoreDataController.shared.saveFileSystem(fs)
+        }
+    }
     override func viewDidAppear(_ animated: Bool) {
         setRevealViewControllerParameters()
     }
@@ -125,7 +133,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "docsCell", for: indexPath) as! DocumentsCollectionViewCell
         let cellType = fs.currentFolder.childs[indexPath.item].type
-        if cellType == .file {
+        if cellType == "file" {
             cell.update(image: "showcase", title: fs.currentFolder.childs[indexPath.item].title!, description: "")
         }
         else{
@@ -146,7 +154,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
             selectedActionButton.isEnabled = true
         }
         else { //abbiamo cliccato una folder
-            if fs.currentFolder.childs[indexPath.item].type == .folder {
+            if fs.currentFolder.childs[indexPath.item].type == "folder" {
                 backButton.isEnabled = true
                 titleLabel.text = fs.currentFolder.childs[indexPath.item].title
                 fs.goToChild(childDoc: fs.currentFolder.childs[indexPath.item])
@@ -407,7 +415,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
              SSAnimator.collapseViewInSourceView(viewToCollapse: self.createFolderView, elementsInsideView: nil, sourceView: self.addNewFolderButton, oscureView: self.oscureView) { (flag) in
                         print("collapsed create folder")
                         self.createFolderTextField.resignFirstResponder()
-                        let newFolder = Doc(title: self.createFolderTextField.text!, path: self.fs.currentFolder.path + self.createFolderTextField.text!, type: .folder)
+                        let newFolder = Doc(title: self.createFolderTextField.text!, path: self.fs.currentFolder.path + self.createFolderTextField.text!, type: "folder")
                         newFolder.setParent(prev: self.fs.currentFolder)
                         self.fs.currentFolder.addChild(item: newFolder)
                         self.reloadCollectionView()
