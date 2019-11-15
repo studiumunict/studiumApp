@@ -339,7 +339,7 @@ import Foundation
         let requestName = "CreateCategory" //"MyCourses"
         let request = startRequest()
         let session =  Session.getUniqueIstance()
-        print("Creo categoria cod fisc : ", Student.getUniqueIstance().codFiscale)
+        //print("Creo categoria cod fisc : ", Student.getUniqueIstance().codFiscale)
         request.setValue(Student.getUniqueIstance().id, forKey: "user")
         request.setValue(catTitle, forKey: "title")
         request.requestURL(requestURL,

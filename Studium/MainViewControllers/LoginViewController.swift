@@ -18,9 +18,13 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var yearsPickerView: UIPickerView!
+    
+    @IBOutlet weak var loginActivityIndicator: UIActivityIndicatorView!
     var yearsDataSource = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        loginActivityIndicator.startAnimating()
+        yearsPickerView.isHidden = true
         addLoginYears()
         getSavedCredentials()
         loginButton.layer.cornerRadius = 7.0
@@ -53,17 +57,32 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     func showErrorWarning(){
         errorLabel.text = "Il Server UNICT non risponde al momento."
     }
+    
+    private func hideActivityIndicator(){
+        let SSAnimator = CoreSSAnimation.getUniqueIstance()
+        SSAnimator.closeViewWithFadeIn(viewToClose: self.loginActivityIndicator) { (flag) in
+            
+        }
+    }
+    private func showPickerView(){
+        let SSAnimator = CoreSSAnimation.getUniqueIstance()
+        SSAnimator.openViewWithFadeIn(viewToOpen: self.yearsPickerView) { (flag) in
+        }
+    }
     func addLoginYears(){
         let api = BackendAPI.getUniqueIstance()
         api.getYears(){ (years) in
             guard years != nil else {
                 self.showErrorWarning()
+                self.hideActivityIndicator()
                 return}
             for year in years!{
                 self.yearsDataSource.append(year)
             }
             self.yearsPickerView.reloadAllComponents()
             self.loginButton.isEnabled = true
+            self.hideActivityIndicator()
+            self.showPickerView()
         }
     }
     

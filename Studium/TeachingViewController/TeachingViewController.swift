@@ -163,6 +163,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             if teachingDataSource.fs.currentFolder.childs.count != 0 {
                  let vc = sb.instantiateViewController(withIdentifier: "documentsPageViewController") as! DocumentsPageViewController
                  vc.fs = teachingDataSource.fs
+                vc.thisTeachingTitle = teachingDataSource.name
                 activeControllerLists.append(vc)
                 documentsButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToDocumentsView(_:))))
                 customButtons(button: documentsButton, image: "folder_1", action: #selector(self.sendToDocumentsView(_:)))

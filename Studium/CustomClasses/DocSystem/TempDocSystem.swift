@@ -10,7 +10,7 @@ import Foundation
 
 public class TempDocSystem: NSObject, NSCoding {
     
-    var root = Doc.init(title: "Root", path: "Home", type: "folder", uploaded: "", lastUpdate: "", size: 0)
+    var root = Doc.init(title: "Root", path: "/Root", type: "folder", uploaded: "", lastUpdate: "", size: 0)
     var currentFolder : Doc!
     
     override init() {
@@ -19,19 +19,49 @@ public class TempDocSystem: NSObject, NSCoding {
         root.parent = nil
     }
     
-    func appendChilds(toDoc: Doc, childs: [Doc]){
-        for child in childs{
-            toDoc.addChild(item: child)
-            child.setParent(prev: toDoc)
+    internal func getIndex(ofDoc: Doc, inFolder: Doc)->Int{
+        var i = 0
+        for doc in inFolder.childs{
+            if doc.title == ofDoc.title { return i }
+            i += 1
         }
-    }
-    func appendChild(toDoc: Doc, child: Doc){
-        toDoc.addChild(item:child)
-        child.setParent(prev: toDoc)
+        return -1
     }
     
-    func removeChild(doc: Doc){
-        
+    internal func checkIfDocExists(inFolder: Doc, name: String)-> Doc!{
+        for doc in inFolder.childs{
+            if doc.title == name { return doc }
+        }
+        return nil
+    }
+    func appendChilds(toDoc: Doc, childs: [Doc]){
+        for child in childs{
+           let _ = appendChild(toDoc: toDoc, child: child)
+        }
+    }
+   
+    func appendChild(toDoc:Doc,child:Doc)->Doc{
+        let possibleDoc = checkIfDocExists(inFolder: toDoc, name: child.title)
+        if let foundDoc = possibleDoc{ //se trovo il documento
+            appendChilds(toDoc: foundDoc, childs: child.childs) //appendo i figli all'interno di quello trovato
+            return foundDoc
+        }
+        else{ //caso base : documento non esistente, lo appendo
+            toDoc.addChild(item:child)
+            child.setParent(prev: toDoc)
+            return child
+        }
+    }
+    
+    func removeChilds(childs: [Doc]){
+        for child in childs{
+            removeChild(child: child)
+        }
+    }
+    
+    func removeChild(child: Doc){
+        let i = getIndex(ofDoc: child, inFolder: self.currentFolder)
+        self.currentFolder.childs.remove(at: i)
     }
     func getCurrentDocs() -> [Doc]{
         return currentFolder.childs
@@ -47,13 +77,11 @@ public class TempDocSystem: NSObject, NSCoding {
     
     public func encode(with coder: NSCoder) {
         coder.encode(root, forKey: "root")
-        //coder.encode(currentFolder, forKey: "currentFolder")
     }
     
     required public init?(coder: NSCoder) {
         root = coder.decodeObject(forKey: "root") as! Doc
         currentFolder = root
-        //currentFolder = coder.decodeObject(forKey: "currentFolder") as? Doc
     }
     
 }

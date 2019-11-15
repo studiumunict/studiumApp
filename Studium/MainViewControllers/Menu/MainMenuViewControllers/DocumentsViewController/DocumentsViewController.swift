@@ -28,6 +28,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     @IBOutlet weak var createFolderView: UIView!
     var selectionList = [Doc]() //Lista contenente gli elementi della selezione multipla
     internal var fs: TempDocSystem!
+    private var emptyContent :Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +43,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         setUpOscureView()
         setUpCreateFolderView()
         fillDocSystem()
-        if fs.currentFolder.childs.count == 0 {
+        if fs.root.childs.count == 0 {
             setEmptyContentLayout()
         } else {
             setFullContentLayout()
@@ -66,19 +67,23 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         collectionView.isHidden = true
         selectedActionButton.isHidden = true
     }
+    func showElementsOfView(){
+        descrizioneLabel.isHidden = false
+        headerView.isHidden = false
+        collectionView.isHidden = false
+        selectedActionButton.isHidden = false
+    }
     
     func showError() {
         setErrorLabelText()
         errorMessageLabel.isHidden = false
         errorMessageLabel.layer.zPosition = 2
     }
-    
-    func setEmptyContentLayout(){
-        setErrorLabelText()
-        showError()
-        //errorInfoDescriptionTextView.backgroundColor = self.view.backgroundColor
-        hideElementsOfView()
+    func hideError(){
+        errorMessageLabel.isHidden = true
     }
+    
+    
     func setHeaderViewLayout(){
         headerView.backgroundColor = UIColor.lightWhite
         headerView.layer.borderWidth = 0.5
@@ -91,10 +96,31 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         selectedActionButton.isHidden = true
     }
     
+    func setEmptyContentLayout(){
+        setErrorLabelText()
+        showError()
+        //errorInfoDescriptionTextView.backgroundColor = self.view.backgroundColor
+        hideElementsOfView()
+        emptyContent = true
+    }
     func setFullContentLayout(){
+        hideError()
+        showElementsOfView()
         setHeaderViewLayout()
         reloadDescriptionLabel()
         setSelectedActionButtonLayout()
+        emptyContent = false
+    }
+    
+    func checkContent(){
+        if emptyContent && fs.root.childs.count > 0{
+            print("Setto full content")
+            setFullContentLayout()
+        }
+        else if !emptyContent && fs.root.childs.count == 0{
+            print("Setto Empty Content")
+            setEmptyContentLayout()
+        }
     }
     
     func loadDocumentsList(){
@@ -158,8 +184,13 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     func reloadTitleLabel(){
         self.titleLabel.text = fs.currentFolder.title
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.reloadCollectionView()
+    }
     func reloadCollectionView(){
+        print("CheckContent")
+        self.checkContent()
         self.setBackButtonState()
         self.collectionView.reloadData()
         self.reloadTitleLabel()
@@ -178,12 +209,13 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         return -1
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         guard collectionView.allowsMultipleSelection else { return }
         let cell = collectionView.cellForItem(at: indexPath) as! DocumentsCollectionViewCell
         let index = getSelectedCellIndex(cellTitle: cell.titleDocLabel.text!)
         cell.backgroundColor = UIColor.clear
-        if index < selectionList.count {
+        if index < selectionList.count && index > -1 {
              selectionList.remove(at: index)
         }
         if selectionList.count == 0 { selectedActionButton.isEnabled = false }
@@ -236,27 +268,36 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     private func showSelectedActionButton(){
          // prima si devono selezionare elementi
         //selectedActionButton.isHidden = false
+        self.selectedActionButton.isEnabled = false
         let SSAnimator = CoreSSAnimation.getUniqueIstance()
         SSAnimator.openViewWithFadeIn(viewToOpen: self.selectedActionButton) { (flag) in
-            self.selectedActionButton.isEnabled = false
+            //self.selectedActionButton.isEnabled = false
         }
     }
     
+    
     @IBAction func multipleSelectionClicked() {
         if collectionView.allowsMultipleSelection {
-            selectButton.isSelected = false
-            collectionView.allowsMultipleSelection = false
-            deselectAllCells()
-            setBackButtonState()
-            addNewFolderButton.isEnabled = true
-            hideSelectedActionButton()
+            cancelSelection()
         } else {
-            collectionView.allowsMultipleSelection = true
-            backButton.isEnabled = false
-            addNewFolderButton.isEnabled = false
-            selectButton.isSelected = true
-            showSelectedActionButton()
+            startSelection()
         }
+    }
+    
+    private func startSelection(){
+        collectionView.allowsMultipleSelection = true
+        backButton.isEnabled = false
+        addNewFolderButton.isEnabled = false
+        selectButton.isSelected = true
+        showSelectedActionButton()
+    }
+    private func cancelSelection(){
+        selectButton.isSelected = false
+        collectionView.allowsMultipleSelection = false
+        deselectAllCells()
+        setBackButtonState()
+        addNewFolderButton.isEnabled = true
+        hideSelectedActionButton()
     }
     
     internal func deselectAllCells(){
@@ -298,7 +339,10 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         
     }
     @objc func deleteSelectedDocuments(){
-        
+        //sarebbe il caso di far comparire un alert
+        fs.removeChilds(childs: self.selectionList)
+        closeActionsView()
+        reloadCollectionView()
     }
     internal func setUpDeleteActionButton()-> UIButton{
          let deleteButton = UIButton(frame: CGRect(x: 0, y: 0, width: actionsView.frame.size.width * 0.8, height: 40))
@@ -311,7 +355,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
          deleteButton.titleLabel?.font = UIFont(name: "System", size: 9)
          //addFavouriteButton.layer.borderColor = UIColor.secondaryBackground.cgColor
          //addFavouriteButton.layer.borderWidth = 1.0
-         deleteButton.addTarget(self, action: #selector(moveSelectedDocuments), for: .touchUpInside)
+         deleteButton.addTarget(self, action: #selector(deleteSelectedDocuments), for: .touchUpInside)
          deleteButton.layer.addBorder(edge: .all, color: #colorLiteral(red: 0.9961728454, green: 0.9902502894, blue: 1, alpha: 1), thickness: 0.5)
          roundTopRadius(radius: 5.0, view: deleteButton)
          //createFolderConfirmButton.layer.zPosition = 3
@@ -319,12 +363,17 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
          //roundRightRadius(radius: 5.0, view: createFolderConfirmButton)
          return  deleteButton
     }
+    
+    
+    
     @objc func closeActionsView(){
         let SSAnimator = CoreSSAnimation.getUniqueIstance()
         SSAnimator.collapseViewInSourceFrame(sourceFrame: self.selectedActionButton.frame, viewToCollapse: self.actionsView, oscureView: self.oscureView, elementsInsideView: nil) { (flag) in
-            
+            //annulla la selezione
+            self.cancelSelection()
         }
     }
+    
     internal func setUpCancelActionButton()-> UIButton{
          let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: actionsView.frame.size.width * 0.8, height: 40))
                cancelButton.center = CGPoint(x: actionsView.center.x, y: actionsView.center.y * 1.6)
@@ -388,8 +437,29 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     internal func setUpCreateFolderTextField(){
         createFolderTextField.backgroundColor = UIColor.lightWhite
     }
+    
+    internal func checkIfNameExists(name: String)->Bool{
+        for doc in fs.currentFolder.childs{
+            if doc.title == name { return true }
+        }
+        return false
+    }
+    private func showErrorTextField(textField : UITextField){
+        textField.layer.borderWidth = 2.0
+        textField.layer.borderColor = UIColor.textRedColor.cgColor
+    }
+    private func hideErrorTextField(textField : UITextField){
+        textField.layer.borderWidth = 0.0
+        textField.layer.borderColor = UIColor.clear.cgColor
+    }
     @IBAction func createFolderWithName(){
+        hideErrorTextField(textField: createFolderTextField)
         if createFolderTextField.text != nil && createFolderTextField.text != "" {
+            let exists = checkIfNameExists(name: createFolderTextField.text!)
+            if exists {
+                showErrorTextField(textField: createFolderTextField)
+                return
+            }
              let SSAnimator = CoreSSAnimation.getUniqueIstance()
              SSAnimator.collapseViewInSourceView(viewToCollapse: self.createFolderView, elementsInsideView: nil, sourceView: self.addNewFolderButton, oscureView: self.oscureView) { (flag) in
                         print("collapsed create folder")
@@ -402,9 +472,13 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
                         self.createFolderTextField.text = ""
                  }
         }
-        else{return}
+        else{
+            showErrorTextField(textField: createFolderTextField)
+            return
+        }
     }
     @IBAction func closeCreateFolderView(){
+        hideErrorTextField(textField: createFolderTextField)
         let SSAnimator = CoreSSAnimation.getUniqueIstance()
             SSAnimator.collapseViewInSourceView(viewToCollapse: self.createFolderView, elementsInsideView: nil, sourceView: self.addNewFolderButton, oscureView: self.oscureView) { (flag) in
                        print("collapsed create folder")
