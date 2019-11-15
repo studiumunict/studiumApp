@@ -45,27 +45,23 @@ class CoreDataController {
     
     ///Salva nel CoreData il riferimento al fs, passato come parametro
     func saveFileSystem(_ obj: PermanentDocSystem) {
-        //do {
-           // let results = try self.context.fetch(CDEFileSystem.fetchRequest() as NSFetchRequest<CDEFileSystem>)
-        
-            //if results.isEmpty {
-            removeFileSystem() //non è la maniera corretta questa
-            print("[CDC - saveFileSystem]: Salvo l'object fs")
-                
-            let tmp = CDEFileSystem(entity: NSEntityDescription.entity(forEntityName: "CDEFileSystem", in: self.context)!, insertInto: self.context)
-                
-            tmp.setFs(obj)
-            //print("Numero elementi figli di root" ,obj.currentFolder.childs.count)
-        
-            CoreDataController.shared.saveContext(anyError: "[CDC]: Impossibile salvare l'object fs")
-                
-           // } else {
-            //    print("[CDC - saveFileSystem]: object fs presente")
-            //}
+        do {
+            let results = try self.context.fetch(CDEFileSystem.fetchRequest() as NSFetchRequest<CDEFileSystem>)
             
-        //} catch let error {
-          //  print("[CDC]: \(error)")
-        //}
+            if results.first != nil { // Aggiorna
+                results.first!.setFs(obj)
+            
+            } else {
+                let tmp = CDEFileSystem(entity: NSEntityDescription.entity(forEntityName: "CDEFileSystem", in: self.context)!, insertInto: self.context)
+                
+                tmp.setFs(obj)
+            }
+            
+            CoreDataController.shared.saveContext(anyError: "[CDC]: Impossibile salvare l'object fs")
+        
+        } catch let error {
+            print("[CDC]: \(error)")
+        }
     }
     
     ///Rimuove l'unico fs salvato nel CoreData
@@ -88,7 +84,6 @@ class CoreDataController {
             let results = try self.context.fetch(CDEFileSystem.fetchRequest() as NSFetchRequest<CDEFileSystem>)
             
             if results.first != nil {
-                //return (results.first!.value(forKey: "fs") as! DocSystem)
                 return results.first!.fs
             }
         
