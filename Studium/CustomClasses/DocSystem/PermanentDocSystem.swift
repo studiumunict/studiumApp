@@ -20,13 +20,10 @@ class PermanentDocSystem: TempDocSystem{ //fileSystem singleton con autoSalvatag
     static private func getFS() -> PermanentDocSystem{
        // CoreDataController.shared.removeFileSystem()
         if let coreDataFS = CoreDataController.shared.getFileSystem() {
-             //print("Trovato core data FS")
             return coreDataFS
         } else {
-            //print("Costruisco nuovo FS")
-            let obj2 = PermanentDocSystem()
-            //obj2.appendChild(toDoc: obj2.currentFolder, child: Doc(title: "MyDocSystem", path: "MyDocSystem", type: "folder"))
-            return obj2
+            let pds = PermanentDocSystem()
+            return pds
         }
     }
     
