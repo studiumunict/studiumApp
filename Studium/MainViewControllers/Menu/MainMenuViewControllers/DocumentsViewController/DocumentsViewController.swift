@@ -58,7 +58,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     }
     
     func setErrorLabelText() {
-        errorMessageLabel.text = "Non ci sono documenti preferiti salvati."
+        errorMessageLabel.text = "Non ci sono documenti preferiti salvati. Puoi aggiungere documenti alla sezione preferiti dalla pagina di un qualsiasi corso di tuo interesse."
     }
     
     func hideElementsOfView() {
@@ -99,7 +99,6 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     func setEmptyContentLayout(){
         setErrorLabelText()
         showError()
-        //errorInfoDescriptionTextView.backgroundColor = self.view.backgroundColor
         hideElementsOfView()
         emptyContent = true
     }
