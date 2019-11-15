@@ -26,7 +26,7 @@ class SharedSource: NSObject {
            for row in courseSharedDataSource{
                //print(row.course, " _------_", cat)
                if row.course.code == cat{
-                   print("Trovato indice", i , "Categpria ", cat)
+                  // print("Trovato indice", i , "Categpria ", cat)
                    return i }
                i+=1
            }

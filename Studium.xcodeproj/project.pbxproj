@@ -303,6 +303,7 @@
 		9C06A22821AB6FE900E695DB /* CustomClasses */ = {
 			isa = PBXGroup;
 			children = (
+				9C8B9387237C3C2F001E5657 /* DocSystem */,
 				9C06A22921AB700200E695DB /* DepartmentClass.swift */,
 				1311D89A21BBE82E00A09499 /* StudentClass.swift */,
 				9C06A22B21AB707500E695DB /* CDLClass.swift */,
@@ -312,8 +313,6 @@
 				13D3997E21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift */,
 				1380ED502302F2440063F79F /* DocumentBrowserViewController.swift */,
 				9C2C63CC237311BB0063F9C7 /* NotifyClass.swift */,
-				9C1BBD422378F01F003EEB9A /* TempDocSystem.swift */,
-				9C8B9385237C1215001E5657 /* PermanentDocSystem.swift */,
 				9CBDB9CE2379C6AD00A015A4 /* CoreSSAnimation.swift */,
 				9C27B34A237B0DB500242958 /* DescriptionBlock.swift */,
 			);
@@ -366,6 +365,15 @@
 				9C454F1423016DA70071F81F /* Session.swift */,
 			);
 			path = "Back-end-Adapter";
+			sourceTree = "<group>";
+		};
+		9C8B9387237C3C2F001E5657 /* DocSystem */ = {
+			isa = PBXGroup;
+			children = (
+				9C8B9385237C1215001E5657 /* PermanentDocSystem.swift */,
+				9C1BBD422378F01F003EEB9A /* TempDocSystem.swift */,
+			);
+			path = DocSystem;
 			sourceTree = "<group>";
 		};
 		9CFE72C821BA97FA001EB697 /* CoursesViewController */ = {

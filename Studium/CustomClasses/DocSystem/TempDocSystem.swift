@@ -47,12 +47,13 @@ public class TempDocSystem: NSObject, NSCoding {
     
     public func encode(with coder: NSCoder) {
         coder.encode(root, forKey: "root")
-        coder.encode(currentFolder, forKey: "currentFolder")
+        //coder.encode(currentFolder, forKey: "currentFolder")
     }
     
     required public init?(coder: NSCoder) {
         root = coder.decodeObject(forKey: "root") as! Doc
-        currentFolder = coder.decodeObject(forKey: "currentFolder") as? Doc
+        currentFolder = root
+        //currentFolder = coder.decodeObject(forKey: "currentFolder") as? Doc
     }
     
 }

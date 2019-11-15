@@ -72,11 +72,9 @@ class CoreDataController {
     func removeFileSystem() {
         do {
             let results = try self.context.fetch(CDEFileSystem.fetchRequest() as NSFetchRequest<CDEFileSystem>)
-            
             for x in results {
                 CoreDataController.shared.context.delete(x)
             }
-            
             CoreDataController.shared.saveContext(anyError: "[CDC]: Impossibile eliminare il fs")
             
         } catch let error {

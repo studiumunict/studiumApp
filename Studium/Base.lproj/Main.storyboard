@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1775,11 +1775,11 @@
         <scene sceneID="4xO-lV-xWb">
             <objects>
                 <viewController storyboardIdentifier="descriptionPageViewController" id="pRO-db-by7" customClass="DescriptionPageViewController" customModule="Studium" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="MCo-57-K3P">
+                    <view key="view" contentMode="scaleToFill" id="MCo-57-K3P">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="537"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dn5-x8-boE">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dn5-x8-boE">
                                 <rect key="frame" x="16" y="44" width="343" height="473"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -1977,7 +1977,7 @@
                                     <constraint firstAttribute="height" constant="40" id="hyM-5F-Zne"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <state key="normal" title="Esegui un'azione">
+                                <state key="normal" title="Gestisci selezionati">
                                     <color key="titleColor" red="0.91044991779999995" green="0.91044991779999995" blue="0.91044991779999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <state key="disabled" title="Seleziona dei documenti"/>
@@ -2700,7 +2700,7 @@
                                     <constraint firstAttribute="height" constant="40" id="GTQ-Pt-CKm"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <state key="normal" title="Esegui un'azione">
+                                <state key="normal" title="Gestisci selezionati">
                                     <color key="titleColor" red="0.91044991779999995" green="0.91044991779999995" blue="0.91044991779999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <state key="disabled" title="Seleziona dei documenti"/>
