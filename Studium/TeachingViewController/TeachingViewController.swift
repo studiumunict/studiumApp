@@ -75,6 +75,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         self.oscureLoadingView.layer.zPosition = 2
       // self.oscureLoadingView.alpha = 0.8
         self.stackView.isHidden = true
+        self.courseNameLabel.lineBreakMode = .byTruncatingMiddle
         //let oscureView = createOscureView()
         //self.view.addSubview(oscureView)
         

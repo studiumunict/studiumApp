@@ -7,11 +7,10 @@
 //
 
 import UIKit
-import WebKit
+//import WebKit
 
 class NotifyCell: UITableViewCell {
     
-    @IBOutlet weak var descriptionMessageWebView: WKWebView!
     @IBOutlet private weak var stackView: UIStackView!
     @IBOutlet private weak var dataLabel: UILabel!
     @IBOutlet private weak var titleLabel: UILabel!
@@ -19,13 +18,16 @@ class NotifyCell: UITableViewCell {
     @IBOutlet private weak var carret: UIImageView!
     @IBOutlet private weak var headerView: UIView!
     @IBOutlet private weak var descriptionView: UIView!
-    var isCollapsed = true
+    var notifyData : Notify!
+    //var isCollapsed = true
    
     override func awakeFromNib() {
         selectionStyle = .none
         //#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)
         carret.image = UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate);
         carret.tintColor = UIColor.elementsLikeNavBarColor
+        self.descriptionLabel.adjustsFontSizeToFitWidth = true
+        self.descriptionLabel.sizeToFit()
         
         self.contentView.backgroundColor = UIColor.clear
         headerView.backgroundColor = UIColor.lightSectionColor
@@ -39,15 +41,25 @@ class NotifyCell: UITableViewCell {
         descriptionLabel.textColor = UIColor.elementsLikeNavBarColor
         titleLabel.textColor = UIColor.elementsLikeNavBarColor
         dataLabel.textColor = UIColor.subTitleGray
+
+        titleLabel.numberOfLines = 2
+        titleLabel.lineBreakMode = .byTruncatingMiddle
         
-        self.stackView.arrangedSubviews[1].isHidden = true
     }
     
     
-    func setInfo(data: String, title: String, description: String) {
-        dataLabel.text = data
-        titleLabel.text = title
-        descriptionLabel.text = description
+    func setInfo(notifyData : Notify ) {
+        self.notifyData = notifyData
+        dataLabel.text = notifyData.date
+        titleLabel.text = notifyData.title
+        descriptionLabel.text = notifyData.message
+        //updateSuperTableView()
+        setDescriptionLayerState(hidden: !notifyData.isCellExpanded)
+    }
+    
+    func setDescriptionLayerState(hidden: Bool){
+        self.stackView.arrangedSubviews[1].isHidden = hidden
+        self.updateConstraints()
     }
     
     @objc private func toggle() {
@@ -59,10 +71,10 @@ class NotifyCell: UITableViewCell {
     
     
     private func collapseOrExpandDescription(){
-        if self.isCollapsed { self.isCollapsed = false; }
-        else{ self.isCollapsed = true }
+        if self.notifyData.isCellExpanded { self.notifyData.isCellExpanded = false; }
+        else{ self.notifyData.isCellExpanded = true }
         UIView.animate(withDuration: 0.3) {
-              self.stackView.arrangedSubviews[1].isHidden = self.isCollapsed
+              self.stackView.arrangedSubviews[1].isHidden = !self.notifyData.isCellExpanded
         }
         self.updateSuperTableView()
     }
@@ -71,7 +83,6 @@ class NotifyCell: UITableViewCell {
         let tableView = self.superview as? UITableView
         tableView?.beginUpdates()
         tableView?.endUpdates()
-        
     }
     
 }

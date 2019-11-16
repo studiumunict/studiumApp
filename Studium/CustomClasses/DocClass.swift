@@ -33,29 +33,7 @@ class Doc : NSObject, NSCoding {
         self.lastUpdate = ""
         self.size = 0
     }
-    private func parseHTMLText(text: String)-> String{
-           var str = text.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
-           str = str.replacingOccurrences(of: "&#39;", with: "'", options: .caseInsensitive, range: nil)
-            str = str.replacingOccurrences(of: "&#039;", with: "'", options: .caseInsensitive, range: nil)
-           str = str.replacingOccurrences(of: "&nbsp;", with: "", options: .caseInsensitive, range: nil)
-           str = str.replacingOccurrences(of: "&quot;", with: "\"", options: .caseInsensitive, range: nil)
-           str = str.replacingOccurrences(of: "&rsquo;", with: "'", options: .caseInsensitive, range: nil)
-           str = str.replacingOccurrences(of: "&agrave;", with: "à", options: .caseInsensitive, range: nil)
-           str = str.replacingOccurrences(of: "&egrave;", with: "è", options: .caseInsensitive, range: nil)
-           str = str.replacingOccurrences(of: "&igrave;", with: "ì", options: .caseInsensitive, range: nil)
-           str = str.replacingOccurrences(of: "&ograve;", with: "ò", options: .caseInsensitive, range: nil)
-           str = str.replacingOccurrences(of: "&ugrave;", with: "ù", options: .caseInsensitive, range: nil)
-           var i = str.count-1
-           var char = false
-           while(i >= 0 && !char){
-               if(str[i] != " "){
-                   char = true
-               }
-               else{i-=1}
-           }
-           let finalStr = String(str.dropLast(str.count-1-i))
-           return finalStr
-       }
+
     
     init(title: String, path: String, type: String, uploaded: String, lastUpdate: String, size: Int) {
         super.init()
@@ -66,7 +44,7 @@ class Doc : NSObject, NSCoding {
         self.lastUpdate = lastUpdate
         self.size = size
         self.canOpen = true
-        self.title = self.parseHTMLText(text: title)
+        self.title = HTMLParser.getUniqueIstance().parseHTMLText(text: title)
     }
     
     func setParent(prev: Doc!) {

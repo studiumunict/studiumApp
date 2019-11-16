@@ -18,6 +18,7 @@ class CDLTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        CDLnameLabel.lineBreakMode = .byTruncatingMiddle
         // Initialization code
     }
 

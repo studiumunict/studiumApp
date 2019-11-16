@@ -41,6 +41,7 @@
 		9C14FE87237B2C1D00069D11 /* CDEFileSystemCoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C14FE86237B2C1D00069D11 /* CDEFileSystemCoreDataProperties.swift */; };
 		9C1BBD432378F01F003EEB9A /* TempDocSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1BBD422378F01F003EEB9A /* TempDocSystem.swift */; };
 		9C27B34B237B0DB500242958 /* DescriptionBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C27B34A237B0DB500242958 /* DescriptionBlock.swift */; };
+		9C29C2D72380730A00A29669 /* HTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C29C2D62380730A00A29669 /* HTMLParser.swift */; };
 		9C2C63CD237311BB0063F9C7 /* NotifyClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2C63CC237311BB0063F9C7 /* NotifyClass.swift */; };
 		9C454F1323016B070071F81F /* PswEncryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C454F1223016B070071F81F /* PswEncryption.swift */; };
 		9C454F1523016DA70071F81F /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C454F1423016DA70071F81F /* Session.swift */; };
@@ -131,6 +132,7 @@
 		9C14FE86237B2C1D00069D11 /* CDEFileSystemCoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDEFileSystemCoreDataProperties.swift; sourceTree = "<group>"; };
 		9C1BBD422378F01F003EEB9A /* TempDocSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempDocSystem.swift; sourceTree = "<group>"; };
 		9C27B34A237B0DB500242958 /* DescriptionBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionBlock.swift; sourceTree = "<group>"; };
+		9C29C2D62380730A00A29669 /* HTMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLParser.swift; sourceTree = "<group>"; };
 		9C2C63CC237311BB0063F9C7 /* NotifyClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyClass.swift; sourceTree = "<group>"; };
 		9C454F1223016B070071F81F /* PswEncryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PswEncryption.swift; sourceTree = "<group>"; };
 		9C454F1423016DA70071F81F /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				9C2C63CC237311BB0063F9C7 /* NotifyClass.swift */,
 				9CBDB9CE2379C6AD00A015A4 /* CoreSSAnimation.swift */,
 				9C27B34A237B0DB500242958 /* DescriptionBlock.swift */,
+				9C29C2D62380730A00A29669 /* HTMLParser.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -770,6 +773,7 @@
 				13E91D0521C7DB550007EF3E /* ManageCoursePageViewController.swift in Sources */,
 				13E3A34A21C1416E004BE8D8 /* NotifyTableDataSource.swift in Sources */,
 				9C14FE74237B1C9B00069D11 /* DescriptionTableViewCell.swift in Sources */,
+				9C29C2D72380730A00A29669 /* HTMLParser.swift in Sources */,
 				9C06A22A21AB700200E695DB /* DepartmentClass.swift in Sources */,
 				9CBDB9CF2379C6AD00A015A4 /* CoreSSAnimation.swift in Sources */,
 			);

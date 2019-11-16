@@ -38,7 +38,7 @@ class NotifyPageViewController: UIViewController, UITableViewDelegate, SWRevealV
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = dataSource
-        tableView.rowHeight = UITableView.automaticDimension
+        tableView.rowHeight = UITableView.automaticDimension 
         tableView.estimatedRowHeight = 200.0
         tableView.separatorStyle = .none
         

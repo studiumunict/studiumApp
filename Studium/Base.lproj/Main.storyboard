@@ -2182,7 +2182,7 @@
                                                                         <constraint firstAttribute="width" constant="15" id="BOO-jd-IP9"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Programming language #0" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JjT-p9-L4l">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Programming language #0" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JjT-p9-L4l">
                                                                     <rect key="frame" x="8" y="25" width="200.5" height="19.5"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
@@ -2847,6 +2847,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="PQQ-En-RsV"/>
-        <segue reference="035-UK-Tez"/>
+        <segue reference="rDa-ii-Lwh"/>
     </inferredMetricsTieBreakers>
 </document>

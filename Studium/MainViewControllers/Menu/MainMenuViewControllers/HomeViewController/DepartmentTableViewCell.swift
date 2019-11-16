@@ -15,6 +15,7 @@ class DepartmentTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         self.selectionStyle = .none
+        departmentName.lineBreakMode = .byTruncatingMiddle
         
     }
 

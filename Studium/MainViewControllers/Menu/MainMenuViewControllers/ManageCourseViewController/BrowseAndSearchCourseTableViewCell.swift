@@ -19,6 +19,7 @@ class BrowseAndSearchCourseTableViewCell: UITableViewCell {
         teacherNameLabel.textColor =  UIColor.lightSectionColor
         teachingNameLabel.textColor =  UIColor.lightWhite
         self.selectionStyle = .none
+        self.teachingNameLabel.lineBreakMode = .byTruncatingMiddle
         
     }
     

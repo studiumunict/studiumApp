@@ -8,17 +8,11 @@
 
 import UIKit
 
-struct ContentCell {
-    let data: String!
-    let title: String!
-    let description: String!
-}
-
 class NotifyTableDataSource: NSObject, UITableViewDataSource {
     
     internal let cellIdentifier = "notifyCell"
     
-    var items: [ContentCell] = []
+    var items: [Notify] = []
     
     //fileprivate var indexPaths: Set<IndexPath> = []
     
@@ -28,9 +22,8 @@ class NotifyTableDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! NotifyCell
-        
-        cell.setInfo(data: items[indexPath.row].data, title: items[indexPath.row].title, description: items[indexPath.row].description)
-        if cell.isCollapsed == false{
+        cell.setInfo(notifyData: items[indexPath.row])
+        if items[indexPath.row].isCellExpanded{
             print("Espansa")
         }
         //cell.state = cellIsExpanded(at: indexPath) ? .expanded : .collapsed
@@ -39,9 +32,7 @@ class NotifyTableDataSource: NSObject, UITableViewDataSource {
     }
     
     func insertNotifies(sourceArray: [Notify]){
-        for notify in sourceArray{
-            self.items.append(ContentCell(data: notify.date, title: notify.title, description: notify.message))
-        }
+        self.items = sourceArray
     }
     
     /*func cellIsExpanded(at indexPath: IndexPath) -> Bool {
