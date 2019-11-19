@@ -36,11 +36,17 @@ class Teaching{
         description = [DescriptionBlock]()
     }
     
-   
-    func refreshTeachingData(completion: @escaping(Bool)->Void){
-        
+    func removeAllData(){
+        self.notifyList.removeAll()
+        self.fs = TempDocSystem()
+        self.description = [DescriptionBlock]()
     }
-    
+    func refreshData(completion: @escaping (Bool)->Void){
+        self.isCompleted = false
+        completeTeachingData { (flag) in
+            completion(flag)
+        }
+    }
     func completeTeachingData(completion: @escaping (Bool)->Void){
         guard isCompleted == false else { completion(false); return}
         self.downloadNotify { (flag) in
@@ -98,7 +104,7 @@ class Teaching{
                 let docDict = doc as! [String:Any]
                 //print("*****Appendo Doc*****")
                 let item = Doc.init(title: docDict["title"] as! String, path: docDict["path"] as! String, type: docDict["type"] as! String, uploaded: docDict["insert"] as! String, lastUpdate: docDict["updated"] as! String, size: docDict["size"] as! Int)
-                self.fs.appendChild(toDoc: prev, child: item)
+                let _ = self.fs.appendChild(toDoc: prev, child: item)
                 //item.setParent(prev: prev)
                 //prev.addChild(item: item)
                 if(docDict["type"] as! String == "folder") {
@@ -144,7 +150,7 @@ class Teaching{
                 let blockTitle = descriptionBlock["title"] as! String
                 let blockContent = descriptionBlock["content"] as! String
                 //print("-------Blocco descrizione:-------- ",blockTitle, " ", blockContent)
-                let descBlock = DescriptionBlock(title: blockTitle, contentHTML: blockContent)
+                let descBlock = DescriptionBlock(title: blockTitle, message: blockContent)
                 self.description.append(descBlock)
             }
             completion(true)

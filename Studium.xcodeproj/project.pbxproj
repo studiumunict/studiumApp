@@ -248,19 +248,11 @@
 		13E3A34521C1407D004BE8D8 /* NotifyPageViewController */ = {
 			isa = PBXGroup;
 			children = (
-				13E3A34821C14159004BE8D8 /* DataSource */,
+				13E3A34921C1416E004BE8D8 /* NotifyTableDataSource.swift */,
 				139BCB6521BDDFD5005A750A /* NotifyPageViewController.swift */,
 				13E3A34621C140A6004BE8D8 /* NotifyCell.swift */,
 			);
 			path = NotifyPageViewController;
-			sourceTree = "<group>";
-		};
-		13E3A34821C14159004BE8D8 /* DataSource */ = {
-			isa = PBXGroup;
-			children = (
-				13E3A34921C1416E004BE8D8 /* NotifyTableDataSource.swift */,
-			);
-			path = DataSource;
 			sourceTree = "<group>";
 		};
 		13F8E3C321A9668600BBAD9B /* TeachingViewController */ = {
@@ -311,7 +303,6 @@
 				9C06A22B21AB707500E695DB /* CDLClass.swift */,
 				9CFE72C221B95206001EB697 /* TeachingClass.swift */,
 				9CFE72C421B95331001EB697 /* HomeTableSectionClass.swift */,
-				13D3997C21CACF1300B023B8 /* DocClass.swift */,
 				13D3997E21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift */,
 				1380ED502302F2440063F79F /* DocumentBrowserViewController.swift */,
 				9C2C63CC237311BB0063F9C7 /* NotifyClass.swift */,
@@ -375,6 +366,7 @@
 			children = (
 				9C8B9385237C1215001E5657 /* PermanentDocSystem.swift */,
 				9C1BBD422378F01F003EEB9A /* TempDocSystem.swift */,
+				13D3997C21CACF1300B023B8 /* DocClass.swift */,
 			);
 			path = DocSystem;
 			sourceTree = "<group>";

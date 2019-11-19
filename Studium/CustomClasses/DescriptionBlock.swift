@@ -7,12 +7,9 @@
 //
 
 import Foundation
-class DescriptionBlock{
-    var title : String!
-    var contentHTML : String!
-    
-    init(title: String, contentHTML: String){
-        self.title = title
-        self.contentHTML = HTMLParser.getUniqueIstance().parseHTMLText(text: contentHTML)
+class DescriptionBlock : Notify { //eredito da Notify perchè sono molto simili
+    init(title: String, message: String){
+        super.init(date: "", title: title, message:  message)
+        self.isCellExpanded = true
     }
 }

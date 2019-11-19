@@ -52,7 +52,8 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     
     
     func setOscureView(){
-        
+        self.oscureLoadingView.isHidden = false
+        self.oscureLoadingView.layer.zPosition = 2
         oscureLoadingView.backgroundColor = UIColor.oscureColor
         oscureLoadingView.alpha = 1.0
         let spinner = UIActivityIndicatorView(frame: CGRect(x: self.view.frame.width/2 - 30, y: self.view.frame.height/2-200, width: 60, height: 60))
@@ -70,38 +71,16 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         courseNameLabel.text = teachingDataSource.name
         nameTeacherLabel.text = teachingDataSource.teacherName
         self.navigationController?.navigationBar.barTintColor = UIColor.clear
-        //fai comparire una oscureView di Caricamento mentre vengono scaricati i dati
-        self.setOscureView()
-        self.oscureLoadingView.layer.zPosition = 2
-      // self.oscureLoadingView.alpha = 0.8
-        self.stackView.isHidden = true
         self.courseNameLabel.lineBreakMode = .byTruncatingMiddle
-        //let oscureView = createOscureView()
-        //self.view.addSubview(oscureView)
-        
-        
-        teachingDataSource.completeTeachingData { (flag) in
-            self.istantiateViewControllers()
-            self.stackView.translatesAutoresizingMaskIntoConstraints = false
-            self.setPageViewControllerSubviewsNumber()
-            self.pageViewController.dataSource = self
-            self.pageViewController.delegate = self
-            self.setPageControllerLayouts()
-           // self.setPanGestureOnFirstController()
-            
-            UIView.animate(withDuration: 0.5, animations: {
-                self.oscureLoadingView.alpha = 0.0
-            }) { (flag1) in
-                self.oscureLoadingView.isHidden = true
-            }
-            //show stackView
-            self.stackView.alpha = 0.0
-            self.stackView.isHidden = false
-            UIView.animate(withDuration: 0.5) {
-                self.stackView.alpha = 1.0
-            }
-           
-            
+        setUIForLoading()
+        loadContent()
+    }
+    private func refreshContent(){
+        self.teachingDataSource.removeAllData()
+        self.setUIForRefreshing()
+        teachingDataSource.refreshData { (flag) in
+            self.hideLoadingOscureView()
+            //chiama la funzione che fa il reload delle diverse tabelle attive nei page controller.
         }
     }
     
@@ -112,6 +91,48 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             viewControllerList[0].view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
     }*/
+    private func setUIForRefreshing(){
+        self.oscureLoadingView.alpha = 0.0
+        self.oscureLoadingView.isHidden = false
+        UIView.animate(withDuration: 0.3, animations: {
+             self.oscureLoadingView.alpha = 1.0
+        })
+    }
+    
+    
+    private func setUIForLoading(){
+        self.setOscureView()
+        self.stackView.isHidden = true
+        self.stackView.alpha = 0.0
+    }
+    
+    private func hideLoadingOscureView(){
+        UIView.animate(withDuration: 0.5, animations: {
+            self.oscureLoadingView.alpha = 0.0
+        }) { (flag1) in
+            self.oscureLoadingView.isHidden = true
+        }
+    }
+    private func showStackView(){
+        self.stackView.alpha = 0.0
+        self.stackView.isHidden = false
+        UIView.animate(withDuration: 0.3) {
+            self.stackView.alpha = 1.0
+        }
+    }
+    private func loadContent(){
+        teachingDataSource.completeTeachingData { (flag) in
+            self.istantiateViewControllers()
+            self.stackView.translatesAutoresizingMaskIntoConstraints = false
+            self.setPageViewControllerSubviewsNumber()
+            self.pageViewController.dataSource = self
+            self.pageViewController.delegate = self
+            self.setPageControllerLayouts()
+            self.hideLoadingOscureView()
+            self.showStackView()
+        }
+    }
+    
     private func istantiateViewControllers(){
         viewControllerList = {
             var activeControllerLists = [UIViewController]()
@@ -153,7 +174,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             
             if teachingDataSource.description.count > 0 {
                 let vc = sb.instantiateViewController(withIdentifier: "descriptionPageViewController") as! DescriptionPageViewController
-                vc.descriptionBlocks = teachingDataSource.description
+                vc.dataSource.insertDescriptionBlocks(sourceArray: self.teachingDataSource.description)
                 activeControllerLists.append(vc)
                 descriptionButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToDescriptionView(_:))))
                 customButtons(button: descriptionButton, image: "description", action: #selector(self.sendToDescriptionView(_:)))
@@ -238,6 +259,11 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     }
     
 
+    @IBAction func refreshClicked(_ sender: Any) {
+        self.refreshContent()
+    }
+    
+    
     
     
     @objc func sendToShowcaseView(_ sender: UIButton) {

@@ -32,6 +32,15 @@ class HTMLParser {
         str = str.replacingOccurrences(of: "&ograve;", with: "ò", options: .caseInsensitive, range: nil)
         str = str.replacingOccurrences(of: "&ugrave;", with: "ù", options: .caseInsensitive, range: nil)
         str = str.replacingOccurrences(of: "    ", with: "", options: .caseInsensitive, range: nil)
+        str = str.replacingOccurrences(of: "/*", with: "", options: .caseInsensitive, range: nil)
+        str = str.replacingOccurrences(of: "*/", with: "", options: .caseInsensitive, range: nil)
+        str = str.replacingOccurrences(of: "&#64257;", with: "fi", options: .caseInsensitive, range: nil)
+        str = str.replacingOccurrences(of: "&#64256;", with: "ff", options: .caseInsensitive, range: nil)
+        str = str.replacingOccurrences(of: "&ldquo;", with: "\"", options: .caseInsensitive, range: nil)
+        str = str.replacingOccurrences(of: "&rdquo;", with: "\"", options: .caseInsensitive, range: nil)
+        //str = str.replacingOccurrences(of: "&amp;", with: "&", options: .caseInsensitive, range: nil)
+        str = str.replacingOccurrences(of: "&amp;", with: "", options: .caseInsensitive, range: nil)
+        str = str.replacingOccurrences(of: "#768;", with: "", options: .caseInsensitive, range: nil)
         return str
     }
 }
