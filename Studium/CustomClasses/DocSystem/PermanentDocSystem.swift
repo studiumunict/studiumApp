@@ -33,7 +33,6 @@ class PermanentDocSystem: TempDocSystem{ //fileSystem singleton con autoSalvatag
     
     override func appendChild(toDoc: Doc, child: Doc) -> Doc {
         let appendedDoc = super.appendChild(toDoc: toDoc, child: child)
-        //print("Eseguo salvataggio")
         CoreDataController.shared.saveFileSystem(self)
         return appendedDoc
     }

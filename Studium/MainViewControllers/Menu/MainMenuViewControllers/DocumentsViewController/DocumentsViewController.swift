@@ -253,6 +253,8 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     
     @IBAction func addNewFolderClicked(_ sender: UIButton) {
         let SSAnimator = CoreSSAnimation.getUniqueIstance()
+        self.createFolderView.translatesAutoresizingMaskIntoConstraints = false
+        //self.createFolderView
         SSAnimator.expandViewFromSourceView(viewToOpen: self.createFolderView, elementsInsideView: nil, sourceView: self.addNewFolderButton, oscureView: self.oscureView) { (flag) in
             self.createFolderTextField.becomeFirstResponder()
         }

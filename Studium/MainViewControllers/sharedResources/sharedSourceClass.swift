@@ -8,22 +8,22 @@
 
 import Foundation
 
-class SharedSource: NSObject {
-    public var courseSharedDataSource : [HomeTableSection] = [HomeTableSection.init(cdl: CDL.init(courseName: "Default", courseCode: "0"), teachingArray: [Teaching](), setExpanded: true)]
-    private static var obj : SharedSource!
+class SharedCoursesSource: NSObject {
+    public var dataSource : [HomeTableSection] = [HomeTableSection.init(cdl: CDL.init(courseName: "Default", courseCode: "0"), teachingArray: [Teaching](), setExpanded: true)]
+    private static var obj : SharedCoursesSource!
     
     private override init(){}
     
-    public static func getUniqueIstance() -> SharedSource{
+    public static func getUniqueIstance() -> SharedCoursesSource{
         if(obj == nil){
-            obj = SharedSource()
+            obj = SharedCoursesSource()
         }
         return obj
     }
     
     private func getRowIndexByCategory(cat: String) -> Int{
            var i = 0
-           for row in courseSharedDataSource{
+           for row in dataSource{
                //print(row.course, " _------_", cat)
                if row.course.code == cat{
                   // print("Trovato indice", i , "Categpria ", cat)
@@ -34,14 +34,14 @@ class SharedSource: NSObject {
     }
     
     public func reloadSourceFromAPI(completion: @escaping (Bool) -> Void){
-        courseSharedDataSource.removeAll()
-        courseSharedDataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "Default", courseCode: "0"), teachingArray: [Teaching](), setExpanded: true)) 
+        dataSource.removeAll()
+        dataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "Default", courseCode: "0"), teachingArray: [Teaching](), setExpanded: true)) 
         let api = BackendAPI.getUniqueIstance()
         api.getMyCoursesCategories { (JSONData) in
             //print("Categorie",JSONData)
             for cat in JSONData as! [Any]{
                 let dict =  cat as! [String:Any]
-                self.courseSharedDataSource.insert(HomeTableSection.init(cdl: CDL.init(courseName: dict["title"] as? String, courseCode: String(dict["id"] as! Int)), teachingArray: [Teaching](), setExpanded: true),at: 0)
+                self.dataSource.insert(HomeTableSection.init(cdl: CDL.init(courseName: dict["title"] as? String, courseCode: String(dict["id"] as! Int)), teachingArray: [Teaching](), setExpanded: true),at: 0)
             }
             api.getMyCourses { (JSONData) in
                       //print("Miei corsi",JSONData)
@@ -50,7 +50,7 @@ class SharedSource: NSObject {
                             let dict =  course as!  [String:Any]
                            //cerca la riga con categoria corrispondente
                             let i = self.getRowIndexByCategory(cat: String(dict["category"] as! Int))
-                        self.courseSharedDataSource[i].teachings.append(Teaching.init(teachingName: dict["title"] as! String, category: String(dict["category"] as! Int), teachingCode: dict["code"] as! String, teacherName: dict["tutorname"] as! String, signedUp: true))
+                        self.dataSource[i].teachings.append(Teaching.init(teachingName: dict["title"] as! String, category: String(dict["category"] as! Int), teachingCode: dict["code"] as! String, teacherName: dict["tutorname"] as! String, signedUp: true))
                        
                        }
                     completion(true)

@@ -35,8 +35,8 @@ class CoreSSAnimation{
         viewToOpen.center = CGPoint(x: sourceView.center.x + 10, y: sourceView.center.y + 5)
         //viewToOpen.frame.origin = sourceView.frame.origin
          //print("new center: ", viewToOpen.center.x, " : ", viewToOpen.center.y)
-        viewToOpen.layoutIfNeeded()
-        viewToOpen.setNeedsDisplay()
+        //viewToOpen.layoutIfNeeded()
+        //viewToOpen.setNeedsDisplay()
         //print("actual center: ", viewToOpen.center.x, " : ", viewToOpen.center.y)
         UIView.animate(withDuration: 0.2, animations: {
            

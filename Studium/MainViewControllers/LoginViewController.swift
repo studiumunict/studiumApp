@@ -25,6 +25,7 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         super.viewDidLoad()
         loginActivityIndicator.startAnimating()
         //yearsPickerView.isHidden = true
+        yearsPickerView.alpha = 0.0
         addLoginYears()
         getSavedCredentials()
         loginButton.layer.cornerRadius = 7.0
@@ -82,7 +83,7 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
             self.yearsPickerView.reloadAllComponents()
             self.loginButton.isEnabled = true
             self.hideActivityIndicator()
-            //self.showPickerView()
+            self.showPickerView()
         }
     }
     

@@ -13,7 +13,7 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
     @IBOutlet weak var categoriesLabel: UILabel!
     @IBOutlet weak var teachingsTableView: UITableView!
     
-    var sharedSource : SharedSource!
+    var sharedSource : SharedCoursesSource!
    // da aggiungere un header view alla table per dare spazio
 
     override func viewDidLoad() {
@@ -51,7 +51,7 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
             
             
         }
-        sharedSource = SharedSource.getUniqueIstance()
+        sharedSource = SharedCoursesSource.getUniqueIstance()
         // Do any additional setup after loading the view.
     }
     
@@ -63,7 +63,7 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
             self.navigationItem.leftBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:))))
         }
-        if sharedSource.courseSharedDataSource.count == 1 {
+        if sharedSource.dataSource.count == 1 {
             sharedSource.reloadSourceFromAPI { (flag) in
                 self.teachingsTableView.reloadData()
             };
@@ -75,8 +75,8 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if sharedSource.courseSharedDataSource[section].expanded {
-              return sharedSource.courseSharedDataSource[section].teachings.count
+        if sharedSource.dataSource[section].expanded {
+              return sharedSource.dataSource[section].teachings.count
         }
         return 0
       
@@ -94,7 +94,7 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
         //modifico la cella e la mostro
         var dataElement : Teaching!
       
-            dataElement = sharedSource.courseSharedDataSource[indexPath.section].teachings[indexPath.row]
+            dataElement = sharedSource.dataSource[indexPath.section].teachings[indexPath.row]
         
         cell.teachingNameLabel.text = dataElement.name
         cell.teacherNameLabel.text = dataElement.teacherName
@@ -111,7 +111,7 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let  controller = segue.destination as? TeachingViewController{
             let index = sender as! IndexPath
-                controller.teachingDataSource = sharedSource.courseSharedDataSource[index.section].teachings[index.row]
+                controller.teachingDataSource = sharedSource.dataSource[index.section].teachings[index.row]
         }
     }
     
@@ -121,19 +121,19 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
             button.layer.cornerRadius = 5.0
             button.clipsToBounds = true
             
-            if sharedSource.courseSharedDataSource[section].teachings.count > 0 {
+            if sharedSource.dataSource[section].teachings.count > 0 {
                 let arrowImageView = UIImageView.init(frame: CGRect(x: 10, y: button.frame.height/2 - 7.5, width: 15, height: 15))
                 arrowImageView.image = UIImage.init(named: "arrow")?.withRenderingMode(.alwaysTemplate);
                 arrowImageView.tintColor = UIColor.elementsLikeNavBarColor
                 button.addSubview(arrowImageView)
-                if sharedSource.courseSharedDataSource[section].expanded {
+                if sharedSource.dataSource[section].expanded {
                     let SSAnimator = CoreSSAnimation.getUniqueIstance()
                     SSAnimator.rotate180Degrees(view: button, animated: false)
                 }
                 button.addTarget(self, action: #selector(self.removeOrExpandRows), for: .touchUpInside)
             }
         
-            button.setTitle(sharedSource.courseSharedDataSource[section].course.name, for: .normal)
+            button.setTitle(sharedSource.dataSource[section].course.name, for: .normal)
             button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
             button.setTitleColor(UIColor.elementsLikeNavBarColor, for: .normal)
             button.backgroundColor = UIColor.lightSectionColor
@@ -149,24 +149,24 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
         var indices = [IndexPath]()
         var row = 0;
         
-            for _ in sharedSource.courseSharedDataSource[sect].teachings{ // salva tutti gli indici
+            for _ in sharedSource.dataSource[sect].teachings{ // salva tutti gli indici
                 indices.append(IndexPath.init(row: row, section: sect))
                 row += 1
             }
             
-            if sharedSource.courseSharedDataSource[sect].expanded == true{ //RIMUOVE LE RIGHE
-                sharedSource.courseSharedDataSource[sect].expanded = false
+            if sharedSource.dataSource[sect].expanded == true{ //RIMUOVE LE RIGHE
+                sharedSource.dataSource[sect].expanded = false
                 self.teachingsTableView.deleteRows(at: indices, with: .fade)
             }
             else{
-                sharedSource.courseSharedDataSource[sect].expanded = true
+                sharedSource.dataSource[sect].expanded = true
                 self.teachingsTableView.insertRows(at: indices, with: .fade)
             }
         
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sharedSource.courseSharedDataSource.count
+        return sharedSource.dataSource.count
     }
 
 }

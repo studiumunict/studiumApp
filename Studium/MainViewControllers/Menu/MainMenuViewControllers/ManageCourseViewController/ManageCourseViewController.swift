@@ -27,9 +27,9 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
    
     @IBOutlet weak var oscureView: UIView!
     
-    var sharedSource : SharedSource!
+    var sharedSource : SharedCoursesSource!
     func setAllExpanded(){
-        for sect in sharedSource.courseSharedDataSource{
+        for sect in sharedSource.dataSource{
             sect.expanded = true
         }
     }
@@ -53,7 +53,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         // Do any additional setup after loading the view.
-        sharedSource = SharedSource.getUniqueIstance()
+        sharedSource = SharedCoursesSource.getUniqueIstance()
     }
     
     
@@ -66,7 +66,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         
-        if sharedSource.courseSharedDataSource.count == 1 {
+        if sharedSource.dataSource.count == 1 {
             sharedSource.reloadSourceFromAPI { (flag) in
                 self.manageCoursesTableView.reloadData()
             }
@@ -93,8 +93,8 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         if sourceIndexPath.section == destinationIndexPath.section {return}
-        let courseCode = sharedSource.courseSharedDataSource[sourceIndexPath.section].teachings[sourceIndexPath.row].code
-        let newCatCode = sharedSource.courseSharedDataSource[destinationIndexPath.section].course.code
+        let courseCode = sharedSource.dataSource[sourceIndexPath.section].teachings[sourceIndexPath.row].code
+        let newCatCode = sharedSource.dataSource[destinationIndexPath.section].course.code
     
         let api = BackendAPI.getUniqueIstance()
         
@@ -117,8 +117,8 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if sharedSource.courseSharedDataSource[section].expanded {
-            return sharedSource.courseSharedDataSource[section].teachings.count
+        if sharedSource.dataSource[section].expanded {
+            return sharedSource.dataSource[section].teachings.count
         }
         return 0
         
@@ -135,7 +135,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         let cell = manageCoursesTableView.dequeueReusableCell(withIdentifier: "teachingCell") as! CoursesTableViewCell
         //modifico la cella e la mostro
         var dataElement : Teaching!
-        dataElement = sharedSource.courseSharedDataSource[indexPath.section].teachings[indexPath.row]
+        dataElement = sharedSource.dataSource[indexPath.section].teachings[indexPath.row]
         
         cell.teachingNameLabel.text = dataElement.name
         cell.teacherNameLabel.text = dataElement.teacherName
@@ -151,7 +151,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let  controller = segue.destination as? TeachingViewController{
             let index = sender as! IndexPath
-            controller.teachingDataSource = sharedSource.courseSharedDataSource[index.section].teachings[index.row]
+            controller.teachingDataSource = sharedSource.dataSource[index.section].teachings[index.row]
         }
     }
     
@@ -167,7 +167,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         button.layer.cornerRadius = 5.0
         button.clipsToBounds = true
         
-        if manageCoursesTableView.isEditing && section != sharedSource.courseSharedDataSource.count-1 {
+        if manageCoursesTableView.isEditing && section != sharedSource.dataSource.count-1 {
             let removeButton = UIButton.init(frame: CGRect(x: 10, y: 10, width: 25, height: 25))
            // removeButton.imageView?.image = UIImage.init(named: "menu")
             removeButton.setBackgroundImage(UIImage.init(named: "delete"), for: .normal)
@@ -176,8 +176,8 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
 
             button.addSubview(removeButton)
         }
-        button.setTitle(sharedSource.courseSharedDataSource[section].course.name, for: .normal)
-        if sharedSource.courseSharedDataSource[section].expanded {
+        button.setTitle(sharedSource.dataSource[section].course.name, for: .normal)
+        if sharedSource.dataSource[section].expanded {
             let SSAnimator = CoreSSAnimation.getUniqueIstance()
             SSAnimator.rotate180Degrees(view: button, animated: false)
         }
@@ -202,12 +202,12 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         return UITableViewCell.EditingStyle.delete
     }*/
     func signOutCourse(indexPath : IndexPath){
-        let code = sharedSource.courseSharedDataSource[indexPath.section].teachings[indexPath.row].code
+        let code = sharedSource.dataSource[indexPath.section].teachings[indexPath.row].code
         let api  = BackendAPI.getUniqueIstance()
         api.deleteCourse(codCourse: code!) { (JSONResponse) in
             print(JSONResponse ?? "null")
         }
-        sharedSource.courseSharedDataSource[indexPath.section].teachings.remove(at: indexPath.row)
+        sharedSource.dataSource[indexPath.section].teachings.remove(at: indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -228,7 +228,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sharedSource.courseSharedDataSource.count
+        return sharedSource.dataSource.count
     }
     
     func setEditIconOnTabBar(){
@@ -259,7 +259,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
             //self.manageCoursesTableView.reloadSections(IndexSet(arrayLiteral: section), with: UITableView.RowAnimation.left)
             self.manageCoursesTableView.reloadData()*/
             let api = BackendAPI.getUniqueIstance()
-            api.deleteCategory(idCat: self.sharedSource.courseSharedDataSource[section].course.code) { (JSONResponse) in
+            api.deleteCategory(idCat: self.sharedSource.dataSource[section].course.code) { (JSONResponse) in
                 print(JSONResponse ?? "null")
                 self.sharedSource.reloadSourceFromAPI { (flag) in
                      self.manageCoursesTableView.reloadData()
@@ -278,11 +278,11 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     @objc func editClicked(){
         if !self.manageCoursesTableView.isEditing {
             self.manageCoursesTableView.setEditing(true, animated: true)
-            self.manageCoursesTableView.reloadSections(IndexSet(integersIn: 0...sharedSource.courseSharedDataSource.count-1), with: UITableView.RowAnimation.fade)
+            self.manageCoursesTableView.reloadSections(IndexSet(integersIn: 0...sharedSource.dataSource.count-1), with: UITableView.RowAnimation.fade)
         }
         else{
             self.manageCoursesTableView.setEditing(false, animated: true)
-            self.manageCoursesTableView.reloadSections(IndexSet(integersIn: 0...sharedSource.courseSharedDataSource.count-1), with: UITableView.RowAnimation.fade)
+            self.manageCoursesTableView.reloadSections(IndexSet(integersIn: 0...sharedSource.dataSource.count-1), with: UITableView.RowAnimation.fade)
         }
        // self.manageCoursesTableView.isEditing = !self.manageCoursesTableView.isEditing
     }

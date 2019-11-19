@@ -107,7 +107,7 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
         api.addCourse(codCourse: courseCode) { (JSONResponse) in
             print(JSONResponse ??  "null")
             print("iscritto");
-            SharedSource.getUniqueIstance().reloadSourceFromAPI { (flag) in
+            SharedCoursesSource.getUniqueIstance().reloadSourceFromAPI { (flag) in
             }
         }
         //chiama la funzione che fa comparire "Iscrizione effettuata! Il corso è stato inserito nella sezione i miei corsi."

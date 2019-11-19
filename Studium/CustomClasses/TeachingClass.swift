@@ -15,7 +15,6 @@ class Teaching{
     var signedUp : Bool! //TRUE: se sei iscritto, FALSE: altrimenti
     var looked: Bool! //TRUE: se è privata, FALSE: altrimenti
     var teacherName: String!
-   
     var showcaseHTML: String!
     var haveBooking: Bool!
     var description: [DescriptionBlock]! // se nel sito è formattata in html potremmo prenderci l'html e mostrarlo in una webView. A quel punto rimarrebbe formattato allo stesso modo
@@ -64,7 +63,7 @@ class Teaching{
                 //print("*****Appendo Doc*****")
                 let item =  Doc.init(title: docDict["title"] as! String, path: docDict["path"] as! String, type: docDict["type"] as! String, uploaded: docDict["insert"] as! String, lastUpdate: docDict["updated"] as! String, size: docDict["size"] as! Int)
                 item.setParent(prev: self.fs.currentFolder) //currentFolder è la root
-                self.fs.appendChild(toDoc: self.fs.currentFolder, child: item)
+                let _ = self.fs.appendChild(toDoc: self.fs.currentFolder, child: item)
                 if(docDict["type"] as! String == "folder") {
                     self.downloadDocuments(path: docDict["path"] as! String, prev: item) { (flag2) in
                         //print("Scaricati anche i secondi")
