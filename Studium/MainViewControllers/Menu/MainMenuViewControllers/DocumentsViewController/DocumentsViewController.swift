@@ -28,7 +28,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     @IBOutlet weak var createFolderView: UIView!
     var selectionList = [Doc]() //Lista contenente gli elementi della selezione multipla
     internal var fs: TempDocSystem!
-    private var emptyContent :Bool!
+    private var emptyContent :Bool! = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,8 +82,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     func hideError(){
         errorMessageLabel.isHidden = true
     }
-    
-    
+
     func setHeaderViewLayout(){
         headerView.backgroundColor = UIColor.lightWhite
         headerView.layer.borderWidth = 0.5

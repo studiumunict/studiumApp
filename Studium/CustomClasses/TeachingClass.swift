@@ -38,8 +38,8 @@ class Teaching{
     
     func removeAllData(){
         self.notifyList.removeAll()
-        self.fs = TempDocSystem()
-        self.description = [DescriptionBlock]()
+        self.fs.removeAll()
+        self.description.removeAll()
     }
     func refreshData(completion: @escaping (Bool)->Void){
         self.isCompleted = false

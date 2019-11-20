@@ -1806,9 +1806,9 @@
                                                     <rect key="frame" x="9.5" y="4" width="356" height="142.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Obbiettivi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jnm-8Z-VbS">
-                                                            <rect key="frame" x="139" y="0.0" width="78.5" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="356" height="40"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="30" id="15j-a8-VU6"/>
+                                                                <constraint firstAttribute="height" constant="40" id="15j-a8-VU6"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                             <color key="textColor" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1826,8 +1826,9 @@
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
                                                         <constraint firstItem="Jnm-8Z-VbS" firstAttribute="centerX" secondItem="Dls-MR-rAt" secondAttribute="centerX" id="50Q-pa-nuF"/>
+                                                        <constraint firstItem="Jnm-8Z-VbS" firstAttribute="width" secondItem="Dls-MR-rAt" secondAttribute="width" id="Fvz-OM-5Gv"/>
                                                         <constraint firstItem="0Fr-qg-XI8" firstAttribute="width" secondItem="Dls-MR-rAt" secondAttribute="width" multiplier="0.95" id="JTN-sc-OgE"/>
-                                                        <constraint firstItem="0Fr-qg-XI8" firstAttribute="top" secondItem="Jnm-8Z-VbS" secondAttribute="bottom" constant="-90" id="L9S-Du-vhH"/>
+                                                        <constraint firstItem="0Fr-qg-XI8" firstAttribute="top" secondItem="Jnm-8Z-VbS" secondAttribute="bottom" constant="-100" id="L9S-Du-vhH"/>
                                                         <constraint firstItem="Jnm-8Z-VbS" firstAttribute="top" secondItem="Dls-MR-rAt" secondAttribute="top" id="MoG-OX-Kas"/>
                                                         <constraint firstAttribute="bottom" secondItem="0Fr-qg-XI8" secondAttribute="bottom" id="Xo1-Ct-WtG"/>
                                                         <constraint firstItem="0Fr-qg-XI8" firstAttribute="centerX" secondItem="Dls-MR-rAt" secondAttribute="centerX" id="e6p-L0-xEO"/>

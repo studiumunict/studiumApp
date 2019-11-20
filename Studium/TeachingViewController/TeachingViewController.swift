@@ -58,7 +58,8 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         oscureLoadingView.alpha = 1.0
         let spinner = UIActivityIndicatorView(frame: CGRect(x: self.view.frame.width/2 - 30, y: self.view.frame.height/2-200, width: 60, height: 60))
         oscureLoadingView.addSubview(spinner)
-        spinner.layer.zPosition = 3
+        spinner.layer.zPosition = 4
+        spinner.color = UIColor.lightGray
         if #available(iOS 13.0, *) {
             spinner.style = .large
         } else {
@@ -80,7 +81,21 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         self.setUIForRefreshing()
         teachingDataSource.refreshData { (flag) in
             self.hideLoadingOscureView()
-            //chiama la funzione che fa il reload delle diverse tabelle attive nei page controller.
+            self.refreshSubViewControllersContent()
+        }
+    }
+    
+    private func refreshSubViewControllersContent(){
+        for vc in viewControllerList{
+            if let v = vc as? NotifyPageViewController{
+                v.tableView.reloadData()
+            }
+            else if let v = vc as? DescriptionPageViewController{
+                v.tableView.reloadData()
+            }
+            else if let v = vc as? DocumentsPageViewController{
+                v.viewDidLoad()
+            }
         }
     }
     

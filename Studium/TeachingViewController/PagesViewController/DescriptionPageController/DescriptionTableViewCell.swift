@@ -13,9 +13,13 @@ class DescriptionTableViewCell : UITableViewCell{
     @IBOutlet weak var elementsView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.elementsView.backgroundColor = UIColor.lightSectionColor
+        self.elementsView.backgroundColor = UIColor.clear
         self.elementsView.layer.cornerRadius = 5.0
+        self.elementsView.layer.borderWidth = 1.0
+        self.elementsView.layer.borderColor = UIColor.elementsLikeNavBarColor.cgColor
         self.elementsView.clipsToBounds = true
+        self.titleLabel.backgroundColor = UIColor.elementsLikeNavBarColor
+        self.titleLabel.textColor = UIColor.lightWhite
     }
     @IBOutlet weak var titleLabel: UILabel!
     

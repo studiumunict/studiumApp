@@ -31,6 +31,8 @@ class NotifyCell: UITableViewCell {
         
         self.contentView.backgroundColor = UIColor.clear
         headerView.backgroundColor = UIColor.lightSectionColor
+       
+        
         headerView.layer.cornerRadius = 5.0
         headerView.clipsToBounds = true
         let gesture:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toggle))
@@ -41,6 +43,8 @@ class NotifyCell: UITableViewCell {
         descriptionLabel.textColor = UIColor.elementsLikeNavBarColor
         titleLabel.textColor = UIColor.elementsLikeNavBarColor
         dataLabel.textColor = UIColor.subTitleGray
+        
+
 
         titleLabel.numberOfLines = 2
         titleLabel.lineBreakMode = .byTruncatingMiddle

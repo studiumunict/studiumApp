@@ -11,7 +11,7 @@ import UIKit
 
 class DescriptionPageViewController: UIViewController, UITableViewDelegate, SWRevealViewControllerDelegate {
 
-    @IBOutlet fileprivate weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     var dataSource = DescriptionTableDataSource()
 
     override func viewDidLoad() {

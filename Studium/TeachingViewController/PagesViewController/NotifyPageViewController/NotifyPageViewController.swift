@@ -11,7 +11,7 @@ import UIKit
 class NotifyPageViewController: UIViewController, UITableViewDelegate, SWRevealViewControllerDelegate {
 
     @IBOutlet var errorMessageLabel: UILabel!
-    @IBOutlet fileprivate weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     var dataSource = NotifyTableDataSource()
     
    

@@ -74,6 +74,13 @@ public class TempDocSystem: NSObject, NSCoding {
     func goToChild(childDoc: Doc){
         currentFolder = childDoc
     }
+    func removeAll(){
+        currentFolder = root
+        for c in root.childs {
+            c.setParent(prev: nil)
+        }
+        root.childs.removeAll()
+    }
     
     public func encode(with coder: NSCoder) {
         coder.encode(root, forKey: "root")
