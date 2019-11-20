@@ -17,7 +17,7 @@ class DescriptionTableViewCell : UITableViewCell{
     override func awakeFromNib() {
         super.awakeFromNib()
         self.elementsView.backgroundColor = UIColor.clear
-        self.elementsView.layer.cornerRadius = 5.0
+        self.elementsView.layer.cornerRadius = 10.0
         self.elementsView.layer.borderWidth = 1.0
         self.elementsView.layer.borderColor = UIColor.elementsLikeNavBarColor.cgColor
         self.elementsView.clipsToBounds = true
