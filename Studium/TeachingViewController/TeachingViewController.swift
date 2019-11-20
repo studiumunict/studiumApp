@@ -88,12 +88,17 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     private func refreshSubViewControllersContent(){
         for vc in viewControllerList{
             if let v = vc as? NotifyPageViewController{
+                v.dataSource.items.removeAll()
+                v.dataSource.insertNotifies(sourceArray: self.teachingDataSource.notifyList)
                 v.tableView.reloadData()
             }
             else if let v = vc as? DescriptionPageViewController{
+                v.dataSource.items.removeAll()
+                v.dataSource.insertDescriptionBlocks(sourceArray: self.teachingDataSource.description)
                 v.tableView.reloadData()
             }
             else if let v = vc as? DocumentsPageViewController{
+                v.fs = self.teachingDataSource.fs
                 v.viewDidLoad()
             }
         }

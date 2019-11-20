@@ -33,6 +33,10 @@ class NotifyPageViewController: UIViewController, UITableViewDelegate, SWRevealV
             tableView.isHidden = true
         }
         
+        let firstCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! NotifyCell
+        firstCell.collapseOrExpandDescription()
+        firstCell.setArrowLayerState(rotate: true)
+        
     }
     
     private func setupTableView() {

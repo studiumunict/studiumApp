@@ -11,13 +11,14 @@ import UIKit
 
 class NotifyCell: UITableViewCell {
     
-    @IBOutlet private weak var stackView: UIStackView!
+    @IBOutlet weak var carretView: UIView!
+    @IBOutlet weak var elementsView: UIView!
+    @IBOutlet weak var stackView: UIStackView!
     @IBOutlet private weak var dataLabel: UILabel!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
-    @IBOutlet private weak var carret: UIImageView!
+    @IBOutlet weak var carret: UIImageView!
     @IBOutlet private weak var headerView: UIView!
-    @IBOutlet private weak var descriptionView: UIView!
     var notifyData : Notify!
     //var isCollapsed = true
    
@@ -30,22 +31,28 @@ class NotifyCell: UITableViewCell {
         self.descriptionLabel.sizeToFit()
         
         self.contentView.backgroundColor = UIColor.clear
-        headerView.backgroundColor = UIColor.lightSectionColor
-       
-        
-        headerView.layer.cornerRadius = 5.0
-        headerView.clipsToBounds = true
+        headerView.backgroundColor = UIColor.elementsLikeNavBarColor
         let gesture:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toggle))
         gesture.numberOfTapsRequired = 1
         headerView.isUserInteractionEnabled = true
         headerView.addGestureRecognizer(gesture)
         
-        descriptionLabel.textColor = UIColor.elementsLikeNavBarColor
+        //descriptionLabel.textColor = UIColor.lightWhite
+        titleLabel.textColor = UIColor.lightWhite
+        dataLabel.textColor = UIColor.lightGray
+        /*descriptionLabel.textColor = UIColor.elementsLikeNavBarColor
         titleLabel.textColor = UIColor.elementsLikeNavBarColor
-        dataLabel.textColor = UIColor.subTitleGray
+        dataLabel.textColor = UIColor.subTitleGray*/
         
-
-
+        self.elementsView.backgroundColor = UIColor.clear
+        self.elementsView.layer.cornerRadius = 5.0
+        self.elementsView.layer.borderWidth = 1.0
+        self.elementsView.layer.borderColor = UIColor.elementsLikeNavBarColor.cgColor
+        self.elementsView.clipsToBounds = true
+        
+        self.carretView.layer.cornerRadius = self.carretView.frame.size.width / 2
+        self.carretView.clipsToBounds = true
+        self.carretView.backgroundColor = UIColor.lightWhite
         titleLabel.numberOfLines = 2
         titleLabel.lineBreakMode = .byTruncatingMiddle
         
@@ -59,8 +66,16 @@ class NotifyCell: UITableViewCell {
         descriptionLabel.text = notifyData.message
         //updateSuperTableView()
         setDescriptionLayerState(hidden: !notifyData.isCellExpanded)
+        setArrowLayerState(rotate: notifyData.isCellExpanded)
     }
-    
+    func setArrowLayerState(rotate: Bool){
+        if !rotate{
+            self.carret.transform = CGAffineTransform.identity
+        }
+        else{
+            self.carret.transform = CGAffineTransform.init(rotationAngle: .pi)
+        }
+    }
     func setDescriptionLayerState(hidden: Bool){
         self.stackView.arrangedSubviews[1].isHidden = hidden
         self.updateConstraints()
@@ -74,12 +89,21 @@ class NotifyCell: UITableViewCell {
     }
     
     
-    private func collapseOrExpandDescription(){
+      func collapseOrExpandDescription(){
+        
         if self.notifyData.isCellExpanded { self.notifyData.isCellExpanded = false; }
         else{ self.notifyData.isCellExpanded = true }
+       
+       /* tableView?.beginUpdates()
+        UIView.animate(withDuration: 0.3, animations: {
+            self.stackView.arrangedSubviews[1].isHidden = !self.notifyData.isCellExpanded
+        }) { (flag) in
+            tableView?.endUpdates()
+        }*/
         UIView.animate(withDuration: 0.3) {
-              self.stackView.arrangedSubviews[1].isHidden = !self.notifyData.isCellExpanded
+            self.stackView.arrangedSubviews[1].isHidden = !self.notifyData.isCellExpanded
         }
+        
         self.updateSuperTableView()
     }
     

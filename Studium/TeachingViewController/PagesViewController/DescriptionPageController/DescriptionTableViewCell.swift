@@ -11,6 +11,9 @@ import UIKit
 class DescriptionTableViewCell : UITableViewCell{
     
     @IBOutlet weak var elementsView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionMessageLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.elementsView.backgroundColor = UIColor.clear
@@ -21,9 +24,6 @@ class DescriptionTableViewCell : UITableViewCell{
         self.titleLabel.backgroundColor = UIColor.elementsLikeNavBarColor
         self.titleLabel.textColor = UIColor.lightWhite
     }
-    @IBOutlet weak var titleLabel: UILabel!
-    
-    @IBOutlet weak var descriptionMessageLabel: UILabel!
     
     func setInfo(descBlock : DescriptionBlock){
         self.titleLabel.text = descBlock.title

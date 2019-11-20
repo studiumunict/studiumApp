@@ -20,10 +20,8 @@ class NotifyTableDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! NotifyCell
+        
         cell.setInfo(notifyData: items[indexPath.row])
-        if items[indexPath.row].isCellExpanded{
-            print("Espansa")
-        }
         return cell
     }
     
