@@ -10,7 +10,7 @@ import Foundation
 
 public class TempDocSystem: NSObject, NSCoding {
     
-    var root = Doc.init(title: "Root", path: "/Root", type: "folder", uploaded: "", lastUpdate: "", size: 0)
+    var root = Doc.init(title: "Root", path: "/Root", type: "folder", uploaded: "", lastUpdate: "", size: 0,courseID: "")
     var currentFolder : Doc!
     
     override init() {

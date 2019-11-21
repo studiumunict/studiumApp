@@ -99,11 +99,8 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dati di accesso errati!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="kWS-OH-Ak0">
-                                <rect key="frame" x="0.0" y="801" width="414" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="SoS-lW-4wY"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="Dati di accesso errati!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kWS-OH-Ak0">
+                                <rect key="frame" x="20.5" y="800.5" width="373" height="21.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="0.96879995200000002" green="0.96879995200000002" blue="0.96879995200000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -122,17 +119,17 @@
                             <constraint firstItem="pAi-ia-HNu" firstAttribute="width" secondItem="IZe-ai-Is8" secondAttribute="width" multiplier="0.9" id="7io-VW-CsH"/>
                             <constraint firstItem="vHR-dQ-zxg" firstAttribute="top" secondItem="9KB-Ho-3Xk" secondAttribute="bottom" id="81R-a7-h46"/>
                             <constraint firstItem="cmT-NN-tzt" firstAttribute="centerX" secondItem="ftq-RX-tmK" secondAttribute="centerX" id="BAi-zW-kbb"/>
+                            <constraint firstItem="ftq-RX-tmK" firstAttribute="bottom" secondItem="kWS-OH-Ak0" secondAttribute="bottom" constant="40" id="J27-HJ-eDC"/>
                             <constraint firstItem="ftq-RX-tmK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lGb-k0-eMY" secondAttribute="trailing" symbolic="YES" id="Jp6-t2-dxa"/>
                             <constraint firstItem="pAi-ia-HNu" firstAttribute="centerX" secondItem="ftq-RX-tmK" secondAttribute="centerX" id="P9D-3y-Wzk"/>
                             <constraint firstItem="lGb-k0-eMY" firstAttribute="leading" secondItem="ftq-RX-tmK" secondAttribute="leading" constant="86" id="PcL-AU-lLc"/>
                             <constraint firstItem="cmT-NN-tzt" firstAttribute="centerY" secondItem="ftq-RX-tmK" secondAttribute="centerY" multiplier="0.25" id="PzJ-Fm-Maj"/>
-                            <constraint firstItem="kWS-OH-Ak0" firstAttribute="width" secondItem="IZe-ai-Is8" secondAttribute="width" id="V3d-ur-Hvn"/>
+                            <constraint firstItem="kWS-OH-Ak0" firstAttribute="width" secondItem="IZe-ai-Is8" secondAttribute="width" multiplier="0.9" id="V3d-ur-Hvn"/>
                             <constraint firstItem="lGb-k0-eMY" firstAttribute="centerY" secondItem="vHR-dQ-zxg" secondAttribute="centerY" id="X2K-NH-nXG"/>
                             <constraint firstItem="9KB-Ho-3Xk" firstAttribute="width" secondItem="IZe-ai-Is8" secondAttribute="width" multiplier="0.9" id="cCr-6A-fal"/>
                             <constraint firstItem="yzo-Vc-ibl" firstAttribute="centerY" secondItem="gyI-Ma-rfj" secondAttribute="centerY" id="eCV-Yv-ejS"/>
                             <constraint firstItem="kWS-OH-Ak0" firstAttribute="centerX" secondItem="ftq-RX-tmK" secondAttribute="centerX" id="vWQ-Je-vY8"/>
                             <constraint firstItem="yzo-Vc-ibl" firstAttribute="centerX" secondItem="gyI-Ma-rfj" secondAttribute="centerX" id="xsR-sh-m2n"/>
-                            <constraint firstItem="ftq-RX-tmK" firstAttribute="bottom" secondItem="kWS-OH-Ak0" secondAttribute="bottom" constant="40" id="z1A-2P-Xeg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ftq-RX-tmK"/>
                     </view>
@@ -1805,7 +1802,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dls-MR-rAt">
                                                     <rect key="frame" x="9.5" y="4" width="356" height="142.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Obbiettivi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jnm-8Z-VbS">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Obbiettivi" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jnm-8Z-VbS">
                                                             <rect key="frame" x="0.0" y="0.0" width="356" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="15j-a8-VU6"/>

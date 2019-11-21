@@ -75,6 +75,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         self.courseNameLabel.lineBreakMode = .byTruncatingMiddle
         setUIForLoading()
         loadContent()
+        //print("CODE:::::::",self.teachingDataSource.code)
     }
     private func refreshContent(){
         self.teachingDataSource.removeAllData()
@@ -205,7 +206,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             if teachingDataSource.fs.currentFolder.childs.count != 0 {
                  let vc = sb.instantiateViewController(withIdentifier: "documentsPageViewController") as! DocumentsPageViewController
                  vc.fs = teachingDataSource.fs
-                vc.thisTeachingTitle = teachingDataSource.name
+                vc.thisTeaching = teachingDataSource
                 activeControllerLists.append(vc)
                 documentsButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToDocumentsView(_:))))
                 customButtons(button: documentsButton, image: "folder_1", action: #selector(self.sendToDocumentsView(_:)))

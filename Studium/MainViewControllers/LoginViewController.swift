@@ -166,6 +166,12 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
                     
                     else{ phone = dict["phone"] as? String }
                     //print(dict["id"] as! String)
+                    if dict["id"] == nil{
+                        self.errorLabel.sizeToFit()
+                         self.errorLabel.text = "E' necessario un primo accesso dal sito WEB per l'anno accademico selezionato"
+                        self.errorLabel.isHidden = false
+                        return
+                    }
                     _ = Student.getUniqueIstance(id: String(dict["id"] as! Int), codFiscale: dict["username"] as? String , code: dict["officialcode"] as? String, name: dict["firstname"] as? String, surname: dict["lastname"] as? String,telNumber: phone, email: dict["email"] as? String, profileImage: UIImage.init(named: "logo"))
                     if Student.getUniqueIstance().name == nil && Student.getUniqueIstance().surname == nil {
                         Student.getUniqueIstance().name = ""

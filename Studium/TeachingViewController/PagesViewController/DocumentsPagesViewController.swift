@@ -9,7 +9,7 @@
 import UIKit
 
 class DocumentsPageViewController: DocumentsViewController{
-    var thisTeachingTitle: String!
+    var thisTeaching: Teaching!
     //TODO:
     override func fillDocSystem() {
         //non fa nulla perchè è già scaricato dal server e settato dal teachingController
@@ -42,7 +42,7 @@ class DocumentsPageViewController: DocumentsViewController{
     }
     @objc func addToSelectedDocumentsToFavourite(){
         let permanentFS = PermanentDocSystem.getUniqueIstance()
-        let thisCourseFolder = Doc.init(title: thisTeachingTitle , path: "/"+thisTeachingTitle, type: "folder")
+        let thisCourseFolder = Doc.init(title: thisTeaching.name , path: "/"+thisTeaching.name, type: "folder",courseID: thisTeaching.code)
         let appendedFolder = permanentFS.appendChild(toDoc: permanentFS.root, child: thisCourseFolder)
         permanentFS.appendChilds(toDoc: appendedFolder, childs: selectionList)
         closeActionsView()

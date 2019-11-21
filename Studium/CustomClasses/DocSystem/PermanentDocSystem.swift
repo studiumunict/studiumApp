@@ -18,7 +18,7 @@ class PermanentDocSystem: TempDocSystem{ //fileSystem singleton con autoSalvatag
     }
   
     static private func getFS() -> PermanentDocSystem{
-       // CoreDataController.shared.removeFileSystem()
+        //CoreDataController.shared.removeFileSystem()
         if let coreDataFS = CoreDataController.shared.getFileSystem() {
             return coreDataFS
         } else {

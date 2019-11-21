@@ -9,7 +9,7 @@
 import UIKit
 
 
-class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIDocumentInteractionControllerDelegate {
+class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIDocumentInteractionControllerDelegate  {
     @IBOutlet var errorMessageLabel: UILabel!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var descrizioneLabel: UILabel!
@@ -29,12 +29,14 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     var selectionList = [Doc]() //Lista contenente gli elementi della selezione multipla
     internal var fs: TempDocSystem!
     private var emptyContent :Bool! = true
+    let documentInteractionController = UIDocumentInteractionController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.lightWhite
         self.view.layer.borderColor = UIColor.primaryBackground.cgColor
         self.view.layer.borderWidth = 0.5
+        self.documentInteractionController.delegate = self
         self.createFolderView.isHidden = true
         self.oscureView.isHidden = true
         setRevealViewControllerParameters()
@@ -166,11 +168,33 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
             }
             else { //Visualizza il file
                 print("file selezionato:: \((fs.currentFolder.childs[indexPath.item].path)!)")
-                openDocument(fs.currentFolder.childs[indexPath.item].path)
+                fileSelected(file: fs.currentFolder.childs[indexPath.item])
+                //openDocument(fs.currentFolder.childs[indexPath.item].path)
             }
         }
     }
     
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+           guard let navVC = self.navigationController else {
+               return self
+           }
+           return navVC
+       }
+    
+    func openFile(tempUrl: URL) {
+        documentInteractionController.url = tempUrl
+        documentInteractionController.uti = tempUrl.typeIdentifier ?? "public.data, public.content"
+        documentInteractionController.name = tempUrl.localizedName ?? tempUrl.lastPathComponent
+        documentInteractionController.presentPreview(animated: true)
+    }
+    
+    func fileSelected(file: Doc){
+            let fd = FileDownloader.getUniqueIstance()
+            fd.downloadFile(courseID: file.courseID, fsDoc: file, completion: { (tempurl) in
+                //da permettere la rotazione schermo per vedere il file in orizzontale
+                self.openFile(tempUrl:tempurl)
+            })
+    }
     func setBackButtonState(){
         if fs.currentFolder.parent == nil{
             self.backButton.isEnabled = false
@@ -464,8 +488,8 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
              SSAnimator.collapseViewInSourceView(viewToCollapse: self.createFolderView, elementsInsideView: nil, sourceView: self.addNewFolderButton, oscureView: self.oscureView) { (flag) in
                         print("collapsed create folder")
                         self.createFolderTextField.resignFirstResponder()
-                        let newFolder = Doc(title: self.createFolderTextField.text!, path: self.fs.currentFolder.path + self.createFolderTextField.text!, type: "folder")
-                        self.fs.appendChild(toDoc: self.fs.currentFolder, child: newFolder)
+                let newFolder = Doc(title: self.createFolderTextField.text!, path: self.fs.currentFolder.path + self.createFolderTextField.text!, type: "folder", courseID: "")
+                        let _ = self.fs.appendChild(toDoc: self.fs.currentFolder, child: newFolder)
                         //newFolder.setParent(prev: self.fs.currentFolder)
                        // self.fs.currentFolder.addChild(item: newFolder)
                         self.reloadCollectionView()
@@ -597,3 +621,4 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
       }
 
 }
+

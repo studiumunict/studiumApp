@@ -9,8 +9,8 @@
 import Foundation
 class Session{
     var username : String!
-    private var encryptedPassword : String!
-    private var academicYear: String!
+    var encryptedPassword : String!
+    var academicYear: String!
     private var isActive: Bool!
     private static var obj : Session!
     

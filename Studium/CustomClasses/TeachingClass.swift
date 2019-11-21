@@ -67,7 +67,7 @@ class Teaching{
             for doc in JSONArray{
                 let docDict = doc as! [String:Any]
                 //print("*****Appendo Doc*****")
-                let item =  Doc.init(title: docDict["title"] as! String, path: docDict["path"] as! String, type: docDict["type"] as! String, uploaded: docDict["insert"] as! String, lastUpdate: docDict["updated"] as! String, size: docDict["size"] as! Int)
+                let item =  Doc.init(title: docDict["title"] as! String, path: docDict["path"] as! String, type: docDict["type"] as! String, uploaded: docDict["insert"] as! String, lastUpdate: docDict["updated"] as! String, size: docDict["size"] as! Int, courseID: self.code)
                 item.setParent(prev: self.fs.currentFolder) //currentFolder è la root
                 let _ = self.fs.appendChild(toDoc: self.fs.currentFolder, child: item)
                 if(docDict["type"] as! String == "folder") {
@@ -103,7 +103,7 @@ class Teaching{
             for doc in JSONArray{
                 let docDict = doc as! [String:Any]
                 //print("*****Appendo Doc*****")
-                let item = Doc.init(title: docDict["title"] as! String, path: docDict["path"] as! String, type: docDict["type"] as! String, uploaded: docDict["insert"] as! String, lastUpdate: docDict["updated"] as! String, size: docDict["size"] as! Int)
+                let item = Doc.init(title: docDict["title"] as! String, path: docDict["path"] as! String, type: docDict["type"] as! String, uploaded: docDict["insert"] as! String, lastUpdate: docDict["updated"] as! String, size: docDict["size"] as! Int, courseID: self.code)
                 let _ = self.fs.appendChild(toDoc: prev, child: item)
                 //item.setParent(prev: prev)
                 //prev.addChild(item: item)

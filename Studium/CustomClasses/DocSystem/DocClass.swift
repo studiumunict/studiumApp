@@ -19,12 +19,13 @@ class Doc : NSObject, NSCoding {
     var size :Int!
     var parent: Doc!
     var childs = [Doc]()
+    var courseID : String!
     
     /*enum docType {
         case file
         case folder
     }*/
-    init(title: String, path: String, type: String) {
+    init(title: String, path: String, type: String, courseID: String) {
         self.title = title
         self.path = path
         self.type = type
@@ -32,10 +33,11 @@ class Doc : NSObject, NSCoding {
         self.uploaded = ""
         self.lastUpdate = ""
         self.size = 0
+        self.courseID = courseID
     }
 
     
-    init(title: String, path: String, type: String, uploaded: String, lastUpdate: String, size: Int) {
+    init(title: String, path: String, type: String, uploaded: String, lastUpdate: String, size: Int, courseID: String) {
         super.init()
         //self.title = title
         self.path = path
@@ -44,6 +46,7 @@ class Doc : NSObject, NSCoding {
         self.lastUpdate = lastUpdate
         self.size = size
         self.canOpen = true
+        self.courseID = courseID
         self.title = HTMLParser.getUniqueIstance().parseHTMLText(text: title)
     }
     
@@ -65,6 +68,7 @@ class Doc : NSObject, NSCoding {
         coder.encode(path, forKey: "path")
         coder.encode(parent, forKey: "parent")
         coder.encode(childs, forKey: "childs")
+        coder.encode(courseID, forKey: "courseID")
     }
     
     required public init?(coder: NSCoder) {
@@ -77,6 +81,7 @@ class Doc : NSObject, NSCoding {
         path = coder.decodeObject( forKey: "path") as? String
         parent = coder.decodeObject( forKey: "parent") as? Doc
         childs = coder.decodeObject( forKey: "childs") as! [Doc]
+        courseID = coder.decodeObject( forKey: "courseID") as! String
     }
     
 }
