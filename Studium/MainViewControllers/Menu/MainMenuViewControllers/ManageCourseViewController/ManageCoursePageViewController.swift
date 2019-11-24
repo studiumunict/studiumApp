@@ -29,7 +29,6 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
     lazy var navControllerList: [UIViewController]! = { return nil }()
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

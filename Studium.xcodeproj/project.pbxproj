@@ -305,7 +305,6 @@
 				9C06A22B21AB707500E695DB /* CDLClass.swift */,
 				9CFE72C221B95206001EB697 /* TeachingClass.swift */,
 				9CFE72C421B95331001EB697 /* HomeTableSectionClass.swift */,
-				13D3997E21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift */,
 				1380ED502302F2440063F79F /* DocumentBrowserViewController.swift */,
 				9C2C63CC237311BB0063F9C7 /* NotifyClass.swift */,
 				9CBDB9CE2379C6AD00A015A4 /* CoreSSAnimation.swift */,
@@ -489,6 +488,7 @@
 			isa = PBXGroup;
 			children = (
 				9CFE9DB021A8BC9A0030AE33 /* DocumentsViewController.swift */,
+				13D3997E21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift */,
 			);
 			path = DocumentsViewController;
 			sourceTree = "<group>";

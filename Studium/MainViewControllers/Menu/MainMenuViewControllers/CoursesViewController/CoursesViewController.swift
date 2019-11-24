@@ -16,6 +16,8 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
     var sharedSource : SharedCoursesSource!
    // da aggiungere un header view alla table per dare spazio
 
+  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.view.backgroundColor = UIColor.green

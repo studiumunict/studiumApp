@@ -20,7 +20,7 @@ class ShowcasePageViewController: UIViewController, WKNavigationDelegate {
     
     let reachability = Reachability()!
     
-    
+   
     deinit {
         reachability.stopNotifier()
         NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)

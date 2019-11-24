@@ -21,6 +21,9 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     
     @IBOutlet weak var loginActivityIndicator: UIActivityIndicatorView!
     var yearsDataSource = [String]()
+    
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loginActivityIndicator.startAnimating()

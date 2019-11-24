@@ -20,16 +20,18 @@ class FileDownloader {
         }
         return obj
     }
-    
-    func downloadFile(courseID: String, fsDoc: Doc, completion: @escaping (URL)->Void){
+    private func getCorrectURL(fsDoc :Doc) ->String{
         let fullAcademicYear = Session.getUniqueIstance().academicYear!
         let startIndex = fullAcademicYear.firstIndex(of: "/")
         let academicYear = String(fullAcademicYear[startIndex!...])
         let folderURL = baseURL + academicYear + "/courses/" + fsDoc.courseID + "/document"
         let fileURL = folderURL + fsDoc.path
-        print(fileURL)
-        guard let url = URL(string: fileURL) else { return }
-               /// START YOUR ACTIVITY INDICATOR HERE
+        let parsedFileURL = HTMLParser.getUniqueIstance().getStringURL(sourceString: fileURL)
+        return parsedFileURL
+    }
+    func downloadFile(courseID: String, fsDoc: Doc, completion: @escaping (URL?)->Void){
+        let parsedFileURL = getCorrectURL(fsDoc: fsDoc)
+        guard let url = URL(string: parsedFileURL) else { return }
                URLSession.shared.dataTask(with: url) { data, response, error in
                    guard let data = data, error == nil else { return }
                    let tmpURL = FileManager.default.temporaryDirectory
@@ -38,11 +40,10 @@ class FileDownloader {
                        try data.write(to: tmpURL)
                    } catch {
                        print(error)
+                       completion(nil)
                    }
                    DispatchQueue.main.async {
-                       /// STOP YOUR ACTIVITY INDICATOR HERE
                     completion(tmpURL)
-                      // self.share(url: tmpURL)
                    }
                 }.resume()
      }

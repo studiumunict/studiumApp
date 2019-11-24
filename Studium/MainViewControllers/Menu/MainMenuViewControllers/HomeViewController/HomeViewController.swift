@@ -21,6 +21,8 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     var filteredCDLDataSource = [HomeTableSection]()
     var searchTimer : Timer!
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         if revealViewController() != nil {

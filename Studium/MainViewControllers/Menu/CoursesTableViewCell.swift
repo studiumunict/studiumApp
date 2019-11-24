@@ -17,7 +17,6 @@ class CoursesTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
         teacherNameLabel.textColor =  UIColor.subTitleGray
         teachingNameLabel.textColor =  UIColor.elementsLikeNavBarColor
         self.showsReorderControl = true

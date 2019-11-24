@@ -19,6 +19,7 @@ import UIKit
 
 class MenuTableViewController: UITableViewController, SWRevealViewControllerDelegate {
 
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.allowsSelection = true

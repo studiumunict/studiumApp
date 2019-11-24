@@ -14,6 +14,7 @@ class DescriptionPageViewController: UIViewController, UITableViewDelegate, SWRe
     @IBOutlet weak var tableView: UITableView!
     var dataSource = DescriptionTableDataSource()
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.lightWhite

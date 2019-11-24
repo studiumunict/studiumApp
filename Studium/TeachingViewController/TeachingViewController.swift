@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TeachingViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, SWRevealViewControllerDelegate {
+class TeachingViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, SWRevealViewControllerDelegate, UIDocumentInteractionControllerDelegate  {
 
     
     @IBOutlet weak var oscureLoadingView: UIView!
@@ -42,14 +42,32 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     @IBOutlet weak var bookingButtonView: UIView!
     @IBOutlet var bookingButton: UIButton!
     @IBOutlet var bookingLabel: UILabel!
-    
+
     // --- MARK: Variables ---
+    var appDelegate = UIApplication.shared.delegate as! AppDelegate
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask{
+        return .portrait
+    }
     weak var teachingDataSource: Teaching! //Pre inizializzato solo con: name, code, teacherName, signedUp
     
     let pageViewController: UIPageViewController!  = UIPageViewController(transitionStyle: UIPageViewController.TransitionStyle.scroll, navigationOrientation: UIPageViewController.NavigationOrientation.horizontal, options: nil)
     lazy var viewControllerList: [UIViewController]! = { return nil }()
+    let documentInteractionController = UIDocumentInteractionController()
+    
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+           guard let navVC = self.navigationController else {
+               return self
+           }
+           return navVC
+       }
     
     
+    func openFile(tempUrl: URL) {
+        documentInteractionController.url = tempUrl
+        documentInteractionController.uti = tempUrl.typeIdentifier ?? "public.data, public.content"
+        documentInteractionController.name = tempUrl.localizedName ?? tempUrl.lastPathComponent
+        documentInteractionController.presentPreview(animated: true)
+    }
     
     func setOscureView(){
         self.oscureLoadingView.isHidden = false
@@ -75,6 +93,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         self.courseNameLabel.lineBreakMode = .byTruncatingMiddle
         setUIForLoading()
         loadContent()
+        self.documentInteractionController.delegate = self
         //print("CODE:::::::",self.teachingDataSource.code)
     }
     private func refreshContent(){
@@ -207,6 +226,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
                  let vc = sb.instantiateViewController(withIdentifier: "documentsPageViewController") as! DocumentsPageViewController
                  vc.fs = teachingDataSource.fs
                 vc.thisTeaching = teachingDataSource
+                vc.teachingController = self
                 activeControllerLists.append(vc)
                 documentsButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToDocumentsView(_:))))
                 customButtons(button: documentsButton, image: "folder_1", action: #selector(self.sendToDocumentsView(_:)))
@@ -369,6 +389,8 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
          if (revealViewController().frontViewPosition != FrontViewPosition.left) {
              revealViewController().frontViewPosition = .left
          }
+        appDelegate.isFilePresented = false
+        print("TeachingAppeared")
      }
      
      

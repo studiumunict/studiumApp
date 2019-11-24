@@ -13,8 +13,18 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    var isFilePresented = false
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        print("ritorno orientation: ", isFilePresented)
+        if isFilePresented {
+                print("all")
+                return UIInterfaceOrientationMask.all
+            
+        }
+        print("portrait")
+        return UIInterfaceOrientationMask.portrait
+    }
+        
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UINavigationBar.appearance().barTintColor = #colorLiteral(red: 0.04193217307, green: 0.04194748402, blue: 0.04193013161, alpha: 1)

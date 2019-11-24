@@ -13,6 +13,7 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
     var oscureView : UIView!
     var signUpView : UIView!
     
+  
     override func setSearchIconOnSearchButton(){
         let imageView2 = UIImageView(frame: CGRect(x: 0, y: 2.5, width: 25.5, height: 25))
         imageView2.image = UIImage.init(named: "search")
@@ -20,7 +21,6 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
         buttonView2.addSubview(imageView2)
         self.tabController.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: buttonView2)
         self.tabController.navigationItem.rightBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.searchingClicked)))
-        
     }
     
     override func setCancelIconOnSearchButton(){
@@ -29,7 +29,7 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
         let buttonView2 = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 27.5))
         buttonView2.addSubview(imageView2)
         self.tabController.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: buttonView2)
-    self.tabController.navigationItem.rightBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.searchingClicked)))
+        self.tabController.navigationItem.rightBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.searchingClicked)))
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -48,10 +48,9 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
             self.view.endEditing(true)
             self.cdlTableView.isHidden = false
             self.hideDepartmentTableAnimated()
-            
             getCDLAndTeachings(ofDepartment : self.departmentsDataSource[indexPath.row])
         }
-        else {// fai comparire la view per iscriversi  al corso
+        else {// E' stato selezionato un corso -> fai comparire la view per iscriversi  al corso
             setUpOscureView()
             setUpSignUpView(sourceIndexPath: indexPath)
             if self.cdsSearchBar.isFirstResponder || self.cdsSearchBar.text != ""{
@@ -71,14 +70,12 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView ==  self.departmentsTableView{
             let cell = departmentsTableView.dequeueReusableCell(withIdentifier: "departmentCell") as! DepartmentTableViewCell
-            //modifico la cella e la mostro
             cell.departmentName.text = self.departmentsDataSource[indexPath.row].name
             return cell
             
         }
         else { //CDL table
             let cell = cdlTableView.dequeueReusableCell(withIdentifier: "teachingCell") as! BrowseAndSearchCourseTableViewCell
-            //modifico la cella e la mostro
             var dataElement : Teaching!
             if self.cdsSearchBar.isFirstResponder || self.cdsSearchBar.text != ""{
                 print("prendo dal filtered")
@@ -87,10 +84,8 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
             else{
                 dataElement = self.CDLDataSource[indexPath.section].teachings[indexPath.row]
             }
-            
             cell.teachingNameLabel.text = dataElement.name
             cell.teacherNameLabel.text = dataElement.teacherName
-            
             return cell
         }
     }
@@ -105,15 +100,73 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
         }
         let api =  BackendAPI.getUniqueIstance()
         api.addCourse(codCourse: courseCode) { (JSONResponse) in
-            print(JSONResponse ??  "null")
-            print("iscritto");
             SharedCoursesSource.getUniqueIstance().reloadSourceFromAPI { (flag) in
+                //do nothing in completion
             }
         }
-        //chiama la funzione che fa comparire "Iscrizione effettuata! Il corso è stato inserito nella sezione i miei corsi."
-        // Questa funzione poi chiama hideSignupViewAnimated
-        hideSignUpViewAnimated(button: sender)
+        setupSignUpViewForConfirmSubscription(senderButton: sender)
     }
+    
+    private func setUpSubscriptedLabelForSignUp() -> UILabel{
+        let label = UILabel.init(frame: CGRect(x: 10, y: 20, width: signUpView.frame.size.width - 20, height: 20))
+        label.text =  "Iscrizione effettuata!"
+        label.textColor = UIColor.lightWhite
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.textAlignment = .center
+        label.alpha = 0.0
+        return label
+    }
+    
+    private func setUpCheersLabelForSignUp() -> UILabel{
+        let label = UILabel.init(frame: CGRect(x: 10 , y: 45, width: signUpView.frame.size.width - 20, height: 20))
+        label.text = "Troverai il corso nella sezione \"I miei corsi\" "
+        label.textColor = UIColor.lightGray
+        label.font = UIFont.boldSystemFont(ofSize: 13)
+        label.textAlignment = .center
+        label.alpha = 0.0
+        return label
+    }
+    
+    private func setupSignUpViewForConfirmSubscription(senderButton: UIButton){
+        for sv in self.signUpView.subviews{
+            UIView.animate(withDuration: 0.3, animations: {
+                sv.alpha = 0.0
+            }) { (flag) in
+                sv.removeFromSuperview()
+            }
+        }
+        let subscriptedLabel = setUpSubscriptedLabelForSignUp()
+        let cheersLabel = setUpCheersLabelForSignUp()
+        self.signUpView.addSubview(subscriptedLabel)
+        self.signUpView.addSubview(cheersLabel)
+        let indexPath = senderButton.accessibilityElements?[0] as! IndexPath
+        let closeConfirmButton = setupCloseConfirmSignUpButton(sourceIndexPath: indexPath)
+        self.signUpView.addSubview(closeConfirmButton)
+        UIView.animate(withDuration: 0.3, animations: {
+            for sv in self.signUpView.subviews{
+                sv.alpha = 1.0
+            }
+        })
+    }
+    
+    private func setupCloseConfirmSignUpButton(sourceIndexPath: IndexPath) -> UIButton{
+        let closeConfirmButton = UIButton(frame: CGRect(x: 0, y: 100 , width: 200, height: 40))
+        closeConfirmButton.center.x = self.signUpView.center.x - 20
+        closeConfirmButton.backgroundColor = UIColor.lightWhite
+        closeConfirmButton.setTitleColor(UIColor.textBlueColor, for: .normal)
+        closeConfirmButton.accessibilityElements = [IndexPath]()
+        closeConfirmButton.accessibilityElements?.append(sourceIndexPath)
+        closeConfirmButton.addTarget(self, action: #selector(hideSignUpViewAnimated(button:)), for: .touchUpInside)
+        closeConfirmButton.setTitle("Chiudi", for: .normal)
+        closeConfirmButton.titleLabel?.font = UIFont(name: "System", size: 9)
+        closeConfirmButton.layer.cornerRadius = 5.0
+        closeConfirmButton.layer.borderWidth = 2.0
+        closeConfirmButton.layer.borderColor = UIColor.secondaryBackground.cgColor
+        closeConfirmButton.alpha = 0.0
+        return closeConfirmButton
+    
+    }
+    
     private func setUpOscureView(){
         oscureView = UIView.init(frame: self.view.frame)
         oscureView.backgroundColor = UIColor.primaryBackground
@@ -123,11 +176,11 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
     }
     private func setUpTeachingNameLabelForSignUp(teaching: Teaching)-> UILabel{
         let teachingNameLabel = UILabel.init(frame: CGRect(x: 10, y: 20, width: signUpView.frame.size.width - 20, height: 20))
-               teachingNameLabel.text = teaching.name
-               teachingNameLabel.textColor = UIColor.lightWhite
-               teachingNameLabel.font = UIFont.boldSystemFont(ofSize: 15)
-               teachingNameLabel.textAlignment = .center
-               //teachingNameLabel.alpha = 0.0
+        teachingNameLabel.text = teaching.name
+        teachingNameLabel.textColor = UIColor.lightWhite
+        teachingNameLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        teachingNameLabel.textAlignment = .center
+        //teachingNameLabel.alpha = 0.0
         return teachingNameLabel
     }
     

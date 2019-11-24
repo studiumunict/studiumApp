@@ -30,7 +30,10 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     internal var fs: TempDocSystem!
     private var emptyContent :Bool! = true
     let documentInteractionController = UIDocumentInteractionController()
-    
+    var appDelegate = UIApplication.shared.delegate as! AppDelegate
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask{
+        return .portrait
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.lightWhite
@@ -57,10 +60,12 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     }
     override func viewDidAppear(_ animated: Bool) {
         setRevealViewControllerParameters()
+        appDelegate.isFilePresented = false
     }
     
     func setErrorLabelText() {
         errorMessageLabel.text = "Non ci sono documenti preferiti salvati. Puoi aggiungere documenti alla sezione preferiti dalla pagina di un qualsiasi corso di tuo interesse."
+        errorMessageLabel.numberOfLines = 4
     }
     
     func hideElementsOfView() {
@@ -123,11 +128,6 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         }
     }
     
-    func loadDocumentsList(){
-        //questa funzione tira fuori tutta la directory dal coredata.
-        //essa non viene utilizzata in DocumentsPageController.
-    }
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -140,13 +140,13 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "docsCell", for: indexPath) as! DocumentsCollectionViewCell
         let cellType = fs.currentFolder.childs[indexPath.item].type
         if cellType == "file" {
-            cell.update(image: "showcase", title: fs.currentFolder.childs[indexPath.item].title!, description: "")
+            cell.update(type: "file", title: fs.currentFolder.childs[indexPath.item].title!, description: "")
         }
         else{
             if fs.currentFolder.childs[indexPath.item].childs.count == 1 {
-                cell.update(image: "folder_1", title: fs.currentFolder.childs[indexPath.item].title!, description: "1 elemento")
+                cell.update(type: "folder", title: fs.currentFolder.childs[indexPath.item].title!, description: "1 elemento")
             } else {
-                cell.update(image: "folder_1", title: fs.currentFolder.childs[indexPath.item].title!, description: String(fs.currentFolder.childs[indexPath.item].childs.count) + " elementi")
+                cell.update(type: "folder", title: fs.currentFolder.childs[indexPath.item].title!, description: String(fs.currentFolder.childs[indexPath.item].childs.count) + " elementi")
             }
         }
         return cell
@@ -168,8 +168,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
             }
             else { //Visualizza il file
                 print("file selezionato:: \((fs.currentFolder.childs[indexPath.item].path)!)")
-                fileSelected(file: fs.currentFolder.childs[indexPath.item])
-                //openDocument(fs.currentFolder.childs[indexPath.item].path)
+                fileSelected(indexPath: indexPath)
             }
         }
     }
@@ -188,11 +187,22 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         documentInteractionController.presentPreview(animated: true)
     }
     
-    func fileSelected(file: Doc){
+    func fileSelected(indexPath: IndexPath){
+            collectionView.allowsSelection = false
+            let cell = self.collectionView.cellForItem(at: indexPath) as! DocumentsCollectionViewCell
+            cell.startActivityIndicator()
+            let file =  fs.currentFolder.childs[indexPath.item]
             let fd = FileDownloader.getUniqueIstance()
             fd.downloadFile(courseID: file.courseID, fsDoc: file, completion: { (tempurl) in
-                //da permettere la rotazione schermo per vedere il file in orizzontale
-                self.openFile(tempUrl:tempurl)
+                if let url = tempurl { //donwload effetturato
+                    self.openFile(tempUrl: url)
+                    self.appDelegate.isFilePresented = true
+                }
+                else{ //errore download
+                    print("Errore apertura file")
+                }
+                cell.stopActyivityIndicator()
+                self.collectionView.allowsSelection = true
             })
     }
     func setBackButtonState(){
@@ -206,12 +216,12 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     func reloadTitleLabel(){
         self.titleLabel.text = fs.currentFolder.title
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.reloadCollectionView()
     }
     func reloadCollectionView(){
-        print("CheckContent")
         self.checkContent()
         self.setBackButtonState()
         self.collectionView.reloadData()
@@ -230,7 +240,6 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         }
         return -1
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         guard collectionView.allowsMultipleSelection else { return }
@@ -287,15 +296,11 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         SSAnimator.closeViewWithFadeIn(viewToClose: self.selectedActionButton) { (flag) in
            
         }
-        //selectedActionButton.isHidden = true
     }
     private func showSelectedActionButton(){
-         // prima si devono selezionare elementi
-        //selectedActionButton.isHidden = false
         self.selectedActionButton.isEnabled = false
         let SSAnimator = CoreSSAnimation.getUniqueIstance()
         SSAnimator.openViewWithFadeIn(viewToOpen: self.selectedActionButton) { (flag) in
-            //self.selectedActionButton.isEnabled = false
         }
     }
     
@@ -331,33 +336,22 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
             cell?.isSelected = false
         }
         selectionList.removeAll()
-        return
     }
     internal func setUpOscureView(){
-        //oscureView = UIView.init(frame: self.view.frame)
         oscureView.backgroundColor = UIColor.primaryBackground
         oscureView.alpha = 0.0
-        //oscureView.layer.zPosition = 0
-        //self.view.addSubview(oscureView)
     }
     internal func setUpMoveActionButton()-> UIButton{
-        let moveButton = UIButton(frame: CGRect(x: 0, y: 0, width: actionsView.frame.size.width * 0.8 - 3, height: 40))
-        moveButton.center = CGPoint(x: actionsView.center.x, y: actionsView.center.y * 1.6 - 38)
+         let moveButton = UIButton(frame: CGRect(x: 0, y: 0, width: actionsView.frame.size.width * 0.8 - 3, height: 40))
+         moveButton.center = CGPoint(x: actionsView.center.x, y: actionsView.center.y * 1.6 - 38)
          moveButton.clipsToBounds = true
-        //addFavouriteButton.layer.cornerRadius = 5.0
          moveButton.backgroundColor = UIColor.lightWhite
          moveButton.setTitleColor(UIColor.textBlueColor, for: .normal)
          moveButton.setTitle("Sposta in una cartella", for: .normal)
          moveButton.titleLabel?.font = UIFont(name: "System", size: 9)
-        //addFavouriteButton.layer.borderColor = UIColor.secondaryBackground.cgColor
-        //addFavouriteButton.layer.borderWidth = 1.0
          moveButton.addTarget(self, action: #selector(moveSelectedDocuments), for: .touchUpInside)
          moveButton.layer.addBorder(edge: .all, color: #colorLiteral(red: 0.9961728454, green: 0.9902502894, blue: 1, alpha: 1), thickness: 0.5)
-        //roundTopRadius(radius: 5.0, view: addFavouriteButton)
-        //createFolderConfirmButton.layer.zPosition = 3
-        
-        //roundRightRadius(radius: 5.0, view: createFolderConfirmButton)
-        return  moveButton
+         return  moveButton
     }
     @objc func moveSelectedDocuments(){
         
@@ -371,20 +365,14 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     internal func setUpDeleteActionButton()-> UIButton{
          let deleteButton = UIButton(frame: CGRect(x: 0, y: 0, width: actionsView.frame.size.width * 0.8, height: 40))
          deleteButton.center = CGPoint(x: actionsView.center.x, y: actionsView.center.y * 1.6 - (38*2))
-          deleteButton.clipsToBounds = true
-         //addFavouriteButton.layer.cornerRadius = 5.0
+         deleteButton.clipsToBounds = true
          deleteButton.backgroundColor = UIColor.lightWhite
          deleteButton.setTitleColor(UIColor.textBlueColor, for: .normal)
          deleteButton.setTitle("Cancella selezionati", for: .normal)
          deleteButton.titleLabel?.font = UIFont(name: "System", size: 9)
-         //addFavouriteButton.layer.borderColor = UIColor.secondaryBackground.cgColor
-         //addFavouriteButton.layer.borderWidth = 1.0
          deleteButton.addTarget(self, action: #selector(deleteSelectedDocuments), for: .touchUpInside)
          deleteButton.layer.addBorder(edge: .all, color: #colorLiteral(red: 0.9961728454, green: 0.9902502894, blue: 1, alpha: 1), thickness: 0.5)
          roundTopRadius(radius: 5.0, view: deleteButton)
-         //createFolderConfirmButton.layer.zPosition = 3
-         
-         //roundRightRadius(radius: 5.0, view: createFolderConfirmButton)
          return  deleteButton
     }
     
@@ -402,18 +390,13 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
          let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: actionsView.frame.size.width * 0.8, height: 40))
                cancelButton.center = CGPoint(x: actionsView.center.x, y: actionsView.center.y * 1.6)
                cancelButton.clipsToBounds = true
-               //cancelButton.layer.cornerRadius = 5.0
                cancelButton.backgroundColor = UIColor.lightWhite
                cancelButton.setTitleColor(UIColor.textRedColor, for: .normal)
                cancelButton.setTitle("Annulla", for: .normal)
                cancelButton.titleLabel?.font = UIFont(name: "System", size: 9)
-               //cancelButton.layer.borderColor = UIColor.secondaryBackground.cgColor
-               //cancelButton.layer.borderWidth = 1.0
                cancelButton.layer.addBorder(edge: .bottom, color: #colorLiteral(red: 0.9961728454, green: 0.9902502894, blue: 1, alpha: 1), thickness: 0.5)
                roundBottomRadius(radius: 5.0, view: cancelButton)
                cancelButton.addTarget(self, action: #selector(closeActionsView), for: .touchUpInside)
-               //createFolderConfirmButton.layer.zPosition = 3
-               //roundRightRadius(radius: 5.0, view: createFolderConfirmButton)
                return cancelButton
     }
     internal func setUpActionsViewLabel()-> UILabel{
@@ -430,12 +413,10 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         let actionsViewLabel = setUpActionsViewLabel()
         let moveActionButton = setUpMoveActionButton() //presente solo in miei documenti
         let deleteActionButton = setUpDeleteActionButton() //presente solo in miei documenti
-        //let addInFavouriteActionButton = setUpAddInFavouriteActionButton() //presente solo in pageController
         let cancelActionButton = setUpCancelActionButton() //sempre presente
         self.actionsView.addSubview(actionsViewLabel)
         self.actionsView.addSubview(moveActionButton)
         self.actionsView.addSubview(deleteActionButton)
-        //self.actionsView.addSubview(addInFavouriteActionButton)
         self.actionsView.addSubview(cancelActionButton)
     }
     
@@ -455,7 +436,6 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     internal func setUpCreateFolderLabel(){
         createFolderLabel.textColor = UIColor.lightWhite
         createFolderLabel.font = UIFont.boldSystemFont(ofSize: 15)
-        //UIFont.systemFont(ofSize: 20, weight: .semibold)
         createFolderLabel.textAlignment = .center
     }
     internal func setUpCreateFolderTextField(){
@@ -486,12 +466,9 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
             }
              let SSAnimator = CoreSSAnimation.getUniqueIstance()
              SSAnimator.collapseViewInSourceView(viewToCollapse: self.createFolderView, elementsInsideView: nil, sourceView: self.addNewFolderButton, oscureView: self.oscureView) { (flag) in
-                        print("collapsed create folder")
                         self.createFolderTextField.resignFirstResponder()
-                let newFolder = Doc(title: self.createFolderTextField.text!, path: self.fs.currentFolder.path + self.createFolderTextField.text!, type: "folder", courseID: "")
+                        let newFolder = Doc(title: self.createFolderTextField.text!, path: self.fs.currentFolder.path + self.createFolderTextField.text!, type: "folder", courseID: "")
                         let _ = self.fs.appendChild(toDoc: self.fs.currentFolder, child: newFolder)
-                        //newFolder.setParent(prev: self.fs.currentFolder)
-                       // self.fs.currentFolder.addChild(item: newFolder)
                         self.reloadCollectionView()
                         self.createFolderTextField.text = ""
                  }
@@ -501,11 +478,12 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
             return
         }
     }
+    
+    
     @IBAction func closeCreateFolderView(){
         hideErrorTextField(textField: createFolderTextField)
         let SSAnimator = CoreSSAnimation.getUniqueIstance()
             SSAnimator.collapseViewInSourceView(viewToCollapse: self.createFolderView, elementsInsideView: nil, sourceView: self.addNewFolderButton, oscureView: self.oscureView) { (flag) in
-                       print("collapsed create folder")
                     self.createFolderTextField.resignFirstResponder()
                     self.createFolderTextField.text = ""
                 }
@@ -516,7 +494,6 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         createFolderConfirmButton.setTitle("Conferma", for: .normal)
         createFolderConfirmButton.layer.cornerRadius = 5.0
         createFolderConfirmButton.titleLabel?.font = UIFont(name: "System", size: 9)
-        //createFolderConfirmButton.layer.zPosition = 3
         roundRightRadius(radius: 5.0, view: createFolderConfirmButton)
     }
     
@@ -527,7 +504,6 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         createFolderCancelButton.layer.cornerRadius = 5.0
         createFolderCancelButton.titleLabel?.font = UIFont(name: "System", size: 9)
         createFolderCancelButton.isEnabled = true
-        //createFolderCancelButton.layer.zPosition = 3
         createFolderCancelButton.layer.addBorder(edge: .right, color: #colorLiteral(red: 0.9961728454, green: 0.9902502894, blue: 1, alpha: 1), thickness: 0.5)
         roundLeftRadius(radius: 5.0, view: createFolderCancelButton)
     }
@@ -540,10 +516,6 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         createFolderView.layer.borderColor = UIColor.secondaryBackground.cgColor
         createFolderView.layer.borderWidth = 1.0
         createFolderView.layer.cornerRadius = 5.0
-        //createFolderView.layer.zPosition = 3
-          
-        //createFolderView.addSubview(createFolderConfirmButton)
-        //createFolderView.addSubview(createFolderCancelButton)
        }
     
    
@@ -552,26 +524,9 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         setUpOscureView()
         let SSAnimator = CoreSSAnimation.getUniqueIstance()
         SSAnimator.expandViewFromSourceFrame(sourceFrame: self.selectedActionButton.frame, viewToExpand: self.actionsView, elementsInsideView: nil, oscureView: self.oscureView) { (flag) in
-            
+            //do nothing in completion
         }
     }
-    internal func openDocument(_ str: String) {
-        print("openDocument \(str)")
-        let dot = str.firstIndex(of: ".")!
-        
-        guard let url = Bundle.main.url(
-                            forResource: String(str[..<dot]),
-                            withExtension: String(str[str.index(after: dot)...])
-                        )
-        else { return }
-        
-        let vc = storyboard!.instantiateViewController(withIdentifier: "DocumentBrowserViewController") as! DocumentBrowserViewController
-        vc.documentController = UIDocumentInteractionController(url: url)
-        
-        self.present(vc, animated: true, completion: nil)
-        vc.openFile()
-    }
-    
     internal func setRevealViewControllerParameters(){
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
         imageView.image = UIImage.init(named: "menu")
@@ -586,12 +541,11 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         }
     }
     func roundLeftRadius(radius:CGFloat, view : UIView) {
-          self.roundCorners(corners: [UIRectCorner.topLeft, UIRectCorner.bottomLeft], radius:radius, view: view)
-      }
-      
-      func roundRightRadius(radius:CGFloat, view : UIView) {
-          self.roundCorners(corners: [UIRectCorner.topRight, UIRectCorner.bottomRight], radius:radius, view: view)
-      }
+        self.roundCorners(corners: [UIRectCorner.topLeft, UIRectCorner.bottomLeft], radius:radius, view: view)
+    }
+    func roundRightRadius(radius:CGFloat, view : UIView) {
+        self.roundCorners(corners: [UIRectCorner.topRight, UIRectCorner.bottomRight], radius:radius, view: view)
+    }
     func roundBottomRadius(radius:CGFloat, view : UIView) {
         self.roundCorners(corners: [UIRectCorner.bottomLeft, UIRectCorner.bottomRight], radius:radius, view: view)
     }
@@ -599,26 +553,21 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         self.roundCorners(corners: [UIRectCorner.topLeft, UIRectCorner.topRight], radius:radius, view: view)
     }
       
-      func roundCorners(corners:UIRectCorner, radius:CGFloat, view : UIView) {
-          let bounds = view.bounds
+    func roundCorners(corners:UIRectCorner, radius:CGFloat, view : UIView) {
+        let bounds = view.bounds
+        let maskPath = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let maskLayer = CAShapeLayer()
+        maskLayer.frame = bounds
+        maskLayer.path = maskPath.cgPath
+        view.layer.mask = maskLayer
           
-          let maskPath = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-          
-          let maskLayer = CAShapeLayer()
-          maskLayer.frame = bounds
-          maskLayer.path = maskPath.cgPath
-          
-          view.layer.mask = maskLayer
-          
-          let frameLayer = CAShapeLayer()
-          frameLayer.frame = bounds
-          frameLayer.path = maskPath.cgPath
-          frameLayer.strokeColor = UIColor.secondaryBackground.cgColor
-          frameLayer.lineWidth = 3.0
-          frameLayer.fillColor = nil
-          
-          view.layer.addSublayer(frameLayer)
+        let frameLayer = CAShapeLayer()
+        frameLayer.frame = bounds
+        frameLayer.path = maskPath.cgPath
+        frameLayer.strokeColor = UIColor.secondaryBackground.cgColor
+        frameLayer.lineWidth = 3.0
+        frameLayer.fillColor = nil
+        view.layer.addSublayer(frameLayer)
       }
-
 }
 

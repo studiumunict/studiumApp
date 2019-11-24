@@ -34,6 +34,8 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         }
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCreateCategoryView()

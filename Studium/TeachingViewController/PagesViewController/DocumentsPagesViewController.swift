@@ -9,8 +9,13 @@
 import UIKit
 
 class DocumentsPageViewController: DocumentsViewController{
-    var thisTeaching: Teaching!
-    //TODO:
+    weak var thisTeaching: Teaching!
+    weak var teachingController : TeachingViewController!
+    
+    override func viewDidAppear(_ animated: Bool) {
+        //non fa nulla perchè sennò si avrebbero problemi con l'orientation usata per il documentInteractionController.
+        //il tutto è implementato invece nel TeachingController perchè il lavigationController è il suo.
+    }
     override func fillDocSystem() {
         //non fa nulla perchè è già scaricato dal server e settato dal teachingController
         //è un fs di tipo temporaneo
@@ -21,15 +26,15 @@ class DocumentsPageViewController: DocumentsViewController{
     override func showError() {
         errorMessageLabel.isHidden = false
     }
-    override func loadDocumentsList() {
-        //il metodo non fa nulla perchè il chiamante ha già settato i documenti.
-    }
     override func setHeaderViewLayout() {
         headerView.backgroundColor = UIColor.lightWhite
         headerView.layer.borderWidth = 0.5
         headerView.layer.borderColor = UIColor.primaryBackground.cgColor
         titleLabel.text = fs.currentFolder.title
         addNewFolderButton.isHidden = true
+    }
+    override  func openFile(tempUrl: URL) {
+        teachingController.openFile(tempUrl: tempUrl)
     }
     override func setupActionsView(){
         setUpActionsViewLayout()
