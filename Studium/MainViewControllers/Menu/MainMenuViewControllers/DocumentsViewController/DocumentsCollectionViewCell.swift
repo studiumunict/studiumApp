@@ -21,7 +21,8 @@ class DocumentsCollectionViewCell: UICollectionViewCell {
         self.activityIndicator.alpha = 0.0
     }
     private func getRelatedImage(fromTitle: String)->String{
-        let dotIndex = fromTitle.lastIndex(of: ".")!
+        let dotInd = fromTitle.lastIndex(of: ".")
+        guard let dotIndex = dotInd else{return "file"}
         let extSub = fromTitle[dotIndex...]
         let ext = String(extSub)
         if ext == ".pdf" {return "pdf"}

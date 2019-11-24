@@ -678,7 +678,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2nJ-AK-pH4">
-                                <rect key="frame" x="10.5" y="138" width="393" height="756"/>
+                                <rect key="frame" x="10.5" y="138" width="393" height="724"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="teachingCell" rowHeight="60" id="0c5-jT-CID" customClass="CoursesTableViewCell" customModule="Studium" customModuleProvider="target">
@@ -751,7 +751,7 @@
                             <constraint firstItem="2nJ-AK-pH4" firstAttribute="centerX" secondItem="5Pz-Rb-gXw" secondAttribute="centerX" id="8q1-nv-sz7"/>
                             <constraint firstItem="2nJ-AK-pH4" firstAttribute="width" secondItem="sjA-UN-im6" secondAttribute="width" multiplier="0.95" id="HN5-cS-koa"/>
                             <constraint firstItem="Jxx-Qd-qdP" firstAttribute="centerX" secondItem="5Pz-Rb-gXw" secondAttribute="centerX" id="jKz-6c-LMa"/>
-                            <constraint firstItem="2nJ-AK-pH4" firstAttribute="bottom" secondItem="5Pz-Rb-gXw" secondAttribute="bottom" constant="32" id="pnP-LS-K3T"/>
+                            <constraint firstItem="2nJ-AK-pH4" firstAttribute="bottom" secondItem="5Pz-Rb-gXw" secondAttribute="bottom" id="pnP-LS-K3T"/>
                             <constraint firstItem="Jxx-Qd-qdP" firstAttribute="width" secondItem="sjA-UN-im6" secondAttribute="width" multiplier="0.95" constant="1" id="tDF-a7-u3T"/>
                             <constraint firstItem="Jxx-Qd-qdP" firstAttribute="top" secondItem="5Pz-Rb-gXw" secondAttribute="top" constant="10" id="vjQ-SL-xoI"/>
                         </constraints>
