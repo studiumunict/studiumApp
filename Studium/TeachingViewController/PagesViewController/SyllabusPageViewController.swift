@@ -51,9 +51,7 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate {
     }
     
    
-    
-    
-    
+
    
     private func customButtons(button: UIButton!, image: String!, rotazione: CGFloat!){
         let customImageView = UIImageView(frame: CGRect(x: button.frame.size.width/2 - 16, y: button.frame.size.height/2 - 10, width: 22, height: 22))
@@ -86,7 +84,7 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate {
         }
     }
     
-    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+    func webView(_ webView: WKWebView, didFailLoadWithError error: Error) {
         print("\n\n didFailLoadWithError, error: ", error.localizedDescription)
     }
     

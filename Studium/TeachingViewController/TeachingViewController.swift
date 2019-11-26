@@ -49,18 +49,28 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         return .portrait
     }
     weak var teachingDataSource: Teaching! //Pre inizializzato solo con: name, code, teacherName, signedUp
-    
     let pageViewController: UIPageViewController!  = UIPageViewController(transitionStyle: UIPageViewController.TransitionStyle.scroll, navigationOrientation: UIPageViewController.NavigationOrientation.horizontal, options: nil)
+    
     lazy var viewControllerList: [UIViewController]! = { return nil }()
     let documentInteractionController = UIDocumentInteractionController()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        courseNameLabel.text = teachingDataSource.name
+        nameTeacherLabel.text = teachingDataSource.teacherName
+        self.navigationController?.navigationBar.barTintColor = UIColor.clear
+        self.courseNameLabel.lineBreakMode = .byTruncatingMiddle
+        setUIForLoading()
+        loadContent()
+        self.documentInteractionController.delegate = self
+        //print("CODE:::::::",self.teachingDataSource.code)
+    }
     func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
            guard let navVC = self.navigationController else {
                return self
            }
            return navVC
        }
-    
     
     func openFile(tempUrl: URL) {
         documentInteractionController.url = tempUrl
@@ -80,17 +90,6 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         spinner.color = UIColor.lightGray
         spinner.style = .large
         spinner.startAnimating()
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        courseNameLabel.text = teachingDataSource.name
-        nameTeacherLabel.text = teachingDataSource.teacherName
-        self.navigationController?.navigationBar.barTintColor = UIColor.clear
-        self.courseNameLabel.lineBreakMode = .byTruncatingMiddle
-        setUIForLoading()
-        loadContent()
-        self.documentInteractionController.delegate = self
-        //print("CODE:::::::",self.teachingDataSource.code)
     }
     private func refreshContent(){
         self.teachingDataSource.removeAllData()
@@ -162,7 +161,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         }
     }
     
-    private func getShowcaseController() -> ShowcasePageViewController{
+    fileprivate func getShowcaseController() -> ShowcasePageViewController{
         let sb = storyboard!
         let vc = sb.instantiateViewController(withIdentifier: "showcasePageViewController") as! ShowcasePageViewController
         vc.showcaseHTML = teachingDataSource.showcaseHTML
@@ -171,7 +170,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         return vc
     }
     
-    private func getNotifyController() -> NotifyPageViewController{
+    fileprivate func getNotifyController() -> NotifyPageViewController{
         let sb = storyboard!
         let vc = sb.instantiateViewController(withIdentifier: "notifyPageViewController") as! NotifyPageViewController
         vc.dataSource.insertNotifies(sourceArray: teachingDataSource.notifyList)

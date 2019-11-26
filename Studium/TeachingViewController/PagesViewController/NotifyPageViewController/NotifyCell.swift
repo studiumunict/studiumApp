@@ -21,35 +21,55 @@ class NotifyCell: UITableViewCell {
     var notifyData : Notify!
    
     override func awakeFromNib() {
-        selectionStyle = .none
-        carret.image = UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate);
-        carret.tintColor = UIColor.elementsLikeNavBarColor
-        self.descriptionLabel.adjustsFontSizeToFitWidth = true
-        self.descriptionLabel.sizeToFit()
-        
-        self.contentView.backgroundColor = UIColor.clear
-        headerView.backgroundColor = UIColor.elementsLikeNavBarColor
-        let gesture:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toggle))
-        gesture.numberOfTapsRequired = 1
-        headerView.isUserInteractionEnabled = true
-        headerView.addGestureRecognizer(gesture)
-        
-        titleLabel.textColor = UIColor.lightSectionColor
-        dataLabel.textColor = UIColor.lightGray
-        
+          selectionStyle = .none
+          setupCarret()
+          setupDescriptionLabel()
+          self.contentView.backgroundColor = UIColor.clear
+          setupHeaderView()
+          dataLabel.textColor = UIColor.lightGray
+          setupElementsView()
+          setupCarretView()
+          setupTitleLabel()
+    }
+    fileprivate func setupElementsView() {
         self.elementsView.backgroundColor = UIColor.clear
         self.elementsView.layer.cornerRadius = 10.0
         self.elementsView.layer.borderWidth = 1.0
         self.elementsView.layer.borderColor = UIColor.elementsLikeNavBarColor.cgColor
         self.elementsView.clipsToBounds = true
-        
+    }
+    
+    fileprivate func setupCarretView() {
         self.carretView.layer.cornerRadius = self.carretView.frame.size.width / 2
         self.carretView.clipsToBounds = true
         self.carretView.backgroundColor = UIColor.lightSectionColor
+    }
+    
+    fileprivate func setupTitleLabel() {
+        titleLabel.textColor = UIColor.lightSectionColor
         titleLabel.numberOfLines = 2
         titleLabel.lineBreakMode = .byTruncatingMiddle
-        
     }
+    
+    fileprivate func setupHeaderView() {
+        headerView.backgroundColor = UIColor.elementsLikeNavBarColor
+        let gesture:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toggle))
+        gesture.numberOfTapsRequired = 1
+        headerView.isUserInteractionEnabled = true
+        headerView.addGestureRecognizer(gesture)
+    }
+    
+    fileprivate func setupDescriptionLabel() {
+        self.descriptionLabel.adjustsFontSizeToFitWidth = true
+        self.descriptionLabel.sizeToFit()
+    }
+    
+    fileprivate func setupCarret() {
+        carret.image = UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate);
+        carret.tintColor = UIColor.elementsLikeNavBarColor
+    }
+    
+   
     func setInfo(notifyData : Notify ) {
         self.notifyData = notifyData
         dataLabel.text = notifyData.date

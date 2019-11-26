@@ -20,7 +20,7 @@ class MenuTableViewController: UITableViewController, SWRevealViewControllerDele
         super.viewDidLoad()
         self.tableView.allowsSelection = true
         preloadSmartEduController()
-       // preloadProfileController()
+        //preloadProfileController()
     }
 
     func preloadSmartEduController(){
@@ -30,13 +30,14 @@ class MenuTableViewController: UITableViewController, SWRevealViewControllerDele
             vc.topViewController?.viewDidLoad()
         }
     }
-  /*  func preloadProfileController(){
+    func preloadProfileController(){
         if MenuTableViewController.ProfileFrontController == nil {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileNavigation") as! UINavigationController
             MenuTableViewController.ProfileFrontController = vc
-            vc.topViewController?.viewDidLoad()
+            vc.viewDidLoad()
+            //vc.topViewController?.viewDidLoad()
         }
-    }*/
+    }
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

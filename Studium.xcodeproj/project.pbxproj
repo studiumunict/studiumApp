@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1311D89B21BBE82E00A09499 /* StudentClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1311D89A21BBE82E00A09499 /* StudentClass.swift */; };
 		135D120F21B8092200DA9C69 /* ExtensionCALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135D120E21B8092200DA9C69 /* ExtensionCALayer.swift */; };
-		1380ED512302F2440063F79F /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1380ED502302F2440063F79F /* DocumentBrowserViewController.swift */; };
 		138E6E2821C458830000A747 /* SyllabusPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138E6E2721C458830000A747 /* SyllabusPageViewController.swift */; };
 		139BCB6421BDDC71005A750A /* ShowcasePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139BCB6321BDDC71005A750A /* ShowcasePageViewController.swift */; };
 		139BCB6621BDDFD5005A750A /* NotifyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139BCB6521BDDFD5005A750A /* NotifyPageViewController.swift */; };
@@ -94,7 +93,6 @@
 		0E83DFE790C0A80B2F43811B /* Pods-StudiumUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudiumUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudiumUITests/Pods-StudiumUITests.release.xcconfig"; sourceTree = "<group>"; };
 		1311D89A21BBE82E00A09499 /* StudentClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentClass.swift; sourceTree = "<group>"; };
 		135D120E21B8092200DA9C69 /* ExtensionCALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionCALayer.swift; sourceTree = "<group>"; };
-		1380ED502302F2440063F79F /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
 		138E6E2721C458830000A747 /* SyllabusPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyllabusPageViewController.swift; sourceTree = "<group>"; };
 		139BCB6321BDDC71005A750A /* ShowcasePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowcasePageViewController.swift; sourceTree = "<group>"; };
 		139BCB6521BDDFD5005A750A /* NotifyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyPageViewController.swift; sourceTree = "<group>"; };
@@ -297,7 +295,6 @@
 				9C06A22B21AB707500E695DB /* CDLClass.swift */,
 				9CFE72C221B95206001EB697 /* TeachingClass.swift */,
 				9CFE72C421B95331001EB697 /* HomeTableSectionClass.swift */,
-				1380ED502302F2440063F79F /* DocumentBrowserViewController.swift */,
 				9C2C63CC237311BB0063F9C7 /* NotifyClass.swift */,
 				9CBDB9CE2379C6AD00A015A4 /* CoreSSAnimation.swift */,
 				9C27B34A237B0DB500242958 /* DescriptionBlock.swift */,
@@ -751,7 +748,6 @@
 				9C14FE76237B1CC400069D11 /* DescriptionTableViewDataSource.swift in Sources */,
 				13D3F45A237AE88E00D0D4EB /* CoreDataController.swift in Sources */,
 				9C06A22721AB6BC500E695DB /* DepartmentTableViewCell.swift in Sources */,
-				1380ED512302F2440063F79F /* DocumentBrowserViewController.swift in Sources */,
 				9CFE9D7321A8ADBC0030AE33 /* AppDelegate.swift in Sources */,
 				9C14FE87237B2C1D00069D11 /* CDEFileSystemCoreDataProperties.swift in Sources */,
 				9CFE72C121B9508E001EB697 /* CDLTableViewCell.swift in Sources */,

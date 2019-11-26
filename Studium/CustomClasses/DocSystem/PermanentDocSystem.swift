@@ -30,7 +30,10 @@ class PermanentDocSystem: TempDocSystem{ //fileSystem singleton con autoSalvatag
     override init(){
         super.init()
     }
-    
+    override func move(documents: [Doc], fromFolder: Doc, toFolder: Doc) {
+        super.move(documents: documents, fromFolder: fromFolder, toFolder: toFolder)
+        CoreDataController.shared.saveFileSystem(self)
+    }
     override func appendChild(toDoc: Doc, child: Doc) -> Doc {
         let appendedDoc = super.appendChild(toDoc: toDoc, child: child)
         CoreDataController.shared.saveFileSystem(self)

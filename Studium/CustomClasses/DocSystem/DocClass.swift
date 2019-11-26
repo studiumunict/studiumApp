@@ -21,10 +21,6 @@ class Doc : NSObject, NSCoding {
     var childs = [Doc]()
     var courseID : String!
     
-    /*enum docType {
-        case file
-        case folder
-    }*/
     init(title: String, path: String, type: String, courseID: String) {
         self.title = title
         self.path = path
@@ -36,7 +32,6 @@ class Doc : NSObject, NSCoding {
         self.courseID = courseID
     }
 
-    
     init(title: String, path: String, type: String, uploaded: String, lastUpdate: String, size: Int, courseID: String) {
         super.init()
         //self.title = title

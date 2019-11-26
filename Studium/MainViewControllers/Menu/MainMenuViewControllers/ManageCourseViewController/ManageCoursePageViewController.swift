@@ -23,6 +23,7 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
     let pageViewController: UIPageViewController!  = UIPageViewController(transitionStyle: UIPageViewController.TransitionStyle.scroll, navigationOrientation: UIPageViewController.NavigationOrientation.horizontal, options: nil)
     lazy var navControllerList: [UIViewController]! = { return nil }()
     
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         setMenuNavItem()
@@ -32,15 +33,20 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
         setNavBarControllerList()
         setNavBarForManagement()
         setRevealControllerParameters()
-        pageViewController.dataSource = self
-        pageViewController.delegate = self
-        pageViewController.view.frame = CGRect(x: 0.0, y: 0.0, width: self.viewAppoggio.frame.width, height: self.viewAppoggio.frame.height)
-        self.viewAppoggio.addSubview(pageViewController.view)
+        setupPageViewControllerParameters()
         if let fisrtViewController = navControllerList.first {
             pageViewController.setViewControllers([fisrtViewController], direction: .forward, animated: true, completion: nil)
         }
         setNavBarButtons()
     }
+    
+    fileprivate func setupPageViewControllerParameters() {
+           pageViewController.dataSource = self
+           pageViewController.delegate = self
+           pageViewController.view.frame = CGRect(x: 0.0, y: 0.0, width: self.viewAppoggio.frame.width, height: self.viewAppoggio.frame.height)
+           self.viewAppoggio.addSubview(pageViewController.view)
+       }
+       
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

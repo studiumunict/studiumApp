@@ -142,13 +142,11 @@ class Teaching{
         //self.descriptionText = "Descrizione"
         let api = BackendAPI.getUniqueIstance()
         api.getCourseDescription(codCourse: self.code) { (JSONResponse) in
-            print("**************************Descrizione", JSONResponse ?? "NULL")
             let JSONArray = JSONResponse as! [Any]
             for descBlock in JSONArray{
                 let descriptionBlock = descBlock as! [String: Any]
                 let blockTitle = descriptionBlock["title"] as! String
                 let blockContent = descriptionBlock["content"] as! String
-                //print("-------Blocco descrizione:-------- ",blockTitle, " ", blockContent)
                 let descBlock = DescriptionBlock(title: blockTitle, message: blockContent)
                 self.description.append(descBlock)
             }

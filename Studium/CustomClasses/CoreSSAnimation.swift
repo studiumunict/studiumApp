@@ -29,15 +29,8 @@ class CoreSSAnimation{
         viewToOpen.alpha = 0.0
         viewToOpen.isHidden = false
         let initialCenter =  viewToOpen.center
-        //print("initial center: ", viewToOpen.center.x, " : ", viewToOpen.center.y)
-        //print("sourceView center: ", sourceView.center.x, " : ", sourceView.center.y)
         viewToOpen.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
         viewToOpen.center = CGPoint(x: sourceView.center.x + 10, y: sourceView.center.y + 5)
-        //viewToOpen.frame.origin = sourceView.frame.origin
-         //print("new center: ", viewToOpen.center.x, " : ", viewToOpen.center.y)
-        //viewToOpen.layoutIfNeeded()
-        //viewToOpen.setNeedsDisplay()
-        //print("actual center: ", viewToOpen.center.x, " : ", viewToOpen.center.y)
         UIView.animate(withDuration: 0.2, animations: {
            
             if let _ = oscureView {oscureView.alpha = 0.6}

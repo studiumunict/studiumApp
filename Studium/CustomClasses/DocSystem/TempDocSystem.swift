@@ -52,7 +52,18 @@ public class TempDocSystem: NSObject, NSCoding {
             return child
         }
     }
+    private func removeDoc(fromFolder: Doc, doc: Doc){
+        let i = getIndex(ofDoc: doc, inFolder: fromFolder)
+        fromFolder.childs.remove(at: i)
+    }
     
+    func move(documents: [Doc], fromFolder :Doc, toFolder: Doc){
+        for doc in documents{
+            doc.setParent(prev: toFolder)
+            toFolder.addChild(item: doc)
+            removeDoc(fromFolder: fromFolder, doc: doc)
+        }
+    }
     func removeChilds(childs: [Doc]){
         for child in childs{
             removeChild(child: child)

@@ -31,6 +31,9 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     private var emptyContent :Bool! = true
     let documentInteractionController = UIDocumentInteractionController()
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var moving = false
+    var moveFrom :Doc!
+    var moveTo : Doc!
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask{
         return .portrait
     }
@@ -47,6 +50,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         collectionView.delegate = self
         setUpOscureView()
         setUpCreateFolderView()
+        setupActionsButtonForNormalSelection()
         fillDocSystem()
         if fs.root.childs.count == 0 {
             setEmptyContentLayout()
@@ -128,6 +132,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         emptyContent = false
     }
     
+    
     func checkContent(){
         if emptyContent && fs.root.childs.count > 0{
             print("Setto full content")
@@ -150,6 +155,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "docsCell", for: indexPath) as! DocumentsCollectionViewCell
         let cellType = fs.currentFolder.childs[indexPath.item].type
+        checkForSelectionDraw(cell: cell, indexPath: indexPath)
         if cellType == "file" {
             cell.update(type: "file", title: fs.currentFolder.childs[indexPath.item].title!, description: "")
         }
@@ -162,22 +168,28 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         }
         return cell
     }
+    func isInSelectionList(doc :Doc) -> Bool{
+        return selectionList.contains(doc)
+    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView.allowsMultipleSelection {
+        
+        if collectionView.allowsMultipleSelection && !moving {
             selectionList.append(fs.currentFolder.childs[indexPath.item])
             let cell = collectionView.cellForItem(at: indexPath)
             cell?.backgroundColor = UIColor.lightSectionColor
             selectedActionButton.isEnabled = true
         }
-        else { //abbiamo cliccato una folder
+        else {
             if fs.currentFolder.childs[indexPath.item].type == "folder" {
+                if moving && isInSelectionList(doc: fs.currentFolder.childs[indexPath.item]){ print("is in selection!"); return }
                 backButton.isEnabled = true
                 titleLabel.text = fs.currentFolder.childs[indexPath.item].title
                 fs.goToChild(childDoc: fs.currentFolder.childs[indexPath.item])
                 reloadCollectionView()
             }
             else { //Visualizza il file
+                if moving{ return }
                 print("file selezionato:: \((fs.currentFolder.childs[indexPath.item].path)!)")
                 fileSelected(indexPath: indexPath)
             }
@@ -233,12 +245,22 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         super.viewWillAppear(animated)
         self.reloadCollectionView()
     }
+    private func checkForMoving(){
+        if moving{
+            moveTo = fs.currentFolder
+            if moveTo != moveFrom{ selectedActionButton.isEnabled = true }
+            else{ selectedActionButton.isEnabled = false }
+        }
+    }
     func reloadCollectionView(){
+        
+        self.checkForMoving()
         self.checkContent()
         self.setBackButtonState()
         self.collectionView.reloadData()
         self.reloadTitleLabel()
         self.reloadDescriptionLabel()
+        //self.drawSelectedCell()
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         cell.backgroundColor = cell.isSelected ? UIColor.lightSectionColor : UIColor.clear
@@ -254,6 +276,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard !moving else {return}
         guard collectionView.allowsMultipleSelection else { return }
         let cell = collectionView.cellForItem(at: indexPath) as! DocumentsCollectionViewCell
         let index = getSelectedCellIndex(cellTitle: cell.titleDocLabel.text!)
@@ -316,9 +339,15 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         }
     }
     
-    
+    private func stopMoving(){
+        moving = false
+        moveFrom = nil
+        moveTo = nil
+        setupActionsButtonForNormalSelection()
+    }
     @IBAction func multipleSelectionClicked() {
         if collectionView.allowsMultipleSelection {
+            if moving{ stopMoving() }
             cancelSelection()
         } else {
             startSelection()
@@ -331,6 +360,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         addNewFolderButton.isEnabled = false
         selectButton.isSelected = true
         showSelectedActionButton()
+        setupActionsButtonForNormalSelection()
     }
     private func cancelSelection(){
         selectButton.isSelected = false
@@ -341,6 +371,14 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         hideSelectedActionButton()
     }
     
+    internal func checkForSelectionDraw(cell: DocumentsCollectionViewCell, indexPath: IndexPath){
+        guard moving else { return }
+        let i = indexPath.item
+        if selectionList.contains(fs.currentFolder.childs[i]){
+            cell.backgroundColor = UIColor.lightSectionColor
+            cell.isSelected = true
+        }
+    }
     internal func deselectAllCells(){
         for i in 0..<fs.currentFolder.childs.count {
             let cell = collectionView.cellForItem(at: IndexPath(item: i, section: 0))
@@ -357,8 +395,33 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         let CV = ConfirmView.getUniqueIstance()
         return CV.getButton(position: .center, dataToAttach: nil, title: "Sposta in una cartella", selector:   #selector(moveSelectedDocuments), target: self)
     }
+    private func setupActionsButtonForNormalSelection(){
+        selectedActionButton.setTitle("Seleziona dei documenti", for: .disabled)
+        selectedActionButton.setTitle("Gestisci selezionati", for: .normal)
+        //da settare l'action
+        selectedActionButton.removeTarget(self, action: #selector(selectedActionButtonDestinationFolderSelectionClicked(_:)), for: .touchUpInside)
+        selectedActionButton.addTarget(self, action: #selector(selectedActionButtonNormalSelectionClicked(_:)), for: .touchUpInside)
+    }
+    private func setupActionsButtonForSelectFolderState(){
+        selectedActionButton.setTitle("Seleziona una cartella di destinazione", for: .disabled)
+        selectedActionButton.setTitle("Conferma spostamento", for: .normal)
+        //da settare l'action
+        selectedActionButton.removeTarget(self, action: #selector(selectedActionButtonNormalSelectionClicked(_:)), for: .touchUpInside)
+        selectedActionButton.addTarget(self, action: #selector(selectedActionButtonDestinationFolderSelectionClicked(_:)), for: .touchUpInside)
+    }
+    
+    private func startMoving(){
+        self.moving = true
+        self.moveFrom = self.fs.currentFolder
+        self.moveTo = self.fs.currentFolder
+        let SSAnimator = CoreSSAnimation.getUniqueIstance()
+        SSAnimator.collapseViewInSourceFrame(sourceFrame: self.selectedActionButton.frame, viewToCollapse: self.actionsView, oscureView: self.oscureView, elementsInsideView: nil) { (flag) in }
+        setupActionsButtonForSelectFolderState()
+        selectedActionButton.isEnabled = false
+        setBackButtonState()
+    }
     @objc func moveSelectedDocuments(){
-        
+        startMoving()
     }
     @objc func deleteSelectedDocuments(){
         //sarebbe il caso di far comparire un alert
@@ -482,8 +545,13 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         createFolderView.layer.cornerRadius = 5.0
        }
     
-   
-    @IBAction func selectedActionButtonClicked(_ sender: Any) {
+    @objc func selectedActionButtonDestinationFolderSelectionClicked(_ sender: Any) {
+        fs.move(documents: selectionList, fromFolder: moveFrom, toFolder: moveTo)
+        cancelSelection()
+        stopMoving()
+        reloadCollectionView()
+    }
+    @objc func selectedActionButtonNormalSelectionClicked(_ sender: Any) {
         setupActionsView()
         setUpOscureView()
         let SSAnimator = CoreSSAnimation.getUniqueIstance()
