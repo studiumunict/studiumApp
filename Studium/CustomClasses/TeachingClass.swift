@@ -17,7 +17,7 @@ class Teaching{
     var teacherName: String!
     var showcaseHTML: String!
     var haveBooking: Bool!
-    var description: [DescriptionBlock]! // se nel sito è formattata in html potremmo prenderci l'html e mostrarlo in una webView. A quel punto rimarrebbe formattato allo stesso modo
+    var description: [DescriptionBlock]!
     var notifyList: [Notify]!
     var fs : TempDocSystem!
     var syllabusCode: String!
@@ -123,7 +123,6 @@ class Teaching{
     private func downloadNotify(completion: @escaping (Bool)->Void){
         let api =  BackendAPI.getUniqueIstance()
         api.getAvvisi(codCourse: self.code) { (JSONResponse) in
-            //print(JSONResponse)
             let JSONArray = JSONResponse as! [Any]
             for avviso in JSONArray{
                 let avvisoDict = avviso as! [String: Any]

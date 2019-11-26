@@ -101,7 +101,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             self.showDepartmentTableAnimated()
         }
         
-        HomeFrontController = self.navigationController
+        MenuTableViewController.HomeFrontController = self.navigationController
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 130 //Menu sx
             revealViewController().delegate = self

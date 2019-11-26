@@ -78,11 +78,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         oscureLoadingView.addSubview(spinner)
         spinner.layer.zPosition = 4
         spinner.color = UIColor.lightGray
-        if #available(iOS 13.0, *) {
-            spinner.style = .large
-        } else {
-            // Fallback on earlier versions
-        }
+        spinner.style = .large
         spinner.startAnimating()
     }
     override func viewDidLoad() {
@@ -124,13 +120,6 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         }
     }
     
-   /* private func setPanGestureOnFirstController(){
-        if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 130//Menu sx/
-            revealViewController().delegate = self
-            viewControllerList[0].view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-        }
-    }*/
     private func setUIForRefreshing(){
         self.oscureLoadingView.alpha = 0.0
         self.oscureLoadingView.isHidden = false
@@ -167,103 +156,125 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             self.setPageViewControllerSubviewsNumber()
             self.pageViewController.dataSource = self
             self.pageViewController.delegate = self
-            self.setPageControllerLayouts()
+            self.setPageControllerLayout()
             self.hideLoadingOscureView()
             self.showStackView()
         }
     }
     
+    private func getShowcaseController() -> ShowcasePageViewController{
+        let sb = storyboard!
+        let vc = sb.instantiateViewController(withIdentifier: "showcasePageViewController") as! ShowcasePageViewController
+        vc.showcaseHTML = teachingDataSource.showcaseHTML
+        showcaseButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToShowcaseView(_:))))
+        customButtons(button: showcaseButton, image: "showcase", action: #selector(self.sendToShowcaseView(_:)))
+        return vc
+    }
+    
+    private func getNotifyController() -> NotifyPageViewController{
+        let sb = storyboard!
+        let vc = sb.instantiateViewController(withIdentifier: "notifyPageViewController") as! NotifyPageViewController
+        vc.dataSource.insertNotifies(sourceArray: teachingDataSource.notifyList)
+        notifyButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToNotifyView(_:))))
+        if teachingDataSource.notifyList.isEmpty {
+            customButtons(button: notifyButton, image: "markedBell", action: #selector(self.sendToNotifyView(_:)))
+        } else {
+            customButtons(button: notifyButton, image: "bell", action: #selector(self.sendToNotifyView(_:)))
+        }
+        return vc
+    }
+    
+    fileprivate func getSyllabusController() -> SyllabusPageViewController {
+        let sb = storyboard!
+        let vc = sb.instantiateViewController(withIdentifier: "syllabusPageViewController") as! SyllabusPageViewController
+        vc.syllabusCode = teachingDataSource.syllabusCode
+        syllabusButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToSyllabusView(_:))))
+        customButtons(button: syllabusButton, image: "description", action: #selector(self.sendToSyllabusView(_:)))
+        return vc
+    }
+    
+    fileprivate func getDescriptionController() -> DescriptionPageViewController {
+        let sb = storyboard!
+        let vc = sb.instantiateViewController(withIdentifier: "descriptionPageViewController") as! DescriptionPageViewController
+        vc.dataSource.insertDescriptionBlocks(sourceArray: self.teachingDataSource.description)
+        descriptionButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToDescriptionView(_:))))
+        customButtons(button: descriptionButton, image: "notebook", action: #selector(self.sendToDescriptionView(_:)))
+        return vc
+    }
+    
+    fileprivate func getDocumentController() -> DocumentsPageViewController {
+        let sb = storyboard!
+        let vc = sb.instantiateViewController(withIdentifier: "documentsPageViewController") as! DocumentsPageViewController
+        vc.fs = teachingDataSource.fs
+        vc.thisTeaching = teachingDataSource
+        vc.teachingController = self
+        documentsButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToDocumentsView(_:))))
+        customButtons(button: documentsButton, image: "folder_1", action: #selector(self.sendToDocumentsView(_:)))
+        return vc
+    }
+    
+    fileprivate func getBookingController() -> BookingPageViewController {
+        let sb = storyboard!
+        let vc = sb.instantiateViewController(withIdentifier: "bookingPageViewController") as! BookingPageViewController
+        vc.haveBooking = teachingDataSource.haveBooking
+        bookingButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToBookingView(_:))))
+        customButtons(button: bookingButton, image: "booking", action: #selector(self.sendToBookingView(_:)))
+        return vc
+    }
+    
     private func istantiateViewControllers(){
         viewControllerList = {
             var activeControllerLists = [UIViewController]()
-            let sb = storyboard!
             if teachingDataSource.showcaseHTML != nil && !teachingDataSource.showcaseHTML.isEmpty{
-                let vc = sb.instantiateViewController(withIdentifier: "showcasePageViewController") as! ShowcasePageViewController
-                vc.showcaseHTML = teachingDataSource.showcaseHTML
+                let vc = getShowcaseController()
                 activeControllerLists.append(vc)
-                showcaseButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToShowcaseView(_:))))
-                customButtons(button: showcaseButton, image: "showcase", action: #selector(self.sendToShowcaseView(_:)))
-                
             }
             else{ showcaseButtonView.isHidden = true }
             
             if !teachingDataSource.notifyList.isEmpty{
-                let vc = sb.instantiateViewController(withIdentifier: "notifyPageViewController") as! NotifyPageViewController
-                vc.dataSource.insertNotifies(sourceArray: teachingDataSource.notifyList)
+                let vc = getNotifyController()
                 activeControllerLists.append(vc)
-                notifyButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToNotifyView(_:))))
-                           if teachingDataSource.notifyList.isEmpty {
-                               customButtons(button: notifyButton, image: "markedBell", action: #selector(self.sendToNotifyView(_:)))
-                           } else {
-                               customButtons(button: notifyButton, image: "bell", action: #selector(self.sendToNotifyView(_:)))
-                           }
-              
             }
             else{ notifyButtonView.isHidden = true }
             
             if teachingDataSource.syllabusCode != nil && !teachingDataSource.syllabusCode.isEmpty{
-                 let vc = sb.instantiateViewController(withIdentifier: "syllabusPageViewController") as! SyllabusPageViewController
-                    vc.syllabusCode = teachingDataSource.syllabusCode
+                let vc = getSyllabusController()
                 activeControllerLists.append(vc)
-                syllabusButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToSyllabusView(_:))))
-                customButtons(button: syllabusButton, image: "description", action: #selector(self.sendToSyllabusView(_:)))
-               
             }
             else{ syllabusButtonView.isHidden = true }
             
             
             if teachingDataSource.description.count > 0 {
-                let vc = sb.instantiateViewController(withIdentifier: "descriptionPageViewController") as! DescriptionPageViewController
-                vc.dataSource.insertDescriptionBlocks(sourceArray: self.teachingDataSource.description)
+                let vc = getDescriptionController()
                 activeControllerLists.append(vc)
-                descriptionButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToDescriptionView(_:))))
-                customButtons(button: descriptionButton, image: "description", action: #selector(self.sendToDescriptionView(_:)))
-                
             }
             else{ descriptionButtonView.isHidden =  true }
             
             if teachingDataSource.fs.currentFolder.childs.count != 0 {
-                 let vc = sb.instantiateViewController(withIdentifier: "documentsPageViewController") as! DocumentsPageViewController
-                 vc.fs = teachingDataSource.fs
-                vc.thisTeaching = teachingDataSource
-                vc.teachingController = self
+                let vc = getDocumentController()
                 activeControllerLists.append(vc)
-                documentsButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToDocumentsView(_:))))
-                customButtons(button: documentsButton, image: "folder_1", action: #selector(self.sendToDocumentsView(_:)))
-               
             }
             else{ documentsButtonView.isHidden = true }
            
             
             if teachingDataSource.haveBooking != nil && teachingDataSource.haveBooking{
-                
-                let vc = sb.instantiateViewController(withIdentifier: "bookingPageViewController") as! BookingPageViewController
-                 vc.haveBooking = teachingDataSource.haveBooking
+                let vc = getBookingController()
                 activeControllerLists.append(vc)
-                bookingButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToBookingView(_:))))
-                customButtons(button: bookingButton, image: "booking", action: #selector(self.sendToBookingView(_:)))
-               
-                
             }
             else{ bookingButtonView.isHidden = true }
             
             return activeControllerLists
         }()
     }
-    private func setPageControllerLayouts(){
+    private func setPageControllerLayout(){
         viewAppoggio.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height - (stackView.frame.height + courseNameLabel.frame.height + nameTeacherLabel.frame.height)) //definisco le dimensioni reali e di autolayout per la scrollView
-            
             pageViewController.view.frame = CGRect(x: 0.0, y: 0.0, width: viewAppoggio.frame.width, height: viewAppoggio.frame.height)
             viewAppoggio.addSubview(pageViewController.view)
-            
             if let fisrtViewController = viewControllerList.first {
                pageViewController.setViewControllers([fisrtViewController], direction: .forward, animated: true, completion: nil)
             }
-            
             navigationItem.title = "Insegnamento"
             navigationController?.view.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.secondaryBackground, thickness: 0.3)
-        
-            
             for x in stackView.subviews {
                 if !x.isHidden {
                     x.backgroundColor = UIColor.buttonSelected
@@ -272,15 +283,12 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             }
     }
 
-    
     private func setPageViewControllerSubviewsNumber() {
         for x in stackView.subviews {
             stackView.addConstraint(x.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 1 /
                 CGFloat(viewControllerList.count), constant: 0))
         }
     }
-    
-    
     
    private func setAllButtonsViewWithClearBackgroundColor(){
         showcaseButtonView.backgroundColor = UIColor.clear
@@ -291,7 +299,6 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         bookingButtonView.backgroundColor = UIColor.clear
     }
     
-    
     private func customButtons(button: UIButton!, image: String!, action: Selector?){
         let customImageView = UIImageView(frame: CGRect(x: button.frame.size.width/2 - 16, y: button.frame.size.height/2 - 15, width: 32, height: 30))
         customImageView.image = UIImage(named: image!)
@@ -299,13 +306,9 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         button.addTarget(self, action: action!, for: UIControl.Event.touchUpInside)
     }
     
-
     @IBAction func refreshClicked(_ sender: Any) {
         self.refreshContent()
     }
-    
-    
-    
     
     @objc func sendToShowcaseView(_ sender: UIButton) {
         var i = 0
@@ -373,16 +376,6 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         bookingButtonView.backgroundColor = UIColor.buttonSelected
     }
 
-    /*func setRevealControllerGesture(){
-        //Definire le dimensioni dei menu
-        if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 130//Menu sx
-            revealViewController().delegate = self
-           if viewControllerList != nil{
-            viewControllerList[0].view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-           }
-        }
-    }*/
     override func viewWillAppear(_ animated: Bool) {
          super.viewWillAppear(animated)
          navigationController?.interactivePopGestureRecognizer?.isEnabled = false
@@ -393,61 +386,29 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         print("TeachingAppeared")
      }
      
-     
-     
-     
-     
      func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-         
-         guard let vcIndex = viewControllerList.firstIndex(of: viewController) else {
-             return nil
-         }
-         
+         guard let vcIndex = viewControllerList.firstIndex(of: viewController) else {return nil}
          let previousIndex = vcIndex - 1
-         
-         guard previousIndex >= 0 else {
-             return nil
-         }
-         
-         guard viewControllerList.count > previousIndex else {
-             return nil
-         }
-         
+         guard previousIndex >= 0 else {return nil}
+         guard viewControllerList.count > previousIndex else {return nil}
          return viewControllerList[previousIndex]
      }
      
      func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-         
-         guard let vcIndex = viewControllerList.firstIndex(of: viewController) else {
-             return nil
-         }
-         
+         guard let vcIndex = viewControllerList.firstIndex(of: viewController) else {return nil}
          let nextIndex = vcIndex + 1
-         
-         guard viewControllerList.count != nextIndex else {
-             return nil
-         }
-         
-         guard viewControllerList.count > nextIndex else {
-             return nil
-         }
-         
+         guard viewControllerList.count != nextIndex else {return nil}
+         guard viewControllerList.count > nextIndex else {return nil}
          return viewControllerList[nextIndex]
      }
-     
-
-     
+    
      func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
          guard completed else { return }
-     
          guard let vc = pageViewController.viewControllers?.first else { return }
-         
          if revealViewController() != nil {
              vc.view.removeGestureRecognizer(revealViewController().panGestureRecognizer())
          }
-         
          setAllButtonsViewWithClearBackgroundColor()
-         
          switch vc {
          case is ShowcasePageViewController:
              showcaseButtonView.backgroundColor = UIColor.buttonSelected
@@ -478,12 +439,10 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
      func revealController(_ revealController: SWRevealViewController!, didMoveTo position: FrontViewPosition) {
          switch position {
          case .right: //Uno dei due menu è aperto
-             //scrollView.isScrollEnabled = false
              stackView.isUserInteractionEnabled = false
              self.navigationController?.navigationBar.isUserInteractionEnabled = false
              
          case .left: //Tutti i menu sono chiusi
-             //scrollView.isScrollEnabled = true
              stackView.isUserInteractionEnabled = true
              self.navigationController?.navigationBar.isUserInteractionEnabled = true
              

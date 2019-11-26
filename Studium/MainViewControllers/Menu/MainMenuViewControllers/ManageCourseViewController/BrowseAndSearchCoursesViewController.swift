@@ -78,7 +78,6 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
             let cell = cdlTableView.dequeueReusableCell(withIdentifier: "teachingCell") as! BrowseAndSearchCourseTableViewCell
             var dataElement : Teaching!
             if self.cdsSearchBar.isFirstResponder || self.cdsSearchBar.text != ""{
-                print("prendo dal filtered")
                 dataElement = self.filteredCDLDataSource[indexPath.section].teachings[indexPath.row]
             }
             else{
@@ -90,7 +89,7 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
         }
     }
     @objc func confirmSignup(sender: UIButton) {
-        let indexPath = sender.accessibilityElements![0] as! IndexPath
+        let indexPath = sender.accessibilityElements![1] as! IndexPath
         let courseCode : String
         if self.cdsSearchBar.isFirstResponder || self.cdsSearchBar.text != ""{
             courseCode = self.filteredCDLDataSource[indexPath.section].teachings[indexPath.row].code
@@ -108,63 +107,27 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
     }
     
     private func setUpSubscriptedLabelForSignUp() -> UILabel{
-        let label = UILabel.init(frame: CGRect(x: 10, y: 20, width: signUpView.frame.size.width - 20, height: 20))
-        label.text =  "Iscrizione effettuata!"
-        label.textColor = UIColor.lightWhite
-        label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.textAlignment = .center
-        label.alpha = 0.0
-        return label
+        let CV = ConfirmView.getUniqueIstance()
+        return CV.getTitleLabel(text: "Iscrizione effettuata")
     }
     
     private func setUpCheersLabelForSignUp() -> UILabel{
-        let label = UILabel.init(frame: CGRect(x: 10 , y: 45, width: signUpView.frame.size.width - 20, height: 20))
-        label.text = "Troverai il corso nella sezione \"I miei corsi\" "
-        label.textColor = UIColor.lightGray
-        label.font = UIFont.boldSystemFont(ofSize: 13)
-        label.textAlignment = .center
-        label.alpha = 0.0
-        return label
+        let CV = ConfirmView.getUniqueIstance()
+        return CV.getDescriptionLabel(text: "Troverai il corso nella sezione \"I miei corsi\" ")
     }
     
     private func setupSignUpViewForConfirmSubscription(senderButton: UIButton){
-        for sv in self.signUpView.subviews{
-            UIView.animate(withDuration: 0.3, animations: {
-                sv.alpha = 0.0
-            }) { (flag) in
-                sv.removeFromSuperview()
-            }
-        }
-        let subscriptedLabel = setUpSubscriptedLabelForSignUp()
-        let cheersLabel = setUpCheersLabelForSignUp()
-        self.signUpView.addSubview(subscriptedLabel)
-        self.signUpView.addSubview(cheersLabel)
-        let indexPath = senderButton.accessibilityElements?[0] as! IndexPath
-        let closeConfirmButton = setupCloseConfirmSignUpButton(sourceIndexPath: indexPath)
-        self.signUpView.addSubview(closeConfirmButton)
-        UIView.animate(withDuration: 0.3, animations: {
-            for sv in self.signUpView.subviews{
-                sv.alpha = 1.0
-            }
-        })
+        let CV = ConfirmView.getUniqueIstance()
+        let subscriptedLabel = self.setUpSubscriptedLabelForSignUp()
+        let cheersLabel = self.setUpCheersLabelForSignUp()
+        let indexPath = senderButton.accessibilityElements?[1] as! IndexPath
+        let closeConfirmButton = self.setupCloseConfirmSignUpButton(sourceIndexPath: indexPath)
+        CV.updateView(confirmView: &self.signUpView, titleLabel: subscriptedLabel, descLabel: cheersLabel, buttons: [closeConfirmButton], dataToAttach: nil, animated: true)
     }
     
     private func setupCloseConfirmSignUpButton(sourceIndexPath: IndexPath) -> UIButton{
-        let closeConfirmButton = UIButton(frame: CGRect(x: 0, y: 100 , width: 200, height: 40))
-        closeConfirmButton.center.x = self.signUpView.center.x - 20
-        closeConfirmButton.backgroundColor = UIColor.lightWhite
-        closeConfirmButton.setTitleColor(UIColor.textBlueColor, for: .normal)
-        closeConfirmButton.accessibilityElements = [IndexPath]()
-        closeConfirmButton.accessibilityElements?.append(sourceIndexPath)
-        closeConfirmButton.addTarget(self, action: #selector(hideSignUpViewAnimated(button:)), for: .touchUpInside)
-        closeConfirmButton.setTitle("Chiudi", for: .normal)
-        closeConfirmButton.titleLabel?.font = UIFont(name: "System", size: 9)
-        closeConfirmButton.layer.cornerRadius = 5.0
-        closeConfirmButton.layer.borderWidth = 2.0
-        closeConfirmButton.layer.borderColor = UIColor.secondaryBackground.cgColor
-        closeConfirmButton.alpha = 0.0
-        return closeConfirmButton
-    
+        let CV = ConfirmView.getUniqueIstance()
+        return CV.getButton(position: .alone, dataToAttach: sourceIndexPath, title: "Chiudi", selector: #selector(hideSignUpViewAnimated(button:)), target: self)
     }
     
     private func setUpOscureView(){
@@ -175,51 +138,23 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
         
     }
     private func setUpTeachingNameLabelForSignUp(teaching: Teaching)-> UILabel{
-        let teachingNameLabel = UILabel.init(frame: CGRect(x: 10, y: 20, width: signUpView.frame.size.width - 20, height: 20))
-        teachingNameLabel.text = teaching.name
-        teachingNameLabel.textColor = UIColor.lightWhite
-        teachingNameLabel.font = UIFont.boldSystemFont(ofSize: 15)
-        teachingNameLabel.textAlignment = .center
-        //teachingNameLabel.alpha = 0.0
-        return teachingNameLabel
+        let CV = ConfirmView.getUniqueIstance()
+        return CV.getTitleLabel(text: teaching.name)
     }
     
     private func setUpTeacherNameLabelForSignUp(teaching: Teaching)->UILabel{
-        let teacherNameLabel = UILabel.init(frame: CGRect(x: 10 , y: 45, width: signUpView.frame.size.width - 20, height: 20))
-        teacherNameLabel.text = teaching.teacherName
-        teacherNameLabel.textColor = UIColor.lightGray
-        teacherNameLabel.font = UIFont.boldSystemFont(ofSize: 13)
-        teacherNameLabel.textAlignment = .center
-        //teacherNameLabel.alpha = 0.0
-        return teacherNameLabel
+        let CV = ConfirmView.getUniqueIstance()
+        return CV.getDescriptionLabel(text: teaching.teacherName)
     }
     
     private func setUpSignUpButtonForSignUp(sourceIndexPath: IndexPath) ->UIButton{
-        let signUpButton = UIButton(frame: CGRect(x: signUpView.frame.size.width/2 - 0.5, y: 100 , width: 100, height: 40))
-        signUpButton.backgroundColor = UIColor.lightWhite
-        signUpButton.setTitleColor(UIColor.textBlueColor, for: .normal)
-        signUpButton.accessibilityElements = [IndexPath]()
-        signUpButton.accessibilityElements?.append(sourceIndexPath)
-        signUpButton.addTarget(self, action: #selector(confirmSignup(sender:)), for: .touchUpInside)
-        signUpButton.setTitle("Iscriviti", for: .normal)
-        signUpButton.titleLabel?.font = UIFont(name: "System", size: 9)
-        signUpButton.layer.cornerRadius = 5.0
-        roundRightRadius(radius: 5.0, view: signUpButton)
-        return signUpButton
+        let CV = ConfirmView.getUniqueIstance()
+        return CV.getButton(position: .right, dataToAttach: sourceIndexPath, title: "Iscriviti", selector: #selector(confirmSignup(sender:)), target: self)
+       
     }
     private func setUpCancelButtonForSignUp(sourceIndexPath: IndexPath) ->UIButton{
-        let cancelButton = UIButton(frame: CGRect(x: signUpView.frame.size.width/2 - 100 + 0.5 , y: 100, width: 100, height: 40))
-        cancelButton.backgroundColor = UIColor.lightWhite
-        cancelButton.setTitle("Annulla", for: .normal)
-        cancelButton.titleLabel?.font = UIFont(name: "System", size: 9)
-        cancelButton.setTitleColor(UIColor.textRedColor, for: .normal)
-        cancelButton.accessibilityElements = [IndexPath]()
-        cancelButton.accessibilityElements?.append(sourceIndexPath)
-        cancelButton.addTarget(self, action: #selector(hideSignUpViewAnimated), for: .touchUpInside)
-        cancelButton.layer.cornerRadius = 5.0
-        cancelButton.layer.addBorder(edge: .right, color: #colorLiteral(red: 0.9961728454, green: 0.9902502894, blue: 1, alpha: 1), thickness: 0.5)
-        roundLeftRadius(radius: 5.0, view: cancelButton)
-        return cancelButton
+        let CV = ConfirmView.getUniqueIstance()
+        return CV.getButton(position: .left, dataToAttach: sourceIndexPath, title: "Annulla", selector: #selector(hideSignUpViewAnimated), target: self)
     }
     
     
@@ -231,23 +166,13 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
         else{
             teaching  = self.CDLDataSource[sourceIndexPath.section].teachings[sourceIndexPath.row]
         }
-        let newFrame = CGRect(x: 0, y: 0, width: self.view.frame.size.width * 0.9, height: 180)
-        self.signUpView = UIView.init(frame: newFrame)
-        self.view.addSubview(signUpView)
-        self.signUpView.backgroundColor = UIColor.primaryBackground
-        self.signUpView.layer.borderColor = UIColor.secondaryBackground.cgColor
-        self.signUpView.layer.borderWidth = 1.0
-        self.signUpView.layer.cornerRadius = 5.0
-        self.signUpView.transform = CGAffineTransform(scaleX: 1, y: 0.01)
-        self.signUpView.alpha = 0.0
+        let CV = ConfirmView.getUniqueIstance()
         let teachingNameLabel = setUpTeachingNameLabelForSignUp(teaching: teaching)
         let teacherNameLabel = setUpTeacherNameLabelForSignUp(teaching: teaching)
         let signUpButton = setUpSignUpButtonForSignUp(sourceIndexPath: sourceIndexPath)
         let cancelButton = setUpCancelButtonForSignUp(sourceIndexPath: sourceIndexPath)
-        signUpView.addSubview(signUpButton)
-        signUpView.addSubview(cancelButton)
-        signUpView.addSubview(teacherNameLabel)
-        signUpView.addSubview(teachingNameLabel)
+        self.signUpView = CV.getView(titleLabel: teachingNameLabel, descLabel: teacherNameLabel, buttons: [signUpButton,cancelButton], dataToAttach: nil)
+        self.view.addSubview(signUpView)
         
     }
     
@@ -260,7 +185,7 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
     }
     
     @objc func hideSignUpViewAnimated(button: UIButton){
-        let indexPath = button.accessibilityElements![0] as! IndexPath
+        let indexPath = button.accessibilityElements![1] as! IndexPath
         var cellFrame = self.cdlTableView.rectForRow(at: indexPath)
         cellFrame = self.cdlTableView.convert(cellFrame, to: self.cdlTableView.superview)
         
@@ -274,34 +199,7 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
         }
     }
     
-    func roundCorners(corners:UIRectCorner, radius:CGFloat, view : UIView) {
-        let bounds = view.bounds
-        
-        let maskPath = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        
-        let maskLayer = CAShapeLayer()
-        maskLayer.frame = bounds
-        maskLayer.path = maskPath.cgPath
-        
-        view.layer.mask = maskLayer
-        
-        let frameLayer = CAShapeLayer()
-        frameLayer.frame = bounds
-        frameLayer.path = maskPath.cgPath
-        frameLayer.strokeColor = UIColor.secondaryBackground.cgColor
-        frameLayer.lineWidth = 3.0
-        frameLayer.fillColor = nil
-        
-        view.layer.addSublayer(frameLayer)
-    }
     
-    func roundLeftRadius(radius:CGFloat, view : UIView) {
-        self.roundCorners(corners: [UIRectCorner.topLeft, UIRectCorner.bottomLeft], radius:radius, view: view)
-    }
-    
-    func roundRightRadius(radius:CGFloat, view : UIView) {
-        self.roundCorners(corners: [UIRectCorner.topRight, UIRectCorner.bottomRight], radius:radius, view: view)
-    }
     
     
 }

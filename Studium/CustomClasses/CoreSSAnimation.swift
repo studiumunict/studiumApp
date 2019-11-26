@@ -88,6 +88,7 @@ class CoreSSAnimation{
     
     public func expandViewFromSourceFrame(sourceFrame: CGRect, viewToExpand: UIView, elementsInsideView : [UIView]!,oscureView: UIView!,  completion: @escaping(Bool)->Void){
         viewToExpand.center = CGPoint(x: sourceFrame.origin.x + sourceFrame.width/2  , y: sourceFrame.origin.y + sourceFrame.height/2 )
+       
         if let _ = oscureView {oscureView.isHidden = false}
         if let _ = oscureView {oscureView.alpha = 0.0}
                UIView.animate(withDuration: 0.3, animations: {

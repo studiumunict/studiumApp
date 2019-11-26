@@ -21,15 +21,12 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     
     @IBOutlet weak var loginActivityIndicator: UIActivityIndicatorView!
     var yearsDataSource = [String]()
-    
-   
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         loginActivityIndicator.startAnimating()
-        //yearsPickerView.isHidden = true
         yearsPickerView.alpha = 0.0
-        addLoginYears()
+        getLoginYears()
         getSavedCredentials()
         loginButton.layer.cornerRadius = 7.0
         loginButton.clipsToBounds = true
@@ -47,8 +44,6 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         loginButton.layer.borderColor = UIColor.secondaryBackground.cgColor
 
         yearsPickerView.delegate = self
-        
-        // Do any additional setup after loading the view.
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.pickerTapped))
         tap.cancelsTouchesInView = false
@@ -73,7 +68,7 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         SSAnimator.openViewWithFadeIn(viewToOpen: self.yearsPickerView) { (flag) in
         }
     }
-    func addLoginYears(){
+    func getLoginYears(){
         let api = BackendAPI.getUniqueIstance()
         api.getYears(){ (years) in
             guard years != nil else {
@@ -102,7 +97,6 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         }
         
     }
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -144,6 +138,36 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         }
     }
     
+    private func buildStudent(completion: @escaping (Bool)->Void ){
+        let api = BackendAPI.getUniqueIstance()
+        api.getCurrentUserData() { (studentJSONData) in
+            let dict =  studentJSONData as! [String: Any]
+            var phone : String!
+                           
+            if dict["phone"] is NSNull || dict["phone"] as! String == ""{
+                phone = "Nessun numero telefonico specificato"
+            }
+            else{ phone = dict["phone"] as? String }
+            if dict["id"] == nil{
+                    completion(false)
+                    return
+            }
+            _ = Student.getUniqueIstance(id: String(dict["id"] as! Int), codFiscale: dict["username"] as? String , code: dict["officialcode"] as? String, name: dict["firstname"] as? String, surname: dict["lastname"] as? String,telNumber: phone, email: dict["email"] as? String, profileImage: UIImage.init(named: "logo"))
+            if Student.getUniqueIstance().name == nil && Student.getUniqueIstance().surname == nil {
+                Student.getUniqueIstance().name = ""
+                Student.getUniqueIstance().surname = ""
+            }
+            completion(true)
+        }
+    }
+    
+    private func getMainController() -> UIViewController{
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController")
+        controller.modalPresentationStyle = .fullScreen
+        return controller
+    }
+    
     @IBAction func loginButtonClicked(_ sender: Any) {
         guard controlDataFields() == true else {return}
         let api = BackendAPI.getUniqueIstance()
@@ -155,34 +179,17 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
                 if self.rememberMeSwitcher.isOn{
                    self.saveCredentials()
                 }
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let controller = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController")
-                controller.modalPresentationStyle = .fullScreen
-                //prendi le info studente e costruisci l'istanza singleton
-                api.getCurrentUserData() { (studentJSONData) in
-                    let dict =  studentJSONData as! [String: Any]
-                    var phone : String!
-                    
-                    if dict["phone"] is NSNull || dict["phone"] as! String == ""{
-                        phone = "Nessun numero telefonico specificato"
+                self.buildStudent { (success) in
+                    if success {
+                        let controller = self.getMainController()
+                        self.present(controller, animated: true, completion: nil)
                     }
-                    
-                    else{ phone = dict["phone"] as? String }
-                    //print(dict["id"] as! String)
-                    if dict["id"] == nil{
+                    else{
                         self.errorLabel.sizeToFit()
-                         self.errorLabel.text = "E' necessario un primo accesso dal sito WEB per l'anno accademico selezionato"
+                        self.errorLabel.text = "E' necessario un primo accesso dal sito WEB per l'anno accademico selezionato"
                         self.errorLabel.isHidden = false
                         return
                     }
-                    _ = Student.getUniqueIstance(id: String(dict["id"] as! Int), codFiscale: dict["username"] as? String , code: dict["officialcode"] as? String, name: dict["firstname"] as? String, surname: dict["lastname"] as? String,telNumber: phone, email: dict["email"] as? String, profileImage: UIImage.init(named: "logo"))
-                    if Student.getUniqueIstance().name == nil && Student.getUniqueIstance().surname == nil {
-                        Student.getUniqueIstance().name = ""
-                        Student.getUniqueIstance().surname = ""
-                    }
-                    self.present(controller, animated: true, completion: nil)
-                    //non faccio segue perchè ios 13 ha cambiato i segue.
-                    // self.performSegue(withIdentifier: "segueToReveal", sender: nil)
                 }
             }
             else{

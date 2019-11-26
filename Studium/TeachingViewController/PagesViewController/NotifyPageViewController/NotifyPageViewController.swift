@@ -14,29 +14,30 @@ class NotifyPageViewController: UIViewController, UITableViewDelegate, SWRevealV
     @IBOutlet weak var tableView: UITableView!
     var dataSource = NotifyTableDataSource()
     
-   
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableHeaderView = UIView.init(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 10))
         self.view.backgroundColor = UIColor.lightWhite
         self.view.layer.borderColor = UIColor.primaryBackground.cgColor
         self.view.layer.borderWidth = 0.5
+        setupViewContent()
+        let firstCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! NotifyCell
+        firstCell.collapseOrExpandDescription()
+        firstCell.setArrowLayerState(rotate: true)
+        
+    }
+    
+    private func setupViewContent(){
         if dataSource.items.count > 0 {
             errorMessageLabel.isHidden = true
             tableView.isHidden = false
             setupTableView()
         }
         else {
-            
             errorMessageLabel.isHidden = false
             errorMessageLabel.text = "Non sono ancora stati rilasciati avvisi."
             tableView.isHidden = true
         }
-        
-        let firstCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! NotifyCell
-        firstCell.collapseOrExpandDescription()
-        firstCell.setArrowLayerState(rotate: true)
-        
     }
     
     private func setupTableView() {

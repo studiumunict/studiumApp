@@ -81,7 +81,7 @@ class Doc : NSObject, NSCoding {
         path = coder.decodeObject( forKey: "path") as? String
         parent = coder.decodeObject( forKey: "parent") as? Doc
         childs = coder.decodeObject( forKey: "childs") as! [Doc]
-        courseID = coder.decodeObject( forKey: "courseID") as! String
+        courseID = coder.decodeObject( forKey: "courseID") as? String
     }
     
 }

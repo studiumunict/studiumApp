@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import WebKit
 
 class NotifyCell: UITableViewCell {
     
@@ -20,11 +19,9 @@ class NotifyCell: UITableViewCell {
     @IBOutlet weak var carret: UIImageView!
     @IBOutlet private weak var headerView: UIView!
     var notifyData : Notify!
-    //var isCollapsed = true
    
     override func awakeFromNib() {
         selectionStyle = .none
-        //#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)
         carret.image = UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate);
         carret.tintColor = UIColor.elementsLikeNavBarColor
         self.descriptionLabel.adjustsFontSizeToFitWidth = true
@@ -37,12 +34,8 @@ class NotifyCell: UITableViewCell {
         headerView.isUserInteractionEnabled = true
         headerView.addGestureRecognizer(gesture)
         
-        //descriptionLabel.textColor = UIColor.lightWhite
-        titleLabel.textColor = UIColor.lightWhite
+        titleLabel.textColor = UIColor.lightSectionColor
         dataLabel.textColor = UIColor.lightGray
-        /*descriptionLabel.textColor = UIColor.elementsLikeNavBarColor
-        titleLabel.textColor = UIColor.elementsLikeNavBarColor
-        dataLabel.textColor = UIColor.subTitleGray*/
         
         self.elementsView.backgroundColor = UIColor.clear
         self.elementsView.layer.cornerRadius = 10.0
@@ -52,19 +45,16 @@ class NotifyCell: UITableViewCell {
         
         self.carretView.layer.cornerRadius = self.carretView.frame.size.width / 2
         self.carretView.clipsToBounds = true
-        self.carretView.backgroundColor = UIColor.lightWhite
+        self.carretView.backgroundColor = UIColor.lightSectionColor
         titleLabel.numberOfLines = 2
         titleLabel.lineBreakMode = .byTruncatingMiddle
         
     }
-    
-    
     func setInfo(notifyData : Notify ) {
         self.notifyData = notifyData
         dataLabel.text = notifyData.date
         titleLabel.text = notifyData.title
         descriptionLabel.text = notifyData.message
-        //updateSuperTableView()
         setDescriptionLayerState(hidden: !notifyData.isCellExpanded)
         setArrowLayerState(rotate: notifyData.isCellExpanded)
     }
@@ -82,28 +72,17 @@ class NotifyCell: UITableViewCell {
     }
     
     @objc private func toggle() {
-        print("Apertura cella")
         collapseOrExpandDescription()
         let SSAnimator = CoreSSAnimation.getUniqueIstance()
         SSAnimator.rotate180Degrees(view: carret, animated: true)
     }
     
-    
-      func collapseOrExpandDescription(){
-        
+    func collapseOrExpandDescription(){
         if self.notifyData.isCellExpanded { self.notifyData.isCellExpanded = false; }
         else{ self.notifyData.isCellExpanded = true }
-       
-       /* tableView?.beginUpdates()
-        UIView.animate(withDuration: 0.3, animations: {
-            self.stackView.arrangedSubviews[1].isHidden = !self.notifyData.isCellExpanded
-        }) { (flag) in
-            tableView?.endUpdates()
-        }*/
         UIView.animate(withDuration: 0.3) {
             self.stackView.arrangedSubviews[1].isHidden = !self.notifyData.isCellExpanded
         }
-        
         self.updateSuperTableView()
     }
     

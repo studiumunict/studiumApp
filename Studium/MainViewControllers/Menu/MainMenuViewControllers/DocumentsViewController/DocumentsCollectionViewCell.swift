@@ -19,6 +19,7 @@ class DocumentsCollectionViewCell: UICollectionViewCell {
         titleDocLabel.textColor = UIColor.elementsLikeNavBarColor
         descriptionDocLabel.textColor = UIColor.subTitleGray
         self.activityIndicator.alpha = 0.0
+        self.titleDocLabel.lineBreakMode = .byTruncatingMiddle
     }
     private func getRelatedImage(fromTitle: String)->String{
         let dotInd = fromTitle.lastIndex(of: ".")

@@ -37,102 +37,57 @@ class DocumentsPageViewController: DocumentsViewController{
         teachingController.openFile(tempUrl: tempUrl)
     }
     override func setupActionsView(){
-        setUpActionsViewLayout()
+        let CV = ConfirmView.getUniqueIstance()
         let actionsViewLabel = setUpActionsViewLabel()
         let addFavouriteButton = setUpAddInFavouriteActionButton()
         let cancelButton = setUpCancelActionButton()
-    
-        self.actionsView.addSubview(actionsViewLabel)
-        self.actionsView.addSubview(addFavouriteButton)
-        self.actionsView.addSubview(cancelButton)
+        self.actionsView = CV.getView(titleLabel: actionsViewLabel, buttons: [addFavouriteButton,cancelButton])
+        self.view.addSubview(actionsView)
     }
-    
+    override func disableControllerInteraction() {
+        collectionView.allowsSelection = false
+        teachingController.navigationController?.navigationBar.isUserInteractionEnabled = false
+        self.view.isUserInteractionEnabled = false
+        self.teachingController.view.isUserInteractionEnabled = false
+    }
+    override func enableControllerInteraction() {
+        collectionView.allowsSelection = true
+        teachingController.navigationController?.navigationBar.isUserInteractionEnabled = true
+        self.view.isUserInteractionEnabled = true
+        self.teachingController.view.isUserInteractionEnabled = true
+    }
     private func setUpCloseConfirmActionButton() -> UIButton{
-        let closeConfirmButton = UIButton(frame: CGRect(x: 0, y: 100 , width: 200, height: 40))
-        closeConfirmButton.center.x = self.actionsView.center.x - 20
-        closeConfirmButton.backgroundColor = UIColor.lightWhite
-        closeConfirmButton.setTitleColor(UIColor.textBlueColor, for: .normal)
-        closeConfirmButton.accessibilityElements = [IndexPath]()
-        closeConfirmButton.addTarget(self, action: #selector(closeActionsView), for: .touchUpInside)
-        closeConfirmButton.setTitle("Chiudi", for: .normal)
-        closeConfirmButton.titleLabel?.font = UIFont(name: "System", size: 9)
-        closeConfirmButton.layer.cornerRadius = 5.0
-        closeConfirmButton.layer.borderWidth = 2.0
-        closeConfirmButton.layer.borderColor = UIColor.secondaryBackground.cgColor
-        closeConfirmButton.alpha = 0.0
-        return closeConfirmButton
-    
+        let CV = ConfirmView.getUniqueIstance()
+        return CV.getButton(position: .alone, title: "Chiudi", selector: #selector(closeActionsView), target: self)
     }
     
     private func setUpActionsViewConfirmationLabel() -> UILabel{
-        let label = UILabel.init(frame: CGRect(x: 10, y: 20, width: actionsView.frame.size.width - 20, height: 20))
-        label.text =  "Documenti aggiunti ai preferiti!"
-        label.textColor = UIColor.lightWhite
-        label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.textAlignment = .center
-        label.alpha = 0.0
-        return label
+        let CV = ConfirmView.getUniqueIstance()
+        return CV.getTitleLabel(text: "Documenti aggiunti ai preferiti!")
     }
     
-    
     private func setUpActionsViewCheersLabel() -> UILabel{
-        let label = UILabel.init(frame: CGRect(x: 10 , y: 45, width: actionsView.frame.size.width - 20, height: 20))
-        label.text = "Troverai i documenti nella sezione \"Documenti\" "
-        label.textColor = UIColor.lightGray
-        label.font = UIFont.boldSystemFont(ofSize: 13)
-        label.textAlignment = .center
-        label.alpha = 0.0
-        return label
+        let CV = ConfirmView.getUniqueIstance()
+        return CV.getDescriptionLabel(text: "Troverai i documenti nella sezione \"Documenti\" ")
     }
     
     func setupActionViewForFavouriteAddingConfirm(){
-        //setUpActionsViewLayout()
-         for sv in self.actionsView.subviews{
-            UIView.animate(withDuration: 0.3, animations: {
-                sv.alpha = 0.0
-                
-            }) { (flag) in
-                sv.removeFromSuperview()
-            }
-        }
+        let CV = ConfirmView.getUniqueIstance()
         let actionsViewConfirmationLabel = setUpActionsViewConfirmationLabel()
         let actionsViewCheersLabel = setUpActionsViewCheersLabel()
         let closeActionsViewButton = setUpCloseConfirmActionButton()
-        actionsViewConfirmationLabel.alpha = 0.0
-        actionsViewCheersLabel.alpha = 0.0
-        closeActionsViewButton.alpha = 0.0
-        self.actionsView.addSubview(actionsViewConfirmationLabel)
-        self.actionsView.addSubview(actionsViewCheersLabel)
-        self.actionsView.addSubview(closeActionsViewButton)
-        UIView.animate(withDuration: 0.3) {
-            actionsViewConfirmationLabel.alpha = 1.0
-            actionsViewCheersLabel.alpha = 1.0
-            closeActionsViewButton.alpha = 1.0
-        }
-        
+        CV.updateView(confirmView: &self.actionsView, titleLabel: actionsViewConfirmationLabel, descLabel: actionsViewCheersLabel, buttons: [closeActionsViewButton], dataToAttach: nil, animated: true)
     }
-    @objc func addToSelectedDocumentsToFavourite(){
+    @objc func addSelectedDocumentsToFavourite(){
         let permanentFS = PermanentDocSystem.getUniqueIstance()
         let thisCourseFolder = Doc.init(title: thisTeaching.name , path: "/"+thisTeaching.name, type: "folder",courseID: thisTeaching.code)
         let appendedFolder = permanentFS.appendChild(toDoc: permanentFS.root, child: thisCourseFolder)
         permanentFS.appendChilds(toDoc: appendedFolder, childs: selectionList)
-        //closeActionsView()
         setupActionViewForFavouriteAddingConfirm()
     }
     private func setUpAddInFavouriteActionButton()-> UIButton{
-        let addFavouriteButton = UIButton(frame: CGRect(x: 0, y: 0, width: actionsView.frame.size.width * 0.8, height: 40))
-        addFavouriteButton.center = CGPoint(x: actionsView.center.x, y: actionsView.center.y * 1.6 - 38)
-        addFavouriteButton.clipsToBounds = true
-        addFavouriteButton.backgroundColor = UIColor.lightWhite
-        addFavouriteButton.setTitleColor(UIColor.textBlueColor, for: .normal)
-        addFavouriteButton.setTitle("Aggiungi a preferiti", for: .normal)
-        addFavouriteButton.titleLabel?.font = UIFont(name: "System", size: 9)
-        addFavouriteButton.addTarget(self, action: #selector(addToSelectedDocumentsToFavourite), for: .touchUpInside)
-        addFavouriteButton.layer.addBorder(edge: .all, color: #colorLiteral(red: 0.9961728454, green: 0.9902502894, blue: 1, alpha: 1), thickness: 0.5)
-        roundTopRadius(radius: 5.0, view: addFavouriteButton)
-        return addFavouriteButton
+        let CV = ConfirmView.getUniqueIstance()
+        return CV.getButton(position: .centerTopRounded, dataToAttach: nil, title: "Aggiungi ai preferiti", selector: #selector(addSelectedDocumentsToFavourite), target: self)
     }
-    
-    
-    
+
 }

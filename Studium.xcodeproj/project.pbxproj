@@ -16,7 +16,6 @@
 		139BCB6821BDE034005A750A /* DescriptionPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139BCB6721BDE034005A750A /* DescriptionPageViewController.swift */; };
 		139BCB6A21BDE057005A750A /* DocumentsPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139BCB6921BDE057005A750A /* DocumentsPagesViewController.swift */; };
 		139BCB6C21BDE0AF005A750A /* BookingPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139BCB6B21BDE0AF005A750A /* BookingPagesViewController.swift */; };
-		13A7D28621C6F25F00F42193 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A7D28521C6F25F00F42193 /* Reachability.swift */; };
 		13CC782321C93FB90052E579 /* PortaleStudentiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CC782221C93FB90052E579 /* PortaleStudentiViewController.swift */; };
 		13D3997D21CACF1300B023B8 /* DocClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D3997C21CACF1300B023B8 /* DocClass.swift */; };
 		13D3997F21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D3997E21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift */; };
@@ -30,7 +29,7 @@
 		9C06A22721AB6BC500E695DB /* DepartmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C06A22621AB6BC500E695DB /* DepartmentTableViewCell.swift */; };
 		9C06A22A21AB700200E695DB /* DepartmentClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C06A22921AB700200E695DB /* DepartmentClass.swift */; };
 		9C06A22C21AB707500E695DB /* CDLClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C06A22B21AB707500E695DB /* CDLClass.swift */; };
-		9C06CA8621C67ACF00FA09DB /* sharedSourceClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C06CA8521C67ACF00FA09DB /* sharedSourceClass.swift */; };
+		9C06CA8621C67ACF00FA09DB /* SharedCourseSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C06CA8521C67ACF00FA09DB /* SharedCourseSource.swift */; };
 		9C07088E21C85C1100F7D296 /* CoursesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C07088D21C85C1100F7D296 /* CoursesTableViewCell.swift */; };
 		9C07089021C8672800F7D296 /* BrowseAndSearchCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C07088F21C8672800F7D296 /* BrowseAndSearchCourseTableViewCell.swift */; };
 		9C0E501B21C3F7CE0055C4DD /* ManageCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0E501A21C3F7CE0055C4DD /* ManageCourseViewController.swift */; };
@@ -48,6 +47,8 @@
 		9C60BF322386EB9000AD1CA1 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C60BF312386EB9000AD1CA1 /* FileDownloader.swift */; };
 		9C7ADB5522F31AF7009651FB /* BackendAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7ADB5422F31AF7009651FB /* BackendAPI.swift */; };
 		9C8B9386237C1215001E5657 /* PermanentDocSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8B9385237C1215001E5657 /* PermanentDocSystem.swift */; };
+		9CA4511E238D060600D25B66 /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA4511D238D060600D25B66 /* ConfirmView.swift */; };
+		9CA45120238D095400D25B66 /* SSCustomLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA4511F238D095400D25B66 /* SSCustomLayers.swift */; };
 		9CBDB9CF2379C6AD00A015A4 /* CoreSSAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBDB9CE2379C6AD00A015A4 /* CoreSSAnimation.swift */; };
 		9CC86E3F22C0EC0F007567B1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CC86E3E22C0EC0F007567B1 /* WebKit.framework */; };
 		9CF6175F2302EFA1001D3E77 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF6175E2302EFA1001D3E77 /* StringExtension.swift */; };
@@ -100,8 +101,6 @@
 		139BCB6721BDE034005A750A /* DescriptionPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionPageViewController.swift; sourceTree = "<group>"; };
 		139BCB6921BDE057005A750A /* DocumentsPagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsPagesViewController.swift; sourceTree = "<group>"; };
 		139BCB6B21BDE0AF005A750A /* BookingPagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingPagesViewController.swift; sourceTree = "<group>"; };
-		13A7D28421C6F25F00F42193 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		13A7D28521C6F25F00F42193 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		13CC782221C93FB90052E579 /* PortaleStudentiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortaleStudentiViewController.swift; sourceTree = "<group>"; };
 		13D3997C21CACF1300B023B8 /* DocClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocClass.swift; sourceTree = "<group>"; };
 		13D3997E21CAE1D000B023B8 /* DocumentsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -122,7 +121,7 @@
 		9C06A22621AB6BC500E695DB /* DepartmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentTableViewCell.swift; sourceTree = "<group>"; };
 		9C06A22921AB700200E695DB /* DepartmentClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentClass.swift; sourceTree = "<group>"; };
 		9C06A22B21AB707500E695DB /* CDLClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDLClass.swift; sourceTree = "<group>"; };
-		9C06CA8521C67ACF00FA09DB /* sharedSourceClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sharedSourceClass.swift; sourceTree = "<group>"; };
+		9C06CA8521C67ACF00FA09DB /* SharedCourseSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCourseSource.swift; sourceTree = "<group>"; };
 		9C07088D21C85C1100F7D296 /* CoursesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesTableViewCell.swift; sourceTree = "<group>"; };
 		9C07088F21C8672800F7D296 /* BrowseAndSearchCourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseAndSearchCourseTableViewCell.swift; sourceTree = "<group>"; };
 		9C0E501A21C3F7CE0055C4DD /* ManageCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCourseViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +139,8 @@
 		9C60BF312386EB9000AD1CA1 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		9C7ADB5422F31AF7009651FB /* BackendAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAPI.swift; sourceTree = "<group>"; };
 		9C8B9385237C1215001E5657 /* PermanentDocSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermanentDocSystem.swift; sourceTree = "<group>"; };
+		9CA4511D238D060600D25B66 /* ConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
+		9CA4511F238D095400D25B66 /* SSCustomLayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSCustomLayers.swift; sourceTree = "<group>"; };
 		9CBDB9CE2379C6AD00A015A4 /* CoreSSAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreSSAnimation.swift; sourceTree = "<group>"; };
 		9CC86E3E22C0EC0F007567B1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		9CF6175E2302EFA1001D3E77 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
@@ -219,15 +220,6 @@
 				9CF6175E2302EFA1001D3E77 /* StringExtension.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		13A7D28721C6F26C00F42193 /* Reachability */ = {
-			isa = PBXGroup;
-			children = (
-				13A7D28421C6F25F00F42193 /* Reachability.h */,
-				13A7D28521C6F25F00F42193 /* Reachability.swift */,
-			);
-			path = Reachability;
 			sourceTree = "<group>";
 		};
 		13CC782421C93FBE0052E579 /* PortaleStudentiViewController */ = {
@@ -311,6 +303,8 @@
 				9C27B34A237B0DB500242958 /* DescriptionBlock.swift */,
 				9C29C2D62380730A00A29669 /* HTMLParser.swift */,
 				9C60BF312386EB9000AD1CA1 /* FileDownloader.swift */,
+				9CA4511D238D060600D25B66 /* ConfirmView.swift */,
+				9CA4511F238D095400D25B66 /* SSCustomLayers.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -318,7 +312,7 @@
 		9C07EF3721C6ED4D00C4836B /* sharedResources */ = {
 			isa = PBXGroup;
 			children = (
-				9C06CA8521C67ACF00FA09DB /* sharedSourceClass.swift */,
+				9C06CA8521C67ACF00FA09DB /* SharedCourseSource.swift */,
 			);
 			path = sharedResources;
 			sourceTree = "<group>";
@@ -418,7 +412,6 @@
 				9CFE9D8121A8ADBE0030AE33 /* Info.plist */,
 				9CFE9D7921A8ADBC0030AE33 /* Studium.xcdatamodeld */,
 				13F8E3D021A98C6900BBAD9B /* Studium-Bridging-Header.h */,
-				13A7D28721C6F26C00F42193 /* Reachability */,
 				13F8E3C821A9885B00BBAD9B /* SWRevealViewController */,
 				1364997B21BA7548008C5345 /* Extensions */,
 			);
@@ -729,7 +722,7 @@
 				9C27B34B237B0DB500242958 /* DescriptionBlock.swift in Sources */,
 				9C8B9386237C1215001E5657 /* PermanentDocSystem.swift in Sources */,
 				135D120F21B8092200DA9C69 /* ExtensionCALayer.swift in Sources */,
-				9C06CA8621C67ACF00FA09DB /* sharedSourceClass.swift in Sources */,
+				9C06CA8621C67ACF00FA09DB /* SharedCourseSource.swift in Sources */,
 				9CFE9DB121A8BC9A0030AE33 /* DocumentsViewController.swift in Sources */,
 				9C60BF322386EB9000AD1CA1 /* FileDownloader.swift in Sources */,
 				9CFE9DA821A8BBEE0030AE33 /* MenuTableViewController.swift in Sources */,
@@ -747,9 +740,9 @@
 				13E3A34721C140A6004BE8D8 /* NotifyCell.swift in Sources */,
 				1311D89B21BBE82E00A09499 /* StudentClass.swift in Sources */,
 				9CFE72C521B95331001EB697 /* HomeTableSectionClass.swift in Sources */,
-				13A7D28621C6F25F00F42193 /* Reachability.swift in Sources */,
 				9CFE9D7B21A8ADBC0030AE33 /* Studium.xcdatamodeld in Sources */,
 				9CFE9DAF21A8BC8F0030AE33 /* ProfileViewController.swift in Sources */,
+				9CA45120238D095400D25B66 /* SSCustomLayers.swift in Sources */,
 				9CFE72C321B95206001EB697 /* TeachingClass.swift in Sources */,
 				139BCB6821BDE034005A750A /* DescriptionPageViewController.swift in Sources */,
 				9C0E501D21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift in Sources */,
@@ -766,6 +759,7 @@
 				9C2C63CD237311BB0063F9C7 /* NotifyClass.swift in Sources */,
 				9C1BBD432378F01F003EEB9A /* TempDocSystem.swift in Sources */,
 				9C454F1323016B070071F81F /* PswEncryption.swift in Sources */,
+				9CA4511E238D060600D25B66 /* ConfirmView.swift in Sources */,
 				13E91D0521C7DB550007EF3E /* ManageCoursePageViewController.swift in Sources */,
 				13E3A34A21C1416E004BE8D8 /* NotifyTableDataSource.swift in Sources */,
 				9C14FE74237B1C9B00069D11 /* DescriptionTableViewCell.swift in Sources */,
@@ -951,7 +945,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7JSR847A9P;
 				INFOPLIST_FILE = Studium/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -974,7 +968,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7JSR847A9P;
 				INFOPLIST_FILE = Studium/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

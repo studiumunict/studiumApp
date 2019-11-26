@@ -12,36 +12,55 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
     
     @IBOutlet weak var viewAppoggio: UIView!
     @IBOutlet var stackView: UIStackView!
-    
     //gestione
     @IBOutlet var manageCourseButtonView: UIView!
     @IBOutlet var manageCourseButton: UIButton!
     @IBOutlet var manageCourseButtonLabel: UILabel!
-    
-    
     //iscrizione
     @IBOutlet var signUpCourseButtonView: UIView!
     @IBOutlet var signUpCourseButton: UIButton!
     @IBOutlet var signUpCourseButtonLabel: UILabel!
-    
-    
     let pageViewController: UIPageViewController!  = UIPageViewController(transitionStyle: UIPageViewController.TransitionStyle.scroll, navigationOrientation: UIPageViewController.NavigationOrientation.horizontal, options: nil)
     lazy var navControllerList: [UIViewController]! = { return nil }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setMenuNavItem()
+        self.viewAppoggio.backgroundColor =  UIColor.primaryBackground
+        self.signUpCourseButtonView.backgroundColor = UIColor.clear
+        self.manageCourseButtonView.backgroundColor = UIColor.buttonSelected
+        setNavBarControllerList()
+        setNavBarForManagement()
+        setRevealControllerParameters()
+        pageViewController.dataSource = self
+        pageViewController.delegate = self
+        pageViewController.view.frame = CGRect(x: 0.0, y: 0.0, width: self.viewAppoggio.frame.width, height: self.viewAppoggio.frame.height)
+        self.viewAppoggio.addSubview(pageViewController.view)
+        if let fisrtViewController = navControllerList.first {
+            pageViewController.setViewControllers([fisrtViewController], direction: .forward, animated: true, completion: nil)
+        }
+        setNavBarButtons()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if revealViewController() != nil {
+            revealViewController().rearViewRevealWidth = 130//Menu sx/
+            revealViewController().delegate = self
+             self.navigationItem.leftBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:))))
+            navControllerList[0].view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+        }
+    }
+    
+    private func setMenuNavItem(){
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
         imageView.image = UIImage.init(named: "menu")
         let buttonView = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 30))
         buttonView.addSubview(imageView)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: buttonView)
-        
-      
-        self.viewAppoggio.backgroundColor =  UIColor.primaryBackground
-        self.signUpCourseButtonView.backgroundColor = UIColor.clear
-        self.manageCourseButtonView.backgroundColor = UIColor.buttonSelected
+    }
+    
+    private func setNavBarControllerList(){
         navControllerList = {
             let nc1 = storyboard!.instantiateViewController(withIdentifier: "ManageCourseController")
             let nc2 = storyboard!.instantiateViewController(withIdentifier: "BrowseAndSearchController")
@@ -51,49 +70,24 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
             manage.tabController = self
             return [nc1, nc2]
         }()
-          setNavBarForManagement()
-        
+    }
+    private func setRevealControllerParameters(){
         if revealViewController() != nil {
             revealViewController().rearViewRevealWidth = 130//Menu sx/
             revealViewController().delegate = self
-             self.navigationItem.leftBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:))))
+            self.navigationItem.leftBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:))))
             navControllerList[0].view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
-        
-        //self.view.backgroundColor = UIColor.primaryBackground
-       // stackView.backgroundColor = UIColor.secondaryBackground
-        pageViewController.dataSource = self
-        pageViewController.delegate = self
-        pageViewController.view.frame = CGRect(x: 0.0, y: 0.0, width: self.viewAppoggio.frame.width, height: self.viewAppoggio.frame.height)
-        self.viewAppoggio.addSubview(pageViewController.view)
-       // self.view.addSubview(pageViewController.view)
-        
-        if let fisrtViewController = navControllerList.first {
-            pageViewController.setViewControllers([fisrtViewController], direction: .forward, animated: true, completion: nil)
-        }
-        
-        
+    }
+    private func setNavBarButtons(){
         manageCourseButtonLabel.text = "Gestisci Corsi"
-        customButtons(button: manageCourseButton, image: "courses", action: #selector(self.sendManageCourse(_:)))
-        manageCourseButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendManageCourse(_:))))
+        customButtons(button: manageCourseButton, image: "courses", action: #selector(self.sendToManageCourse(_:)))
+        manageCourseButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToManageCourse(_:))))
         
         signUpCourseButtonLabel.text = "Iscriviti ai corsi"
-        customButtons(button: signUpCourseButton, image: "showcase", action: #selector(self.sendSignUpCourse(_:)))
-        signUpCourseButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendSignUpCourse(_:))))
+        customButtons(button: signUpCourseButton, image: "showcase", action: #selector(self.sendToSignUpCourse(_:)))
+        signUpCourseButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToSignUpCourse(_:))))
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
-        if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 130//Menu sx/
-            revealViewController().delegate = self
-             self.navigationItem.leftBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:))))
-            navControllerList[0].view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-        }
-    }
-    
     
     func revealController(_ revealController: SWRevealViewController!, didMoveTo position: FrontViewPosition) {
         print("moved")
@@ -112,9 +106,7 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
             if manageController.createCategoryView.isHidden ==  false{
                 manageController.createCategoryTextField.becomeFirstResponder()
             }
-            
             break
-            
         default:
             break
         }
@@ -142,44 +134,18 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
     
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        
-        guard let vcIndex = navControllerList.firstIndex(of: viewController) else {
-            return nil
-        }
-        
+        guard let vcIndex = navControllerList.firstIndex(of: viewController) else {return nil}
         let previousIndex = vcIndex - 1
-        
-        guard previousIndex >= 0 else {
-            return nil
-        }
-        
-        guard navControllerList.count > previousIndex else {
-            return nil
-        }
-        
-       
-        
+        guard previousIndex >= 0 else {return nil}
+        guard navControllerList.count > previousIndex else {return nil}
         return navControllerList[previousIndex]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        
-        guard let vcIndex = navControllerList.firstIndex(of: viewController) else {
-            return nil
-        }
-        
+        guard let vcIndex = navControllerList.firstIndex(of: viewController) else {return nil}
         let nextIndex = vcIndex + 1
-        
-        guard navControllerList.count != nextIndex else {
-            return nil
-        }
-        
-        guard navControllerList.count > nextIndex else {
-            return nil
-        }
-        
-        
-        
+        guard navControllerList.count != nextIndex else {return nil}
+        guard navControllerList.count > nextIndex else {return nil}
         return navControllerList[nextIndex]
     }
     
@@ -193,8 +159,7 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
     }
     
     
-    //iscriviti
-    @objc func sendManageCourse(_ sender: Any) {
+    @objc func sendToManageCourse(_ sender: Any) {
         pageViewController.setViewControllers([navControllerList[0]], direction: .forward, animated: false, completion: nil)
         setNavBarForManagement()
         self.signUpCourseButtonView.backgroundColor = UIColor.clear
@@ -202,7 +167,7 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
         
     }
     
-    @objc func sendSignUpCourse(_ sender: Any) {
+    @objc func sendToSignUpCourse(_ sender: Any) {
         pageViewController.setViewControllers([navControllerList[1]], direction: .forward, animated: false, completion: nil)
        setNavBarForSignUp()
         self.signUpCourseButtonView.backgroundColor = UIColor.buttonSelected
@@ -221,8 +186,8 @@ class ManageCoursePageViewController: UIViewController, SWRevealViewControllerDe
     }
     func setNavBarForManagement(){
         self.navigationItem.rightBarButtonItem = nil
-        let manageVc = navControllerList[0] as! ManageCourseViewController
-        manageVc.setEditIconOnTabBar()
+        //let manageVc = navControllerList[0] as! ManageCourseViewController
+        //manageVc.setEditIconOnTabBar()
         self.navigationItem.title =  "Gestisci corsi"
     }
     

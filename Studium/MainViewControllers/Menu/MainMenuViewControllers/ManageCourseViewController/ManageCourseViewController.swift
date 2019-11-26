@@ -11,36 +11,28 @@ import UIKit
 class ManageCourseViewController: UIViewController, SWRevealViewControllerDelegate, UITableViewDataSource, UITableViewDelegate {
    
     @IBOutlet weak var createCategoryView: UIView!
-    
     @IBOutlet weak var createCategoryTextField: UITextField!
     @IBOutlet weak var createCategoryLabel: UILabel!
-    
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var createCategoryButton: UIButton!
-    
-    //facciamo un for che setta tutte le section ad expanded, poi quando si rivà sul i miei corsi controller, si lasciano tutte expandend richiamando il reloaddata di quella tableview
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var categoryHeaderView: UIView!
     var tabController : ManageCoursePageViewController!
     @IBOutlet weak var addCategoryButton: UIButton!
     @IBOutlet weak var manageCoursesTableView: UITableView!
-   
     @IBOutlet weak var oscureView: UIView!
-    
+    var deleteConfirmView :UIView!
     var sharedSource : SharedCoursesSource!
     func setAllExpanded(){
         for sect in sharedSource.dataSource{
             sect.expanded = true
         }
     }
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCreateCategoryView()
         manageCoursesTableView.setEditing(true, animated: false)
-       // self.view.backgroundColor = UIColor.green
         self.manageCoursesTableView.backgroundColor = UIColor.lightWhite
         self.view.backgroundColor = UIColor.lightWhite
         self.categoryHeaderView.backgroundColor = UIColor.elementsLikeNavBarColor
@@ -54,11 +46,8 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
             revealViewController().delegate = self
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
-        // Do any additional setup after loading the view.
         sharedSource = SharedCoursesSource.getUniqueIstance()
     }
-    
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -68,11 +57,10 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         
-        if sharedSource.dataSource.count == 1 {
+        if sharedSource.dataSource.count == 1 && sharedSource.dataSource[0].teachings.count == 0 {
             sharedSource.reloadSourceFromAPI { (flag) in
                 self.manageCoursesTableView.reloadData()
             }
-            
         }
         else{
             self.setAllExpanded()
@@ -80,10 +68,6 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
             
         }
     }
-    
-    
-  
-    
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String?
     {
         return "Rimuovi iscrizione"
@@ -106,16 +90,6 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
                 tableView.reloadData()
             }
         }
-        /*let item = sharedSource.courseSharedDataSource[sourceIndexPath.section].teachings[sourceIndexPath.row]
-        sharedSource.courseSharedDataSource[sourceIndexPath.section].teachings.remove(at: sourceIndexPath.row)
-        sharedSource.courseSharedDataSource[destinationIndexPath.section].teachings.insert(item, at: destinationIndexPath.row)
-        //tableView.reloadRows(at: [destinationIndexPath], with: .none)
-        
-       tableView.reloadData()*/
-        
-        
-        
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -135,20 +109,12 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = manageCoursesTableView.dequeueReusableCell(withIdentifier: "teachingCell") as! CoursesTableViewCell
-        //modifico la cella e la mostro
         var dataElement : Teaching!
         dataElement = sharedSource.dataSource[indexPath.section].teachings[indexPath.row]
-        
         cell.teachingNameLabel.text = dataElement.name
         cell.teacherNameLabel.text = dataElement.teacherName
         cell.arrowImage.image =  nil
-       // cell.arrowImage.tintColor = UIColor.elementsLikeNavBarColor
-       // cell.arrowImage.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
-        
         return cell
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       //self.performSegue(withIdentifier: "segueToTeachingController", sender: indexPath)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let  controller = segue.destination as? TeachingViewController{
@@ -157,25 +123,15 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         }
     }
     
-    
-   
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-       
-        
-        
         let button = UIButton.init(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 45))
         button.layer.cornerRadius = 5.0
         button.clipsToBounds = true
-        
         if manageCoursesTableView.isEditing && section != sharedSource.dataSource.count-1 {
             let removeButton = UIButton.init(frame: CGRect(x: 10, y: 10, width: 25, height: 25))
-           // removeButton.imageView?.image = UIImage.init(named: "menu")
-            removeButton.setBackgroundImage(UIImage.init(named: "delete"), for: .normal)
+            removeButton.setBackgroundImage(UIImage.init(named: "removex"), for: .normal)
             removeButton.tag = section
-            removeButton.addTarget(self, action: #selector(removeSection), for: .touchUpInside)
-
+            removeButton.addTarget(self, action: #selector(showRemoveSectionConfirmView), for: .touchUpInside)
             button.addSubview(removeButton)
         }
         button.setTitle(sharedSource.dataSource[section].course.name, for: .normal)
@@ -187,22 +143,9 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         button.setTitleColor(UIColor.elementsLikeNavBarColor, for: .normal)
         button.backgroundColor = UIColor.lightSectionColor
         button.tag = section
-       // button.addTarget(self, action: #selector(self.removeOrExpandRows), for: .touchUpInside)
-        
-        
-        
         return button
-        
-        
     }
     
-    /*func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        if indexPath.section == courseSharedDataSource.count-1{
-            //senza cancella
-            return .none
-        }
-        return UITableViewCell.EditingStyle.delete
-    }*/
     func signOutCourse(indexPath : IndexPath){
         let code = sharedSource.dataSource[indexPath.section].teachings[indexPath.row].code
         let api  = BackendAPI.getUniqueIstance()
@@ -212,20 +155,43 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         sharedSource.dataSource[indexPath.section].teachings.remove(at: indexPath.row)
     }
     
+    @objc private func unsuscribe(sender: UIButton){
+        let view = sender.superview!
+        let indexPath = sender.accessibilityElements?[1] as! IndexPath
+        self.signOutCourse(indexPath: indexPath)
+        self.manageCoursesTableView.reloadData()
+        let SSAnimator = CoreSSAnimation.getUniqueIstance()
+        SSAnimator.collapseViewInSourceFrame(sourceFrame: self.categoryHeaderView.frame, viewToCollapse: view, oscureView: self.oscureView, elementsInsideView: nil) { (flag) in
+            view.removeFromSuperview()
+        }
+    }
+    @objc private func closeUnsuscribeView(sender: UIButton){
+        let view = sender.superview!
+        let indexPath = sender.accessibilityElements?[1] as! IndexPath
+        let frameTb = self.manageCoursesTableView.rectForRow(at: indexPath)
+        let frame = self.manageCoursesTableView.convert(frameTb, to: self.view)
+        let SSAnimator = CoreSSAnimation.getUniqueIstance()
+        SSAnimator.collapseViewInSourceFrame(sourceFrame: frame, viewToCollapse: view, oscureView: self.oscureView, elementsInsideView: nil) { (flag) in
+            view.removeFromSuperview()
+        }
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let alert = UIAlertController(title: "Attenzione", message: "Sei sicuro di voler rimuovere l'iscrizione a questo corso?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Annulla", style: UIAlertAction.Style.destructive, handler: { action in
-                self.dismiss(animated: true, completion: nil)
-            }))
-            alert.addAction(UIAlertAction(title: "Conferma", style: .default, handler: { action in
-                //courseSharedDataSource[indexPath.section].teachings.remove(at: indexPath.row)
-                self.signOutCourse(indexPath: indexPath)
-                self.manageCoursesTableView.reloadData()
-                self.dismiss(animated: true, completion: nil)
-                
-            }))
-            self.present(alert, animated: true, completion: nil)
+            let CV = ConfirmView.getUniqueIstance()
+            let titleLabel = CV.getTitleLabel(text: "Attenzione")
+            let descLabel = CV.getDescriptionLabel(text: "Sei sicuro di voler rimuovere l'iscrizione a questo corso?")
+            descLabel.adjustsFontSizeToFitWidth = true
+            descLabel.minimumScaleFactor = 0.7
+            let cancelButton = CV.getButton(position: .left, dataToAttach: indexPath, title: "Annulla", selector: #selector(closeUnsuscribeView(sender:)), target: self)
+            let confirmButton = CV.getButton(position: .right, dataToAttach: indexPath, title: "Conferma", selector: #selector(unsuscribe(sender:)), target: self)
+            let view = CV.getView(titleLabel: titleLabel, descLabel: descLabel, buttons: [cancelButton,confirmButton], dataToAttach: nil)
+            view.backgroundColor = UIColor.createCategoryViewColor
+            self.view.addSubview(view)
+            let SSAnimator = CoreSSAnimation.getUniqueIstance()
+            let frameTb = self.manageCoursesTableView.rectForRow(at: indexPath)
+            let frame = self.manageCoursesTableView.convert(frameTb, to: self.view)
+            SSAnimator.expandViewFromSourceFrame(sourceFrame: frame, viewToExpand: view, elementsInsideView: nil, oscureView: self.oscureView) { (flag) in }
         }
     }
     
@@ -233,62 +199,50 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         return sharedSource.dataSource.count
     }
     
-    func setEditIconOnTabBar(){
-        let imageView2 = UIImageView(frame: CGRect(x: 0, y: 2.5, width: 25.5, height: 25))
-        imageView2.image = UIImage.init(named: "menu")
-        let buttonView2 = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 27.5))
-        buttonView2.addSubview(imageView2)
-        self.tabController.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: buttonView2)
-        self.tabController.navigationItem.rightBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.editClicked)))
-        
-    }
-    
-    @objc func removeSection(button : UIButton){
-        let section = button.tag
-        print("rimuovo section", section)
-        let alert = UIAlertController(title: "Attenzione", message: "Sei sicuro di voler eliminare questa categoria? tutti i corsi al suo interno verranno spostati nella categoria di default.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Annulla", style: UIAlertAction.Style.destructive, handler: { action in
-            self.dismiss(animated: true, completion: nil)
-            }))
-        alert.addAction(UIAlertAction(title: "Conferma", style: .default, handler: { action in
-            /*var items = [Teaching]()
-            for item in self.sharedSource.courseSharedDataSource[section].teachings{
-                items.append(item)
-                
-            }
-            self.sharedSource.courseSharedDataSource.remove(at: section)
-            self.sharedSource.courseSharedDataSource[self.sharedSource.courseSharedDataSource.count-1].teachings.append(contentsOf: items)
-            //self.manageCoursesTableView.reloadSections(IndexSet(arrayLiteral: section), with: UITableView.RowAnimation.left)
-            self.manageCoursesTableView.reloadData()*/
-            let api = BackendAPI.getUniqueIstance()
-            api.deleteCategory(idCat: self.sharedSource.dataSource[section].course.code) { (JSONResponse) in
-                print(JSONResponse ?? "null")
-                self.sharedSource.reloadSourceFromAPI { (flag) in
-                     self.manageCoursesTableView.reloadData()
+    @objc private func removeSection(button : UIButton){
+        let section = button.accessibilityElements?[1] as! Int
+        let api = BackendAPI.getUniqueIstance()
+        api.deleteCategory(idCat: self.sharedSource.dataSource[section].course.code) { (JSONResponse) in
+            self.sharedSource.reloadSourceFromAPI { (flag) in
+                self.manageCoursesTableView.reloadData()
+                let SSAnimator = CoreSSAnimation.getUniqueIstance()
+                SSAnimator.collapseViewInSourceFrame(sourceFrame: self.categoryHeaderView.frame, viewToCollapse: button.superview!, oscureView: self.oscureView, elementsInsideView: nil) { (flag) in
                 }
-               
             }
-            
-            self.dismiss(animated: true, completion: nil)
-            
-            }))
-        self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    @objc func showRemoveSectionConfirmView(button : UIButton){
+        let section = button.tag
+        let CV = ConfirmView.getUniqueIstance()
+        let titleLabel = CV.getTitleLabel(text: "Sei sicuro di voler eliminare questa categoria?")
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.minimumScaleFactor = 0.7
+        let descLabel = CV.getDescriptionLabel(text: "I corsi all'interno saranno spostati in Default")
+        descLabel.adjustsFontSizeToFitWidth = true
+        descLabel.minimumScaleFactor = 0.7
+        let cancelButton = CV.getButton(position: .left, dataToAttach: section, title: "Annulla", selector: #selector(closeRemoveSectionConfirmView), target: self)
+        let confirmButton = CV.getButton(position: .right, dataToAttach: section, title: "Conferma", selector: #selector(removeSection(button:)), target: self)
+        let view = CV.getView(titleLabel: titleLabel, descLabel: descLabel, buttons: [cancelButton,confirmButton], dataToAttach: nil)
+        view.backgroundColor = UIColor.createCategoryViewColor
+        self.view.addSubview(view)
         
+        let SSAnimator = CoreSSAnimation.getUniqueIstance()
+        let frameTb = self.manageCoursesTableView.rect(forSection: section)
+        let frame = self.manageCoursesTableView.convert(frameTb, to: self.view)
+        SSAnimator.expandViewFromSourceFrame(sourceFrame: frame, viewToExpand: view, elementsInsideView: nil, oscureView: self.oscureView) { (flag) in }
     }
-    
-    
-    @objc func editClicked(){
-        if !self.manageCoursesTableView.isEditing {
-            self.manageCoursesTableView.setEditing(true, animated: true)
-            self.manageCoursesTableView.reloadSections(IndexSet(integersIn: 0...sharedSource.dataSource.count-1), with: UITableView.RowAnimation.fade)
+    @objc private func closeRemoveSectionConfirmView(sender : UIButton){
+        let section = sender.accessibilityElements?[1] as! Int
+        let frameTb = self.manageCoursesTableView.rect(forSection: section)
+        let frame = self.manageCoursesTableView.convert(frameTb, to: self.view)
+        let SSAnimator = CoreSSAnimation.getUniqueIstance()
+        //let frame = self.categoryHeaderView.frame
+        let view = sender.superview!
+        SSAnimator.collapseViewInSourceFrame(sourceFrame: frame, viewToCollapse: view, oscureView: self.oscureView, elementsInsideView: nil) { (flag) in
+            view.removeFromSuperview()
         }
-        else{
-            self.manageCoursesTableView.setEditing(false, animated: true)
-            self.manageCoursesTableView.reloadSections(IndexSet(integersIn: 0...sharedSource.dataSource.count-1), with: UITableView.RowAnimation.fade)
-        }
-       // self.manageCoursesTableView.isEditing = !self.manageCoursesTableView.isEditing
     }
-    
     
     @objc func closeCreateCategory(){
         closeCreateCategoryViewAnimated()

@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Wuc-p9-wJ8">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1220,15 +1219,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="LqB-L5-lGq">
-                                                    <rect key="frame" x="40" y="9" width="45" height="45"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smartlight" translatesAutoresizingMaskIntoConstraints="NO" id="LqB-L5-lGq">
+                                                    <rect key="frame" x="40" y="6.5" width="50" height="50"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="45" id="2cU-cH-id8"/>
-                                                        <constraint firstAttribute="width" constant="45" id="dVs-uN-0ZJ"/>
+                                                        <constraint firstAttribute="height" constant="50" id="2cU-cH-id8"/>
+                                                        <constraint firstAttribute="width" constant="50" id="dVs-uN-0ZJ"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Portale Studenti" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hB-g2-Hqm">
-                                                    <rect key="frame" x="-2.5" y="58" width="130" height="21"/>
+                                                    <rect key="frame" x="0.0" y="60.5" width="130" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="130" id="YuK-DO-COC"/>
                                                         <constraint firstAttribute="height" constant="21" id="sML-E1-Lzj"/>
@@ -1292,7 +1291,7 @@
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="sendManageCourse:" destination="vtU-cg-YC9" eventType="touchUpInside" id="S3d-pf-c8A"/>
+                                                            <action selector="sendToManageCourse:" destination="vtU-cg-YC9" eventType="touchUpInside" id="S3d-pf-c8A"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gestisci corsi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0fq-Ey-z2P">
@@ -1328,7 +1327,7 @@
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="sendSignUpCourse:" destination="vtU-cg-YC9" eventType="touchUpInside" id="Ii0-W1-acg"/>
+                                                            <action selector="sendToSignUpCourse:" destination="vtU-cg-YC9" eventType="touchUpInside" id="Ii0-W1-acg"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Iscriviti ai corsi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GhJ-RP-TN8">
@@ -1875,13 +1874,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="537"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error message label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBM-dH-Y4b">
-                                <rect key="frame" x="16" y="142" width="343" height="70"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error message label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="nBM-dH-Y4b">
+                                <rect key="frame" x="16" y="74" width="343" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="343" id="dzH-FS-ZTN"/>
                                     <constraint firstAttribute="height" constant="70" id="fRc-3e-4yd"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -2125,7 +2124,7 @@
                             <constraint firstItem="9NG-YC-UcG" firstAttribute="centerX" secondItem="lRG-83-CQT" secondAttribute="centerX" id="nSb-yh-gQf"/>
                             <constraint firstItem="kYO-FJ-Lp2" firstAttribute="centerX" secondItem="lRG-83-CQT" secondAttribute="centerX" id="rVa-Kq-fVB"/>
                             <constraint firstItem="hbh-1E-F2a" firstAttribute="centerX" secondItem="ihn-dK-D2O" secondAttribute="centerX" id="uFY-He-xqZ"/>
-                            <constraint firstItem="nBM-dH-Y4b" firstAttribute="top" secondItem="lRG-83-CQT" secondAttribute="top" constant="98" id="wTQ-G2-sVL"/>
+                            <constraint firstItem="nBM-dH-Y4b" firstAttribute="top" secondItem="lRG-83-CQT" secondAttribute="top" constant="30" id="wTQ-G2-sVL"/>
                             <constraint firstItem="9NG-YC-UcG" firstAttribute="width" secondItem="ihn-dK-D2O" secondAttribute="width" id="xcd-MN-Hkn"/>
                             <constraint firstItem="lRG-83-CQT" firstAttribute="bottom" secondItem="KdQ-cr-luT" secondAttribute="bottom" constant="10" id="yYY-SC-PJk"/>
                         </constraints>
@@ -2634,13 +2633,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error message label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydo-e9-ZPl">
-                                <rect key="frame" x="35.5" y="186" width="343" height="70"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error message label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="Ydo-e9-ZPl">
+                                <rect key="frame" x="35.5" y="118" width="343" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="DeX-Z3-68A"/>
                                     <constraint firstAttribute="width" constant="343" id="y5R-lm-4KW"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -2864,7 +2863,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.96879995200000002" green="0.96879995200000002" blue="0.96879995200000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="Ydo-e9-ZPl" firstAttribute="top" secondItem="SE5-EI-nHh" secondAttribute="top" constant="98" id="1Cf-aE-XSf"/>
+                            <constraint firstItem="Ydo-e9-ZPl" firstAttribute="top" secondItem="SE5-EI-nHh" secondAttribute="top" constant="30" id="1Cf-aE-XSf"/>
                             <constraint firstItem="Xxe-yU-gTn" firstAttribute="leading" secondItem="SE5-EI-nHh" secondAttribute="leading" id="4AG-BK-hHI"/>
                             <constraint firstItem="q2U-1Z-hPI" firstAttribute="centerX" secondItem="1HU-dJ-1dk" secondAttribute="centerX" id="6io-xM-8VN"/>
                             <constraint firstItem="eMC-n0-tK0" firstAttribute="width" secondItem="1HU-dJ-1dk" secondAttribute="width" id="JLH-cG-WMy"/>
@@ -2925,6 +2924,7 @@
         <image name="logo" width="64" height="64"/>
         <image name="pencil.and.ellipsis.rectangle" catalog="system" width="64" height="40"/>
         <image name="showcase" width="64" height="64"/>
+        <image name="smartlight" width="256" height="256"/>
         <image name="star_empty" width="24" height="24"/>
         <image name="student" width="128" height="128"/>
     </resources>

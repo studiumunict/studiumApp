@@ -49,13 +49,11 @@ class ProfileViewController: UIViewController, SWRevealViewControllerDelegate, U
             print("User has denied the permission.")
         }
     }*/
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         self.modalPresentationStyle = .fullScreen
         imagePicker.delegate =  self
-        self.userImageView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(self.imageTapped(tapGestureRecognizer:))))
-        userImageView.isUserInteractionEnabled =  true
         setupNavigationBar()
         setupRevealControllerParameters()
         setupUserImageView()
@@ -94,6 +92,8 @@ class ProfileViewController: UIViewController, SWRevealViewControllerDelegate, U
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         self.userImageView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(self.imageTapped(tapGestureRecognizer:))))
+        self.userImageView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(self.imageTapped(tapGestureRecognizer:))))
+        userImageView.isUserInteractionEnabled =  true
     }
     
     private func setupNavigationBar(){

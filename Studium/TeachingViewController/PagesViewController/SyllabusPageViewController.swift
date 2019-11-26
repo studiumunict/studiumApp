@@ -20,14 +20,7 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate {
     
     var syllabusCode: String!
     var isLoaded: Bool = false
-   
-    let reachability = Reachability()!
-    
-    
-    deinit {
-        reachability.stopNotifier()
-        NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)
-    }
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,51 +50,11 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
-        do{
-            try reachability.startNotifier()
-        } catch {
-            print("could not start reachability notifier")
-        }
-        
-    }
+   
     
     
     
-    
-    @objc func reachabilityChanged(note: Notification) {
-        let reachability = note.object as! Reachability
-        
-        if reachability.connection == .none {
-            if isLoaded {
-                webView.isHidden = false
-                viewAppoggio.isHidden = false
-                errorMessageLabel.isHidden = true
-            } else {
-                webView.isHidden = true
-                viewAppoggio.isHidden = true
-                errorMessageLabel.isHidden = false
-                errorMessageLabel.text = "La connessione ad Internet sembra essere offline."
-            }
-        
-        } else {
-            webView.isHidden = false
-            viewAppoggio.isHidden = false
-            errorMessageLabel.isHidden = true
-            
-            if !isLoaded {
-                if syllabusCode != nil {
-                    webView.load(URLRequest(url: URL(string: "https://syllabus.unict.it/insegnamento.php?mod=" + syllabusCode!)!))
-                }
-            }
-        }
-        
-    }
-    
-
+   
     private func customButtons(button: UIButton!, image: String!, rotazione: CGFloat!){
         let customImageView = UIImageView(frame: CGRect(x: button.frame.size.width/2 - 16, y: button.frame.size.height/2 - 10, width: 22, height: 22))
         customImageView.image = UIImage(named: image!)?.withRenderingMode(.alwaysTemplate)
@@ -116,14 +69,7 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate {
         button.isEnabled = flag
         button.alpha = flag == true ? 1 : 0.3
     }
-    
-    
-    
-    
-    
-    
-    
-    // MARK: WebView
+
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         switch keyPath {
@@ -160,9 +106,6 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         print("\n\n didFailProvisionalNavigation, error: ", error.localizedDescription)
     }
-    
-    
-    
     
     
     @IBAction func backButtonPressed(_ sender: UIButton) {

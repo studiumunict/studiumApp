@@ -12,8 +12,6 @@ class HomeTableSection{
     var expanded : Bool!
     var teachings = [Teaching]() //saranno le row (array sottostante alla section)
     
-    
-    
     init(cdl : CDL, teachingArray : [Teaching], setExpanded : Bool){
         self.course = cdl
         self.teachings = teachingArray

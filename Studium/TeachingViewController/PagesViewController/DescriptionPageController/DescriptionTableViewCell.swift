@@ -22,7 +22,7 @@ class DescriptionTableViewCell : UITableViewCell{
         self.elementsView.layer.borderColor = UIColor.elementsLikeNavBarColor.cgColor
         self.elementsView.clipsToBounds = true
         self.titleLabel.backgroundColor = UIColor.elementsLikeNavBarColor
-        self.titleLabel.textColor = UIColor.lightWhite
+        self.titleLabel.textColor = UIColor.lightSectionColor
     }
     
     func setInfo(descBlock : DescriptionBlock){

@@ -38,15 +38,13 @@ class HTMLParser {
         str = str.replacingOccurrences(of: "&#64256;", with: "ff", options: .caseInsensitive, range: nil)
         str = str.replacingOccurrences(of: "&ldquo;", with: "\"", options: .caseInsensitive, range: nil)
         str = str.replacingOccurrences(of: "&rdquo;", with: "\"", options: .caseInsensitive, range: nil)
-        //str = str.replacingOccurrences(of: "&amp;", with: "&", options: .caseInsensitive, range: nil)
         str = str.replacingOccurrences(of: "&amp;", with: "", options: .caseInsensitive, range: nil)
         str = str.replacingOccurrences(of: "#768;", with: "", options: .caseInsensitive, range: nil)
         str = str.replacingOccurrences(of: "&#8217;", with: "'", options: .caseInsensitive, range: nil)
-        
         return str
     }
     public func getStringURL(sourceString: String)-> String{
-        var str = sourceString.replacingOccurrences(of: " ", with: "%20", options: .caseInsensitive, range: nil)
+        let str = sourceString.replacingOccurrences(of: " ", with: "%20", options: .caseInsensitive, range: nil)
         return str
     }
 }
