@@ -67,7 +67,8 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     internal func enableControllerInteraction(){
         self.navigationController?.navigationBar.isUserInteractionEnabled = true
         self.view.isUserInteractionEnabled = true
-        collectionView.allowsSelection = true
+        collectionView.allowsSelection = false
+        
     }
     internal func fillDocSystem(){ //fileSystemPermanente
         fs = PermanentDocSystem.getUniqueIstance()
