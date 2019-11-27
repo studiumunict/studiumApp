@@ -471,7 +471,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     }
     internal func setUpActionsViewLabel()-> UILabel{
         let CV = ConfirmView.getUniqueIstance()
-        return CV.getTitleLabel(text: "Gestisci dodumenti selezionati")
+        return CV.getTitleLabel(text: "Gestisci documenti selezionati")
     }
     internal func setupActionsView(){
         let CV = ConfirmView.getUniqueIstance()

@@ -27,7 +27,8 @@ class DocumentsCollectionViewCell: UICollectionViewCell {
         activityIndicator.font = UIFont.systemFont(ofSize: 12)
         //activityIndicator.viewPrintFormatter().view.isHidden = true
         activityIndicator.valueFormatter = UICircularProgressRingFormatter(valueIndicator: "", rightToLeft: false, showFloatingPoint: false, decimalPlaces: 0)
-        
+        self.layer.cornerRadius = 5.0
+        self.clipsToBounds = true
     }
     private func getRelatedImage(fromTitle: String)->String{
         let dotInd = fromTitle.lastIndex(of: ".")
