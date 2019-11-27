@@ -34,7 +34,6 @@ class Doc : NSObject, NSCoding {
 
     init(title: String, path: String, type: String, uploaded: String, lastUpdate: String, size: Int, courseID: String) {
         super.init()
-        //self.title = title
         self.path = path
         self.type = type
         self.uploaded = uploaded

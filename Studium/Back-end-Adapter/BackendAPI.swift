@@ -167,7 +167,6 @@ import Foundation
                             else{
                                 let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
                                 completion(json)
-                                //print(json)
                             }
                             
         }) { (error : Error?) -> Void in

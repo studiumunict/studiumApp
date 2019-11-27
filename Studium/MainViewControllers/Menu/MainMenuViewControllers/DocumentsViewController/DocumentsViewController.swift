@@ -211,7 +211,6 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     }
     
     func fileSelected(indexPath: IndexPath){
-            
             self.disableControllerInteraction()
             let cell = self.collectionView.cellForItem(at: indexPath) as! DocumentsCollectionViewCell
             cell.startActivityIndicator()
@@ -253,14 +252,12 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         }
     }
     func reloadCollectionView(){
-        
         self.checkForMoving()
         self.checkContent()
         self.setBackButtonState()
         self.collectionView.reloadData()
         self.reloadTitleLabel()
         self.reloadDescriptionLabel()
-        //self.drawSelectedCell()
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         cell.backgroundColor = cell.isSelected ? UIColor.lightSectionColor : UIColor.clear
@@ -423,6 +420,14 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     @objc func moveSelectedDocuments(){
         startMoving()
     }
+    @objc func showDeleteDocumentsConfirmView(){
+        let CF = ConfirmView.getUniqueIstance()
+        let titleLabel = CF.getTitleLabel(text: "Sei sicuro di voler eliminare i documenti?")
+        let descLabel = CF.getDescriptionLabel(text: "L'operazione è irreversibile")
+        let cancelButton = CF.getButton(position: .left, title: "Annulla", selector: #selector(closeActionsView), target: self)
+        let confirmButton = CF.getButton(position: .right, title: "Conferma", selector: #selector(deleteSelectedDocuments), target: self)
+        CF.updateView(confirmView: &self.actionsView, titleLabel: titleLabel, descLabel: descLabel, buttons: [cancelButton,confirmButton], dataToAttach: nil, animated: true)
+    }
     @objc func deleteSelectedDocuments(){
         //sarebbe il caso di far comparire un alert
         fs.removeChilds(childs: self.selectionList)
@@ -431,7 +436,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     }
     internal func setUpDeleteActionButton()-> UIButton{
         let CV = ConfirmView.getUniqueIstance()
-        return CV.getButton(position: .top, dataToAttach: nil, title: "Cancella selezionati", selector:  #selector(deleteSelectedDocuments), target: self)
+        return CV.getButton(position: .top, dataToAttach: nil, title: "Cancella selezionati", selector:  #selector(showDeleteDocumentsConfirmView), target: self)
     }
 
     @objc func closeActionsView(){

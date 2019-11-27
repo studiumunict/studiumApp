@@ -13,7 +13,6 @@ class DescriptionPageViewController: UIViewController, UITableViewDelegate, SWRe
 
     @IBOutlet weak var tableView: UITableView!
     var dataSource = DescriptionTableDataSource()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +29,6 @@ class DescriptionPageViewController: UIViewController, UITableViewDelegate, SWRe
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 200.0
         tableView.separatorStyle = .none
-        
     }
     
     deinit{
