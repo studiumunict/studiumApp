@@ -76,7 +76,8 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         documentInteractionController.url = tempUrl
         documentInteractionController.uti = tempUrl.typeIdentifier ?? "public.data, public.content"
         documentInteractionController.name = tempUrl.localizedName ?? tempUrl.lastPathComponent
-        documentInteractionController.presentPreview(animated: true)
+        let flag = documentInteractionController.presentPreview(animated: true)
+        if !flag {documentInteractionController.presentOptionsMenu(from: self.nameTeacherLabel.frame, in: self.view, animated: true)}
     }
     
     func setOscureView(){

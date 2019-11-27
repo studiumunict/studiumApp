@@ -41,7 +41,12 @@ class Doc : NSObject, NSCoding {
         self.size = size
         self.canOpen = true
         self.courseID = courseID
-        self.title = HTMLParser.getUniqueIstance().parseHTMLText(text: title)
+        if type == "file" {
+            self.title = HTMLParser.getUniqueIstance().parseFileTitle(text: title)
+        }
+        else {
+            self.title = HTMLParser.getUniqueIstance().parseFolderTitle(text: title)
+        }
     }
     
     func setParent(prev: Doc!) {

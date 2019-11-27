@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -43,14 +43,18 @@
 		9C2C63CD237311BB0063F9C7 /* NotifyClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2C63CC237311BB0063F9C7 /* NotifyClass.swift */; };
 		9C454F1323016B070071F81F /* PswEncryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C454F1223016B070071F81F /* PswEncryption.swift */; };
 		9C454F1523016DA70071F81F /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C454F1423016DA70071F81F /* Session.swift */; };
-		9C60BF322386EB9000AD1CA1 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C60BF312386EB9000AD1CA1 /* FileDownloader.swift */; };
+		9C60BF322386EB9000AD1CA1 /* SSFileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C60BF312386EB9000AD1CA1 /* SSFileDownloader.swift */; };
 		9C7ADB5522F31AF7009651FB /* BackendAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7ADB5422F31AF7009651FB /* BackendAPI.swift */; };
 		9C8B9386237C1215001E5657 /* PermanentDocSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8B9385237C1215001E5657 /* PermanentDocSystem.swift */; };
 		9CA4511E238D060600D25B66 /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA4511D238D060600D25B66 /* ConfirmView.swift */; };
 		9CA45120238D095400D25B66 /* SSCustomLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA4511F238D095400D25B66 /* SSCustomLayers.swift */; };
 		9CBDB9CF2379C6AD00A015A4 /* CoreSSAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBDB9CE2379C6AD00A015A4 /* CoreSSAnimation.swift */; };
 		9CC86E3F22C0EC0F007567B1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CC86E3E22C0EC0F007567B1 /* WebKit.framework */; };
+		9CEBB273238EF2EB00A6BEFF /* Pods_Studium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEBB272238EF2EB00A6BEFF /* Pods_Studium.framework */; };
+		9CEBB274238EF2EB00A6BEFF /* Pods_Studium.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEBB272238EF2EB00A6BEFF /* Pods_Studium.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9CEBB277238EF30A00A6BEFF /* UICircularProgressRing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEBB276238EF30A00A6BEFF /* UICircularProgressRing.framework */; };
 		9CF6175F2302EFA1001D3E77 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF6175E2302EFA1001D3E77 /* StringExtension.swift */; };
+		9CF9C928238EE1A700805523 /* SSFileDownloaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF9C927238EE1A700805523 /* SSFileDownloaderDelegate.swift */; };
 		9CFE72C121B9508E001EB697 /* CDLTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE72C021B9508E001EB697 /* CDLTableViewCell.swift */; };
 		9CFE72C321B95206001EB697 /* TeachingClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE72C221B95206001EB697 /* TeachingClass.swift */; };
 		9CFE72C521B95331001EB697 /* HomeTableSectionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE72C421B95331001EB697 /* HomeTableSectionClass.swift */; };
@@ -68,7 +72,6 @@
 		9CFE9DAF21A8BC8F0030AE33 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE9DAE21A8BC8F0030AE33 /* ProfileViewController.swift */; };
 		9CFE9DB121A8BC9A0030AE33 /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE9DB021A8BC9A0030AE33 /* DocumentsViewController.swift */; };
 		DCDCA30A0259D09056ED34DE /* Pods_StudiumTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 680AF054BAE403BD03DB8DA1 /* Pods_StudiumTests.framework */; };
-		F1B1CA9919349ED5CFE1C280 /* Pods_Studium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC89C62786E9836B037027E /* Pods_Studium.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +90,20 @@
 			remoteInfo = Studium;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9CEBB275238EF2EB00A6BEFF /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9CEBB274238EF2EB00A6BEFF /* Pods_Studium.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0D0D5F6926FC3A70A81E131D /* Pods-StudiumTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudiumTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudiumTests/Pods-StudiumTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -134,14 +151,18 @@
 		9C2C63CC237311BB0063F9C7 /* NotifyClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyClass.swift; sourceTree = "<group>"; };
 		9C454F1223016B070071F81F /* PswEncryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PswEncryption.swift; sourceTree = "<group>"; };
 		9C454F1423016DA70071F81F /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
-		9C60BF312386EB9000AD1CA1 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
+		9C60BF312386EB9000AD1CA1 /* SSFileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSFileDownloader.swift; sourceTree = "<group>"; };
 		9C7ADB5422F31AF7009651FB /* BackendAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAPI.swift; sourceTree = "<group>"; };
 		9C8B9385237C1215001E5657 /* PermanentDocSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermanentDocSystem.swift; sourceTree = "<group>"; };
 		9CA4511D238D060600D25B66 /* ConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
 		9CA4511F238D095400D25B66 /* SSCustomLayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSCustomLayers.swift; sourceTree = "<group>"; };
 		9CBDB9CE2379C6AD00A015A4 /* CoreSSAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreSSAnimation.swift; sourceTree = "<group>"; };
 		9CC86E3E22C0EC0F007567B1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		9CEBB26E238EF2D500A6BEFF /* Pods_Studium.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Studium.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9CEBB272238EF2EB00A6BEFF /* Pods_Studium.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Studium.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9CEBB276238EF30A00A6BEFF /* UICircularProgressRing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = UICircularProgressRing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CF6175E2302EFA1001D3E77 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		9CF9C927238EE1A700805523 /* SSFileDownloaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSFileDownloaderDelegate.swift; sourceTree = "<group>"; };
 		9CFE72C021B9508E001EB697 /* CDLTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDLTableViewCell.swift; sourceTree = "<group>"; };
 		9CFE72C221B95206001EB697 /* TeachingClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingClass.swift; sourceTree = "<group>"; };
 		9CFE72C421B95331001EB697 /* HomeTableSectionClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableSectionClass.swift; sourceTree = "<group>"; };
@@ -173,8 +194,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CEBB277238EF30A00A6BEFF /* UICircularProgressRing.framework in Frameworks */,
+				9CEBB273238EF2EB00A6BEFF /* Pods_Studium.framework in Frameworks */,
 				9CC86E3F22C0EC0F007567B1 /* WebKit.framework in Frameworks */,
-				F1B1CA9919349ED5CFE1C280 /* Pods_Studium.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +290,9 @@
 		3116D69C2086EA685ADD33FE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9CEBB276238EF30A00A6BEFF /* UICircularProgressRing.framework */,
+				9CEBB272238EF2EB00A6BEFF /* Pods_Studium.framework */,
+				9CEBB26E238EF2D500A6BEFF /* Pods_Studium.framework */,
 				9CC86E3E22C0EC0F007567B1 /* WebKit.framework */,
 				ACC89C62786E9836B037027E /* Pods_Studium.framework */,
 				680AF054BAE403BD03DB8DA1 /* Pods_StudiumTests.framework */,
@@ -299,9 +324,10 @@
 				9CBDB9CE2379C6AD00A015A4 /* CoreSSAnimation.swift */,
 				9C27B34A237B0DB500242958 /* DescriptionBlock.swift */,
 				9C29C2D62380730A00A29669 /* HTMLParser.swift */,
-				9C60BF312386EB9000AD1CA1 /* FileDownloader.swift */,
 				9CA4511D238D060600D25B66 /* ConfirmView.swift */,
 				9CA4511F238D095400D25B66 /* SSCustomLayers.swift */,
+				9C60BF312386EB9000AD1CA1 /* SSFileDownloader.swift */,
+				9CF9C927238EE1A700805523 /* SSFileDownloaderDelegate.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -508,6 +534,7 @@
 				9CFE9D6C21A8ADBC0030AE33 /* Frameworks */,
 				9CFE9D6D21A8ADBC0030AE33 /* Resources */,
 				50EFBB571D73FFA8C041E609 /* [CP] Embed Pods Frameworks */,
+				9CEBB275238EF2EB00A6BEFF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -635,17 +662,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Studium/Pods-Studium-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/SWRevealViewController/SWRevealViewController.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Studium/Pods-Studium-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SWRevealViewController.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Studium/Pods-Studium-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Studium/Pods-Studium-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Studium/Pods-Studium-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7AE56DA560AF9174F5CFED55 /* [CP] Check Pods Manifest.lock */ = {
@@ -721,7 +747,7 @@
 				135D120F21B8092200DA9C69 /* ExtensionCALayer.swift in Sources */,
 				9C06CA8621C67ACF00FA09DB /* SharedCourseSource.swift in Sources */,
 				9CFE9DB121A8BC9A0030AE33 /* DocumentsViewController.swift in Sources */,
-				9C60BF322386EB9000AD1CA1 /* FileDownloader.swift in Sources */,
+				9C60BF322386EB9000AD1CA1 /* SSFileDownloader.swift in Sources */,
 				9CFE9DA821A8BBEE0030AE33 /* MenuTableViewController.swift in Sources */,
 				9CFE72CA21BA9814001EB697 /* CoursesViewController.swift in Sources */,
 				9C06A22C21AB707500E695DB /* CDLClass.swift in Sources */,
@@ -761,6 +787,7 @@
 				9C14FE74237B1C9B00069D11 /* DescriptionTableViewCell.swift in Sources */,
 				9C29C2D72380730A00A29669 /* HTMLParser.swift in Sources */,
 				9C06A22A21AB700200E695DB /* DepartmentClass.swift in Sources */,
+				9CF9C928238EE1A700805523 /* SSFileDownloaderDelegate.swift in Sources */,
 				9CBDB9CF2379C6AD00A015A4 /* CoreSSAnimation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

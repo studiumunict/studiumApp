@@ -1962,10 +1962,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="113" height="113"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="nWt-6I-l9z">
-                                                    <rect key="frame" x="46.5" y="15.5" width="20" height="20"/>
-                                                    <color key="color" red="0.1460712874" green="0.1460712874" blue="0.1460712874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                </activityIndicatorView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pwN-eB-DMC" customClass="UICircularProgressRing" customModule="UICircularProgressRing">
+                                                    <rect key="frame" x="34" y="3" width="45" height="45"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                </view>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folder_1" translatesAutoresizingMaskIntoConstraints="NO" id="shA-ax-dAr">
                                                     <rect key="frame" x="34" y="3" width="45" height="45"/>
                                                     <constraints>
@@ -1992,21 +1992,21 @@
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="jR8-Hu-raH" secondAttribute="trailing" id="4oj-KZ-8Cx"/>
-                                            <constraint firstItem="nWt-6I-l9z" firstAttribute="height" secondItem="shA-ax-dAr" secondAttribute="height" multiplier="0.444444" id="9ZK-Sx-y0q"/>
                                             <constraint firstItem="1Mm-3w-zv9" firstAttribute="leading" secondItem="koI-MT-f3I" secondAttribute="leading" id="AMI-IN-ICf"/>
                                             <constraint firstItem="shA-ax-dAr" firstAttribute="top" secondItem="koI-MT-f3I" secondAttribute="top" constant="3" id="J8q-Pz-FCN"/>
-                                            <constraint firstItem="nWt-6I-l9z" firstAttribute="centerX" secondItem="shA-ax-dAr" secondAttribute="centerX" id="M0k-37-Ktt"/>
+                                            <constraint firstItem="pwN-eB-DMC" firstAttribute="height" secondItem="shA-ax-dAr" secondAttribute="height" id="L50-BX-7Cj"/>
+                                            <constraint firstItem="pwN-eB-DMC" firstAttribute="width" secondItem="shA-ax-dAr" secondAttribute="width" id="Rj5-Cv-1zU"/>
                                             <constraint firstItem="1Mm-3w-zv9" firstAttribute="top" secondItem="shA-ax-dAr" secondAttribute="bottom" id="amv-i9-1uY"/>
                                             <constraint firstAttribute="trailing" secondItem="1Mm-3w-zv9" secondAttribute="trailing" id="dqY-tz-HQ0"/>
                                             <constraint firstItem="jR8-Hu-raH" firstAttribute="top" secondItem="1Mm-3w-zv9" secondAttribute="bottom" constant="4" id="fKY-i3-5jp"/>
                                             <constraint firstItem="jR8-Hu-raH" firstAttribute="leading" secondItem="koI-MT-f3I" secondAttribute="leading" id="fjF-AZ-f8C"/>
-                                            <constraint firstItem="nWt-6I-l9z" firstAttribute="centerY" secondItem="shA-ax-dAr" secondAttribute="centerY" id="nOL-4s-vpt"/>
+                                            <constraint firstItem="pwN-eB-DMC" firstAttribute="centerX" secondItem="shA-ax-dAr" secondAttribute="centerX" id="jK4-Ng-9iI"/>
                                             <constraint firstItem="shA-ax-dAr" firstAttribute="centerX" secondItem="koI-MT-f3I" secondAttribute="centerX" id="nTW-vm-Dgn"/>
-                                            <constraint firstItem="nWt-6I-l9z" firstAttribute="width" secondItem="shA-ax-dAr" secondAttribute="width" multiplier="0.444444" id="pGn-Vf-YhN"/>
+                                            <constraint firstItem="pwN-eB-DMC" firstAttribute="centerY" secondItem="shA-ax-dAr" secondAttribute="centerY" id="oTR-sl-byb"/>
                                         </constraints>
                                         <size key="customSize" width="113" height="113"/>
                                         <connections>
-                                            <outlet property="activityIndicator" destination="nWt-6I-l9z" id="3rm-dk-UIf"/>
+                                            <outlet property="activityIndicator" destination="pwN-eB-DMC" id="Org-rJ-sGI"/>
                                             <outlet property="descriptionDocLabel" destination="jR8-Hu-raH" id="MeI-Sy-SL4"/>
                                             <outlet property="imageDoc" destination="shA-ax-dAr" id="5dI-zR-WUE"/>
                                             <outlet property="titleDocLabel" destination="1Mm-3w-zv9" id="6dp-1l-J71"/>
@@ -2148,7 +2148,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5BX-nl-pwd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5846" y="1947"/>
+            <point key="canvasLocation" x="5845.652173913044" y="1946.9866071428571"/>
         </scene>
         <!--Booking Page View Controller-->
         <scene sceneID="caJ-qU-oEk">
@@ -2718,6 +2718,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="113" height="113"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ovB-ob-LbA" customClass="UICircularProgressRing" customModule="UICircularProgressRing">
+                                                    <rect key="frame" x="34" y="3" width="45" height="45"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                </view>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folder_1" translatesAutoresizingMaskIntoConstraints="NO" id="Xbv-ud-7jf">
                                                     <rect key="frame" x="34" y="3" width="45" height="45"/>
                                                     <constraints>
@@ -2740,28 +2744,25 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="x0j-nq-2jT">
-                                                    <rect key="frame" x="46.5" y="15.5" width="20" height="20"/>
-                                                </activityIndicatorView>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="izn-Nl-95v" secondAttribute="trailing" id="11D-iz-90p"/>
-                                            <constraint firstItem="x0j-nq-2jT" firstAttribute="width" secondItem="Xbv-ud-7jf" secondAttribute="width" multiplier="0.444444" id="6wk-bt-8Hw"/>
                                             <constraint firstItem="wXH-hN-l9D" firstAttribute="leading" secondItem="3G4-e4-Br0" secondAttribute="leading" id="85X-qg-Kgh"/>
+                                            <constraint firstItem="ovB-ob-LbA" firstAttribute="height" secondItem="Xbv-ud-7jf" secondAttribute="height" id="BJP-0n-t28"/>
                                             <constraint firstAttribute="trailing" secondItem="wXH-hN-l9D" secondAttribute="trailing" id="FX9-pd-Bxm"/>
-                                            <constraint firstItem="x0j-nq-2jT" firstAttribute="height" secondItem="Xbv-ud-7jf" secondAttribute="height" multiplier="0.444444" id="FqP-DO-Jcu"/>
+                                            <constraint firstItem="ovB-ob-LbA" firstAttribute="width" secondItem="Xbv-ud-7jf" secondAttribute="width" id="FxF-Zc-zte"/>
                                             <constraint firstItem="wXH-hN-l9D" firstAttribute="top" secondItem="izn-Nl-95v" secondAttribute="bottom" constant="4" id="Kzy-S5-9sz"/>
                                             <constraint firstItem="izn-Nl-95v" firstAttribute="leading" secondItem="3G4-e4-Br0" secondAttribute="leading" id="PXZ-hG-mZ6"/>
-                                            <constraint firstItem="x0j-nq-2jT" firstAttribute="centerY" secondItem="Xbv-ud-7jf" secondAttribute="centerY" id="PuC-gx-T7B"/>
-                                            <constraint firstItem="x0j-nq-2jT" firstAttribute="centerX" secondItem="Xbv-ud-7jf" secondAttribute="centerX" id="Tvs-k6-Nj7"/>
                                             <constraint firstItem="Xbv-ud-7jf" firstAttribute="top" secondItem="3G4-e4-Br0" secondAttribute="top" constant="3" id="dfv-bs-iL4"/>
+                                            <constraint firstItem="ovB-ob-LbA" firstAttribute="centerX" secondItem="Xbv-ud-7jf" secondAttribute="centerX" id="edq-Tb-gT4"/>
                                             <constraint firstItem="izn-Nl-95v" firstAttribute="top" secondItem="Xbv-ud-7jf" secondAttribute="bottom" id="kmL-C8-lbV"/>
+                                            <constraint firstItem="ovB-ob-LbA" firstAttribute="centerY" secondItem="Xbv-ud-7jf" secondAttribute="centerY" id="rKJ-P0-06G"/>
                                             <constraint firstItem="Xbv-ud-7jf" firstAttribute="centerX" secondItem="3G4-e4-Br0" secondAttribute="centerX" id="wQK-qH-MXS"/>
                                         </constraints>
                                         <size key="customSize" width="113" height="113"/>
                                         <connections>
-                                            <outlet property="activityIndicator" destination="x0j-nq-2jT" id="vYk-cS-EZc"/>
+                                            <outlet property="activityIndicator" destination="ovB-ob-LbA" id="ht6-NZ-gyb"/>
                                             <outlet property="descriptionDocLabel" destination="wXH-hN-l9D" id="Bag-Bn-sKD"/>
                                             <outlet property="imageDoc" destination="Xbv-ud-7jf" id="Y83-jq-29S"/>
                                             <outlet property="titleDocLabel" destination="izn-Nl-95v" id="NRz-YY-I6C"/>

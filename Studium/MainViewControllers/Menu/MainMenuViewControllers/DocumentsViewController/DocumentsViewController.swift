@@ -9,7 +9,9 @@
 import UIKit
 
 
-class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIDocumentInteractionControllerDelegate  {
+class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIDocumentInteractionControllerDelegate, SSFileDownloaderDelegate  {
+    
+    
     @IBOutlet var errorMessageLabel: UILabel!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var descrizioneLabel: UILabel!
@@ -67,10 +69,11 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     internal func enableControllerInteraction(){
         self.navigationController?.navigationBar.isUserInteractionEnabled = true
         self.view.isUserInteractionEnabled = true
-        collectionView.allowsSelection = false
+        collectionView.allowsSelection = true
         
     }
     internal func fillDocSystem(){ //fileSystemPermanente
+        print("FillDocSystem")
         fs = PermanentDocSystem.getUniqueIstance()
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -183,7 +186,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         }
         else {
             if fs.currentFolder.childs[indexPath.item].type == "folder" {
-                if moving && isInSelectionList(doc: fs.currentFolder.childs[indexPath.item]){ print("is in selection!"); return }
+                if moving && isInSelectionList(doc: fs.currentFolder.childs[indexPath.item]){  return }
                 backButton.isEnabled = true
                 titleLabel.text = fs.currentFolder.childs[indexPath.item].title
                 fs.goToChild(childDoc: fs.currentFolder.childs[indexPath.item])
@@ -208,26 +211,38 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
         documentInteractionController.url = tempUrl
         documentInteractionController.uti = tempUrl.typeIdentifier ?? "public.data, public.content"
         documentInteractionController.name = tempUrl.localizedName ?? tempUrl.lastPathComponent
-        documentInteractionController.presentPreview(animated: true)
+        let flag = documentInteractionController.presentPreview(animated: true)
+        if !flag {documentInteractionController.presentOptionsMenu(from: self.headerView.frame, in: self.view, animated: true)}
     }
     
     func fileSelected(indexPath: IndexPath){
             self.disableControllerInteraction()
             let cell = self.collectionView.cellForItem(at: indexPath) as! DocumentsCollectionViewCell
-            cell.startActivityIndicator()
+            cell.showActivityIndicator()
             let file =  fs.currentFolder.childs[indexPath.item]
-            let fd = FileDownloader.getUniqueIstance()
-            fd.downloadFile(courseID: file.courseID, fsDoc: file, completion: { (tempurl) in
-                if let url = tempurl { //donwload effetturato
-                    self.openFile(tempUrl: url)
-                    self.appDelegate.isFilePresented = true
-                }
-                else{ //errore download
-                    print("Errore apertura file")
-                }
-                cell.stopActyivityIndicator()
-                self.enableControllerInteraction()
-            })
+            let fd = SSFileDownloader(delegate: self)
+            fd.startDownload(forIndexPath: indexPath, fsDoc: file)
+    }
+    
+    func updateDownloadProgress(currentProgress: Float,forIndexPath: IndexPath) { //delegate func download
+        DispatchQueue.main.async { // Correct
+            let cell = self.collectionView.cellForItem(at: forIndexPath) as! DocumentsCollectionViewCell
+            cell.updateActivityIndicator(progress: currentProgress)
+        }
+    }
+    
+    func downloadProgressFinished(withError: Error?, tempUrl: URL?, forIndexPath: IndexPath) { //delegate func download
+        if let url = tempUrl { //download effetturato
+            print("chiamo openFile")
+            self.openFile(tempUrl: url)
+            self.appDelegate.isFilePresented = true
+        }
+        else{ //errore download
+            print("Errore download file")
+        }
+        let cell = collectionView.cellForItem(at: forIndexPath) as! DocumentsCollectionViewCell
+        cell.hide()
+        self.enableControllerInteraction()
     }
     func setBackButtonState(){
         if fs.currentFolder.parent == nil{
@@ -274,11 +289,13 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        print("deselect")
         guard !moving else {return}
         guard collectionView.allowsMultipleSelection else { return }
         let cell = collectionView.cellForItem(at: indexPath) as! DocumentsCollectionViewCell
         let index = getSelectedCellIndex(cellTitle: cell.titleDocLabel.text!)
         cell.backgroundColor = UIColor.clear
+        cell.isSelected = false
         if index < selectionList.count && index > -1 {
              selectionList.remove(at: index)
         }
@@ -370,7 +387,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
     }
     
     internal func checkForSelectionDraw(cell: DocumentsCollectionViewCell, indexPath: IndexPath){
-        guard moving else { return }
+        //guard moving else { return }
         let i = indexPath.item
         if selectionList.contains(fs.currentFolder.childs[i]){
             cell.backgroundColor = UIColor.lightSectionColor
