@@ -63,6 +63,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         setUIForLoading()
         loadContent()
         self.documentInteractionController.delegate = self
+        self.navigationController?.navigationBar.backgroundColor = UIColor.white //non si sa perchè se metto white diventa del colore giusto.. boooo
         //print("CODE:::::::",self.teachingDataSource.code)
     }
     func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
@@ -95,13 +96,33 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     private func refreshContent(){
         self.teachingDataSource.removeAllData()
         self.setUIForRefreshing()
-        teachingDataSource.refreshData { (flag) in
-            self.hideLoadingOscureView()
-            self.refreshSubViewControllersContent()
+        teachingDataSource.refreshData(fromController:self) { (success) in
+            if success{
+                self.hideLoadingOscureView()
+                self.refreshSubViewControllersContent()
+            }
+            else{
+                self.hideSpinnerInOscureView()
+            }
         }
     }
     
+    private func contentDidLoaded(){
+        self.istantiateViewControllers()
+        self.stackView.translatesAutoresizingMaskIntoConstraints = false
+        self.setPageViewControllerSubviewsNumber()
+        self.pageViewController.dataSource = self
+        self.pageViewController.delegate = self
+        self.setPageControllerLayout()
+        self.hideLoadingOscureView()
+        self.showStackView()
+    }
+    
     private func refreshSubViewControllersContent(){
+        if viewControllerList == nil{
+            contentDidLoaded()
+            return
+        }
         for vc in viewControllerList{
             if let v = vc as? NotifyPageViewController{
                 v.dataSource.items.removeAll()
@@ -121,7 +142,8 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     }
     
     private func setUIForRefreshing(){
-        self.oscureLoadingView.alpha = 0.0
+        self.showSpinnerInOscureView()
+        //self.oscureLoadingView.alpha = 0.0
         self.oscureLoadingView.isHidden = false
         UIView.animate(withDuration: 0.3, animations: {
              self.oscureLoadingView.alpha = 1.0
@@ -149,16 +171,25 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             self.stackView.alpha = 1.0
         }
     }
+    private func hideSpinnerInOscureView(){
+        for subview in oscureLoadingView.subviews{
+            if subview is UIActivityIndicatorView{
+                subview.isHidden = true
+            }
+        }
+    }
+    private func showSpinnerInOscureView(){
+        for subview in oscureLoadingView.subviews{
+            if subview is UIActivityIndicatorView{
+                subview.isHidden = false
+            }
+        }
+    }
     private func loadContent(){
-        teachingDataSource.completeTeachingData { (flag) in
-            self.istantiateViewControllers()
-            self.stackView.translatesAutoresizingMaskIntoConstraints = false
-            self.setPageViewControllerSubviewsNumber()
-            self.pageViewController.dataSource = self
-            self.pageViewController.delegate = self
-            self.setPageControllerLayout()
-            self.hideLoadingOscureView()
-            self.showStackView()
+        teachingDataSource.completeTeachingData(fromController:self) { (wasLoaded,success) in
+            if success {self.contentDidLoaded()}
+            else{self.hideSpinnerInOscureView()} //connection error
+            if wasLoaded && !success {self.contentDidLoaded()} //it was loaded, we have still all data
         }
     }
     

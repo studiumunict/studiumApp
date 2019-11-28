@@ -17,10 +17,12 @@ class SSFileDownloader : NSObject, URLSessionDelegate, URLSessionDataDelegate{
     var fsDoc : Doc!
     var forIndexPath : IndexPath!
     weak var delegate: SSFileDownloaderDelegate?
+    weak var errorDelegate : ConnectionErrorHandlerDelegate?
    
-    public init(delegate: SSFileDownloaderDelegate){
+    public init(delegate: SSFileDownloaderDelegate, errorHandlerDelegate: ConnectionErrorHandlerDelegate?){
         super.init()
         self.delegate = delegate
+        self.errorDelegate = errorHandlerDelegate
         let opQueue = OperationQueue()
         session = URLSession(configuration: .default, delegate: self, delegateQueue: opQueue)
     }
@@ -56,6 +58,13 @@ class SSFileDownloader : NSObject, URLSessionDelegate, URLSessionDataDelegate{
     }
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        if error != nil{
+            errorDelegate?.connectionErrorHandle(error: error)
+            DispatchQueue.main.async {
+                self.delegate?.downloadProgressFinished(withError: error, tempUrl: nil, forIndexPath: self.forIndexPath)
+            }
+            return
+        }
         let tmpURL = FileManager.default.temporaryDirectory.appendingPathComponent(fsDoc.title)
         do {
             try buffer.write(to: tmpURL)
@@ -70,32 +79,6 @@ class SSFileDownloader : NSObject, URLSessionDelegate, URLSessionDataDelegate{
             self.delegate?.downloadProgressFinished(withError: error, tempUrl: tmpURL, forIndexPath: self.forIndexPath)
         }
     }
-    
-    /*func downloadFile(courseID: String, fsDoc: Doc, completion: @escaping (URL?)->Void){ //old direct download function with completion
-       let parsedFileURL = getCorrectURL(fsDoc: fsDoc)
-       guard let url = URL(string: parsedFileURL) else { return }
-       URLSession.shared.dataTask(with: url) { data, response, error in
-               guard let data = data, error == nil else {
-                   DispatchQueue.main.async {
-                       completion(nil)
-                   }
-                   return
-               }
-                  let tmpURL = FileManager.default.temporaryDirectory.appendingPathComponent(fsDoc.title)
-                  do {
-                      try data.write(to: tmpURL)
-                  } catch let er {
-                       print(er)
-                       DispatchQueue.main.async {
-                          completion(nil)
-                       }
-                       return
-                  }
-                  DispatchQueue.main.async {
-                   completion(tmpURL)
-                  }
-               }.resume()
-    }*/
 }
 
 extension URL {

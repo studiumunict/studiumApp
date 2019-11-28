@@ -21,33 +21,62 @@ class SharedCoursesSource: NSObject {
         return obj
     }
     
-    private func getRowIndexByCategory(cat: String) -> Int{
+    var observers = [SharedSourceObserverDelegate]()
+    
+    public func addObserverDelegate(observer: SharedSourceObserverDelegate ){
+        self.observers.append(observer)
+    }
+    
+    private func notifyObserversForUpdate(byController: UIViewController?){
+        for observer in observers{
+            observer.dataSourceUpdated(byController: byController)
+        }
+    }
+    public func isEmpty() -> Bool{
+        return dataSource.count == 1 && dataSource[0].teachings.count == 0
+    }
+    
+    private func getRowIndexByCategory(newSource: [HomeTableSection],cat: String) -> Int{
            var i = 0
-           for row in dataSource{
+           for row in newSource{
                if row.course.code == cat {return i}
                i+=1
            }
            return 0
     }
+    private func getCopy(from: [HomeTableSection])-> [HomeTableSection]{
+        var to = [HomeTableSection]()
+        for elem in from{
+            to.append(elem)
+        }
+        return to
+    }
     
-    public func reloadSourceFromAPI(completion: @escaping (Bool) -> Void){
-        dataSource.removeAll()
-        dataSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "Default", courseCode: "0"), teachingArray: [Teaching](), setExpanded: true)) 
-        let api = BackendAPI.getUniqueIstance()
+    public func reloadSourceFromAPI(fromController: UIViewController?, completion: @escaping (Bool) -> Void){
+        print("ReloadSource")
+        var newSource = [HomeTableSection]()
+        //dataSource.removeAll()
+        newSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "Default", courseCode: "0"), teachingArray: [Teaching](), setExpanded: true))
+        let api = BackendAPI.getUniqueIstance(fromController: fromController)
         api.getMyCoursesCategories { (JSONData) in
+            guard JSONData != nil else{return}
             for cat in JSONData as! [Any]{
                 let dict =  cat as! [String:Any]
-                self.dataSource.insert(HomeTableSection.init(cdl: CDL.init(courseName: dict["title"] as? String, courseCode: String(dict["id"] as! Int)), teachingArray: [Teaching](), setExpanded: true),at: 0)
+                newSource.insert(HomeTableSection.init(cdl: CDL.init(courseName: dict["title"] as? String, courseCode: String(dict["id"] as! Int)), teachingArray: [Teaching](), setExpanded: true),at: 0)
             }
             api.getMyCourses { (JSONData) in
+                    guard JSONData != nil else{return}
                     let data =  JSONData as! [Any]
                        for course in data{
                             let dict =  course as!  [String:Any]
                            //cerca la riga con categoria corrispondente
-                            let i = self.getRowIndexByCategory(cat: String(dict["category"] as! Int))
-                        self.dataSource[i].teachings.append(Teaching.init(teachingName: dict["title"] as! String, category: String(dict["category"] as! Int), teachingCode: dict["code"] as! String, teacherName: dict["tutorname"] as! String, signedUp: true))
+                        let i = self.getRowIndexByCategory(newSource: newSource,cat: String(dict["category"] as! Int))
+                        print(i)
+                        newSource[i].teachings.append(Teaching.init(teachingName: dict["title"] as! String, category: String(dict["category"] as! Int), teachingCode: dict["code"] as! String, teacherName: dict["tutorname"] as! String, signedUp: true))
                        
                        }
+                    self.dataSource = newSource
+                    self.notifyObserversForUpdate(byController: fromController)
                     completion(true)
             }
         }

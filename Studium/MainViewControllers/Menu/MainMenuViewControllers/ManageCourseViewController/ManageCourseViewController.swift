@@ -8,8 +8,10 @@
 
 import UIKit
 
-class ManageCourseViewController: UIViewController, SWRevealViewControllerDelegate, UITableViewDataSource, UITableViewDelegate {
+class ManageCourseViewController: UIViewController, SWRevealViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, SharedSourceObserverDelegate {
    
+   
+
     @IBOutlet weak var createCategoryView: UIView!
     @IBOutlet weak var createCategoryTextField: UITextField!
     @IBOutlet weak var createCategoryLabel: UILabel!
@@ -47,6 +49,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         sharedSource = SharedCoursesSource.getUniqueIstance()
+        sharedSource.addObserverDelegate(observer: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,17 +60,25 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
         
-        if sharedSource.dataSource.count == 1 && sharedSource.dataSource[0].teachings.count == 0 {
-            sharedSource.reloadSourceFromAPI { (flag) in
+        if sharedSource.isEmpty() {
+            self.manageCoursesTableView.startWaitingData()
+            sharedSource.reloadSourceFromAPI(fromController: self) { (flag) in
+                self.manageCoursesTableView.stopWaitingData()
                 self.manageCoursesTableView.reloadData()
             }
         }
         else{
             self.setAllExpanded()
             self.manageCoursesTableView.reloadData()
-            
         }
     }
+    
+    func dataSourceUpdated(byController: UIViewController?) { //observer function
+           if let controller = byController{
+               if controller != self {self.manageCoursesTableView.reloadData()}
+           }
+    }
+    
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String?
     {
         return "Rimuovi iscrizione"
@@ -82,11 +93,11 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         let courseCode = sharedSource.dataSource[sourceIndexPath.section].teachings[sourceIndexPath.row].code
         let newCatCode = sharedSource.dataSource[destinationIndexPath.section].course.code
     
-        let api = BackendAPI.getUniqueIstance()
+        let api = BackendAPI.getUniqueIstance(fromController: self)
         
         api.moveCourse(codCourse: courseCode!, newCat: newCatCode!) { (JSONResponse) in
             print(JSONResponse ?? "null")
-            self.sharedSource.reloadSourceFromAPI { (flag) in
+            self.sharedSource.reloadSourceFromAPI(fromController: self) { (flag) in
                 tableView.reloadData()
             }
         }
@@ -110,6 +121,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = manageCoursesTableView.dequeueReusableCell(withIdentifier: "teachingCell") as! CoursesTableViewCell
         var dataElement : Teaching!
+        //TODO:Error next line nil
         dataElement = sharedSource.dataSource[indexPath.section].teachings[indexPath.row]
         cell.teachingNameLabel.text = dataElement.name
         cell.teacherNameLabel.text = dataElement.teacherName
@@ -146,24 +158,38 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         return button
     }
     
-    func signOutCourse(indexPath : IndexPath){
+    func signOutCourse(indexPath : IndexPath, completion: @escaping (Bool)->Void){
+        //TODO:next line can be nil
+        print("Signout")
         let code = sharedSource.dataSource[indexPath.section].teachings[indexPath.row].code
-        let api  = BackendAPI.getUniqueIstance()
+        let api  = BackendAPI.getUniqueIstance(fromController: self)
         api.deleteCourse(codCourse: code!) { (JSONResponse) in
-            print(JSONResponse ?? "null")
+            guard JSONResponse != nil else{completion(false);return}
+            self.sharedSource.reloadSourceFromAPI(fromController: self) { (flag) in
+                guard flag else {completion(false); return}
+                self.manageCoursesTableView.reloadData()
+                completion(true)
+            }
         }
-        sharedSource.dataSource[indexPath.section].teachings.remove(at: indexPath.row)
     }
     
+    
     @objc private func unsuscribe(sender: UIButton){
-        let view = sender.superview!
+        print("Unsuscribe")
+        var view = sender.superview!
         let indexPath = sender.accessibilityElements?[1] as! IndexPath
-        self.signOutCourse(indexPath: indexPath)
-        self.manageCoursesTableView.reloadData()
-        let SSAnimator = CoreSSAnimation.getUniqueIstance()
-        SSAnimator.collapseViewInSourceFrame(sourceFrame: self.categoryHeaderView.frame, viewToCollapse: view, oscureView: self.oscureView, elementsInsideView: nil) { (flag) in
-            view.removeFromSuperview()
+        let CF = ConfirmView.getUniqueIstance()
+        CF.startWaiting(confirmView: &view)
+        self.signOutCourse(indexPath: indexPath) { (success) in
+            CF.stopWaiting(confirmView: &view)
+            if success {
+                let SSAnimator = CoreSSAnimation.getUniqueIstance()
+                SSAnimator.collapseViewInSourceFrame(sourceFrame: self.categoryHeaderView.frame, viewToCollapse: view, oscureView: self.oscureView, elementsInsideView: nil) { (flag) in
+                        view.removeFromSuperview()
+                }
+            }
         }
+       
     }
     @objc private func closeUnsuscribeView(sender: UIButton){
         let view = sender.superview!
@@ -201,9 +227,10 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     
     @objc private func removeSection(button : UIButton){
         let section = button.accessibilityElements?[1] as! Int
-        let api = BackendAPI.getUniqueIstance()
+        let api = BackendAPI.getUniqueIstance(fromController: self)
+        //TODO: next line can be nil
         api.deleteCategory(idCat: self.sharedSource.dataSource[section].course.code) { (JSONResponse) in
-            self.sharedSource.reloadSourceFromAPI { (flag) in
+            self.sharedSource.reloadSourceFromAPI(fromController: self) { (flag) in
                 self.manageCoursesTableView.reloadData()
                 let SSAnimator = CoreSSAnimation.getUniqueIstance()
                 SSAnimator.collapseViewInSourceFrame(sourceFrame: self.categoryHeaderView.frame, viewToCollapse: button.superview!, oscureView: self.oscureView, elementsInsideView: nil) { (flag) in
@@ -252,10 +279,10 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         print("creo categoria")
         guard let t =  createCategoryTextField.text else{ return }
         guard t != "" else{ return }
-        let api = BackendAPI.getUniqueIstance()
+        let api = BackendAPI.getUniqueIstance(fromController: self)
         api.createCategory(catTitle: t) { (JSONResponse) in
             print(JSONResponse ?? "null")
-            self.sharedSource.reloadSourceFromAPI { (flag) in
+            self.sharedSource.reloadSourceFromAPI(fromController: self) { (flag) in
                 self.manageCoursesTableView.reloadData()
             }
             self.manageCoursesTableView.setEditing(true, animated: true)

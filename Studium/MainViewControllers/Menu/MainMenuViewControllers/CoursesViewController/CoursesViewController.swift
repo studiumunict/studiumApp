@@ -8,7 +8,8 @@
 
 import UIKit
 
-class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, UITableViewDelegate,UITableViewDataSource {
+class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, UITableViewDelegate,UITableViewDataSource, SharedSourceObserverDelegate{
+   
     
     @IBOutlet weak var categoriesLabel: UILabel!
     @IBOutlet weak var teachingsTableView: UITableView!
@@ -43,6 +44,7 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
             self.navigationItem.leftBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:))))
         }
         sharedSource = SharedCoursesSource.getUniqueIstance()
+        sharedSource.addObserverDelegate(observer: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,13 +55,21 @@ class CoursesViewController: UIViewController, SWRevealViewControllerDelegate, U
             view.addGestureRecognizer(revealViewController().panGestureRecognizer())
             self.navigationItem.leftBarButtonItem?.customView?.addGestureRecognizer(UITapGestureRecognizer(target: revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:))))
         }
-        if sharedSource.dataSource.count == 1 {
-            sharedSource.reloadSourceFromAPI { (flag) in
+        if sharedSource.isEmpty() {
+            teachingsTableView.startWaitingData()
+            sharedSource.reloadSourceFromAPI(fromController: self) { (flag) in
+                self.teachingsTableView.stopWaitingData()
                 self.teachingsTableView.reloadData()
             }
         }
         else{
             teachingsTableView.reloadData()
+        }
+    }
+    
+    func dataSourceUpdated(byController: UIViewController?) {
+        if let controller = byController{
+            if controller != self {self.teachingsTableView.reloadData()}
         }
     }
     

@@ -116,13 +116,17 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         
         self.cdlTableView.delegate = self
         self.cdlTableView.dataSource = self
-        
+        self.departmentsTableView.startWaitingData()
         getDepartments()
         self.departmentsTableView.reloadData()
         
         departmentsSelectButton.layer.cornerRadius = 5.0
         departmentsSelectButton.clipsToBounds = true
         departmentsSelectButton.titleEdgeInsets = .init(top: 0, left: 40, bottom: 0, right: 40)
+        self.cdlTableView.backgroundColor = UIColor.primaryBackground
+       //let SScl = SSCustomLayers.getUniqueIstance()
+       // SScl.roundCorners(corners: .bottomLeft, radius: 5.0, view: departmentsTableView)
+       // SScl.roundCorners(corners: .bottomRight, radius: 5.0, view: departmentsTableView)
         
         // Do any additional setup after loading the view.
     }
@@ -181,7 +185,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     }
     
     func getTeachingsDuringSearch(searchedText : String){
-        let api = BackendAPI.getUniqueIstance()
+        let api = BackendAPI.getUniqueIstance(fromController: self)
         api.searchCourse(searchedText: searchedText) { (JSONData) in
             //print(JSONData)
             
@@ -246,11 +250,15 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
 
     
     func getCDLAndTeachings(ofDepartment : Department){ //questa funzione scaricherà dal db
+        self.cdlTableView.startWaitingData()
         self.CDLDataSource.removeAll()
         self.cdlTableView.reloadData()
-        let api =  BackendAPI.getUniqueIstance()
+        let api =  BackendAPI.getUniqueIstance(fromController: self)
         api.getCDL(departmentCode: ofDepartment.code) { (JSONData) in
-            if JSONData == nil {return}
+            if JSONData == nil {
+                self.cdlTableView.stopWaitingData()
+                return
+            }
             var i = 0
             let JSONArray = JSONData as! [Any]
             for cdl in JSONArray{
@@ -262,7 +270,11 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
                 api.getTeachings(CDLCode: newCDL.code, completion: { (JSONData) in
                    print("CHIAMATA API")
                     //print(JSONData)
-                    if(JSONData == nil) {return}
+                    if(JSONData == nil) {
+                        self.cdlTableView.stopWaitingData()
+                        return
+                    }
+                    
                     for teaching in JSONData as! [Any]{
                         let teach = teaching as! [String:Any]
                         let teachTitle = teach["title"] as! String
@@ -276,6 +288,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
                     self.CDLDataSource.append(tableSection)
                     if i == JSONArray.count-1 {
                         self.cdlTableView.reloadData()
+                        self.cdlTableView.stopWaitingData()
                     }
                     i += 1
                 })
@@ -285,10 +298,14 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     }
     
     func getDepartments(){
-        let api = BackendAPI.getUniqueIstance()
+        let api = BackendAPI.getUniqueIstance(fromController: self)
         api.getDepartments(completion: { (jsonData) in
             //print(jsonData)
-            if jsonData == nil {return}
+            if jsonData == nil {
+                self.departmentsTableView.stopWaitingData()
+                self.hideDepartmentTableAnimated()
+                return
+            }
             for dep in jsonData as! [Any]{
                 let depDict =  dep as! [String:Any]
                 let depName = depDict["name"] as? String
@@ -297,6 +314,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
                 //capitalize first letter
                 self.departmentsDataSource.append(Department.init(depName: lowName, depCode: depDict["code"] as? String, id: depDict["id"] as? Int))
             }
+            self.departmentsTableView.stopWaitingData()
             self.departmentsTableView.reloadData()
         })
     }
@@ -347,7 +365,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             return 50
         }
         else {
-            return 100
+            return 70
         }
       
     }
@@ -509,12 +527,12 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             }
             cell.CDLnameLabel.text = dataElement.name
             cell.teacherNameLabel.text = dataElement.teacherName
-            if dataElement.signedUp{
+            /*if dataElement.signedUp{
                 cell.signedUpImage.image = UIImage.init(named: "star_full")
             }
             else{
                 cell.signedUpImage.image = UIImage.init(named: "star_empty")
-            }
+            }*/
             cell.codeLabel.text = String(dataElement.code)
             return cell
         }
@@ -538,14 +556,21 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         }
         
     }
+    func checkForGetDepartmentAgain(){
+        if departmentsDataSource.count == 0 {
+            getDepartments()
+        }
+    }
     func showDepartmentTableAnimated(){
         departmentsTableView.alpha = 0.0
         departmentsTableView.isHidden =  false
         UIView.animate(withDuration: 0.3, animations: {
             self.departmentsTableView.alpha = 1.0
         }) { (t) in
-            
+            self.checkForGetDepartmentAgain()
         }
         
     }
 }
+
+

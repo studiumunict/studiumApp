@@ -36,8 +36,8 @@ class Session{
             completion(false)
             return 
         }
-        let api = BackendAPI.getUniqueIstance()
-        api.login(username: username, password: PswEncryption.decode(str: encryptedPassword), academicYear: academicYear) { (success) in
+        let api = BackendAPI.getUniqueIstance(fromController: nil)
+        api.login(username: username, password: PswEncryption.decode(str: encryptedPassword), academicYear: academicYear) { (error,success) in
             completion(success)
         }
     }

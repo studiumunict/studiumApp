@@ -11,7 +11,6 @@ import UIKit
 class CDLTableViewCell: UITableViewCell {
     
     @IBOutlet weak var CDLnameLabel: UILabel!
-    @IBOutlet weak var signedUpImage: UIImageView!
     @IBOutlet weak var codeLabel: UILabel!
     @IBOutlet weak var teacherNameLabel: UILabel!
     
@@ -19,6 +18,7 @@ class CDLTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.selectionStyle = .none
         CDLnameLabel.lineBreakMode = .byTruncatingMiddle
+        codeLabel.textColor = UIColor.secondaryLabel
         // Initialization code
     }
 

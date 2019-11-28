@@ -46,6 +46,10 @@
 		9C60BF322386EB9000AD1CA1 /* SSFileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C60BF312386EB9000AD1CA1 /* SSFileDownloader.swift */; };
 		9C7ADB5522F31AF7009651FB /* BackendAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7ADB5422F31AF7009651FB /* BackendAPI.swift */; };
 		9C8B9386237C1215001E5657 /* PermanentDocSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8B9385237C1215001E5657 /* PermanentDocSystem.swift */; };
+		9C91EEA42390160C00B5FB50 /* TableViewWaitingStateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C91EEA32390160C00B5FB50 /* TableViewWaitingStateExtension.swift */; };
+		9C91EEA72390179B00B5FB50 /* ViewControllerConnectionErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C91EEA62390179B00B5FB50 /* ViewControllerConnectionErrorExtension.swift */; };
+		9C91EEA9239017C600B5FB50 /* ConnectionErrorHandlerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C91EEA8239017C600B5FB50 /* ConnectionErrorHandlerDelegate.swift */; };
+		9C91EEAB23906D6600B5FB50 /* SharedSourceObserverDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C91EEAA23906D6600B5FB50 /* SharedSourceObserverDelegate.swift */; };
 		9CA4511E238D060600D25B66 /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA4511D238D060600D25B66 /* ConfirmView.swift */; };
 		9CA45120238D095400D25B66 /* SSCustomLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA4511F238D095400D25B66 /* SSCustomLayers.swift */; };
 		9CBDB9CF2379C6AD00A015A4 /* CoreSSAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBDB9CE2379C6AD00A015A4 /* CoreSSAnimation.swift */; };
@@ -154,6 +158,10 @@
 		9C60BF312386EB9000AD1CA1 /* SSFileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSFileDownloader.swift; sourceTree = "<group>"; };
 		9C7ADB5422F31AF7009651FB /* BackendAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAPI.swift; sourceTree = "<group>"; };
 		9C8B9385237C1215001E5657 /* PermanentDocSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermanentDocSystem.swift; sourceTree = "<group>"; };
+		9C91EEA32390160C00B5FB50 /* TableViewWaitingStateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewWaitingStateExtension.swift; sourceTree = "<group>"; };
+		9C91EEA62390179B00B5FB50 /* ViewControllerConnectionErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerConnectionErrorExtension.swift; sourceTree = "<group>"; };
+		9C91EEA8239017C600B5FB50 /* ConnectionErrorHandlerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionErrorHandlerDelegate.swift; sourceTree = "<group>"; };
+		9C91EEAA23906D6600B5FB50 /* SharedSourceObserverDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedSourceObserverDelegate.swift; sourceTree = "<group>"; };
 		9CA4511D238D060600D25B66 /* ConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
 		9CA4511F238D095400D25B66 /* SSCustomLayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSCustomLayers.swift; sourceTree = "<group>"; };
 		9CBDB9CE2379C6AD00A015A4 /* CoreSSAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreSSAnimation.swift; sourceTree = "<group>"; };
@@ -238,6 +246,8 @@
 				135D120E21B8092200DA9C69 /* ExtensionCALayer.swift */,
 				13D86DDA21B9A3BF007638FD /* ExtensionUIColor.swift */,
 				9CF6175E2302EFA1001D3E77 /* StringExtension.swift */,
+				9C91EEA32390160C00B5FB50 /* TableViewWaitingStateExtension.swift */,
+				9C91EEA62390179B00B5FB50 /* ViewControllerConnectionErrorExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -314,6 +324,7 @@
 		9C06A22821AB6FE900E695DB /* CustomClasses */ = {
 			isa = PBXGroup;
 			children = (
+				9C91EEA5239016F500B5FB50 /* FileDownloader */,
 				9C8B9387237C3C2F001E5657 /* DocSystem */,
 				9C06A22921AB700200E695DB /* DepartmentClass.swift */,
 				1311D89A21BBE82E00A09499 /* StudentClass.swift */,
@@ -326,8 +337,7 @@
 				9C29C2D62380730A00A29669 /* HTMLParser.swift */,
 				9CA4511D238D060600D25B66 /* ConfirmView.swift */,
 				9CA4511F238D095400D25B66 /* SSCustomLayers.swift */,
-				9C60BF312386EB9000AD1CA1 /* SSFileDownloader.swift */,
-				9CF9C927238EE1A700805523 /* SSFileDownloaderDelegate.swift */,
+				9C91EEA8239017C600B5FB50 /* ConnectionErrorHandlerDelegate.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -336,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				9C06CA8521C67ACF00FA09DB /* SharedCourseSource.swift */,
+				9C91EEAA23906D6600B5FB50 /* SharedSourceObserverDelegate.swift */,
 			);
 			path = sharedResources;
 			sourceTree = "<group>";
@@ -390,10 +401,20 @@
 			path = DocSystem;
 			sourceTree = "<group>";
 		};
+		9C91EEA5239016F500B5FB50 /* FileDownloader */ = {
+			isa = PBXGroup;
+			children = (
+				9C60BF312386EB9000AD1CA1 /* SSFileDownloader.swift */,
+				9CF9C927238EE1A700805523 /* SSFileDownloaderDelegate.swift */,
+			);
+			path = FileDownloader;
+			sourceTree = "<group>";
+		};
 		9CFE72C821BA97FA001EB697 /* CoursesViewController */ = {
 			isa = PBXGroup;
 			children = (
 				9CFE72C921BA9814001EB697 /* CoursesViewController.swift */,
+				9C07088D21C85C1100F7D296 /* CoursesTableViewCell.swift */,
 			);
 			path = CoursesViewController;
 			sourceTree = "<group>";
@@ -473,7 +494,6 @@
 			isa = PBXGroup;
 			children = (
 				9CFE9DA721A8BBEE0030AE33 /* MenuTableViewController.swift */,
-				9C07088D21C85C1100F7D296 /* CoursesTableViewCell.swift */,
 				9CFE9DA921A8BC260030AE33 /* MainMenuViewControllers */,
 			);
 			path = Menu;
@@ -756,10 +776,14 @@
 				139BCB6A21BDE057005A750A /* DocumentsPagesViewController.swift in Sources */,
 				13CC782321C93FB90052E579 /* PortaleStudentiViewController.swift in Sources */,
 				9C07089021C8672800F7D296 /* BrowseAndSearchCourseTableViewCell.swift in Sources */,
+				9C91EEA9239017C600B5FB50 /* ConnectionErrorHandlerDelegate.swift in Sources */,
+				9C91EEA72390179B00B5FB50 /* ViewControllerConnectionErrorExtension.swift in Sources */,
 				9CFE9DA521A8AE960030AE33 /* LoginViewController.swift in Sources */,
 				9C7ADB5522F31AF7009651FB /* BackendAPI.swift in Sources */,
 				139BCB6C21BDE0AF005A750A /* BookingPagesViewController.swift in Sources */,
+				9C91EEA42390160C00B5FB50 /* TableViewWaitingStateExtension.swift in Sources */,
 				9C454F1523016DA70071F81F /* Session.swift in Sources */,
+				9C91EEAB23906D6600B5FB50 /* SharedSourceObserverDelegate.swift in Sources */,
 				13E3A34721C140A6004BE8D8 /* NotifyCell.swift in Sources */,
 				1311D89B21BBE82E00A09499 /* StudentClass.swift in Sources */,
 				9CFE72C521B95331001EB697 /* HomeTableSectionClass.swift in Sources */,

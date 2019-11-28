@@ -21,6 +21,7 @@ class Teaching{
     var notifyList: [Notify]!
     var fs : TempDocSystem!
     var syllabusCode: String!
+    weak var currentControler: UIViewController?
     private var isCompleted = false
     
     
@@ -41,28 +42,37 @@ class Teaching{
         self.fs.removeAll()
         self.description.removeAll()
     }
-    func refreshData(completion: @escaping (Bool)->Void){
+    func refreshData(fromController: UIViewController?, completion: @escaping (Bool)->Void){
         self.isCompleted = false
-        completeTeachingData { (flag) in
+        completeTeachingData(fromController: fromController) { (wasLoaded,flag) in
+            print("***************Ho finito, completion ", flag)
             completion(flag)
         }
     }
-    func completeTeachingData(completion: @escaping (Bool)->Void){
-        guard isCompleted == false else { completion(false); return}
+    func completeTeachingData(fromController: UIViewController?, completion: @escaping (Bool,Bool)->Void){
+        guard isCompleted == false else { completion(true,false); return}
+        self.currentControler = fromController
         self.downloadNotify { (flag) in
+            if !flag {completion(false,false); return}
             self.downloadDocuments(path: "mbareRoot", prev: self.fs.currentFolder) { (flag1) in
+                if !flag1 {completion(false,false); return}
                 self.downloadDescription { (flag2) in
+                    if !flag2 {completion(false,false); return}
                     self.isCompleted = true
                     self.syllabusCode = self.code
-                    completion(true)
+                    completion(false,true)
                 }
             }
         }
     }
    
     private func downloadRootDocuments(completion: @escaping(Bool)-> Void){ //FUNZIONE SICURA
-        let api = BackendAPI.getUniqueIstance()
-        api.getCourseDocuments(codCourse: self.code, path: "mbareRoot") { (JSONResponse) in
+        let api = BackendAPI.getUniqueIstance(fromController: currentControler)
+        api.getCourseDocuments(codCourse: self.code, path: "mbareRoot") { (error,JSONResponse) in
+            guard error == nil else{
+                completion(false)
+                return
+            }
             let JSONArray = JSONResponse as! [Any]
             for doc in JSONArray{
                 let docDict = doc as! [String:Any]
@@ -97,8 +107,8 @@ class Teaching{
     */
     
     private func downloadDocuments(path: String, prev: Doc! ,completion: @escaping(Bool)-> Void){ //FUNZIONE NON SICURA
-        let api = BackendAPI.getUniqueIstance()
-        api.getCourseDocuments(codCourse: self.code, path: path) { (JSONResponse) in
+        let api = BackendAPI.getUniqueIstance(fromController: currentControler)
+        api.getCourseDocuments(codCourse: self.code, path: path) { (error,JSONResponse) in
             let JSONArray = JSONResponse as! [Any]
             for doc in JSONArray{
                 let docDict = doc as! [String:Any]
@@ -121,8 +131,12 @@ class Teaching{
        
     
     private func downloadNotify(completion: @escaping (Bool)->Void){
-        let api =  BackendAPI.getUniqueIstance()
-        api.getAvvisi(codCourse: self.code) { (JSONResponse) in
+        let api =  BackendAPI.getUniqueIstance(fromController: currentControler)
+        api.getAvvisi(codCourse: self.code) { (error,JSONResponse) in
+            guard error == nil else{
+                completion(false)
+                return
+            }
             let JSONArray = JSONResponse as! [Any]
             for avviso in JSONArray{
                 let avvisoDict = avviso as! [String: Any]
@@ -140,8 +154,9 @@ class Teaching{
     }*/
     private func downloadDescription(completion: @escaping (Bool)->Void){
         //self.descriptionText = "Descrizione"
-        let api = BackendAPI.getUniqueIstance()
-        api.getCourseDescription(codCourse: self.code) { (JSONResponse) in
+        let api = BackendAPI.getUniqueIstance(fromController: currentControler)
+        api.getCourseDescription(codCourse: self.code) { (error,JSONResponse) in
+            guard error == nil else{ completion(false); return}
             let JSONArray = JSONResponse as! [Any]
             for descBlock in JSONArray{
                 let descriptionBlock = descBlock as! [String: Any]

@@ -43,12 +43,15 @@ public class TempDocSystem: NSObject, NSCoding {
     func appendChild(toDoc:Doc,child:Doc)->Doc{
         let possibleDoc = checkIfDocExists(inFolder: toDoc, name: child.title)
         if let foundDoc = possibleDoc{ //se trovo il documento
+            print("trovato")
             appendChilds(toDoc: foundDoc, childs: child.childs) //appendo i figli all'interno di quello trovato
+            
             return foundDoc
         }
         else{ //caso base : documento non esistente, lo appendo
             toDoc.addChild(item:child)
             child.setParent(prev: toDoc)
+            print("appeso")
             return child
         }
     }
@@ -58,21 +61,29 @@ public class TempDocSystem: NSObject, NSCoding {
     }
     
     func move(documents: [Doc], fromFolder :Doc, toFolder: Doc){
-        for doc in documents{
-            doc.setParent(prev: toFolder)
-            toFolder.addChild(item: doc)
-            removeDoc(fromFolder: fromFolder, doc: doc)
-        }
+        appendChilds(toDoc: toFolder, childs: documents)
+        removeChilds(fromFolder: fromFolder, childs: documents)
     }
-    func removeChilds(childs: [Doc]){
+    
+    func removeChilds(fromFolder: Doc? = nil, childs: [Doc]){
+        var fromF = fromFolder
+        if fromF == nil{
+            fromF = currentFolder
+        }
         for child in childs{
-            removeChild(child: child)
+            removeChild(fromFolder: fromF! ,child: child)
         }
     }
     
-    func removeChild(child: Doc){
-        let i = getIndex(ofDoc: child, inFolder: self.currentFolder)
-        self.currentFolder.childs.remove(at: i)
+    func removeChild(fromFolder: Doc? = nil, child: Doc){
+        var fromF = fromFolder
+        if fromF == nil{
+            fromF = currentFolder
+        }
+        let i = getIndex(ofDoc: child, inFolder: fromF!)
+        print("Trovato da rimuovere con indice: ", i)
+        if i == -1 {return}
+        fromF!.childs.remove(at: i)
     }
     func getCurrentDocs() -> [Doc]{
         return currentFolder.childs

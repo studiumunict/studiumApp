@@ -16,11 +16,13 @@ import Foundation
     private var soapActionBaseURL : String! = "http://ws1.unict.it/stdata/"
     
     private static var obj : BackendAPI!  = nil
+    weak var delegate : ConnectionErrorHandlerDelegate!
     private override init(){}
-    public static func getUniqueIstance() -> BackendAPI{
+    public static func getUniqueIstance(fromController: UIViewController?) -> BackendAPI{
         if(obj == nil){
             obj =  BackendAPI()
         }
+        obj.delegate = fromController
         return obj
     }
     
@@ -67,11 +69,12 @@ import Foundation
                             }
         }) { (error : Error?) -> Void in
             print(error ?? "Error")
+            //self.delegate?.connectionErrorHandle(error: error)
             completion(nil)
         }
     }
     
-    public func login(username: String, password: String, academicYear: String, completion : @escaping (Bool)->Void){
+    public func login(username: String, password: String, academicYear: String, completion : @escaping (Error?,Bool)->Void){
         let requestName = "LoginCompact"
         let request = startRequest()
         request.setValue(username, forKey: "username")
@@ -90,13 +93,14 @@ import Foundation
                                 //save session
                                 let session = Session.getUniqueIstance()
                                 session.setActiveSessionParameters(username: username, encryptedPassword: pin, academicYear: academicYear)
-                                completion(true)
+                                completion(nil,true)
                             }
-                            else{ completion(false) }
+                            else{ completion(nil,false) }
                             
         }) { (error : Error?) -> Void in
             print(error ?? "Error")
-            completion(false)
+            //self.delegate?.connectionErrorHandle(error: error)
+            completion(error,false)
         }
     }
     public func getMyCoursesCategories(completion: @escaping (Any?)->Void){
@@ -133,6 +137,7 @@ import Foundation
                                
            }) { (error : Error?) -> Void in
                print(error ?? "Error")
+               self.delegate?.connectionErrorHandle(error: error)
                completion(nil)
            }
        }
@@ -141,7 +146,6 @@ import Foundation
         let request = startRequest()
         let session =  Session.getUniqueIstance()
         
-       //print("ID = ***** ",Student.getUniqueIstance().id)
         request.setValue(Student.getUniqueIstance().id , forKey: "id")
         request.requestURL(requestURL,
                         soapAction: soapActionBaseURL + requestName,
@@ -171,6 +175,7 @@ import Foundation
                             
         }) { (error : Error?) -> Void in
             print(error ?? "Error")
+            self.delegate?.connectionErrorHandle(error: error)
             completion(nil)
         }
     }
@@ -212,6 +217,7 @@ import Foundation
                             
         }) { (error : Error?) -> Void in
             print(error ?? "Error")
+            self.delegate?.connectionErrorHandle(error: error)
             completion(nil)
         }
     }
@@ -246,12 +252,13 @@ import Foundation
                             }
                             else{
                                 let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
-                                completion(json)
+                                completion(responseValue)
                                 //print(json)
                             }
                             
         }) { (error : Error?) -> Void in
             print(error ?? "Error")
+            self.delegate?.connectionErrorHandle(error: error)
             completion(nil)
         }
     }
@@ -284,13 +291,17 @@ import Foundation
                                 })
                             }
                             else{
+                                print("responseValue:", responseValue)
                                 let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
-                                completion(json)
+                                print("json:", json)
+                                completion(responseValue)
                                 //print(json)
                             }
                             
         }) { (error : Error?) -> Void in
-            print(error ?? "Error")
+            //print(error ?? "Error")
+            print("HandleError")
+            self.delegate?.connectionErrorHandle(error: error)
             completion(nil)
         }
     }
@@ -331,6 +342,7 @@ import Foundation
                             
         }) { (error : Error?) -> Void in
             print(error ?? "Error")
+            self.delegate?.connectionErrorHandle(error: error)
             completion(nil)
         }
     }
@@ -369,11 +381,12 @@ import Foundation
                             
         }) { (error : Error?) -> Void in
             print(error ?? "Error")
+            self.delegate?.connectionErrorHandle(error: error)
             completion(nil)
         }
     }
     
-    public func getAvvisi(codCourse: String, completion: @escaping (Any?)->Void){
+    public func getAvvisi(codCourse: String, completion: @escaping (Error?,Any?)->Void){
         let requestName = "Avvisi"
         let request = startRequest()
         let session =  Session.getUniqueIstance()
@@ -391,24 +404,26 @@ import Foundation
                                 print("Restoring session")
                                 session.restoreSession(completion: { (success) in
                                     if(success){
-                                        self.getAvvisi(codCourse: codCourse) { (response) in
-                                            completion(response)
+                                        self.getAvvisi(codCourse: codCourse) { (error,response) in
+                                            completion(error,response)
                                         }
                                     }
                                     else{
-                                        completion(nil)
+                                        let error = NSError.init(domain: "Session error", code: -1, userInfo: nil)
+                                        completion(error,nil)
                                     }
                                 })
                             }
                             else{
                                 let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
-                                completion(json)
+                                completion(nil,json)
                                 //print(json)
                             }
                             
         }) { (error : Error?) -> Void in
             print(error ?? "Error")
-            completion(nil)
+            self.delegate?.connectionErrorHandle(error: error)
+            completion(error,nil)
         }
     }
     public func getCurrentUserData(completion: @escaping (Any?)->Void){
@@ -445,11 +460,12 @@ import Foundation
                             
         }) { (error : Error?) -> Void in
             print(error ?? "Error")
+            self.delegate?.connectionErrorHandle(error: error)
             completion(nil)
         }
     }
     
-    public func getCourseDescription(codCourse: String, completion: @escaping (Any?)->Void){
+    public func getCourseDescription(codCourse: String, completion: @escaping (Error?,Any?)->Void){
         let requestName = "Description"
         let request = startRequest()
         let session =  Session.getUniqueIstance()
@@ -467,28 +483,30 @@ import Foundation
                                 print("Restoring session")
                                 session.restoreSession(completion: { (success) in
                                     if(success){
-                                        self.getCourseDescription(codCourse: codCourse) { (response) in
-                                            completion(response)
+                                        self.getCourseDescription(codCourse: codCourse) { (error,response) in
+                                            completion(error,response)
                                         }
                                     }
                                     else{
-                                        completion(nil)
+                                        let error = NSError.init(domain: "Session error", code: -1, userInfo: nil)
+                                        completion(error,nil)
                                     }
                                 })
                             }
                             else{
                                 let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
-                                completion(json)
+                                completion(nil,json)
                                 //print(json)
                             }
                             
         }) { (error : Error?) -> Void in
             print(error ?? "Error")
-            completion(nil)
+            self.delegate?.connectionErrorHandle(error: error)
+            completion(error,nil)
         }
     }
     
-    public func getCourseDocuments(codCourse: String,path: String, completion: @escaping (Any?)->Void){
+    public func getCourseDocuments(codCourse: String,path: String, completion: @escaping (Error?,Any?)->Void){
         let requestName = "Documents"
         let request = startRequest()
         let session =  Session.getUniqueIstance()
@@ -507,24 +525,26 @@ import Foundation
                                 print("Restoring session")
                                 session.restoreSession(completion: { (success) in
                                     if(success){
-                                        self.getCourseDocuments(codCourse: codCourse, path: path) { (response) in
-                                            completion(response)
+                                        self.getCourseDocuments(codCourse: codCourse, path: path) { (error,response) in
+                                            completion(error,response)
                                         }
                                     }
                                     else{
-                                        completion(nil)
+                                        let error = NSError.init(domain: "Session error", code: -1, userInfo: nil)
+                                        completion(error,nil)
                                     }
                                 })
                             }
                             else{
                                 let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
-                                completion(json)
+                                completion(nil,json)
                                 //print(json)
                             }
                             
         }) { (error : Error?) -> Void in
             print(error ?? "Error")
-            completion(nil)
+            self.delegate?.connectionErrorHandle(error: error)
+            completion(error,nil)
         }
     }
     
@@ -558,6 +578,8 @@ import Foundation
                             
         }) { (error : Error?) -> Void in
             print(error ?? "Error")
+            print("Errore getting dep Connection")
+            self.delegate?.connectionErrorHandle(error: error)
             completion(nil)
         }
         
@@ -594,6 +616,8 @@ import Foundation
                             
         }) { (error : Error?) -> Void in
             print(error ?? "Error")
+            print("Errore getting CDL Connection")
+            self.delegate?.connectionErrorHandle(error: error)
             completion(nil)
         }
         
@@ -628,6 +652,8 @@ import Foundation
                         
         }) { (error : Error?) -> Void in
             print(error ?? "Error")
+            print("Errore getting teachings Connection")
+            self.delegate?.connectionErrorHandle(error: error)
             completion(nil)
         }
         
@@ -663,6 +689,7 @@ import Foundation
                             
         }) { (error : Error?) -> Void in
             print(error ?? "Error")
+            self.delegate?.connectionErrorHandle(error: error)
             completion(nil)
         }
         

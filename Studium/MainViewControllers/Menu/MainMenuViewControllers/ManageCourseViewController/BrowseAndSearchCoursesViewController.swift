@@ -97,13 +97,22 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
         else{
             courseCode = self.CDLDataSource[indexPath.section].teachings[indexPath.row].code
         }
-        let api =  BackendAPI.getUniqueIstance()
+        let CV = ConfirmView.getUniqueIstance()
+        CV.startWaiting(confirmView: &signUpView)
+        let api =  BackendAPI.getUniqueIstance(fromController: self)
         api.addCourse(codCourse: courseCode) { (JSONResponse) in
-            SharedCoursesSource.getUniqueIstance().reloadSourceFromAPI { (flag) in
-                //do nothing in completion
+            guard JSONResponse != nil else{
+                CV.stopWaiting(confirmView: &self.signUpView)
+                return
+            }
+            SharedCoursesSource.getUniqueIstance().reloadSourceFromAPI(fromController: self) { (flag) in
+                if flag {
+                    self.setupSignUpViewForConfirmSubscription(senderButton: sender)
+                }
+                CV.stopWaiting(confirmView: &self.signUpView)
             }
         }
-        setupSignUpViewForConfirmSubscription(senderButton: sender)
+        
     }
     
     private func setUpSubscriptedLabelForSignUp() -> UILabel{

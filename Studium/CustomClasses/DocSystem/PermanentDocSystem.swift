@@ -43,12 +43,12 @@ class PermanentDocSystem: TempDocSystem{ //fileSystem singleton con autoSalvatag
         super.appendChilds(toDoc: toDoc, childs: childs)
         CoreDataController.shared.saveFileSystem(self)
     }
-    override func removeChilds(childs: [Doc]) {
-        super.removeChilds(childs: childs)
+    override func removeChilds(fromFolder fromfolder :Doc? = nil, childs: [Doc]) {
+        super.removeChilds(fromFolder: fromfolder ,childs: childs)
         CoreDataController.shared.saveFileSystem(self)
     }
-    override func removeChild(child: Doc) {
-        super.removeChild(child: child)
+    override func removeChild(fromFolder fromfolder :Doc? = nil, child: Doc) {
+        super.removeChild(fromFolder: fromfolder ,child: child)
         CoreDataController.shared.saveFileSystem(self)
     }
     required public init?(coder: NSCoder) {

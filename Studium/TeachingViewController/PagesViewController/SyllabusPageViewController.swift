@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class SyllabusPageViewController: UIViewController, WKNavigationDelegate {
+class SyllabusPageViewController: UIViewController, WKNavigationDelegate, UIScrollViewDelegate {
 
     @IBOutlet var errorMessageLabel: UILabel!
     @IBOutlet var webView: WKWebView!
@@ -37,6 +37,7 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate {
         customButtons(button: forwardButton, image: "arrow", rotazione: 3*(.pi)/2)
         
         webView.navigationDelegate = self
+        webView.scrollView.delegate = self
         
         let webViewKeyPathsToObserve = ["loading", "estimatedProgress"]
         for keyPath in webViewKeyPathsToObserve {
@@ -51,7 +52,11 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate {
     }
     
    
-
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (scrollView.contentOffset.x > 0){
+            scrollView.contentOffset = CGPoint(x: 0, y: scrollView.contentOffset.y)
+        }
+    }
    
     private func customButtons(button: UIButton!, image: String!, rotazione: CGFloat!){
         let customImageView = UIImageView(frame: CGRect(x: button.frame.size.width/2 - 16, y: button.frame.size.height/2 - 10, width: 22, height: 22))
@@ -84,12 +89,15 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate {
         }
     }
     
+    
     func webView(_ webView: WKWebView, didFailLoadWithError error: Error) {
         print("\n\n didFailLoadWithError, error: ", error.localizedDescription)
+        self.webView.scrollView.showsHorizontalScrollIndicator = false
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("\n\n didFinish")
+        
         isLoaded = true
     }
     

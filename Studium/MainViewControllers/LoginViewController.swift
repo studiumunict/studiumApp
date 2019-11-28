@@ -54,7 +54,7 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         
     }
     func showErrorWarning(){
-        errorLabel.text = "Il Server UNICT non risponde al momento."
+        errorLabel.text = "Errore di connessione ad Internet"
     }
     
     private func hideActivityIndicator(){
@@ -69,7 +69,7 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         }
     }
     func getLoginYears(){
-        let api = BackendAPI.getUniqueIstance()
+        let api = BackendAPI.getUniqueIstance(fromController: self)
         api.getYears(){ (years) in
             guard years != nil else {
                 self.showErrorWarning()
@@ -139,7 +139,7 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     }
     
     private func buildStudent(completion: @escaping (Bool)->Void ){
-        let api = BackendAPI.getUniqueIstance()
+        let api = BackendAPI.getUniqueIstance(fromController: self)
         api.getCurrentUserData() { (studentJSONData) in
             let dict =  studentJSONData as! [String: Any]
             var phone : String!
@@ -170,11 +170,16 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     
     @IBAction func loginButtonClicked(_ sender: Any) {
         guard controlDataFields() == true else {return}
-        let api = BackendAPI.getUniqueIstance()
+        let api = BackendAPI.getUniqueIstance(fromController: self)
         let selectedYearIndex = yearsPickerView.selectedRow(inComponent: 0)
         let selectedYear = yearsDataSource[selectedYearIndex]
         
-        api.login(username: usernameTextField.text!, password: passwordTextField.text!, academicYear: selectedYear) { (success) in
+        api.login(username: usernameTextField.text!, password: passwordTextField.text!, academicYear: selectedYear) { (error,success) in
+            guard error == nil else{
+                self.errorLabel.text = "Errore di connessione ad Internet"
+                self.errorLabel.isHidden = false
+                return
+            }
             if success {
                 if self.rememberMeSwitcher.isOn{
                    self.saveCredentials()
@@ -197,6 +202,7 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
                 self.errorLabel.text = "Dati d'accesso errati!"
                 self.errorLabel.isHidden = false
             }
+            
         }
     }
     

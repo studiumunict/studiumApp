@@ -26,7 +26,26 @@ class ConfirmView {
         return obj
     }
     private init(){}
-    
+    public func startWaiting(confirmView : inout UIView){
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.style = .medium
+        activityIndicator.color = UIColor.lightSectionColor
+        confirmView.addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint(item:  activityIndicator, attribute: .centerY, relatedBy: .equal, toItem: confirmView, attribute: .centerY, multiplier: 1.0, constant: -10).isActive = true
+        NSLayoutConstraint(item:  activityIndicator, attribute: .centerX, relatedBy: .equal, toItem: confirmView, attribute: .centerX, multiplier: 1.0, constant: 0.0).isActive = true
+        NSLayoutConstraint(item: confirmView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: 40).isActive = true
+        NSLayoutConstraint(item: confirmView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: 40).isActive = true
+        activityIndicator.updateConstraints()
+        activityIndicator.startAnimating()
+    }
+    public func stopWaiting(confirmView : inout UIView){
+        for subview in confirmView.subviews{
+            if subview is UIActivityIndicatorView{
+                subview.removeFromSuperview()
+            }
+        }
+    }
     public func updateView( confirmView : inout UIView ,titleLabel : UILabel, descLabel : UILabel? = nil ,buttons: [UIButton], dataToAttach : Any? = nil, animated :Bool){
         for sv in confirmView.subviews{
             UIView.animate(withDuration: 0.3, animations: {
@@ -73,19 +92,26 @@ class ConfirmView {
     
     private func addButtons(toView: UIView, buttons : [UIButton], animated: Bool){
         for btn in buttons{
+            toView.addSubview(btn)
             let btnPos = btn.accessibilityElements?[0] as! CButtonType
             switch btnPos{
                 case .left: btn.frame = CGRect(x: toView.frame.size.width/2 - 100 + 0.5 , y: 100, width: 100, height: 40)
                 case .right: btn.frame = CGRect(x: toView.frame.size.width/2 - 0.5, y: 100 , width: 100, height: 40)
                 case .alone:
-                    btn.frame = CGRect(x: 0, y: 100 , width: 200, height: 40)
-                    btn.center.x = toView.center.x - 20
+                    //btn.frame = CGRect(x: 0, y: 100 , width: 200, height: 40)
+                    //btn.center.x = toView.center.x //- 20
+                    btn.translatesAutoresizingMaskIntoConstraints = false
+                    //print(btn.constraints)
+                    NSLayoutConstraint(item: btn, attribute: .top, relatedBy: .equal, toItem: toView, attribute: .top, multiplier: 1.0, constant: 100).isActive = true
+                    NSLayoutConstraint(item: btn, attribute: .centerX, relatedBy: .equal, toItem: toView, attribute: .centerX, multiplier: 1.0, constant: 0.0).isActive = true
+                    NSLayoutConstraint(item: btn, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: 200).isActive = true
+                    NSLayoutConstraint(item: btn, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: 40).isActive = true
+                    btn.updateConstraints()
                 case .top:btn.center = CGPoint(x: toView.center.x, y: toView.center.y * 1.6 - (38*2))
                 case .bottom: btn.center = CGPoint(x: toView.center.x, y: toView.center.y * 1.6)
                 case .center: btn.center = CGPoint(x: toView.center.x, y: toView.center.y * 1.6 - 38)
                 case .centerTopRounded: btn.center = CGPoint(x: toView.center.x, y: toView.center.y * 1.6 - 38)
             }
-            toView.addSubview(btn)
             btn.setNeedsDisplay()
             if animated{
                 btn.alpha = 0.0
