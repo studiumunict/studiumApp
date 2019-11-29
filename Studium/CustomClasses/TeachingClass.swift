@@ -54,18 +54,21 @@ class Teaching{
         self.currentControler = fromController
         self.downloadNotify { (flag) in
             if !flag {completion(false,false); return}
-            self.downloadDocuments(path: "mbareRoot", prev: self.fs.currentFolder) { (flag1) in
-                if !flag1 {completion(false,false); return}
+            //self.downloadDocuments(path: "mbareRoot", prev: self.fs.currentFolder) { (flag1) in
+                //if !flag1 {completion(false,false); return}
                 self.downloadDescription { (flag2) in
-                    if !flag2 {completion(false,false); return}
-                    self.isCompleted = true
-                    self.syllabusCode = self.code
-                    completion(false,true)
+                     if !flag2 {completion(false,false); return}
+                        self.downloadBooking { (flag3) in
+                         if !flag3 {completion(false,false); return}
+                                self.isCompleted = true
+                                self.syllabusCode = self.code
+                                completion(false,true)
+                    }
                 }
-            }
+           // }
         }
     }
-   
+    
     private func downloadRootDocuments(completion: @escaping(Bool)-> Void){ //FUNZIONE SICURA
         let api = BackendAPI.getUniqueIstance(fromController: currentControler)
         api.getCourseDocuments(codCourse: self.code, path: "mbareRoot") { (error,JSONResponse) in
@@ -105,6 +108,15 @@ class Teaching{
         }
     }
     */
+    
+    private func downloadBooking(completion: @escaping (Bool)->Void){
+        let api =  BackendAPI.getUniqueIstance(fromController: currentControler)
+        api.getBooking(codCourse: self.code) { (error, JSONResponse) in
+            print(JSONResponse)
+            completion(true)
+            //TODO: prenotazione
+        }
+    }
     
     private func downloadDocuments(path: String, prev: Doc! ,completion: @escaping(Bool)-> Void){ //FUNZIONE NON SICURA
         let api = BackendAPI.getUniqueIstance(fromController: currentControler)

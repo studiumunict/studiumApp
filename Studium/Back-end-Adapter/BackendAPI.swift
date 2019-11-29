@@ -547,6 +547,46 @@ import Foundation
             completion(error,nil)
         }
     }
+    public func getBooking(codCourse: String, completion: @escaping (Error?,Any?)->Void){
+        let requestName = "V2_GetPrenotazioni"
+        let request = startRequest()
+        let session =  Session.getUniqueIstance()
+        request.setValue(codCourse, forKey: "course")
+        request.setValue(Student.getUniqueIstance().id, forKey: "userid")
+        request.requestURL(requestURL,
+                        soapAction: soapActionBaseURL + requestName,
+                        completeWithDictionary: { (statusCode : Int,
+                            dict : [AnyHashable : Any]?) -> Void in
+                            
+                            let response = dict! as Dictionary
+                            print(response)
+                            let responseValue = self.parseResultToString(requestName: requestName, response: response)
+                            if responseValue == "noSession"{
+                                print("Restoring session")
+                                session.restoreSession(completion: { (success) in
+                                    if(success){
+                                        self.getBooking(codCourse: codCourse) { (error,response) in
+                                            completion(error,response)
+                                        }
+                                    }
+                                    else{
+                                        let error = NSError.init(domain: "Session error", code: -1, userInfo: nil)
+                                        completion(error,nil)
+                                    }
+                                })
+                            }
+                            else{
+                                let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
+                                completion(nil,json)
+                                //print(json)
+                            }
+                            
+        }) { (error : Error?) -> Void in
+            print(error ?? "Error")
+            self.delegate?.connectionErrorHandle(error: error)
+            completion(error,nil)
+        }
+    }
     
     public func getDepartments(completion: @escaping (Any?)->Void){
         let requestName = "Father"

@@ -90,4 +90,7 @@ class DocumentsPageViewController: DocumentsViewController{
         return CV.getButton(position: .centerTopRounded, dataToAttach: nil, title: "Aggiungi ai preferiti", selector: #selector(addSelectedDocumentsToFavourite), target: self)
     }
 
+    deinit{
+        print("Deinit DocumentPage")
+    }
 }

@@ -248,7 +248,6 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         self.cdlTableView.reloadData()
     }
 
-    
     func getCDLAndTeachings(ofDepartment : Department){ //questa funzione scaricherà dal db
         self.cdlTableView.startWaitingData()
         self.CDLDataSource.removeAll()
@@ -350,8 +349,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         }
     }
     
-    
-    
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.cdsSearchBar.resignFirstResponder()
         if (cdsSearchBar.isHidden == false && cdsSearchBar.text == ""){
@@ -451,8 +449,6 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             button.tag = section
             button.addTarget(self, action: #selector(self.removeOrExpandRows), for: .touchUpInside)
            
-            
-            
             return button
             
         
