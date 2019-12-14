@@ -10,7 +10,6 @@ import UIKit
 
 class ManageCourseViewController: UIViewController, SWRevealViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, SharedSourceObserverDelegate {
    
-   
 
     @IBOutlet weak var createCategoryView: UIView!
     @IBOutlet weak var createCategoryTextField: UITextField!
@@ -226,9 +225,11 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     }
     
     @objc private func removeSection(button : UIButton){
+        var view = button.superview!
+        let cf = ConfirmView.getUniqueIstance()
+        cf.startWaiting(confirmView: &view)
         let section = button.accessibilityElements?[1] as! Int
         let api = BackendAPI.getUniqueIstance(fromController: self)
-        //TODO: next line can be nil
         api.deleteCategory(idCat: self.sharedSource.dataSource[section].course.code) { (JSONResponse) in
             self.sharedSource.reloadSourceFromAPI(fromController: self) { (flag) in
                 self.manageCoursesTableView.reloadData()
@@ -259,6 +260,8 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         let frame = self.manageCoursesTableView.convert(frameTb, to: self.view)
         SSAnimator.expandViewFromSourceFrame(sourceFrame: frame, viewToExpand: view, elementsInsideView: nil, oscureView: self.oscureView) { (flag) in }
     }
+    
+    
     @objc private func closeRemoveSectionConfirmView(sender : UIButton){
         let section = sender.accessibilityElements?[1] as! Int
         let frameTb = self.manageCoursesTableView.rect(forSection: section)
@@ -290,13 +293,10 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         }
     }
     
-    
-    
     @IBAction func addCategoryClicked(_ sender: Any) {
        // self.navigationItem.rightBarButtonItem?.customView?.isUserInteractionEnabled = false
         openCreateCategoryViewAnimated()
     }
-    
     
     func disableMenuGesture(){
         

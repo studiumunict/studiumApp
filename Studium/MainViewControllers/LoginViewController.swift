@@ -173,11 +173,12 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         let api = BackendAPI.getUniqueIstance(fromController: self)
         let selectedYearIndex = yearsPickerView.selectedRow(inComponent: 0)
         let selectedYear = yearsDataSource[selectedYearIndex]
-        
+        loginButton.isEnabled = false
         api.login(username: usernameTextField.text!, password: passwordTextField.text!, academicYear: selectedYear) { (error,success) in
             guard error == nil else{
                 self.errorLabel.text = "Errore di connessione ad Internet"
                 self.errorLabel.isHidden = false
+                self.loginButton.isEnabled = true
                 return
             }
             if success {
@@ -193,6 +194,7 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
                         self.errorLabel.sizeToFit()
                         self.errorLabel.text = "E' necessario un primo accesso dal sito WEB per l'anno accademico selezionato"
                         self.errorLabel.isHidden = false
+                        self.loginButton.isEnabled = true
                         return
                     }
                 }
@@ -201,6 +203,7 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
                 print("User data error")
                 self.errorLabel.text = "Dati d'accesso errati!"
                 self.errorLabel.isHidden = false
+                self.loginButton.isEnabled = true
             }
             
         }

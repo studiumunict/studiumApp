@@ -74,7 +74,8 @@ import Foundation
         }
     }
     
-    public func login(username: String, password: String, academicYear: String, completion : @escaping (Error?,Bool)->Void){
+    //normal login function
+    /*public func login(username: String, password: String, academicYear: String, completion : @escaping (Error?,Bool)->Void){
         let requestName = "LoginCompact"
         let request = startRequest()
         request.setValue(username, forKey: "username")
@@ -90,6 +91,42 @@ import Foundation
                             let response :Dictionary = dict! as Dictionary
                             let responseValue = self.parseResultToString(requestName: requestName, response: response)
                             if responseValue == "1" {
+                                //save session
+                                let session = Session.getUniqueIstance()
+                                session.setActiveSessionParameters(username: username, encryptedPassword: pin, academicYear: academicYear)
+                                completion(nil,true)
+                            }
+                            else{ completion(nil,false) }
+                            
+        }) { (error : Error?) -> Void in
+            print(error ?? "Error")
+            //self.delegate?.connectionErrorHandle(error: error)
+            completion(error,false)
+        }
+    }*/
+    
+    //test login function. Test user : username: studente1 password: studente1
+    public func login(username: String, password: String, academicYear: String, completion : @escaping (Error?,Bool)->Void){
+        let requestName = "V2_LoginTest"
+        let request = startRequest()
+        request.setValue(username, forKey: "username")
+        let pin = PswEncryption.encode(s: password)
+        request.setValue(password, forKey: "password")
+        let year =  getYearFromAcademicYear(academicYear: academicYear)
+        //year
+        request.setValue(year, forKey: "db")
+        request.setValue(token, forKey: "token")
+        request.requestURL(requestURL,
+                        soapAction: soapActionBaseURL + requestName,
+                        completeWithDictionary: { (statusCode : Int,
+                            dict : [AnyHashable : Any]?) -> Void in
+                            let response :Dictionary = dict! as Dictionary
+                            let responseValue = self.parseResultToString(requestName: requestName, response: response)
+                            let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
+                            
+                            let dict = json as! [String:Any]
+                            print(dict)
+                            if dict["status"] as! String != "no"{
                                 //save session
                                 let session = Session.getUniqueIstance()
                                 session.setActiveSessionParameters(username: username, encryptedPassword: pin, academicYear: academicYear)
@@ -547,12 +584,146 @@ import Foundation
             completion(error,nil)
         }
     }
+   /* <prenotazione>string</prenotazione>
+    <limit>string</limit>
+    <prio>string</prio>
+    <matricola>string</matricola>
+    <note>string</note>
+    
+    V2_GetPrenotazioneToDo*/
+    public func getBookingToDo(id: String, completion: @escaping (Error?,Any?)->Void){
+        let requestName = "V2_GetPrenotazioneToDo"
+        let request = startRequest()
+        let session =  Session.getUniqueIstance()
+        request.setValue(id, forKey: "id")
+        request.setValue(Student.getUniqueIstance().id, forKey: "userid")
+        request.requestURL(requestURL,
+                        soapAction: soapActionBaseURL + requestName,
+                        completeWithDictionary: { (statusCode : Int,
+                            dict : [AnyHashable : Any]?) -> Void in
+                            
+                            let response = dict! as Dictionary
+                            print(response)
+                            let responseValue = self.parseResultToString(requestName: requestName, response: response)
+                            if responseValue == "noSession"{
+                                print("Restoring session")
+                                session.restoreSession(completion: { (success) in
+                                    if(success){
+                                        self.getBookingToDo(id: id) { (error,response) in
+                                            completion(error,response)
+                                        }
+                                    }
+                                    else{
+                                        let error = NSError.init(domain: "Session error", code: -1, userInfo: nil)
+                                        completion(error,nil)
+                                    }
+                                })
+                            }
+                            else{
+                                let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
+                                completion(nil,json)
+                                //print(json)
+                            }
+                            
+        }) { (error : Error?) -> Void in
+            print(error ?? "Error")
+            self.delegate?.connectionErrorHandle(error: error)
+            completion(error,nil)
+        }
+    }
+    
+    public func doBooking(id: String,limit:String,prio:String,note:String, completion: @escaping (Error?,Any?)->Void){
+        let requestName = "V2_AddPrenotazione"
+        let request = startRequest()
+        let session =  Session.getUniqueIstance()
+        request.setValue(id, forKey: "prenotazione")
+        request.setValue(limit, forKey: "limit")
+        request.setValue(prio, forKey: "prio")
+        request.setValue(Student.getUniqueIstance().code, forKey: "matricola")
+        request.setValue(Student.getUniqueIstance().id, forKey: "userid")
+        request.setValue(note, forKey: "note")
+        request.requestURL(requestURL,
+                        soapAction: soapActionBaseURL + requestName,
+                        completeWithDictionary: { (statusCode : Int,
+                            dict : [AnyHashable : Any]?) -> Void in
+                            
+                            let response = dict! as Dictionary
+                            print(response)
+                            let responseValue = self.parseResultToString(requestName: requestName, response: response)
+                            if responseValue == "noSession"{
+                                print("Restoring session")
+                                session.restoreSession(completion: { (success) in
+                                    if(success){
+                                        self.doBooking(id: id, limit: limit, prio: prio, note: note, completion: { (error,response) in
+                                            completion(error,response)
+                                        })
+                                    }
+                                    else{
+                                        let error = NSError.init(domain: "Session error", code: -1, userInfo: nil)
+                                        completion(error,nil)
+                                    }
+                                })
+                            }
+                            else{
+                                let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
+                                completion(nil,json)
+                                //print(json)
+                            }
+                            
+        }) { (error : Error?) -> Void in
+            print(error ?? "Error")
+            self.delegate?.connectionErrorHandle(error: error)
+            completion(error,nil)
+        }
+    }
+    
+    public func cancelBooking(id: String, completion: @escaping (Error?,Any?)->Void){
+        let requestName = "V2_CancelPrenotazione"
+        let request = startRequest()
+        let session =  Session.getUniqueIstance()
+        request.setValue(id, forKey: "prenotazione")
+        //request.setValue(Student.getUniqueIstance().id, forKey: "userid")
+        request.requestURL(requestURL,
+                        soapAction: soapActionBaseURL + requestName,
+                        completeWithDictionary: { (statusCode : Int,
+                            dict : [AnyHashable : Any]?) -> Void in
+                            
+                            let response = dict! as Dictionary
+                            print(response)
+                            let responseValue = self.parseResultToString(requestName: requestName, response: response)
+                            if responseValue == "noSession"{
+                                print("Restoring session")
+                                session.restoreSession(completion: { (success) in
+                                    if(success){
+                                        self.cancelBooking(id: id, completion: { (error,response) in
+                                            completion(error,response)
+                                        })
+                                    }
+                                    else{
+                                        let error = NSError.init(domain: "Session error", code: -1, userInfo: nil)
+                                        completion(error,nil)
+                                    }
+                                })
+                            }
+                            else{
+                                let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
+                                completion(nil,json)
+                                //print(json)
+                            }
+                            
+        }) { (error : Error?) -> Void in
+            print(error ?? "Error")
+            self.delegate?.connectionErrorHandle(error: error)
+            completion(error,nil)
+        }
+    }
+    
     public func getBooking(codCourse: String, completion: @escaping (Error?,Any?)->Void){
         let requestName = "V2_GetPrenotazioni"
         let request = startRequest()
         let session =  Session.getUniqueIstance()
         request.setValue(codCourse, forKey: "course")
-        request.setValue(Student.getUniqueIstance().id, forKey: "userid")
+        //request.setValue(Student.getUniqueIstance().id, forKey: "userid")
         request.requestURL(requestURL,
                         soapAction: soapActionBaseURL + requestName,
                         completeWithDictionary: { (statusCode : Int,
@@ -662,9 +833,49 @@ import Foundation
         }
         
     }
+    
+    
+    /*public func getTeachingsToSubscribe(CDLCode: String, completion: @escaping (Any?)->Void){
+           let requestName = "V2_GetCoursesToSubscribe"
+           let request =  startRequest()
+           //let code = Int(CDLCode);
+           request.setValue(CDLCode, forKey: "id")
+           request.requestURL(requestURL,
+                              soapAction: soapActionBaseURL + requestName,
+                              completeWithDictionary: { (statusCode : Int,
+                               dict : [AnyHashable : Any]?) -> Void in
+                               let response = dict! as Dictionary
+                               let responseValue = self.parseResultToString(requestName: requestName, response: response)
+                               if responseValue == "noSession"{
+                                   let session =  Session.getUniqueIstance()
+                                   session.restoreSession() { (success) in
+                                       if success {
+                                           self.getTeachings(CDLCode: CDLCode ,completion: { (response) in
+                                               completion(response)
+                                           })
+                                       }
+                                       else{
+                                           completion(nil)
+                                       }
+                                   }
+                               }
+                               else{
+                                   let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
+                                   completion(json)
+                               }
+                           
+           }) { (error : Error?) -> Void in
+               print(error ?? "Error")
+               print("Errore getting teachings Connection")
+               self.delegate?.connectionErrorHandle(error: error)
+               completion(nil)
+           }
+       }*/
+    
     public func getTeachings(CDLCode: String, completion: @escaping (Any?)->Void){
-        let requestName = "CoursesAdd"
+        let requestName = "V2_GetStudiumCourses"
         let request =  startRequest()
+        //let code = Int(CDLCode);
         request.setValue(CDLCode, forKey: "id")
         request.requestURL(requestURL,
                            soapAction: soapActionBaseURL + requestName,
@@ -696,7 +907,6 @@ import Foundation
             self.delegate?.connectionErrorHandle(error: error)
             completion(nil)
         }
-        
     }
     public func searchCourse(searchedText : String, completion: @escaping (Any?)->Void){
         let requestName = "CercaCorso"

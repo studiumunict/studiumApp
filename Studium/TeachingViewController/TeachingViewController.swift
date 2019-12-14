@@ -138,6 +138,11 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
                 v.fs = self.teachingDataSource.fs
                 v.viewDidLoad()
             }
+            else if let v = vc as? BookingPageViewController{
+                v.dataSource.items.removeAll()
+                v.dataSource.insertBookings(sourceArray: self.teachingDataSource.bookings)
+                v.bookingTableView.reloadData()
+            }
         }
     }
     
@@ -247,7 +252,8 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     fileprivate func getBookingController() -> BookingPageViewController {
         let sb = storyboard!
         let vc = sb.instantiateViewController(withIdentifier: "bookingPageViewController") as! BookingPageViewController
-        vc.haveBooking = teachingDataSource.haveBooking
+        //vc.haveBooking = teachingDataSource.haveBooking
+        vc.dataSource.insertBookings(sourceArray: teachingDataSource.bookings)
         bookingButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToBookingView(_:))))
         customButtons(button: bookingButton, image: "booking", action: #selector(self.sendToBookingView(_:)))
         return vc

@@ -54,6 +54,8 @@ class HTMLParser {
         str = str.replacingOccurrences(of: "&amp;", with: "", options: .caseInsensitive, range: nil)
         str = str.replacingOccurrences(of: "#768;", with: "", options: .caseInsensitive, range: nil)
         str = str.replacingOccurrences(of: "&#8217;", with: "'", options: .caseInsensitive, range: nil)
+        str = str.replacingOccurrences(of: "&gt;", with: ">", options: .caseInsensitive, range: nil)
+        str = str.replacingOccurrences(of: "&lt;", with: "<", options: .caseInsensitive, range: nil)
         return str
     }
     public func getStringURL(sourceString: String)-> String{

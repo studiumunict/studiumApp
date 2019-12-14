@@ -143,7 +143,7 @@ class PortaleStudentiViewController: UIViewController, WKNavigationDelegate, SWR
         }
     }
     
-    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+    func webView(_ webView: WKWebView, didFailLoadWithError error: Error) {
         print("\n\n didFailLoadWithError, error: ", error.localizedDescription)
     }
    

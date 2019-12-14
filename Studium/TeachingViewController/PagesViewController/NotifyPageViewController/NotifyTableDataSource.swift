@@ -6,7 +6,6 @@
 //  Copyright © 2018 Unict.it. All rights reserved.
 //
 
-import UIKit
 
 class NotifyTableDataSource: NSObject, UITableViewDataSource {
     

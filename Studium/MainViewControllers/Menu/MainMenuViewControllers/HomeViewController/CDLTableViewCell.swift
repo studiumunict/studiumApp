@@ -18,7 +18,7 @@ class CDLTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.selectionStyle = .none
         CDLnameLabel.lineBreakMode = .byTruncatingMiddle
-        codeLabel.textColor = UIColor.secondaryLabel
+        codeLabel.textColor = UIColor.secondaryBackground
         // Initialization code
     }
 

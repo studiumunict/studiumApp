@@ -9,18 +9,6 @@
 import Foundation
 
 extension UIViewController : ConnectionErrorHandlerDelegate{
-    /*struct oscure {
-        static var _oscureView = UIView()
-    }
-    var oscureView: UIView {
-        get {
-            return oscure._oscureView
-        }
-        set(newValue) {
-            oscure._oscureView = newValue
-        }
-    }*/
-    
     struct errorView {
         static var _errorConfirmView : UIView? = nil
     }
@@ -38,23 +26,17 @@ extension UIViewController : ConnectionErrorHandlerDelegate{
             self.checkForErrorView()
         }
     }
-    func setupOscureView(){
-        //oscureView.isHidden = true
-        //aggiungi constraint oscureView
-    }
+    
     @objc func okClicked(){
         print("OkClicked")
         let SSAnim = CoreSSAnimation.getUniqueIstance()
         SSAnim.collapseViewInSourceFrame(sourceFrame: CGRect(x: self.view.center.x - ((self.view.frame.width * 0.9)/2), y: self.view.frame.size.height - 100, width: self.view.frame.width * 0.9, height: 60), viewToCollapse: self.errorConfirmView!, oscureView: nil, elementsInsideView: nil) { (flag) in
-            //self.view.isUserInteractionEnabled = true
             self.errorConfirmView!.removeFromSuperview()
             self.errorConfirmView = nil
         }
     }
     
     private func showErrorView(){
-        setupOscureView()
-        //self.view.isUserInteractionEnabled = false
         let CF = ConfirmView.getUniqueIstance()
         let titleLabel = CF.getTitleLabel(text: "Errore di connessione")
         let descLabel = CF.getDescriptionLabel(text: "Controlla la tua connessione o riprova più tardi")
@@ -73,7 +55,6 @@ extension UIViewController : ConnectionErrorHandlerDelegate{
     }
     
     func checkForErrorView(){
-        //let SSAnim = CoreSSAnimation.getUniqueIstance()
         if self.errorConfirmView != nil{
             if !errorViewIsInCurrentController(){ //si trova in un altro controller
                 self.errorConfirmView?.removeFromSuperview()
@@ -85,7 +66,5 @@ extension UIViewController : ConnectionErrorHandlerDelegate{
         else{
             showErrorView()
         }
-        
-        //print("Errore connessione da questo view controller:", self)
     }
 }

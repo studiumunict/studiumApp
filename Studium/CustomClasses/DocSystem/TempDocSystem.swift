@@ -43,7 +43,7 @@ public class TempDocSystem: NSObject, NSCoding {
     func appendChild(toDoc:Doc,child:Doc)->Doc{
         let possibleDoc = checkIfDocExists(inFolder: toDoc, name: child.title)
         if let foundDoc = possibleDoc{ //se trovo il documento
-            print("trovato")
+           // print("trovato")
             appendChilds(toDoc: foundDoc, childs: child.childs) //appendo i figli all'interno di quello trovato
             
             return foundDoc
@@ -51,7 +51,7 @@ public class TempDocSystem: NSObject, NSCoding {
         else{ //caso base : documento non esistente, lo appendo
             toDoc.addChild(item:child)
             child.setParent(prev: toDoc)
-            print("appeso")
+           // print("appeso")
             return child
         }
     }
@@ -81,7 +81,7 @@ public class TempDocSystem: NSObject, NSCoding {
             fromF = currentFolder
         }
         let i = getIndex(ofDoc: child, inFolder: fromF!)
-        print("Trovato da rimuovere con indice: ", i)
+       // print("Trovato da rimuovere con indice: ", i)
         if i == -1 {return}
         fromF!.childs.remove(at: i)
     }

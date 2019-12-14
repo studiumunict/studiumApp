@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class HomeTableSection{
+class TeachingTableSection{
     var course = CDL()//sarà la section (1)
     var expanded : Bool!
     var teachings = [Teaching]() //saranno le row (array sottostante alla section)

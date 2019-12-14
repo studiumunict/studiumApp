@@ -9,7 +9,7 @@
 import Foundation
 
 class SharedCoursesSource: NSObject {
-    public var dataSource : [HomeTableSection] = [HomeTableSection.init(cdl: CDL.init(courseName: "Default", courseCode: "0"), teachingArray: [Teaching](), setExpanded: true)]
+    public var dataSource : [TeachingTableSection] = [TeachingTableSection.init(cdl: CDL.init(courseName: "Default", courseCode: "0"), teachingArray: [Teaching](), setExpanded: true)]
     private static var obj : SharedCoursesSource!
     
     private override init(){}
@@ -36,7 +36,7 @@ class SharedCoursesSource: NSObject {
         return dataSource.count == 1 && dataSource[0].teachings.count == 0
     }
     
-    private func getRowIndexByCategory(newSource: [HomeTableSection],cat: String) -> Int{
+    private func getRowIndexByCategory(newSource: [TeachingTableSection],cat: String) -> Int{
            var i = 0
            for row in newSource{
                if row.course.code == cat {return i}
@@ -44,8 +44,8 @@ class SharedCoursesSource: NSObject {
            }
            return 0
     }
-    private func getCopy(from: [HomeTableSection])-> [HomeTableSection]{
-        var to = [HomeTableSection]()
+    private func getCopy(from: [TeachingTableSection])-> [TeachingTableSection]{
+        var to = [TeachingTableSection]()
         for elem in from{
             to.append(elem)
         }
@@ -53,16 +53,15 @@ class SharedCoursesSource: NSObject {
     }
     
     public func reloadSourceFromAPI(fromController: UIViewController?, completion: @escaping (Bool) -> Void){
-        print("ReloadSource")
-        var newSource = [HomeTableSection]()
+        var newSource = [TeachingTableSection]()
         //dataSource.removeAll()
-        newSource.append(HomeTableSection.init(cdl: CDL.init(courseName: "Default", courseCode: "0"), teachingArray: [Teaching](), setExpanded: true))
+        newSource.append(TeachingTableSection.init(cdl: CDL.init(courseName: "Default", courseCode: "0"), teachingArray: [Teaching](), setExpanded: true))
         let api = BackendAPI.getUniqueIstance(fromController: fromController)
         api.getMyCoursesCategories { (JSONData) in
             guard JSONData != nil else{return}
             for cat in JSONData as! [Any]{
                 let dict =  cat as! [String:Any]
-                newSource.insert(HomeTableSection.init(cdl: CDL.init(courseName: dict["title"] as? String, courseCode: String(dict["id"] as! Int)), teachingArray: [Teaching](), setExpanded: true),at: 0)
+                newSource.insert(TeachingTableSection.init(cdl: CDL.init(courseName: dict["title"] as? String, courseCode: String(dict["id"] as! Int)), teachingArray: [Teaching](), setExpanded: true),at: 0)
             }
             api.getMyCourses { (JSONData) in
                     guard JSONData != nil else{return}
