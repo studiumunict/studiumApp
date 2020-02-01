@@ -208,56 +208,115 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
         }
     }
     
-   /*override func getCDLAndTeachings(ofDepartment : Department){ //questa funzione scaricherà dal db
-           self.cdlTableView.startWaitingData()
-           self.CDLDataSource.removeAll()
-           self.cdlTableView.reloadData()
-           //print("Dipartimento selezionato:", ofDepartment.code)
-           let api =  BackendAPI.getUniqueIstance(fromController: self)
-           api.getCDL(departmentCode: ofDepartment.code) { (JSONData) in
-               if JSONData == nil {
-                   self.cdlTableView.stopWaitingData()
-                   return
-               }
-               var i = 0
-               let JSONArray = JSONData as! [Any]
-               for cdl in JSONArray{
-                   let corso = cdl as! [String:Any]
-                   //creo cdl
-                   let newCDL = CDL.init(courseName: corso["name"] as? String, courseCode: corso["code"] as? String, courseId: corso["id"] as? Int, parent: corso["parent"] as? String)
-                   //scarico insegnamenti del cdl
-                   print("CORSO DI LAUREA CODE: ", newCDL.code! );
-                   
-                   var teachings = [Teaching]()
-                   api.getTeachingsToSubscribe(CDLCode: newCDL.code!, completion: { (JSONData) in
-                      print("CHIAMATA API")
-                       //print(JSONData)
-                       if(JSONData == nil) {
-                           self.cdlTableView.stopWaitingData()
-                           return
-                       }
-                       
-                       for teaching in JSONData as! [Any]{
-                           let teach = teaching as! [String:Any]
-                           let teachTitle = teach["title"] as! String
-                           var teachTitleLowercased = teachTitle.lowercased()
-                           teachTitleLowercased.capitalizeFirstLetter()
-                           let newTeach = Teaching.init(teachingName: teachTitleLowercased, category: teach["category"] as! String, teachingCode: teach["code"] as! String, teacherName: teach["tutorName"] as! String, signedUp: false)
-                           teachings.append(newTeach)
-                       }
-                      //salvo il singolo corso di laurea con tutti i suoi insegnamenti
-                      let tableSection = HomeTableSection.init(cdl: newCDL, teachingArray: teachings, setExpanded: false)
-                       self.CDLDataSource.append(tableSection)
-                       if i == JSONArray.count-1 {
-                           self.cdlTableView.reloadData()
-                           self.cdlTableView.stopWaitingData()
-                       }
-                       i += 1
-                   })
-               }
-               
+   override func getCDLAndTeachings(ofDepartment : Department){ //questa funzione scaricherà dal db
+        
+        print("getCDLandTeachings")
+        self.cdlTableView.startWaitingData()
+        self.CDLDataSource.removeAll()
+        self.cdlTableView.reloadData()
+        print("Dipartimento selezionato:", ofDepartment.code)
+        let api =  BackendAPI.getUniqueIstance(fromController: self)
+        api.getCDLToSubscribe_v2(departmentCode: ofDepartment.code) { (JSONResponse) in
+            print(JSONResponse)
+            //TODO: aggiungere gli elementi della lista course ad una sezione apposita "Altro"
+            guard let JSONResponseDegree = JSONResponse as? [String: Any] else{ return }
+            guard let JSONData = JSONResponseDegree["degreeCourses"] as? [Any] else{ self.cdlTableView.stopWaitingData()
+                return
+            }
+            var i = 0
+            let JSONArray = JSONData as! [Any]
+            
+            for cdl in JSONArray{
+                let corso = cdl as! [String:Any]
+                //creo cdl
+                let newCDL = CDL.init(courseName: corso["name"] as? String, courseCode: corso["code"] as? String, courseId: corso["id"] as? Int, parent: corso["parent"] as? String)
+                //scarico insegnamenti del cdl
+                print("CORSO DI LAUREA CODE: ", newCDL.code! );
+                
+                var teachings = [Teaching]()
+                api.getTeachingsToSubscribe_v2(CDLCode: newCDL.code!, completion: { (JSONData) in
+                   print("CHIAMATA API")
+                    //print(JSONData)
+                    if(JSONData == nil) {
+                        self.cdlTableView.stopWaitingData()
+                        return
+                    }
+                    
+                    for teaching in JSONData as! [Any]{
+                        let teach = teaching as! [String:Any]
+                        let teachTitle = teach["title"] as! String
+                        var teachTitleLowercased = teachTitle.lowercased()
+                        teachTitleLowercased.capitalizeFirstLetter()
+                        let newTeach = Teaching.init(teachingName: teachTitleLowercased, category: teach["category"] as? String ?? "", teachingCode: teach["code"] as! String, teacherName: teach["tutorName"] as! String,  dbName: teach["dbName"] as? String ?? "", visualCode: teach["visualCode"] as! String, visibility: teach["visibility"] as? Int ?? 2, subscribe: teach["subscribe"] as? Int ?? 1, unsubscribe: teach["unsubscribe"] as? Int ?? 0)
+                        teachings.append(newTeach)
+                    }
+                   //salvo il singolo corso di laurea con tutti i suoi insegnamenti
+                   let tableSection = TeachingTableSection.init(cdl: newCDL, teachingArray: teachings, setExpanded: false)
+                    self.CDLDataSource.append(tableSection)
+                    if i == JSONArray.count-1 {
+                        self.cdlTableView.reloadData()
+                        self.cdlTableView.stopWaitingData()
+                    }
+                    i += 1
+                })
+            }
+            
+        }
+    }
+   
+    override func getDepartments(){
+       let api = BackendAPI.getUniqueIstance(fromController: self)
+       api.getDepartments_v2(completion: { (jsonData) in
+           //print(jsonData)
+           if jsonData == nil {
+               self.departmentsTableView.stopWaitingData()
+               self.hideDepartmentTableAnimated()
+               return
            }
-       }*/
+           for dep in jsonData as! [Any]{
+               let depDict =  dep as! [String:Any]
+               let depName = depDict["name"] as? String
+               var lowName = depName!.lowercased()
+               lowName.capitalizeFirstLetter()
+               //capitalize first letter
+               self.departmentsDataSource.append(Department.init(depName: lowName, depCode: depDict["code"] as? String, id: depDict["id"] as? Int))
+           }
+           self.departmentsTableView.stopWaitingData()
+           self.departmentsTableView.reloadData()
+       })
+   }
+   
+   
+    override func getTeachingsDuringSearch(searchedText : String){
+        let api = BackendAPI.getUniqueIstance(fromController: self)
+        api.searchCourseToSubscribe_v2(searchedText: searchedText) { (JSONData) in
+            //print(JSONData)
+        //api.searchCourseToSubscribe_v2(searchedText: searchedText) { (JSONData) in
+            var teachings = [Teaching]()
+            if(JSONData == nil) {return}
+            for teaching in JSONData as! [Any]{
+                let teach = teaching as! [String:Any]
+                let teachTitle = teach["title"] as! String
+                var teachTitleLowercased = teachTitle.lowercased()
+                teachTitleLowercased.capitalizeFirstLetter()
+                //print(JSONData)
+                let newTeach = Teaching.init(teachingName: teachTitleLowercased, category: teach["category"] as? String ?? "", teachingCode: teach["code"] as! String, teacherName: teach["tutorName"] as! String, dbName: teach["dbName"] as? String ?? "", visualCode: teach["visualCode"] as? String ?? "", visibility: teach["visibility"] as? Int ?? 2, subscribe: teach["subscribe"] as? Int ?? 1, unsubscribe: teach["unsubscribe"] as? Int ?? 0)
+                teachings.append(newTeach)
+            }
+            var newCDL : CDL
+            if(teachings.count == 0){
+                newCDL = CDL.init(courseName: "Nessun insegnamento trovato", courseCode: nil, courseId: nil, parent: nil)
+            }
+            else{
+                 newCDL = CDL.init(courseName: "Insegnamenti trovati", courseCode: nil, courseId: nil, parent: nil)
+            }
+            let tableSection = TeachingTableSection.init(cdl: newCDL, teachingArray: teachings, setExpanded: true)
+            self.filteredCDLDataSource.removeAll()
+            
+            self.filteredCDLDataSource.append(tableSection)
+            self.cdlTableView.reloadData()
+        }
+    }
        
     
     

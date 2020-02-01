@@ -188,7 +188,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         let api = BackendAPI.getUniqueIstance(fromController: self)
         api.searchCourse(searchedText: searchedText) { (JSONData) in
             //print(JSONData)
-            
+        //api.searchCourseToSubscribe_v2(searchedText: searchedText) { (JSONData) in
             var teachings = [Teaching]()
             if(JSONData == nil) {return}
             for teaching in JSONData as! [Any]{
@@ -196,7 +196,8 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
                 let teachTitle = teach["title"] as! String
                 var teachTitleLowercased = teachTitle.lowercased()
                 teachTitleLowercased.capitalizeFirstLetter()
-                let newTeach = Teaching.init(teachingName: teachTitleLowercased, category: teach["category"] as! String, teachingCode: teach["code"] as! String, teacherName: teach["tutorname"] as! String, signedUp: false)
+                //print(JSONData)
+                let newTeach = Teaching.init(teachingName: teachTitleLowercased, category: teach["category"] as! String, teachingCode: teach["code"] as! String, teacherName: teach["tutorname"] as! String, dbName: teach["dbName"] as? String ?? "", visualCode: teach["visualCode"] as? String ?? "", visibility: teach["visibility"] as? Int ?? 2, subscribe: teach["subscribe"] as? Int ?? 1, unsubscribe: teach["unsubscribe"] as? Int ?? 0)
                 teachings.append(newTeach)
             }
             var newCDL : CDL
@@ -249,18 +250,23 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     }
 
     func getCDLAndTeachings(ofDepartment : Department){ //questa funzione scaricherà dal db
+        
+        print("getCDLandTeachings")
         self.cdlTableView.startWaitingData()
         self.CDLDataSource.removeAll()
         self.cdlTableView.reloadData()
-        //print("Dipartimento selezionato:", ofDepartment.code)
+        print("Dipartimento selezionato:", ofDepartment.code)
         let api =  BackendAPI.getUniqueIstance(fromController: self)
-        api.getCDL(departmentCode: ofDepartment.code) { (JSONData) in
-            if JSONData == nil {
-                self.cdlTableView.stopWaitingData()
+        api.getCDL_v2(departmentCode: ofDepartment.code) { (JSONResponse) in
+            print(JSONResponse)
+            //TODO: aggiungere gli elementi della lista course ad una sezione apposita "Altro"
+            guard let JSONResponseDegree = JSONResponse as? [String: Any] else{ return }
+            guard let JSONData = JSONResponseDegree["degreeCourses"] as? [Any] else{ self.cdlTableView.stopWaitingData()
                 return
             }
             var i = 0
             let JSONArray = JSONData as! [Any]
+            
             for cdl in JSONArray{
                 let corso = cdl as! [String:Any]
                 //creo cdl
@@ -269,7 +275,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
                 print("CORSO DI LAUREA CODE: ", newCDL.code! );
                 
                 var teachings = [Teaching]()
-                api.getTeachings(CDLCode: newCDL.code!, completion: { (JSONData) in
+                api.getTeachings_v2(CDLCode: newCDL.code!, completion: { (JSONData) in
                    print("CHIAMATA API")
                     //print(JSONData)
                     if(JSONData == nil) {
@@ -282,7 +288,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
                         let teachTitle = teach["title"] as! String
                         var teachTitleLowercased = teachTitle.lowercased()
                         teachTitleLowercased.capitalizeFirstLetter()
-                        let newTeach = Teaching.init(teachingName: teachTitleLowercased, category: teach["category"] as! String, teachingCode: teach["code"] as! String, teacherName: teach["tutorName"] as! String, signedUp: false)
+                        let newTeach = Teaching.init(teachingName: teachTitleLowercased, category: teach["category"] as! String, teachingCode: teach["code"] as! String, teacherName: teach["tutorName"] as! String,  dbName: teach["dbName"] as! String, visualCode: teach["visualCode"] as! String, visibility: teach["visibility"] as? Int ?? 2, subscribe: teach["subscribe"] as? Int ?? 1, unsubscribe: teach["unsubscribe"] as? Int ?? 0)
                         teachings.append(newTeach)
                     }
                    //salvo il singolo corso di laurea con tutti i suoi insegnamenti
@@ -301,7 +307,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     
     func getDepartments(){
         let api = BackendAPI.getUniqueIstance(fromController: self)
-        api.getDepartments(completion: { (jsonData) in
+        api.getDepartments_v2(completion: { (jsonData) in
             //print(jsonData)
             if jsonData == nil {
                 self.departmentsTableView.stopWaitingData()

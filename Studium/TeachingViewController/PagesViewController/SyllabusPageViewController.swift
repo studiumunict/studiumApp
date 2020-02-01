@@ -47,6 +47,7 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate, UIScro
         
         if syllabusCode != nil {
             webView.load(URLRequest(url: URL(string: "https://syllabus.unict.it/insegnamento.php?mod=" + syllabusCode!)!))
+            print("CARICO SYLLABUS: ", syllabusCode!)
         }
         
     }

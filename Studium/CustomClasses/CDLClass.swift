@@ -14,7 +14,6 @@ class CDL{ //corsi di laurea (es. informatica l-31)
     var code :String!
     var id: Int!
     var parent: String!
-    
     init() {
         self.name = nil
         self.code = nil

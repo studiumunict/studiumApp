@@ -141,7 +141,9 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             else if let v = vc as? BookingPageViewController{
                 v.dataSource.items.removeAll()
                 v.dataSource.insertBookings(sourceArray: self.teachingDataSource.bookings)
-                v.bookingTableView.reloadData()
+                if let tableview = v.bookingTableView {
+                    tableview.reloadData()
+                }
             }
         }
     }

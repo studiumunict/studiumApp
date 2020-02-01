@@ -138,27 +138,38 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         }
     }
     
-    private func buildStudent(completion: @escaping (Bool)->Void ){
-        let api = BackendAPI.getUniqueIstance(fromController: self)
-        api.getCurrentUserData() { (studentJSONData) in
-            let dict =  studentJSONData as! [String: Any]
-            var phone : String!
-                           
-            if dict["phone"] is NSNull || dict["phone"] as! String == ""{
-                phone = "Nessun numero telefonico specificato"
+    private func buildStudent(studentJSONData: Any?){
+        
+        //TODO:
+        //vengono tornati nella chiamata di login, quindi non ha senso effettuare un'altra chiamata adesso.
+       /* let api = BackendAPI.getUniqueIstance(fromController: self)
+        api.getCurrentUserData() { (studentJSONData) in*/
+            if let dict =  studentJSONData as? [String: Any]{
+                var phone : String!
+                               
+                if dict["phone"] is NSNull || dict["phone"] as! String == ""{
+                    phone = "Nessun numero telefonico specificato"
+                }
+                else{ phone = dict["phone"] as? String }
+                if dict["id"] == nil{
+                       // completion(false)
+                        return
+                }
+                _ = Student.getUniqueIstance(id: String(dict["id"] as! Int), codFiscale: dict["username"] as? String , code: dict["officialcode"] as? String, name: dict["firstname"] as? String, surname: dict["lastname"] as? String,telNumber: phone, email: dict["email"] as? String, profileImage: UIImage.init(named: "logo"))
+                if Student.getUniqueIstance().name == nil && Student.getUniqueIstance().surname == nil {
+                    Student.getUniqueIstance().name = ""
+                    Student.getUniqueIstance().surname = ""
+                }
+                
+                print(Student.getUniqueIstance().name ," ----- ", Student.getUniqueIstance().codFiscale)
+                //completion(true)
             }
-            else{ phone = dict["phone"] as? String }
-            if dict["id"] == nil{
-                    completion(false)
-                    return
+            else{
+                print("Nil student dict")
+                return
+                //completion(false)
             }
-            _ = Student.getUniqueIstance(id: String(dict["id"] as! Int), codFiscale: dict["username"] as? String , code: dict["officialcode"] as? String, name: dict["firstname"] as? String, surname: dict["lastname"] as? String,telNumber: phone, email: dict["email"] as? String, profileImage: UIImage.init(named: "logo"))
-            if Student.getUniqueIstance().name == nil && Student.getUniqueIstance().surname == nil {
-                Student.getUniqueIstance().name = ""
-                Student.getUniqueIstance().surname = ""
-            }
-            completion(true)
-        }
+        //}
     }
     
     private func getMainController() -> UIViewController{
@@ -174,41 +185,61 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         let selectedYearIndex = yearsPickerView.selectedRow(inComponent: 0)
         let selectedYear = yearsDataSource[selectedYearIndex]
         loginButton.isEnabled = false
-        api.login(username: usernameTextField.text!, password: passwordTextField.text!, academicYear: selectedYear) { (error,success) in
-            guard error == nil else{
+        api.login_v2(username: usernameTextField.text!, password: passwordTextField.text!, academicYear: selectedYear) { (JSONResponse , error) in
+            guard let response = JSONResponse, error == nil else{
+                //response è nil
                 self.errorLabel.text = "Errore di connessione ad Internet"
                 self.errorLabel.isHidden = false
                 self.loginButton.isEnabled = true
                 return
             }
-            if success {
-                if self.rememberMeSwitcher.isOn{
-                   self.saveCredentials()
-                }
-                self.buildStudent { (success) in
-                    if success {
-                        let controller = self.getMainController()
-                        self.present(controller, animated: true, completion: nil)
-                    }
-                    else{
-                        self.errorLabel.sizeToFit()
-                        self.errorLabel.text = "E' necessario un primo accesso dal sito WEB per l'anno accademico selezionato"
-                        self.errorLabel.isHidden = false
-                        self.loginButton.isEnabled = true
-                        return
-                    }
-                }
+            let dict = response as! [String: Any]
+            let status = dict["status"] as? Int
+            let mode = dict["mode"] as? String
+            let user = dict["user"] as? [String:Any]
+
+            if status == -1{
+                self.errorLabel.sizeToFit()
+                self.errorLabel.text = "E' necessario un primo accesso dal sito WEB per l'anno accademico selezionato"
+                self.errorLabel.isHidden = false
+                self.loginButton.isEnabled = true
+                return
             }
-            else{
+            else if status  == 0{
                 print("User data error")
                 self.errorLabel.text = "Dati d'accesso errati!"
                 self.errorLabel.isHidden = false
                 self.loginButton.isEnabled = true
             }
-            
+                
+            else if status == 1{
+                if self.rememberMeSwitcher.isOn{
+                   self.saveCredentials()
+                }
+                //salva la sessione
+                Session.getUniqueIstance().setActiveSessionParameters(username: self.usernameTextField.text!, encryptedPassword: PswEncryption.encode(s: self.passwordTextField.text!), academicYear: selectedYear, mode: mode!)
+                
+                self.buildStudent(studentJSONData: user)
+                let controller = self.getMainController()
+                                       self.present(controller, animated: true, completion: nil)
+                
+                /*self.buildStudent { (success) in
+                    if success {
+                       
+                    }
+                    else{
+                      
+                    }
+                }*/
+            }
         }
     }
     
+   /* private func getYearFromAcademicYear(academicYear: String) -> String{
+        let index = academicYear.index(academicYear.startIndex, offsetBy: 5)
+        let year = String(academicYear[index...])
+        return year
+    }*/
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         let titleData = yearsDataSource[row]

@@ -188,15 +188,7 @@ class SingleBookingPageViewController: UIViewController {
         return true
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
     @IBAction func dismissButtonClicked(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -216,6 +208,9 @@ class SingleBookingPageViewController: UIViewController {
             print(JSONResponse)
         }
     }
+    
+    //ptioriy deve essere 1(quella scaricata) per poter permettere di scegliere all'utente. Se è 0 io poi passo sempre 1 e non permetto di scegliere all'utente.
+
     private func confirmBooking(){
         let api = BackendAPI.getUniqueIstance(fromController: self)
         api.doBooking(id: String(booking.id), limit: String(booking.limit), prio: String(booking.priority), note: "") { (error, JSONResponse) in

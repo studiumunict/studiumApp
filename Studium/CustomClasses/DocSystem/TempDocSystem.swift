@@ -9,6 +9,7 @@
 import Foundation
 
 public class TempDocSystem: NSObject, NSCoding {
+   // var usersRoot = Doc.init(title: "usersRoot", path: "/usersRoot", type: "folder", courseID: "")
     
     var root = Doc.init(title: "Root", path: "/Root", type: "folder", uploaded: "", lastUpdate: "", size: 0,courseID: "")
     var currentFolder : Doc!

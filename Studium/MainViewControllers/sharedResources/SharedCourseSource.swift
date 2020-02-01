@@ -63,7 +63,9 @@ class SharedCoursesSource: NSObject {
                 let dict =  cat as! [String:Any]
                 newSource.insert(TeachingTableSection.init(cdl: CDL.init(courseName: dict["title"] as? String, courseCode: String(dict["id"] as! Int)), teachingArray: [Teaching](), setExpanded: true),at: 0)
             }
-            api.getMyCourses { (JSONData) in
+            //TODO:
+            //adattare tutte le altre chiamate al v2, come questa, in cui c'è il nuovo parametro dbName, che serve per poi scaricare gli avvisi, da vedere quale serve per scaricare i documenti ecc ecc.
+            api.getMyCourses_v2 { (JSONData) in
                     guard JSONData != nil else{return}
                     let data =  JSONData as! [Any]
                        for course in data{
@@ -71,7 +73,7 @@ class SharedCoursesSource: NSObject {
                            //cerca la riga con categoria corrispondente
                         let i = self.getRowIndexByCategory(newSource: newSource,cat: String(dict["category"] as! Int))
                         print(i)
-                        newSource[i].teachings.append(Teaching.init(teachingName: dict["title"] as! String, category: String(dict["category"] as! Int), teachingCode: dict["code"] as! String, teacherName: dict["tutorname"] as! String, signedUp: true))
+                        newSource[i].teachings.append(Teaching.init(teachingName: dict["title"] as! String, category: String(dict["category"] as! Int), teachingCode: dict["code"] as! String, teacherName: dict["tutorName"] as! String, dbName: dict["dbName"] as! String, visualCode: dict["visualCode"] as! String, visibility: dict["visibility"] as? Int ?? 2, subscribe: dict["subscribe"] as? Int ?? 1, unsubscribe: dict["unsubscribe"] as? Int ?? 0))
                        
                        }
                     self.dataSource = newSource
