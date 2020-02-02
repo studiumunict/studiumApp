@@ -204,7 +204,7 @@ class SingleBookingPageViewController: UIViewController {
     
     private func cancelBooking(){
         let api = BackendAPI.getUniqueIstance(fromController: self)
-        api.cancelBooking(id: String(booking.id)) { (error, JSONResponse) in
+        api.cancelBooking_v2(id: String(booking.id)) { (error, JSONResponse) in
             print(JSONResponse)
         }
     }
@@ -213,7 +213,7 @@ class SingleBookingPageViewController: UIViewController {
 
     private func confirmBooking(){
         let api = BackendAPI.getUniqueIstance(fromController: self)
-        api.doBooking(id: String(booking.id), limit: String(booking.limit), prio: String(booking.priority), note: "") { (error, JSONResponse) in
+        api.doBooking_v2(id: String(booking.id), limit: String(booking.limit), prio: String(booking.priority), note: "") { (error, JSONResponse) in
             print(JSONResponse)
         }
     }

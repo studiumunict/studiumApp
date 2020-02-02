@@ -10,6 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIGestureRecognizerDelegate {
 
+    weak var SplashController : SplashViewController!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var credentialLabel: UILabel!
@@ -124,9 +125,10 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         passwordTextField.layer.borderWidth = 0.0
         passwordTextField.layer.borderColor = UIColor.clear.cgColor
     }
-    private func saveCredentials(){
-        UserDefaults.standard.setValue(self.usernameTextField.text!, forKey: "username")
-        UserDefaults.standard.setValue(PswEncryption.encode(s: self.passwordTextField.text!) , forKey: "password")
+    private func saveCredentials(username: String, psw: String, yearString: String){
+        UserDefaults.standard.setValue(username, forKey: "username")
+        UserDefaults.standard.setValue(PswEncryption.encode(s:psw) , forKey: "password")
+        UserDefaults.standard.setValue(yearString, forKey: "yearString")
     }
     
     private func getSavedCredentials(){
@@ -138,40 +140,7 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         }
     }
     
-    private func buildStudent(studentJSONData: Any?){
-        
-        //TODO:
-        //vengono tornati nella chiamata di login, quindi non ha senso effettuare un'altra chiamata adesso.
-       /* let api = BackendAPI.getUniqueIstance(fromController: self)
-        api.getCurrentUserData() { (studentJSONData) in*/
-            if let dict =  studentJSONData as? [String: Any]{
-                var phone : String!
-                               
-                if dict["phone"] is NSNull || dict["phone"] as! String == ""{
-                    phone = "Nessun numero telefonico specificato"
-                }
-                else{ phone = dict["phone"] as? String }
-                if dict["id"] == nil{
-                       // completion(false)
-                        return
-                }
-                _ = Student.getUniqueIstance(id: String(dict["id"] as! Int), codFiscale: dict["username"] as? String , code: dict["officialcode"] as? String, name: dict["firstname"] as? String, surname: dict["lastname"] as? String,telNumber: phone, email: dict["email"] as? String, profileImage: UIImage.init(named: "logo"))
-                if Student.getUniqueIstance().name == nil && Student.getUniqueIstance().surname == nil {
-                    Student.getUniqueIstance().name = ""
-                    Student.getUniqueIstance().surname = ""
-                }
-                
-                print(Student.getUniqueIstance().name ," ----- ", Student.getUniqueIstance().codFiscale)
-                //completion(true)
-            }
-            else{
-                print("Nil student dict")
-                return
-                //completion(false)
-            }
-        //}
-    }
-    
+   
     private func getMainController() -> UIViewController{
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController")
@@ -214,23 +183,16 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
                 
             else if status == 1{
                 if self.rememberMeSwitcher.isOn{
-                   self.saveCredentials()
+                    self.saveCredentials(username: self.usernameTextField.text!, psw: self.passwordTextField.text!,yearString: selectedYear)
                 }
                 //salva la sessione
                 Session.getUniqueIstance().setActiveSessionParameters(username: self.usernameTextField.text!, encryptedPassword: PswEncryption.encode(s: self.passwordTextField.text!), academicYear: selectedYear, mode: mode!)
-                
-                self.buildStudent(studentJSONData: user)
+                let _ = Student.buildStudent(studentJSONData: user) //buildStudent
+                self.loginButton.isEnabled = true
                 let controller = self.getMainController()
-                                       self.present(controller, animated: true, completion: nil)
+                //self.dismiss(animated: false, completion: nil)
+                self.present(controller, animated: true, completion: nil)
                 
-                /*self.buildStudent { (success) in
-                    if success {
-                       
-                    }
-                    else{
-                      
-                    }
-                }*/
             }
         }
     }

@@ -40,6 +40,43 @@ import Foundation
     }
 
     
+    public func logout_v2(completion: @escaping ([String]?) -> Void){
+           let requestName = "V2_Logout"
+           let request = startRequest()
+           request.setValue(token, forKey: "token")
+           request.requestURL(requestURL,
+                              soapAction: soapActionBaseURL + requestName,
+                              completeWithDictionary: { (statusCode : Int,
+                               dict : [AnyHashable : Any]?) -> Void in
+                               let response :Dictionary = dict! as Dictionary
+                               
+                               let responseValue = self.parseResultToString(requestName: requestName, response: response)
+                               print(responseValue)
+                               var resultArray : [String] = [String]()
+                               let json = try? JSONSerialization.jsonObject(with: responseValue.data(using: .utf8)!, options: [])
+                               if let years = json as? [String] {
+                                   var i = years.count-1
+                                   while(i >= 0){
+                                       let year = years[i]
+                                       let elem = Int(year)!
+                                       let prev = elem-1 //2019->2018
+                                       let academicYearString = String(prev) + "/" + String(elem)
+                                       resultArray.append(academicYearString)
+                                       i-=1
+                                   }
+                                   completion(resultArray)
+                               }
+                               else{
+                                   completion(nil)
+                               }
+           }) { (error : Error?) -> Void in
+               print(error ?? "Error")
+               //self.delegate?.connectionErrorHandle(error: error)
+               completion(nil)
+           }
+       }
+    
+    
     public func getYears(completion: @escaping ([String]?) -> Void){
         let requestName = "GetYears"
         let request = startRequest()
@@ -268,6 +305,8 @@ import Foundation
             completion(error,false)
         }
     }*/
+    
+    //TODO: v2
     public func getMyCoursesCategories(completion: @escaping (Any?)->Void){
            let requestName = "Categoria" //"MyCourses"
            let request = startRequest()
@@ -346,7 +385,7 @@ import Foundation
         }
     }
     
-    public func getMyCourses(completion: @escaping (Any?)->Void){
+    /*public func getMyCourses(completion: @escaping (Any?)->Void){
         let requestName = "MyCourses"
         let request = startRequest()
         let session =  Session.getUniqueIstance()
@@ -383,8 +422,9 @@ import Foundation
             self.delegate?.connectionErrorHandle(error: error)
             completion(nil)
         }
-    }
+    }*/
     
+    //TODO:da fare v2
     public func moveCourse(codCourse: String, newCat: String, completion: @escaping (Any?)->Void){
         let requestName = "MoveCourse"
         let request = startRequest()
@@ -427,6 +467,7 @@ import Foundation
         }
     }
     
+    //TODO: da fare v2
     public func addCourse(codCourse: String, completion: @escaping (Any?)->Void){
         let requestName = "AddCourse"
         let request = startRequest()
@@ -467,6 +508,7 @@ import Foundation
             completion(nil)
         }
     }
+    //TODO: da fare v2
     public func deleteCourse(codCourse: String, completion: @escaping (Any?)->Void){
         let requestName = "RemoveCourse"
         let request = startRequest()
@@ -511,7 +553,7 @@ import Foundation
         }
     }
     
-    
+    //TODO: da fare v2
     public func deleteCategory(idCat: String, completion: @escaping (Any?)->Void){
         let requestName = "DeleteCategory" //"MyCourses"
         let request = startRequest()
@@ -551,6 +593,7 @@ import Foundation
             completion(nil)
         }
     }
+    //TODO: da fare v2
     public func createCategory(catTitle: String, completion: @escaping (Any?)->Void){
         let requestName = "CreateCategory" //"MyCourses"
         let request = startRequest()
@@ -590,6 +633,7 @@ import Foundation
             completion(nil)
         }
     }
+    
     public func getAvvisi_v2(dbName: String!, completion: @escaping (Error?,Any?)->Void){
         let requestName = "V2_GetAnnouncements"
         let request = startRequest()
@@ -631,7 +675,7 @@ import Foundation
         }
     }
     
-    public func getAvvisi(codCourse: String, completion: @escaping (Error?,Any?)->Void){
+    /*public func getAvvisi(codCourse: String, completion: @escaping (Error?,Any?)->Void){
         let requestName = "Avvisi"
         let request = startRequest()
         let session =  Session.getUniqueIstance()
@@ -670,7 +714,9 @@ import Foundation
             self.delegate?.connectionErrorHandle(error: error)
             completion(error,nil)
         }
-    }
+    }*/
+    
+    //TODO: da fare v2
     public func getCurrentUserData(completion: @escaping (Any?)->Void){
         let requestName = "Utente"
         let request = startRequest()
@@ -750,7 +796,7 @@ import Foundation
             completion(error,nil)
         }
     }
-    public func getCourseDescription(codCourse: String, completion: @escaping (Error?,Any?)->Void){
+    /*public func getCourseDescription(codCourse: String, completion: @escaping (Error?,Any?)->Void){
         let requestName = "Description"
         let request = startRequest()
         let session =  Session.getUniqueIstance()
@@ -789,7 +835,7 @@ import Foundation
             self.delegate?.connectionErrorHandle(error: error)
             completion(error,nil)
         }
-    }
+    }*/
     
     
     public func getCourseContent_v2(dbName: String,course: String, completion: @escaping (Error?,Any?)->Void){
@@ -876,7 +922,7 @@ import Foundation
             completion(error,nil)
         }
     }
-    public func getCourseDocuments(codCourse: String,path: String, completion: @escaping (Error?,Any?)->Void){
+    /*public func getCourseDocuments(codCourse: String,path: String, completion: @escaping (Error?,Any?)->Void){
         let requestName = "Documents"
         let request = startRequest()
         let session =  Session.getUniqueIstance()
@@ -916,15 +962,10 @@ import Foundation
             self.delegate?.connectionErrorHandle(error: error)
             completion(error,nil)
         }
-    }
-   /* <prenotazione>string</prenotazione>
-    <limit>string</limit>
-    <prio>string</prio>
-    <matricola>string</matricola>
-    <note>string</note>
+    }*/
+   
     
-    V2_GetPrenotazioneToDo*/
-    public func getBookingToDo(id: String, completion: @escaping (Error?,Any?)->Void){
+    public func getBookingToDo_v2(id: String, completion: @escaping (Error?,Any?)->Void){
         let requestName = "V2_GetPrenotazioneToDo"
         let request = startRequest()
         let session =  Session.getUniqueIstance()
@@ -942,7 +983,7 @@ import Foundation
                                 print("Restoring session")
                                 session.restoreSession(completion: { (success) in
                                     if(success){
-                                        self.getBookingToDo(id: id) { (error,response) in
+                                        self.getBookingToDo_v2(id: id) { (error,response) in
                                             completion(error,response)
                                         }
                                     }
@@ -967,7 +1008,7 @@ import Foundation
     
     
     //TODO: questa chiamata non fa il suo dovere per adesso, da chiedere ad Angelo, non c'è corrispondenza tra il sito e ciò che torna la chiamata.
-    public func doBooking(id: String,limit:String,prio:String,note:String, completion: @escaping (Error?,Any?)->Void){
+    public func doBooking_v2(id: String,limit:String,prio:String,note:String, completion: @escaping (Error?,Any?)->Void){
         let requestName = "V2_AddPrenotazione"
         let request = startRequest()
         let session =  Session.getUniqueIstance()
@@ -989,7 +1030,7 @@ import Foundation
                                 print("Restoring session")
                                 session.restoreSession(completion: { (success) in
                                     if(success){
-                                        self.doBooking(id: id, limit: limit, prio: prio, note: note, completion: { (error,response) in
+                                        self.doBooking_v2(id: id, limit: limit, prio: prio, note: note, completion: { (error,response) in
                                             completion(error,response)
                                         })
                                     }
@@ -1012,7 +1053,8 @@ import Foundation
         }
     }
     
-    public func cancelBooking(id: String, completion: @escaping (Error?,Any?)->Void){
+    
+    public func cancelBooking_v2(id: String, completion: @escaping (Error?,Any?)->Void){
         let requestName = "V2_CancelPrenotazione"
         let request = startRequest()
         let session =  Session.getUniqueIstance()
@@ -1030,7 +1072,7 @@ import Foundation
                                 print("Restoring session")
                                 session.restoreSession(completion: { (success) in
                                     if(success){
-                                        self.cancelBooking(id: id, completion: { (error,response) in
+                                        self.cancelBooking_v2(id: id, completion: { (error,response) in
                                             completion(error,response)
                                         })
                                     }
@@ -1053,7 +1095,8 @@ import Foundation
         }
     }
     
-    public func getBooking(codCourse: String, completion: @escaping (Error?,Any?)->Void){
+    
+    public func getBooking_v2(codCourse: String, completion: @escaping (Error?,Any?)->Void){
         let requestName = "V2_GetPrenotazioni"
         let request = startRequest()
         let session =  Session.getUniqueIstance()
@@ -1071,7 +1114,7 @@ import Foundation
                                 print("Restoring session")
                                 session.restoreSession(completion: { (success) in
                                     if(success){
-                                        self.getBooking(codCourse: codCourse) { (error,response) in
+                                        self.getBooking_v2(codCourse: codCourse) { (error,response) in
                                             completion(error,response)
                                         }
                                     }
@@ -1358,7 +1401,7 @@ import Foundation
            }
        }
     public func getTeachings_v2(CDLCode: String, completion: @escaping (Any?)->Void){
-        let requestName = "V2_GetStudiumCourses"
+        let requestName = "V2_GetCourses"
         let request =  startRequest()
         //let code = Int(CDLCode);
         request.setValue(CDLCode, forKey: "id")
@@ -1431,7 +1474,7 @@ import Foundation
         
     }
     
-    
+    //TODO: utilizzare versione v2 findCourseToSubscribe
     public func searchCourse(searchedText : String, completion: @escaping (Any?)->Void){
         let requestName = "CercaCorso"
         let request =  startRequest()

@@ -44,11 +44,12 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     @IBOutlet var bookingLabel: UILabel!
 
     // --- MARK: Variables ---
+    var actionsView : UIView!
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask{
         return .portrait
     }
-    weak var teachingDataSource: Teaching! //Pre inizializzato solo con: name, code, teacherName, signedUp
+    weak var teachingDataSource: Teaching! //Pre inizializzato - da completare con i dati pesanti
     let pageViewController: UIPageViewController!  = UIPageViewController(transitionStyle: UIPageViewController.TransitionStyle.scroll, navigationOrientation: UIPageViewController.NavigationOrientation.horizontal, options: nil)
     
     lazy var viewControllerList: [UIViewController]! = { return nil }()
@@ -61,11 +62,50 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         self.navigationController?.navigationBar.barTintColor = UIColor.clear
         self.courseNameLabel.lineBreakMode = .byTruncatingMiddle
         setUIForLoading()
+        guard teachingDataSource.checkVisibility() else{
+            print("non puoi entrare")
+            setupPrivateCourseActionsView()
+            showPrivateCourseAlert()
+            return
+        }
         loadContent()
         self.documentInteractionController.delegate = self
         self.navigationController?.navigationBar.backgroundColor = UIColor.white //non si sa perchè se metto white diventa del colore giusto.. boooo
-        //print("CODE:::::::",self.teachingDataSource.code)
     }
+    func showPrivateCourseAlert(){
+        let SSAnimator = CoreSSAnimation.getUniqueIstance()
+        SSAnimator.expandViewFromSourceFrame(sourceFrame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 200), viewToExpand: self.actionsView, elementsInsideView: nil, oscureView: nil) { (flag) in
+            
+        }
+    }
+    
+    func setupPrivateCourseActionsView(){
+        let CV = ConfirmView.getUniqueIstance()
+        let actionsViewTitleLabel = setupActionsPrivateCourseViewTitleLabel()
+        let actionsViewDescLabel = setupActionsPrivateCourseViewDescLabel()
+        let okButton = setupOkActionButton()
+        self.actionsView = CV.getView(titleLabel: actionsViewTitleLabel, descLabel: actionsViewDescLabel, buttons: [okButton], dataToAttach: nil)
+        self.view.addSubview(actionsView)
+        self.actionsView.layer.zPosition = 10
+    }
+    private func setupActionsPrivateCourseViewTitleLabel() -> UILabel{
+        let CV = ConfirmView.getUniqueIstance()
+               return CV.getTitleLabel(text: "Corso privato")
+    }
+    private func setupActionsPrivateCourseViewDescLabel() -> UILabel{
+        let CV = ConfirmView.getUniqueIstance()
+        return CV.getDescriptionLabel(text: "Chiedi al docente maggiori informazioni")
+    }
+   
+    private func setupOkActionButton()-> UIButton{
+        let CV = ConfirmView.getUniqueIstance()
+        return CV.getButton(position: .alone, title: "Chiudi", selector: #selector(popTeachController), target: self)
+    }
+    
+    @objc func popTeachController(){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
            guard let navVC = self.navigationController else {
                return self

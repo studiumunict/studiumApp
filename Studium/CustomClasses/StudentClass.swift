@@ -19,12 +19,39 @@ class Student{
     var email: String!
     var profileImage: UIImage!
     
-    public static func getUniqueIstance(id: String! =  nil, codFiscale: String! = nil, code: String! = nil , name: String! = nil,  surname: String! = nil, telNumber: String! = nil, email: String! = nil, profileImage: UIImage! = nil) -> Student{
+    /*public static func getUniqueIstance(id: String! =  nil, codFiscale: String! = nil, code: String! = nil , name: String! = nil,  surname: String! = nil, telNumber: String! = nil, email: String! = nil, profileImage: UIImage! = nil) -> Student{
            if obj == nil{
             obj = Student(id: id, codFiscale: codFiscale, code: code, name: name, surname: surname, telNumber: telNumber, email: email, profileImage: profileImage)
            }
            return obj
-       }
+       }*/
+    public static func buildStudent(studentJSONData: Any? = nil) -> Bool{
+        if let dict =  studentJSONData as? [String: Any]{
+            var phone : String!
+            if dict["phone"] is NSNull || dict["phone"] as! String == ""{
+                    phone = "Nessun numero telefonico specificato"
+            }
+            else{ phone = dict["phone"] as? String }
+            if dict["id"] == nil{
+                    // completion(false)
+                    return false
+            }
+            obj = Student(id: String(dict["id"] as! Int), codFiscale: dict["username"] as? String , code: dict["officialcode"] as? String, name: dict["firstname"] as? String, surname: dict["lastname"] as? String,telNumber: phone, email: dict["email"] as? String, profileImage: UIImage.init(named: "logo"))
+            
+            if obj.name == nil && obj.surname == nil {
+                obj.name = ""
+                obj.surname = ""
+            }
+        }
+        else{
+            print("Nil student dict")
+            return false
+        }
+        return true
+    }
+    public static func getUniqueIstance() -> Student{
+        return obj
+    }
     
     private init(id: String!, codFiscale: String!, code: String!, name: String!, surname: String!, telNumber: String!, email: String!, profileImage: UIImage!){
         self.id = id

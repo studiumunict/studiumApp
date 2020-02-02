@@ -36,7 +36,7 @@ class Booking{
     
     public func completeBookingDataToDo(fromController: UIViewController?, completion : @escaping (Bool,Bool)->Void){
         let api = BackendAPI.getUniqueIstance(fromController: fromController)
-        api.getBookingToDo(id: String(id)) { (error, JSONResponse) in
+        api.getBookingToDo_v2(id: String(id)) { (error, JSONResponse) in
             if error != nil{
                 completion(true,false)
                 return
@@ -52,9 +52,17 @@ class Booking{
                 return
             }
             completion(false,false)
-            //print(JSONResponse)
         }
     }
+    public func canDefinePriority()-> Bool{
+        if priority == 0{ return false }
+        return true
+    }
+    public func isMultiTurn()->Bool{
+        if limit == 1 { return true }
+        return false
+    }
+    
     
     
     

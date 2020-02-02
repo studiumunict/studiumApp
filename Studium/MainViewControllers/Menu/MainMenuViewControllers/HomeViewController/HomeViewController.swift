@@ -288,8 +288,16 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
                         let teachTitle = teach["title"] as! String
                         var teachTitleLowercased = teachTitle.lowercased()
                         teachTitleLowercased.capitalizeFirstLetter()
-                        let newTeach = Teaching.init(teachingName: teachTitleLowercased, category: teach["category"] as! String, teachingCode: teach["code"] as! String, teacherName: teach["tutorName"] as! String,  dbName: teach["dbName"] as! String, visualCode: teach["visualCode"] as! String, visibility: teach["visibility"] as? Int ?? 2, subscribe: teach["subscribe"] as? Int ?? 1, unsubscribe: teach["unsubscribe"] as? Int ?? 0)
+                        print(teach)
+                        var code = teach["code"] as! String
+                        let loaning = teach["loaning"] as! String
+                        if loaning != "0"{
+                            code = loaning
+                        }
+                        let newTeach = Teaching.init(teachingName: teachTitleLowercased, category: teach["category"] as! String, teachingCode: code, teacherName: teach["tutorName"] as! String,  dbName: teach["dbName"] as! String, visualCode: teach["visualCode"] as! String, visibility: teach["visibility"] as? Int ?? 2, subscribe: teach["subscribe"] as? Int ?? 1, unsubscribe: teach["unsubscribe"] as? Int ?? 0)
                         teachings.append(newTeach)
+                        
+
                     }
                    //salvo il singolo corso di laurea con tutti i suoi insegnamenti
                    let tableSection = TeachingTableSection.init(cdl: newCDL, teachingArray: teachings, setExpanded: false)

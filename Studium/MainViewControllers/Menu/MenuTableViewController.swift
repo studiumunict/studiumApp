@@ -113,12 +113,26 @@ class MenuTableViewController: UITableViewController, SWRevealViewControllerDele
                 self.revealViewController()?.pushFrontViewController(MenuTableViewController.PortaleStudController, animated: true)
             }
         }
+        else if indexPath.row == 6{
+            print("popToRoot")
+            
+            //execute logout
+            
+            let api =  BackendAPI.getUniqueIstance(fromController: nil)
+            api.logout_v2 { (years) in
+                self.dismiss(animated: true, completion: nil)
+            }
+            
+            //self.removeFromParent()
+            //self.navigationController?.removeFromParent()
+           // self.navigationController?.popToRootViewController(animated: true)
+        }
     }
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return 7
     }
 }

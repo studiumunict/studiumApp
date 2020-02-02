@@ -48,6 +48,19 @@ class Teaching{
         bookings = [BookingTableSection]()
     }
     
+    func checkVisibility() -> Bool{
+        guard self.visibility != 2 else {return true}
+        let myCoursesArray =  SharedCoursesSource.getUniqueIstance()
+        if myCoursesArray.dataSource.contains(where: { (t) -> Bool in
+            t.teachings.contains { (teach) -> Bool in
+                teach.code == self.code
+            }
+        }){
+            return true
+        }
+        return false
+    }
+    
     func removeAllData(){
         self.notifyList.removeAll()
         self.fs.removeAll()
@@ -94,8 +107,6 @@ class Teaching{
             }
         }
        // print("SYLLABUSCODE:", code!)
-        
-        
     }
     
     
@@ -123,7 +134,7 @@ class Teaching{
     
     private func downloadBooking(completion: @escaping (Bool)->Void){
         let api =  BackendAPI.getUniqueIstance(fromController: currentControler)
-        api.getBooking(codCourse: self.code) { (error, JSONResponse) in
+        api.getBooking_v2(codCourse: self.code) { (error, JSONResponse) in
             if error != nil {completion(false); return}
             self.setupBooking(JSONResponse: JSONResponse)
             completion(true)
@@ -181,10 +192,10 @@ class Teaching{
                 //TODO: uncomment when API will be ok
                 if(docDict["type"] as! String == "folder") {
                    // print(docDict["path"])
-                    //self.downloadDocuments(path: docDict["path"] as! String, prev: item) { (flag2) in
+                    self.downloadDocuments(path: docDict["path"] as! String, prev: item) { (flag2) in
                         //print("scaricato sublist")
-                        
-                    //}
+                        //do nothing
+                    }
                 }
             }
         }
