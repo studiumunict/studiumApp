@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Teaching{
+class Teaching : NSObject, BookingDelegate{
     var category: String!
     var name: String!
     var code: String!
@@ -16,17 +16,20 @@ class Teaching{
     var showcaseHTML: String!
     var haveBooking: Bool!
     var bookings : [BookingTableSection]!
-    var description: [DescriptionBlock]!
+    var descriptionBlocks: [DescriptionBlock]!
     var notifyList: [Notify]!
     var dbName: String!
     var visualCode: String!
     var fs : TempDocSystem!
     var syllabusCode: String!
+    var hasSyllabus: Bool!
     weak var currentControler: UIViewController?
     private var isCompleted = false
     var visibility: Int!  // 2 se è libero , 1 se è privato.
     var subscribe : Int! //deve essere 1 per essere libero,0 se non puoi iscriverti
     var unsubscribe : Int! // deve essere 0 per essere libero,1  se solo il docente può farlo
+    
+    var delegates = [TeachingDelegate]() //potrebbe essere un array per gli observer
     
     init(teachingName: String, category: String, teachingCode: String, teacherName: String,dbName: String,visualCode: String, visibility: Int, subscribe:Int, unsubscribe: Int) {
         //print("Init TeachingClass")
@@ -41,11 +44,25 @@ class Teaching{
         self.unsubscribe = unsubscribe
         notifyList = [Notify]()
         fs = TempDocSystem()
-        description = [DescriptionBlock]()
-        
+        descriptionBlocks = [DescriptionBlock]()
+        hasSyllabus = true
         //myBooking = [Booking]()
         //otherBooking = [Booking]()
         bookings = [BookingTableSection]()
+    }
+    
+    func canSubscribe()-> Bool{
+        if subscribe == 1 {return true}
+        return false
+    }
+    
+    func canUnsubscribe()-> Bool{
+        if unsubscribe == 0 {return true}
+        return false
+    }
+    
+    func attachDelegate(delegate: TeachingDelegate){
+        self.delegates.append(delegate)
     }
     
     func checkVisibility() -> Bool{
@@ -64,7 +81,7 @@ class Teaching{
     func removeAllData(){
         self.notifyList.removeAll()
         self.fs.removeAll()
-        self.description.removeAll()
+        self.descriptionBlocks.removeAll()
         self.bookings.removeAll()
     }
     func refreshData(fromController: UIViewController?, completion: @escaping (Bool)->Void){
@@ -75,40 +92,49 @@ class Teaching{
         }
     }
     
-    
-    
-    
     func completeTeachingData(fromController: UIViewController?, completion: @escaping (Bool,Bool)->Void){
         guard isCompleted == false else { completion(true,false); return}
         self.currentControler = fromController
-       /* self.downloadNotify { (flag) in
-            if !flag {completion(false,false); return}
-            self.downloadDocuments(path: "mbareRoot", prev: self.fs.currentFolder) { (flag1) in
-                if !flag1 {completion(false,false); return}
-                self.downloadDescription { (flag2) in
-                     if !flag2 {completion(false,false); return}
-                        self.downloadBooking { (flag3) in
-                         if !flag3 {completion(false,false); return}
-                                self.isCompleted = true
-                                self.syllabusCode = self.code
-                                completion(false,true)
-                    }
-                }
-            }
-        }*/
         self.downloadCourseContent { (success) in
             if success{
                 self.isCompleted = true
                 self.syllabusCode = self.code
-                completion(false,true)
+                self.checkSyllabusContent { (success) in
+                    self.hasSyllabus = success
+                    completion(false,true)
+                }
             }
             else{
                 completion(false,false)
             }
         }
-       // print("SYLLABUSCODE:", code!)
     }
     
+    private func checkSyllabusContent(completion:@escaping (Bool)->Void){
+        let myURLString = "https://syllabus.unict.it/insegnamento.php?mod=" + self.syllabusCode
+        guard let myURL = URL(string: myURLString) else {
+            print("Error: \(myURLString) doesn't seem to be a valid URL")
+            completion(false)
+            return
+        }
+        do {
+            let myHTMLString = try String(contentsOf: myURL, encoding: .ascii)
+            print("HTML : \(myHTMLString)")
+            //chrck html content and decide if completion is true or false
+            if myHTMLString.count > 50{
+                completion(true)
+            }
+            else {
+                completion(false)
+                
+            }
+            
+        } catch let error {
+            print("Error: \(error)")
+            completion(false)
+        }
+    
+    }
     
     private func downloadCourseContent(completion:@escaping (Bool)->Void){
         let api = BackendAPI.getUniqueIstance(fromController: currentControler)
@@ -132,6 +158,37 @@ class Teaching{
     
     }
     
+    private func notifyDelegatesForBookingUpdate(){
+        for d in delegates{
+            print("chiamo il delegate controller per reload table(bookings Updated)")
+            d.bookingsUpdated()
+        }
+    
+    }
+    
+    private func refreshBooking(completion: @escaping(Bool)-> Void){
+        self.bookings.removeAll()
+        self.downloadBooking { (flag) in
+            //notify delegate to refresh Views
+            self.notifyDelegatesForBookingUpdate()
+            completion(flag)
+        }
+    }
+    
+    //booking delegate functions
+    func bookingConfirmed(booking: Booking) {
+        //we can move directly the cell in the table passing the ref
+        self.refreshBooking { (success) in
+        }
+    }
+      
+    func bookingCancelled(booking: Booking) {
+        //we can move directly the cell in the table passing the ref
+        self.refreshBooking { (success) in
+        }
+    }
+    
+    
     private func downloadBooking(completion: @escaping (Bool)->Void){
         let api =  BackendAPI.getUniqueIstance(fromController: currentControler)
         api.getBooking_v2(codCourse: self.code) { (error, JSONResponse) in
@@ -147,14 +204,14 @@ class Teaching{
             let other = root["other"] as! [Any]
             for otherB in other {
                 let dictBooking = otherB as! [String:Any]
-                let booking = Booking.init(id: dictBooking["id"] as! Int, name: dictBooking["name"] as! String, data: dictBooking["data"] as! String, openData: dictBooking["open"] as! String, closeData: dictBooking["close"] as! String, closeHour: dictBooking["closeHour"] as! String, closeMinute: dictBooking["closeMinute"] as! String, mine: false)
+                let booking = Booking.init(id: dictBooking["id"] as! Int, name: dictBooking["name"] as! String, data: dictBooking["data"] as! String, openData: dictBooking["open"] as! String, closeData: dictBooking["close"] as! String, closeHour: dictBooking["closeHour"] as! String, closeMinute: dictBooking["closeMinute"] as! String, mine: false, delegate: self)
                 //print(dictp)
                 otherBooking.append(booking)
             }
             let mine = root["mine"] as! [Any]
             for myB in mine {
                 let dictBooking = myB as! [String:Any]
-                let booking = Booking.init(id: dictBooking["id"] as! Int, name: dictBooking["name"] as! String, data: dictBooking["data"] as! String, openData: dictBooking["open"] as! String, closeData: dictBooking["close"] as! String, closeHour: dictBooking["closeHour"] as! String, closeMinute: dictBooking["closeMinute"] as! String, mine: true)
+                let booking = Booking.init(id: dictBooking["id"] as! Int, name: dictBooking["name"] as! String, data: dictBooking["data"] as! String, openData: dictBooking["open"] as! String, closeData: dictBooking["close"] as! String, closeHour: dictBooking["closeHour"] as! String, closeMinute: dictBooking["closeMinute"] as! String, mine: true, delegate: self)
                 myBooking.append(booking)
                 //print(dictp)
             }
@@ -238,7 +295,7 @@ class Teaching{
                    let blockTitle = descriptionBlock["title"] as! String
                    let blockContent = descriptionBlock["content"] as! String
                    let descBlock = DescriptionBlock(title: blockTitle, message: blockContent)
-                   self.description.append(descBlock)
+                   self.descriptionBlocks.append(descBlock)
                }
            }
     }

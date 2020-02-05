@@ -540,12 +540,6 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             }
             cell.CDLnameLabel.text = dataElement.name
             cell.teacherNameLabel.text = dataElement.teacherName
-            /*if dataElement.signedUp{
-                cell.signedUpImage.image = UIImage.init(named: "star_full")
-            }
-            else{
-                cell.signedUpImage.image = UIImage.init(named: "star_empty")
-            }*/
             cell.codeLabel.text = String(dataElement.code)
             return cell
         }

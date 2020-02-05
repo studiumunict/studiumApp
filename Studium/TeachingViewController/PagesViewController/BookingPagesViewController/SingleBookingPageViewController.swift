@@ -8,8 +8,32 @@
 
 import UIKit
 
-class SingleBookingPageViewController: UIViewController {
+class SingleBookingPageViewController: UIViewController,UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 3
+    }
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        var label: UILabel
+        if let view = view as? UILabel {
+            label = view
+        } else {
+            label = UILabel()
+        }
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = UIColor.primaryBackground
+        // where data is an Array of String
+        label.text = prioritySource[row]
+        return label
 
+    }
+    
+    @IBOutlet weak var priorityLabel: UILabel!
+    var confirmActionsView : UIView!
+    @IBOutlet weak var priorityPickerView: UIPickerView!
     @IBOutlet weak var limitedBookingValueLabel: UILabel!
     @IBOutlet weak var bookingCloseHoursValueLabel: UILabel!
     @IBOutlet weak var bookingCloseDateValueLabel: UILabel!
@@ -30,17 +54,26 @@ class SingleBookingPageViewController: UIViewController {
     @IBOutlet weak var eventHeaderLabel: UILabel!
     @IBOutlet weak var bookingHeaderLabel: UILabel!
     
+    @IBOutlet weak var turnDateLabel: UILabel!
+    @IBOutlet weak var turnDateValueLabel: UILabel!
     @IBOutlet weak var eventStackView: UIStackView!
     
     @IBOutlet weak var bookingStackView: UIStackView!
     
+    @IBOutlet weak var oscureView: UIView!
     @IBOutlet weak var dismissButton: UIButton!
     var booking : Booking!
+    //weak var bookingPageController: BookingPageViewController! da capire come fare bene
+    let prioritySource = ["Bassa","Normale", "Alta"]
     
     @IBOutlet weak var turnLabel: UILabel!
     @IBOutlet weak var turnValueLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.oscureView.isHidden = true
+        self.oscureView.layer.zPosition = 2
+        oscureView.backgroundColor = UIColor.primaryBackground
+        self.priorityPickerView.delegate = self
         self.view.backgroundColor = UIColor.lightWhite
         // Do any additional setup after loading the view.
         eventHeaderLabel.backgroundColor = .elementsLikeNavBarColor
@@ -57,19 +90,27 @@ class SingleBookingPageViewController: UIViewController {
         
         confirmButton.layer.cornerRadius = 5.0
         confirmButton.clipsToBounds = true
+        confirmButton.isHidden = true
         
         setLabelColors()
+        //setUpPickerView()
         setValuesLabelColors()
         hideAll()
-        booking.completeBookingDataToDo(fromController: self) { (error, success) in
-            //stop spinner
-            //updateData
-            self.setUpData()
-            self.showAll()
-        }
+        completeBookingData()
         
         
     }
+    
+    
+    private func completeBookingData(){
+        booking.completeBookingData(fromController: self) { (error, success) in
+            //TODO: control flags
+            self.setUpData()
+            self.showAll()
+            self.booking.selectedPriority = self.booking.priority //selected-> da passare. priority-> indica se la posso scegleire o no
+        }
+    }
+    
     
     private func hideAll(){
         eventStackView.isHidden = true
@@ -85,7 +126,6 @@ class SingleBookingPageViewController: UIViewController {
         UIView.animate(withDuration: 0.3) {
             self.eventStackView.alpha = 1.0
             self.bookingStackView.alpha = 1.0
-            
         }
     }
     
@@ -100,6 +140,8 @@ class SingleBookingPageViewController: UIViewController {
         bookingCloseHoursValueLabel.textColor = .secondaryBackground
         limitedBookingValueLabel.textColor = .secondaryBackground
         turnValueLabel.textColor = .secondaryBackground
+        turnDateValueLabel.textColor = .secondaryBackground
+        
     }
     
     private func setLabelColors(){
@@ -112,39 +154,58 @@ class SingleBookingPageViewController: UIViewController {
         bookingCloseHoursLabel.textColor = .primaryBackground
         limitedBookingLabel.textColor = .primaryBackground
         turnLabel.textColor = .primaryBackground
+        turnDateLabel.textColor = .primaryBackground
+        priorityLabel.textColor = .primaryBackground
+    }
+    
+    private func hideUselessInfo(){
+        if !booking.isMultiTurn() || !booking.mine{
+            eventStackView.arrangedSubviews[4].isHidden = true
+            eventStackView.arrangedSubviews[5].isHidden = true
+        }
+        if !booking.canDefinePriority() {
+            eventStackView.arrangedSubviews[6].isHidden = true
+        }
+       
     }
     
     private func setUpData(){
         eventNameValueLabel.text = booking.name
-        eventLocationValueLabel.text = booking.place == "" ? "Non specificato" : booking.place
-        eventDescriptionValueLabel.text = booking.description == "" ? "Nessuna descrizione" : booking.description
+        eventLocationValueLabel.text = booking.place
+        eventDescriptionValueLabel.text = booking.bookingDescription
         startDateValueLabel.text = booking.data
         bookingStartDateValueLabel.text = booking.openData
         bookingCloseDateValueLabel.text = booking.closeData
         bookingCloseHoursValueLabel.text = booking.closeHour + ":" + booking.closeMinute
         limitedBookingValueLabel.text = booking.limit == 1 ? "Si" : "No"
-        
-        if booking.limit == 0{
-            //nascondi la label per l'orario del turno
-            eventStackView.arrangedSubviews[4].isHidden = true
-        }
-        else{ //inserisci i dati orario turno
-            turnValueLabel.text = booking.turnHour + ":" + booking.turnMinute
-        }
-        
+        turnValueLabel.text = booking.turnName
+        turnDateValueLabel.text = booking.turnHour + ":" + booking.turnMinute + ", " + booking.turnDate
+        setUpPriorityPickerView()
         setUpConfirmButton()
-        
-        
-        
-        
+        hideUselessInfo()
         //limitedBookingValueLabel.textColor = .secondaryBackground
+    }
+    
+    private func setUpPriorityPickerView(){
+        if booking.mine{
+            priorityPickerView.isUserInteractionEnabled = false
+            //inserisci la priorità selezionata nel pickerView
+            var prio : Int
+            if let p = booking.selectedPriority{
+                prio = 2 - p
+            }
+            else{
+                prio = 0
+            }
+            priorityPickerView.selectRow(prio, inComponent: 0, animated: false)
+            
+        }
     }
     
     private func setUpConfirmButton(){
         confirmButton.isEnabled = false
-        UIView.animate(withDuration: 0.2, animations: {
-            self.confirmButton.alpha = 0.0
-        }) { (flag) in
+        confirmButton.alpha = 0.0
+        confirmButton.isHidden = false
             var color : UIColor!
             if !self.booking.mine {
                 color = UIColor.confirmButtonGreen
@@ -158,7 +219,7 @@ class SingleBookingPageViewController: UIViewController {
             UIView.animate(withDuration: 0.2) {
                 self.confirmButton.alpha = 1.0
             }
-            if self.isLate(){
+            if self.booking.isLate(){
                 self.confirmButton.isEnabled = false
                 self.confirmButton.alpha = 0.6
             }
@@ -166,28 +227,8 @@ class SingleBookingPageViewController: UIViewController {
                 self.confirmButton.isEnabled = true
                 self.confirmButton.alpha = 1.0
             }
-        }
-        
-        
-        
         
     }
-
-    private func isLate()-> Bool{
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = .current
-        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
-        let openDateString = booking.openData + " " + "00:00"
-        let closeDateString = booking.closeData + " " + booking.closeHour + ":" + booking.closeMinute
-        let openDate = dateFormatter.date(from: openDateString)!
-        let closeDate = dateFormatter.date(from: closeDateString)!
-        let currentDate = Date()
-        if currentDate >= openDate && currentDate < closeDate{
-            return false
-        }
-        return true
-    }
-    
     
     @IBAction func dismissButtonClicked(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -195,27 +236,92 @@ class SingleBookingPageViewController: UIViewController {
     
     @IBAction func confirmButtonClicked(_ sender: Any) {
         if !booking.mine{
-            confirmBooking()
+            if booking.canDefinePriority(){ requestBookingWithPriority() }
+            else{ requestBooking() }
         }
         else{
             cancelBooking()
         }
     }
     
-    private func cancelBooking(){
-        let api = BackendAPI.getUniqueIstance(fromController: self)
-        api.cancelBooking_v2(id: String(booking.id)) { (error, JSONResponse) in
-            print(JSONResponse)
+    private func getConfirmViewTitleLabel() -> UILabel{
+        let CF = ConfirmView.getUniqueIstance()
+        return CF.getTitleLabel(text: "Prenotazione Confermata")
+    }
+    
+    private func getCancelViewTitleLabel() -> UILabel{
+        let CF = ConfirmView.getUniqueIstance()
+        return CF.getTitleLabel(text: "Prenotazione cancellata")
+    }
+    private func getCancelViewDescLabel() -> UILabel{
+        let CF = ConfirmView.getUniqueIstance()
+        return CF.getDescriptionLabel(text: "Puoi trovare l'evento nella lista \"Altre prenotazioni\"")
+    }
+    private func getConfirmViewDescLabel() -> UILabel{
+        let CF = ConfirmView.getUniqueIstance()
+        return CF.getDescriptionLabel(text: "Puoi trovare l'evento nella lista \"Mie prenotazioni\"")
+    }
+    
+    private func getActionsViewOkButton() -> UIButton{
+        let CF = ConfirmView.getUniqueIstance()
+        return CF.getButton(position: .alone, dataToAttach: nil, title: "Ok", selector: #selector(dismissView), target: self)
+    }
+    
+    
+    @objc func dismissView(){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    private func showConfirmActionsView(){
+        
+        let CF = ConfirmView.getUniqueIstance()
+        let confirmTitleLabel = self.getConfirmViewTitleLabel()
+        let confirmDescLabel = self.getConfirmViewDescLabel()
+        let actionButton = self.getActionsViewOkButton()
+        self.confirmActionsView = CF.getView(titleLabel: confirmTitleLabel, descLabel: confirmDescLabel, buttons: [actionButton], dataToAttach: nil)
+        self.view.addSubview(confirmActionsView)
+        self.confirmActionsView.layer.zPosition = 3
+        let SSAnim  = CoreSSAnimation.getUniqueIstance()
+        SSAnim.expandViewFromSourceFrame(sourceFrame: CGRect(x: 0, y: self.view.frame.size.height/1.2, width: self.view.frame.size.width, height: 100), viewToExpand: self.confirmActionsView, elementsInsideView: nil, oscureView: self.oscureView) { (flag) in
         }
     }
     
-    //ptioriy deve essere 1(quella scaricata) per poter permettere di scegliere all'utente. Se è 0 io poi passo sempre 1 e non permetto di scegliere all'utente.
-
-    private func confirmBooking(){
-        let api = BackendAPI.getUniqueIstance(fromController: self)
-        api.doBooking_v2(id: String(booking.id), limit: String(booking.limit), prio: String(booking.priority), note: "") { (error, JSONResponse) in
-            print(JSONResponse)
+    private func showCancelActionsView(){
+        
+        let CF = ConfirmView.getUniqueIstance()
+        let cancelTitleLabel = self.getCancelViewTitleLabel()
+        let cancelDescLabel = self.getCancelViewDescLabel()
+        let actionButton = self.getActionsViewOkButton()
+        self.confirmActionsView = CF.getView(titleLabel: cancelTitleLabel, descLabel: cancelDescLabel, buttons: [actionButton], dataToAttach: nil)
+        self.view.addSubview(confirmActionsView)
+        self.confirmActionsView.layer.zPosition = 3
+        let SSAnim  = CoreSSAnimation.getUniqueIstance()
+        SSAnim.expandViewFromSourceFrame(sourceFrame: CGRect(x: 0, y: self.view.frame.size.height/1.2, width: self.view.frame.size.width, height: 100), viewToExpand: self.confirmActionsView, elementsInsideView: nil, oscureView: self.oscureView) { (flag) in
         }
     }
+    
+    private func requestBookingWithPriority(){
+        booking.requestBooking(errorHandler: self, selectedPriority: 2 - self.priorityPickerView.selectedRow(inComponent: 0), notes: "") { (success) in
+            if success{
+                self.showConfirmActionsView()
+            }
+        }
+    }
+    private func requestBooking(){
+        booking.requestBooking(errorHandler: self, notes: "") { (success) in
+            if success{
+                self.showConfirmActionsView()
+            }
+        }
+    }
+    private func cancelBooking(){
+        booking.cancelBooking(errorHandler: self) { (success) in
+            if success{
+                self.showCancelActionsView()
+            }
+        }
+    }
+   
+    
     
 }

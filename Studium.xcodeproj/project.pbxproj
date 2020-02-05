@@ -47,6 +47,7 @@
 		9C454F1523016DA70071F81F /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C454F1423016DA70071F81F /* Session.swift */; };
 		9C60BF322386EB9000AD1CA1 /* SSFileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C60BF312386EB9000AD1CA1 /* SSFileDownloader.swift */; };
 		9C7ADB5522F31AF7009651FB /* BackendAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7ADB5422F31AF7009651FB /* BackendAPI.swift */; };
+		9C84C5C623E9C65400610134 /* bookingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C84C5C523E9C65400610134 /* bookingDelegate.swift */; };
 		9C8B9386237C1215001E5657 /* PermanentDocSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8B9385237C1215001E5657 /* PermanentDocSystem.swift */; };
 		9C91EEA42390160C00B5FB50 /* TableViewWaitingStateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C91EEA32390160C00B5FB50 /* TableViewWaitingStateExtension.swift */; };
 		9C91EEA72390179B00B5FB50 /* ViewControllerConnectionErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C91EEA62390179B00B5FB50 /* ViewControllerConnectionErrorExtension.swift */; };
@@ -56,6 +57,7 @@
 		9CA45120238D095400D25B66 /* SSCustomLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA4511F238D095400D25B66 /* SSCustomLayers.swift */; };
 		9CBDB9CF2379C6AD00A015A4 /* CoreSSAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBDB9CE2379C6AD00A015A4 /* CoreSSAnimation.swift */; };
 		9CC86E3F22C0EC0F007567B1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CC86E3E22C0EC0F007567B1 /* WebKit.framework */; };
+		9CD41ACD23E87D5A004B606A /* TeachingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD41ACC23E87D5A004B606A /* TeachingDelegate.swift */; };
 		9CEBB273238EF2EB00A6BEFF /* Pods_Studium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEBB272238EF2EB00A6BEFF /* Pods_Studium.framework */; };
 		9CEBB274238EF2EB00A6BEFF /* Pods_Studium.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEBB272238EF2EB00A6BEFF /* Pods_Studium.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9CEBB277238EF30A00A6BEFF /* UICircularProgressRing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEBB276238EF30A00A6BEFF /* UICircularProgressRing.framework */; };
@@ -165,6 +167,7 @@
 		9C454F1423016DA70071F81F /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		9C60BF312386EB9000AD1CA1 /* SSFileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSFileDownloader.swift; sourceTree = "<group>"; };
 		9C7ADB5422F31AF7009651FB /* BackendAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAPI.swift; sourceTree = "<group>"; };
+		9C84C5C523E9C65400610134 /* bookingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bookingDelegate.swift; sourceTree = "<group>"; };
 		9C8B9385237C1215001E5657 /* PermanentDocSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermanentDocSystem.swift; sourceTree = "<group>"; };
 		9C91EEA32390160C00B5FB50 /* TableViewWaitingStateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewWaitingStateExtension.swift; sourceTree = "<group>"; };
 		9C91EEA62390179B00B5FB50 /* ViewControllerConnectionErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerConnectionErrorExtension.swift; sourceTree = "<group>"; };
@@ -174,6 +177,7 @@
 		9CA4511F238D095400D25B66 /* SSCustomLayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSCustomLayers.swift; sourceTree = "<group>"; };
 		9CBDB9CE2379C6AD00A015A4 /* CoreSSAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreSSAnimation.swift; sourceTree = "<group>"; };
 		9CC86E3E22C0EC0F007567B1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		9CD41ACC23E87D5A004B606A /* TeachingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingDelegate.swift; sourceTree = "<group>"; };
 		9CEBB26E238EF2D500A6BEFF /* Pods_Studium.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Studium.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CEBB272238EF2EB00A6BEFF /* Pods_Studium.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Studium.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CEBB276238EF30A00A6BEFF /* UICircularProgressRing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = UICircularProgressRing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -342,6 +346,7 @@
 				1311D89A21BBE82E00A09499 /* StudentClass.swift */,
 				9C06A22B21AB707500E695DB /* CDLClass.swift */,
 				9CFE72C221B95206001EB697 /* TeachingClass.swift */,
+				9CD41ACC23E87D5A004B606A /* TeachingDelegate.swift */,
 				9CFE72C421B95331001EB697 /* TeachingTableSectionClass.swift */,
 				9C2C63CC237311BB0063F9C7 /* NotifyClass.swift */,
 				9CBDB9CE2379C6AD00A015A4 /* CoreSSAnimation.swift */,
@@ -351,6 +356,7 @@
 				9CA4511F238D095400D25B66 /* SSCustomLayers.swift */,
 				9C91EEA8239017C600B5FB50 /* ConnectionErrorHandlerDelegate.swift */,
 				9CF5301A23A3CEE200D11048 /* BookingClass.swift */,
+				9C84C5C523E9C65400610134 /* bookingDelegate.swift */,
 				9CF5302123A3D71500D11048 /* BookingTableSectionClass.swift */,
 			);
 			path = CustomClasses;
@@ -823,6 +829,7 @@
 				9CFE72C321B95206001EB697 /* TeachingClass.swift in Sources */,
 				139BCB6821BDE034005A750A /* DescriptionPageViewController.swift in Sources */,
 				9C0E501D21C3F7F10055C4DD /* BrowseAndSearchCoursesViewController.swift in Sources */,
+				9C84C5C623E9C65400610134 /* bookingDelegate.swift in Sources */,
 				13D86DDB21B9A3BF007638FD /* ExtensionUIColor.swift in Sources */,
 				9C0E501B21C3F7CE0055C4DD /* ManageCourseViewController.swift in Sources */,
 				9C3628FF23A3EC3F00333D79 /* SingleBookingPageViewController.swift in Sources */,
@@ -841,6 +848,7 @@
 				13E3A34A21C1416E004BE8D8 /* NotifyTableDataSource.swift in Sources */,
 				9C14FE74237B1C9B00069D11 /* DescriptionTableViewCell.swift in Sources */,
 				9C29C2D72380730A00A29669 /* HTMLParser.swift in Sources */,
+				9CD41ACD23E87D5A004B606A /* TeachingDelegate.swift in Sources */,
 				9C06A22A21AB700200E695DB /* DepartmentClass.swift in Sources */,
 				9CF9C928238EE1A700805523 /* SSFileDownloaderDelegate.swift in Sources */,
 				9CBDB9CF2379C6AD00A015A4 /* CoreSSAnimation.swift in Sources */,

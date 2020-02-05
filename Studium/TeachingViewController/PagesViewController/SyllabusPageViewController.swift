@@ -51,7 +51,6 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate, UIScro
         }
         
     }
-    
    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (scrollView.contentOffset.x > 0){

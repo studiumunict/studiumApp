@@ -14,7 +14,6 @@ class Notify { //Struttura contenente il titolo, data e corpo del messaggio di u
     var title: String!
     var message: String!
     var isCellExpanded :Bool!
-    
     init(){}
     
     init(date: String!, title: String!, message: String!){

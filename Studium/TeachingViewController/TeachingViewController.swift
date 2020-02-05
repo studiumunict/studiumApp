@@ -8,8 +8,9 @@
 
 import UIKit
 
-class TeachingViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, SWRevealViewControllerDelegate, UIDocumentInteractionControllerDelegate  {
-
+class TeachingViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, SWRevealViewControllerDelegate, UIDocumentInteractionControllerDelegate, TeachingDelegate  {
+    
+    
     
     @IBOutlet weak var oscureLoadingView: UIView!
     @IBOutlet var viewAppoggio: UIView! //Contiene la scrollView
@@ -57,6 +58,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        teachingDataSource.attachDelegate(delegate: self)
         courseNameLabel.text = teachingDataSource.name
         nameTeacherLabel.text = teachingDataSource.teacherName
         self.navigationController?.navigationBar.barTintColor = UIColor.clear
@@ -72,11 +74,26 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         self.documentInteractionController.delegate = self
         self.navigationController?.navigationBar.backgroundColor = UIColor.white //non si sa perchè se metto white diventa del colore giusto.. boooo
     }
+    
+    func bookingsUpdated() { //called by protocol TeachingDelegate
+        for controller in viewControllerList{
+            if let c = controller as? BookingPageViewController{
+                c.dataSource.items.removeAll()
+                c.dataSource.insertBookings(sourceArray: self.teachingDataSource.bookings)
+                if let tableview = c.bookingTableView {
+                    tableview.reloadData()
+                }
+                c.bookingTableView.reloadData()
+            }
+        }
+    }
+    
+    
     func showPrivateCourseAlert(){
         let SSAnimator = CoreSSAnimation.getUniqueIstance()
-        SSAnimator.expandViewFromSourceFrame(sourceFrame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 200), viewToExpand: self.actionsView, elementsInsideView: nil, oscureView: nil) { (flag) in
-            
-        }
+         SSAnimator.expandViewFromSourceFrame(sourceFrame: CGRect(x: 0, y: self.view.frame.size.height/1.2, width: self.view.frame.size.width, height: 200), viewToExpand: self.actionsView, elementsInsideView: nil, oscureView: nil) { (flag) in
+                    
+                }
     }
     
     func setupPrivateCourseActionsView(){
@@ -149,6 +166,13 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     
     private func contentDidLoaded(){
         self.istantiateViewControllers()
+        if viewControllerList.count == 0 {
+            print("nessun contenuto del corso..!")
+            //fai comparire un alert avvisando l'utente
+            setupNoContentActionsView()
+            showNoContentAlert()
+            return
+        }
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.setPageViewControllerSubviewsNumber()
         self.pageViewController.dataSource = self
@@ -157,6 +181,32 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         self.hideLoadingOscureView()
         self.showStackView()
     }
+    
+    func showNoContentAlert(){
+         let SSAnimator = CoreSSAnimation.getUniqueIstance()
+        SSAnimator.expandViewFromSourceFrame(sourceFrame: CGRect(x: 0, y: self.view.frame.size.height/1.2, width: self.view.frame.size.width, height: 200), viewToExpand: self.actionsView, elementsInsideView: nil, oscureView: nil) { (flag) in
+             
+         }
+     }
+     
+     func setupNoContentActionsView(){
+         let CV = ConfirmView.getUniqueIstance()
+         let actionsViewTitleLabel = setupNoContentViewTitleLabel()
+         let actionsViewDescLabel = setupNoContentViewDescLabel()
+         let okButton = setupOkActionButton()
+         self.actionsView = CV.getView(titleLabel: actionsViewTitleLabel, descLabel: actionsViewDescLabel, buttons: [okButton], dataToAttach: nil)
+         self.view.addSubview(actionsView)
+         self.actionsView.layer.zPosition = 10
+     }
+     private func setupNoContentViewTitleLabel() -> UILabel{
+         let CV = ConfirmView.getUniqueIstance()
+                return CV.getTitleLabel(text: "Corso senza contenuto")
+     }
+     private func setupNoContentViewDescLabel() -> UILabel{
+         let CV = ConfirmView.getUniqueIstance()
+         return CV.getDescriptionLabel(text: "Chiedi al docente maggiori informazioni")
+     }
+    
     
     private func refreshSubViewControllersContent(){
         if viewControllerList == nil{
@@ -171,7 +221,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             }
             else if let v = vc as? DescriptionPageViewController{
                 v.dataSource.items.removeAll()
-                v.dataSource.insertDescriptionBlocks(sourceArray: self.teachingDataSource.description)
+                v.dataSource.insertDescriptionBlocks(sourceArray: self.teachingDataSource.descriptionBlocks)
                 v.tableView.reloadData()
             }
             else if let v = vc as? DocumentsPageViewController{
@@ -274,7 +324,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     fileprivate func getDescriptionController() -> DescriptionPageViewController {
         let sb = storyboard!
         let vc = sb.instantiateViewController(withIdentifier: "descriptionPageViewController") as! DescriptionPageViewController
-        vc.dataSource.insertDescriptionBlocks(sourceArray: self.teachingDataSource.description)
+        vc.dataSource.insertDescriptionBlocks(sourceArray: self.teachingDataSource.descriptionBlocks)
         descriptionButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendToDescriptionView(_:))))
         customButtons(button: descriptionButton, image: "notebook", action: #selector(self.sendToDescriptionView(_:)))
         return vc
@@ -316,14 +366,14 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
             }
             else{ notifyButtonView.isHidden = true }
             
-            if teachingDataSource.syllabusCode != nil && !teachingDataSource.syllabusCode.isEmpty{
+            if teachingDataSource.hasSyllabus == true && teachingDataSource.syllabusCode != nil && !teachingDataSource.syllabusCode.isEmpty {
                 let vc = getSyllabusController()
                 activeControllerLists.append(vc)
             }
             else{ syllabusButtonView.isHidden = true }
             
             
-            if teachingDataSource.description.count > 0 {
+            if teachingDataSource.descriptionBlocks.count > 0 {
                 let vc = getDescriptionController()
                 activeControllerLists.append(vc)
             }

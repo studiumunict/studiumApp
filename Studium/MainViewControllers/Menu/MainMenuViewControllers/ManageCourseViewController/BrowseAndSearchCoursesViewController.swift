@@ -52,18 +52,24 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
         }
         else {// E' stato selezionato un corso -> fai comparire la view per iscriversi  al corso
             setUpOscureView()
-            setUpSignUpView(sourceIndexPath: indexPath)
+            var teach : Teaching!
             if self.cdsSearchBar.isFirstResponder || self.cdsSearchBar.text != ""{
+                teach = filteredCDLDataSource[indexPath.section].teachings[indexPath.row]
                 self.cdsSearchBar.resignFirstResponder()
-                var cellFrame = self.cdlTableView.rectForRow(at: indexPath)
-                cellFrame = self.cdlTableView.convert(cellFrame, to: self.cdlTableView.superview)
-                showSignUpViewAnimated(cellFrame: cellFrame)
+            }
+            else {
+                 teach = CDLDataSource[indexPath.section].teachings[indexPath.row]
+            }
+            if teach.canSubscribe(){
+                setUpSignUpViewForAllows(sourceIndexPath: indexPath)
             }
             else{
-                var cellFrame = self.cdlTableView.rectForRow(at: indexPath)
-                cellFrame = self.cdlTableView.convert(cellFrame, to: self.cdlTableView.superview)
-                showSignUpViewAnimated(cellFrame: cellFrame)
+                setUpSignUpViewForDenied(sourceIndexPath: indexPath)
             }
+            
+            var cellFrame = self.cdlTableView.rectForRow(at: indexPath)
+            cellFrame = self.cdlTableView.convert(cellFrame, to: self.cdlTableView.superview)
+            showSignUpViewAnimated(cellFrame: cellFrame)
         }
     }
     
@@ -100,7 +106,7 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
         let CV = ConfirmView.getUniqueIstance()
         CV.startWaiting(confirmView: &signUpView)
         let api =  BackendAPI.getUniqueIstance(fromController: self)
-        api.addCourse(codCourse: courseCode) { (JSONResponse) in
+        api.addCourse_v2(codCourse: courseCode) { (JSONResponse) in
             guard JSONResponse != nil else{
                 CV.stopWaiting(confirmView: &self.signUpView)
                 return
@@ -167,7 +173,7 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
     }
     
     
-    private func setUpSignUpView(sourceIndexPath: IndexPath){
+    private func setUpSignUpViewForAllows(sourceIndexPath: IndexPath){
         var teaching : Teaching!
         if self.cdsSearchBar.isFirstResponder || self.cdsSearchBar.text != ""{
             teaching  = self.filteredCDLDataSource[sourceIndexPath.section].teachings[sourceIndexPath.row]
@@ -184,6 +190,32 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
         self.view.addSubview(signUpView)
         
     }
+    private func setUpSignUpViewForDenied(sourceIndexPath: IndexPath){
+        var teaching : Teaching!
+        if self.cdsSearchBar.isFirstResponder || self.cdsSearchBar.text != ""{
+            teaching  = self.filteredCDLDataSource[sourceIndexPath.section].teachings[sourceIndexPath.row]
+        }
+        else{
+            teaching  = self.CDLDataSource[sourceIndexPath.section].teachings[sourceIndexPath.row]
+        }
+        let CV = ConfirmView.getUniqueIstance()
+        let teachingNameLabel = setUpTeachingNameLabelForSignUp(teaching: teaching)
+        let deniedLabel = setUpDeniedLabelForSignUp()
+        let okButton = setUpOkButtonForSignUp(sourceIndexPath: sourceIndexPath)
+        self.signUpView = CV.getView(titleLabel: teachingNameLabel, descLabel: deniedLabel, buttons: [okButton], dataToAttach: nil)
+        self.view.addSubview(signUpView)
+        
+    }
+    private func setUpOkButtonForSignUp(sourceIndexPath: IndexPath) ->UIButton{
+        let CV = ConfirmView.getUniqueIstance()
+        return CV.getButton(position: .alone, dataToAttach: sourceIndexPath, title: "Chiudi", selector: #selector(hideSignUpViewAnimated), target: self)
+    }
+    
+    private func setUpDeniedLabelForSignUp()-> UILabel{
+        let CV = ConfirmView.getUniqueIstance()
+        return CV.getDescriptionLabel(text: "Iscrizione al corso riservata al docente")
+    }
+    
     
     func showSignUpViewAnimated(cellFrame : CGRect){
         self.navigationItem.rightBarButtonItem?.customView?.isUserInteractionEnabled = false
@@ -290,8 +322,6 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
     override func getTeachingsDuringSearch(searchedText : String){
         let api = BackendAPI.getUniqueIstance(fromController: self)
         api.searchCourseToSubscribe_v2(searchedText: searchedText) { (JSONData) in
-            //print(JSONData)
-        //api.searchCourseToSubscribe_v2(searchedText: searchedText) { (JSONData) in
             var teachings = [Teaching]()
             if(JSONData == nil) {return}
             for teaching in JSONData as! [Any]{

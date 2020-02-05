@@ -82,7 +82,6 @@ public class TempDocSystem: NSObject, NSCoding {
             fromF = currentFolder
         }
         let i = getIndex(ofDoc: child, inFolder: fromF!)
-       // print("Trovato da rimuovere con indice: ", i)
         if i == -1 {return}
         fromF!.childs.remove(at: i)
     }

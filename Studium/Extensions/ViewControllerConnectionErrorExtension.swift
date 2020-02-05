@@ -25,6 +25,8 @@ extension UIViewController : ConnectionErrorHandlerDelegate{
         DispatchQueue.main.async {
             self.checkForErrorView()
         }
+        print(error)
+        //TODO: analizza l'errore, se è un errore di sessione fai comparire la finestra che dice errore di sessione, prova a riavviare l'app.
     }
     
     @objc func okClicked(){

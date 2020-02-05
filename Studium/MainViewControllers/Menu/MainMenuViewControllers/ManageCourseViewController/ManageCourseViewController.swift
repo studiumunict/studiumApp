@@ -158,8 +158,6 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     }
     
     func signOutCourse(indexPath : IndexPath, completion: @escaping (Bool)->Void){
-        //TODO:next line can be nil
-        print("Signout")
         let code = sharedSource.dataSource[indexPath.section].teachings[indexPath.row].code
         let api  = BackendAPI.getUniqueIstance(fromController: self)
         api.deleteCourse(codCourse: code!) { (JSONResponse) in
@@ -201,22 +199,47 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         }
     }
     
+    private func showConfirmViewForSignout(indexPath: IndexPath){
+        let CV = ConfirmView.getUniqueIstance()
+        let titleLabel = CV.getTitleLabel(text: "Attenzione")
+        let descLabel = CV.getDescriptionLabel(text: "Sei sicuro di voler rimuovere l'iscrizione a questo corso?")
+        descLabel.adjustsFontSizeToFitWidth = true
+        descLabel.minimumScaleFactor = 0.7
+        let cancelButton = CV.getButton(position: .left, dataToAttach: indexPath, title: "Annulla", selector: #selector(closeUnsuscribeView(sender:)), target: self)
+        let confirmButton = CV.getButton(position: .right, dataToAttach: indexPath, title: "Conferma", selector: #selector(unsuscribe(sender:)), target: self)
+        let view = CV.getView(titleLabel: titleLabel, descLabel: descLabel, buttons: [cancelButton,confirmButton], dataToAttach: nil)
+        view.backgroundColor = UIColor.createCategoryViewColor
+        self.view.addSubview(view)
+        let SSAnimator = CoreSSAnimation.getUniqueIstance()
+        let frameTb = self.manageCoursesTableView.rectForRow(at: indexPath)
+        let frame = self.manageCoursesTableView.convert(frameTb, to: self.view)
+        SSAnimator.expandViewFromSourceFrame(sourceFrame: frame, viewToExpand: view, elementsInsideView: nil, oscureView: self.oscureView) { (flag) in }
+    }
+    private func showConfirmViewForDeniedSignout(indexPath: IndexPath){
+          let CV = ConfirmView.getUniqueIstance()
+          let titleLabel = CV.getTitleLabel(text: "Impossibile disiscriversi")
+          let descLabel = CV.getDescriptionLabel(text: "Operazione riservata al docente")
+          descLabel.adjustsFontSizeToFitWidth = true
+          descLabel.minimumScaleFactor = 0.7
+          let okButton = CV.getButton(position: .alone, dataToAttach: indexPath, title: "Ok", selector: #selector(closeUnsuscribeView(sender:)), target: self)
+          let view = CV.getView(titleLabel: titleLabel, descLabel: descLabel, buttons: [okButton], dataToAttach: nil)
+          view.backgroundColor = UIColor.createCategoryViewColor
+          self.view.addSubview(view)
+          let SSAnimator = CoreSSAnimation.getUniqueIstance()
+          let frameTb = self.manageCoursesTableView.rectForRow(at: indexPath)
+          let frame = self.manageCoursesTableView.convert(frameTb, to: self.view)
+          SSAnimator.expandViewFromSourceFrame(sourceFrame: frame, viewToExpand: view, elementsInsideView: nil, oscureView: self.oscureView) { (flag) in }
+      }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let CV = ConfirmView.getUniqueIstance()
-            let titleLabel = CV.getTitleLabel(text: "Attenzione")
-            let descLabel = CV.getDescriptionLabel(text: "Sei sicuro di voler rimuovere l'iscrizione a questo corso?")
-            descLabel.adjustsFontSizeToFitWidth = true
-            descLabel.minimumScaleFactor = 0.7
-            let cancelButton = CV.getButton(position: .left, dataToAttach: indexPath, title: "Annulla", selector: #selector(closeUnsuscribeView(sender:)), target: self)
-            let confirmButton = CV.getButton(position: .right, dataToAttach: indexPath, title: "Conferma", selector: #selector(unsuscribe(sender:)), target: self)
-            let view = CV.getView(titleLabel: titleLabel, descLabel: descLabel, buttons: [cancelButton,confirmButton], dataToAttach: nil)
-            view.backgroundColor = UIColor.createCategoryViewColor
-            self.view.addSubview(view)
-            let SSAnimator = CoreSSAnimation.getUniqueIstance()
-            let frameTb = self.manageCoursesTableView.rectForRow(at: indexPath)
-            let frame = self.manageCoursesTableView.convert(frameTb, to: self.view)
-            SSAnimator.expandViewFromSourceFrame(sourceFrame: frame, viewToExpand: view, elementsInsideView: nil, oscureView: self.oscureView) { (flag) in }
+            let teach = sharedSource.dataSource[indexPath.section].teachings[indexPath.row]
+            if teach.canUnsubscribe() {
+                showConfirmViewForSignout(indexPath: indexPath)
+            }
+            else{
+                 showConfirmViewForDeniedSignout(indexPath: indexPath)
+            }
         }
     }
     

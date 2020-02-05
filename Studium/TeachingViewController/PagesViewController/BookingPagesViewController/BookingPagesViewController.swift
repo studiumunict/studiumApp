@@ -11,6 +11,7 @@ import UIKit
 class BookingPageViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var bookingTableView: UITableView!
     var dataSource = BookingTableDataSource()
+    //var teaching : Teaching! Da capire come fare bene per il refresh della tabella una volta eseguita una prenotazione
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +59,8 @@ class BookingPageViewController: UIViewController, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = getSingleBookingController() as! SingleBookingPageViewController
         vc.booking = dataSource.items[indexPath.section].booking[indexPath.row]
+        //vc.bookingPageController = self
+        
         self.present(vc, animated: true) {
             
         }
