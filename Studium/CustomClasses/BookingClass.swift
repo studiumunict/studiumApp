@@ -25,6 +25,9 @@ class Booking : NSObject{
     var bookingDescription : String!
     var mine : Bool!
     var selectedPriority : Int!
+    var notes: String!
+    var voto: Int!
+    var isWriteTest : Bool!
     var delegate : BookingDelegate!
     
     init(id: Int, name: String, data: String, openData: String, closeData: String, closeHour: String, closeMinute: String, mine: Bool, delegate: BookingDelegate){
@@ -37,6 +40,9 @@ class Booking : NSObject{
         self.closeMinute = closeMinute
         self.mine = mine
         self.delegate = delegate
+        self.isWriteTest = nil
+        self.voto = nil
+        self.notes = nil
     }
     
     //TODO: fare una sola funzione completeBookingData che guarda se è tra mine o no, e chiama quella giusta.
@@ -76,15 +82,19 @@ class Booking : NSObject{
                 return
             }
             if let dict = JSONResponse as? [String: Any]{
+                print(dict)
                 self.limit = dict["limit"] as? Int
                 self.place = dict["place"] as? String ?? "Non specificato"
                 self.priority = dict["priority"] as? Int
-                self.selectedPriority = dict["mypriority"] as? Int //TODO : check from result dict
+                self.selectedPriority = dict["myPriority"] as? Int //TODO : check from result dict
                 self.turnHour = dict["turnHour"] as? String ?? ""
                 self.turnMinute = dict["turnMinute"] as? String ?? ""
                 self.turnName = dict["turnName"] as? String ?? ""
                 self.turnDate = dict["turnDate"] as? String ?? ""
                 self.bookingDescription = dict["descr"] as? String ?? "Nessuna descrizione"
+                self.isWriteTest = dict["scritta"] as? Int == 1 ? true : false
+                self.voto = dict["voto"] as? Int != nil ? (dict["voto"] as! Int) : nil
+                self.notes = dict["notes"] as? String != nil ? (dict["notes"] as! String) : nil
                 completion(false,true)
                 return
             }
@@ -94,7 +104,7 @@ class Booking : NSObject{
     
     public func completeBookingData(fromController: UIViewController?, completion : @escaping (Bool,Bool)->Void){
         if self.mine {
-            completeBookingDataToDo(fromController: fromController) { (errorFlag, dictFlag) in
+            completeBookingDataDone(fromController: fromController) { (errorFlag, dictFlag) in
                 completion(errorFlag,dictFlag)
             }
         }

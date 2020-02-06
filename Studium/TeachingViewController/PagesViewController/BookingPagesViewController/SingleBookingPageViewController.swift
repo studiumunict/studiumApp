@@ -107,7 +107,9 @@ class SingleBookingPageViewController: UIViewController,UIPickerViewDataSource, 
             //TODO: control flags
             self.setUpData()
             self.showAll()
-            self.booking.selectedPriority = self.booking.priority //selected-> da passare. priority-> indica se la posso scegleire o no
+            if self.booking.selectedPriority == nil {
+                self.booking.selectedPriority = self.booking.priority
+            }
         }
     }
     
@@ -195,10 +197,12 @@ class SingleBookingPageViewController: UIViewController,UIPickerViewDataSource, 
                 prio = 2 - p
             }
             else{
-                prio = 0
+                prio = 1
             }
             priorityPickerView.selectRow(prio, inComponent: 0, animated: false)
-            
+        }
+        else{
+            priorityPickerView.selectRow(1, inComponent: 0, animated: false)
         }
     }
     
