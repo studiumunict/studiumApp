@@ -45,8 +45,6 @@ class Booking : NSObject{
         self.notes = nil
     }
     
-    //TODO: fare una sola funzione completeBookingData che guarda se è tra mine o no, e chiama quella giusta.
-    
     private func completeBookingDataToDo(fromController: UIViewController?, completion : @escaping (Bool,Bool)->Void){
         let api = BackendAPI.getUniqueIstance(fromController: fromController)
         api.getBookingToDo_v2(id: String(id)) { (error, JSONResponse) in
@@ -73,8 +71,6 @@ class Booking : NSObject{
     
     
     private func completeBookingDataDone(fromController: UIViewController?, completion : @escaping (Bool,Bool)->Void){
-        
-        //print("id:", id)
         let api = BackendAPI.getUniqueIstance(fromController: fromController)
         api.getBookingDone_v2(id: String(id)) { (error, JSONResponse) in
             if error != nil{
@@ -127,14 +123,15 @@ class Booking : NSObject{
         self.selectedPriority = prio
     }
     
-    public func requestBooking(errorHandler: UIViewController, selectedPriority: Int = 1, notes: String, completion : @escaping (Bool)->Void){
+    public func requestBooking(errorHandler: UIViewController, selectedPriority: Int = 1, notes: String?, completion : @escaping (Bool)->Void){
         setSelectedPriority(value: selectedPriority)
         let api = BackendAPI.getUniqueIstance(fromController: errorHandler)
-        print("id: ", id, "limit", limit, "selectedPriority:", selectedPriority)
-        
-        api.doBooking_v2(id: String(id), limit: String(limit), prio: String(selectedPriority), note: notes) { (error, JSONResponse) in
-            //print(JSONResponse)
-            if let dict =  JSONResponse as? [String: Any]{
+        var noteString = ""
+        if let n = notes {
+            noteString = n
+        }
+        api.doBooking_v2(id: String(id), limit: String(limit), prio: String(selectedPriority), note: noteString) { (error, JSONResponse) in
+            if let _ =  JSONResponse as? [String: Any] , error == nil{
                 //take data from dict and save in this booking
                 if let d = self.delegate{
                     d.bookingConfirmed(booking: self)
@@ -144,17 +141,6 @@ class Booking : NSObject{
             else{
                 completion(false)
             }
-            
-            //print(JSONResponse)
-            //controlla il risultato, se tutto è andato bene prosegui sennò fai comparire alert di errore
-            //fai comparire un alert che indica che la prenotazione è confermata
-            /*self.bookingPageController.teaching.refreshBooking { (flag) in
-                self.bookingPageController.bookingTableView.reloadData()
-            }*/
-            
-            //richiamare prenotazione done
-            //prendere i dati del turno stabilito dal server e mostrarli
-            
         }
     }
     public func cancelBooking(errorHandler: UIViewController, completion : @escaping (Bool)->Void){
@@ -169,18 +155,6 @@ class Booking : NSObject{
             else{
                 completion(false)
             }
-            
-            //TODO:
-            //print(JSONResponse)
-            //controlla il risultato, se tutto è andato bene prosegui sennò fai comparire alert di errore
-            //fai comparire un alert che indica che la prenotazione è confermata
-            /*self.bookingPageController.teaching.refreshBooking { (flag) in
-                self.bookingPageController.bookingTableView.reloadData()
-            }*/
-            
-            //richiamare prenotazione done
-            //prendere i dati del turno stabilito dal server e mostrarli
-            
         })
     }
     private func setSelectedPriority(value: Int){

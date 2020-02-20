@@ -46,8 +46,6 @@ class Teaching : NSObject, BookingDelegate{
         fs = TempDocSystem()
         descriptionBlocks = [DescriptionBlock]()
         hasSyllabus = true
-        //myBooking = [Booking]()
-        //otherBooking = [Booking]()
         bookings = [BookingTableSection]()
     }
     
@@ -142,7 +140,6 @@ class Teaching : NSObject, BookingDelegate{
             //print(JSONResponse)
             if JSONResponse != nil && error == nil{
                 //chiami i diversi setup
-                print(JSONResponse)
                 guard let dict = JSONResponse as? [String: Any] else{completion(false);return}
                 self.setupNotify(JSONResponse: dict["announcements"])
                 self.setupDescription(JSONResponse: dict["description"])
@@ -163,7 +160,6 @@ class Teaching : NSObject, BookingDelegate{
             print("chiamo il delegate controller per reload table(bookings Updated)")
             d.bookingsUpdated()
         }
-    
     }
     
     private func refreshBooking(completion: @escaping(Bool)-> Void){
@@ -241,16 +237,11 @@ class Teaching : NSObject, BookingDelegate{
         if let JSONArray = JSONResponse as? [Any] {
             for doc in JSONArray{
                 let docDict = doc as! [String:Any]
-                //print("*****Appendo Doc*****")
                 let item = Doc.init(title: docDict["title"] as! String, path: docDict["path"] as! String, type: docDict["type"] as! String, uploaded: docDict["insert"] as! String, lastUpdate: docDict["updated"] as! String, size: docDict["size"] as! Int, courseID: self.code)
                 let _ = self.fs.appendChild(toDoc: prev, child: item)
-                //item.setParent(prev: prev)
-                //prev.addChild(item: item)
-                //TODO: uncomment when API will be ok
+            
                 if(docDict["type"] as! String == "folder") {
-                   // print(docDict["path"])
                     self.downloadDocuments(path: docDict["path"] as! String, prev: item) { (flag2) in
-                        //print("scaricato sublist")
                         //do nothing
                     }
                 }
@@ -306,45 +297,3 @@ class Teaching : NSObject, BookingDelegate{
     }
 }
 
-
-
-/*private func downloadRootDocuments(completion: @escaping(Bool)-> Void){ //FUNZIONE SICURA
-    let api = BackendAPI.getUniqueIstance(fromController: currentControler)
-    api.getCourseDocuments(codCourse: self.code, path: "mbareRoot") { (error,JSONResponse) in
-        guard error == nil else{
-            completion(false)
-            return
-        }
-        if let JSONArray = JSONResponse as? [Any]{
-            for doc in JSONArray{
-                let docDict = doc as! [String:Any]
-                //print("*****Appendo Doc*****")
-                let item =  Doc.init(title: docDict["title"] as! String, path: docDict["path"] as! String, type: docDict["type"] as! String, uploaded: docDict["insert"] as! String, lastUpdate: docDict["updated"] as! String, size: docDict["size"] as! Int, courseID: self.code)
-                item.setParent(prev: self.fs.currentFolder) //currentFolder è la root
-                let _ = self.fs.appendChild(toDoc: self.fs.currentFolder, child: item)
-                if(docDict["type"] as! String == "folder") {
-                    self.downloadDocuments(path: docDict["path"] as! String, prev: item) { (flag2) in
-                        //print("Scaricati anche i secondi")
-                    }
-                }
-            }
-        }
-        completion(true)
-    }
-}*/
-
-/*private func downloadDocuments(path: String, prev: Docs ,completion: @escaping(Bool)-> Void){ //scarica il secondo livello
-    let api = BackendAPI.getUniqueIstance()
-    api.getCourseDocuments(codCourse: self.code, path: path) { (JSONResponse) in
-        let JSONArray = JSONResponse as! [Any]
-        for doc in JSONArray{
-            let docDict = doc as! [String:Any]
-            print("*****Appendo Doc*****")
-            self.documentsList.append(Docs.init(title: docDict["title"] as! String, path: docDict["path"] as! String, type: docDict["type"] as! String, uploaded: docDict["insert"] as! String, lastUpdate: docDict["updated"] as! String, size: docDict["size"] as! Int))
-            self.documentsList[self.documentsList.count-1].setPrev(prev: prev)
-            }
-        }
-        completion(true)
-    }
-}
-*/

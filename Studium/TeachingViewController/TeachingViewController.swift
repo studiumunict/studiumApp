@@ -65,7 +65,6 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         self.courseNameLabel.lineBreakMode = .byTruncatingMiddle
         setUIForLoading()
         guard teachingDataSource.checkVisibility() else{
-            print("non puoi entrare")
             setupPrivateCourseActionsView()
             showPrivateCourseAlert()
             return
@@ -76,6 +75,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     }
     
     func bookingsUpdated() { //called by protocol TeachingDelegate
+        guard let _ = viewControllerList else{return}
         for controller in viewControllerList{
             if let c = controller as? BookingPageViewController{
                 c.dataSource.items.removeAll()
@@ -169,6 +169,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
         if viewControllerList.count == 0 {
             print("nessun contenuto del corso..!")
             //fai comparire un alert avvisando l'utente
+            self.hideSpinnerInOscureView()
             setupNoContentActionsView()
             showNoContentAlert()
             return
@@ -185,7 +186,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     func showNoContentAlert(){
          let SSAnimator = CoreSSAnimation.getUniqueIstance()
         SSAnimator.expandViewFromSourceFrame(sourceFrame: CGRect(x: 0, y: self.view.frame.size.height/1.2, width: self.view.frame.size.width, height: 200), viewToExpand: self.actionsView, elementsInsideView: nil, oscureView: nil) { (flag) in
-             
+            
          }
      }
      

@@ -54,6 +54,18 @@ class ConfirmView {
                 sv.removeFromSuperview()
             }
         }
+        //reduce frame if needed
+        /*if hasTextView(view: confirmView){
+            let screenWidth = UIScreen.main.bounds.size.width
+            let newFrame = CGRect(x: 0, y: 0, width: screenWidth * 0.9, height: 180)
+            UIView.animate(withDuration: 0.2, animations: {
+                  confirmView.frame = newFrame
+            }) { (flag) in
+                
+            }
+          
+        }*/
+        
         addTitleLabel(toView: confirmView, titleLabel: titleLabel, animated: true)
         if let dl = descLabel {
             addDescriptionLabel(toView: confirmView, descLabel: dl, animated: true)
@@ -85,9 +97,30 @@ class ConfirmView {
         }
     }
     
+    private func addTextView(toView: UIView, textView: UITextView, animated: Bool){
+       // let textView = UITextView.init(frame: CGRect(x: 10 , y: 60, width: viewFrame.size.width - 40, height: 80))
+        textView.frame = CGRect(x: 20 , y: 55, width: toView.frame.size.width - 40, height: 80)
+        toView.addSubview(textView)
+        if animated{
+            textView.alpha = 0.0
+            UIView.animate(withDuration: 0.3) {
+                textView.alpha = 1.0
+            }
+        }
+    }
+    
     private func attachData(toView :UIView , data: Any){
         toView.accessibilityElements = [Any]()
         toView.accessibilityElements?.append(data)
+    }
+    
+    private func hasTextView(view: UIView) -> Bool{
+        for v in view.subviews{
+            if let _ = v as? UITextView{
+                return true
+            }
+        }
+        return false
     }
     
     private func addButtons(toView: UIView, buttons : [UIButton], animated: Bool){
@@ -95,8 +128,20 @@ class ConfirmView {
             toView.addSubview(btn)
             let btnPos = btn.accessibilityElements?[0] as! CButtonType
             switch btnPos{
-                case .left: btn.frame = CGRect(x: toView.frame.size.width/2 - 100 + 0.5 , y: 100, width: 100, height: 40)
-                case .right: btn.frame = CGRect(x: toView.frame.size.width/2 - 0.5, y: 100 , width: 100, height: 40)
+                case .left:
+                    if hasTextView(view: toView){
+                         btn.frame = CGRect(x: toView.frame.size.width/2 - 100 + 0.5 , y: 160, width: 100, height: 40)
+                    }
+                    else{
+                         btn.frame = CGRect(x: toView.frame.size.width/2 - 100 + 0.5 , y: 100, width: 100, height: 40)
+                    }
+                case .right:
+                    if hasTextView(view: toView){
+                         btn.frame = CGRect(x: toView.frame.size.width/2 - 0.5, y: 160 , width: 100, height: 40)
+                    }
+                    else{
+                         btn.frame = CGRect(x: toView.frame.size.width/2 - 0.5, y: 100 , width: 100, height: 40)
+                    }
                 case .alone:
                     //btn.frame = CGRect(x: 0, y: 100 , width: 200, height: 40)
                     //btn.center.x = toView.center.x //- 20
@@ -122,9 +167,16 @@ class ConfirmView {
         }
     }
     
-    public func getView(titleLabel : UILabel, descLabel : UILabel? = nil ,buttons: [UIButton], dataToAttach : Any? = nil)-> UIView{
+    public func getView(titleLabel : UILabel, textView: UITextView? = nil, descLabel : UILabel? = nil ,buttons: [UIButton], dataToAttach : Any? = nil)-> UIView{
         let screenWidth = UIScreen.main.bounds.size.width
-        let newFrame = CGRect(x: 0, y: 0, width: screenWidth * 0.9, height: 180)
+        var newFrame: CGRect
+        if let _ = textView{
+             newFrame = CGRect(x: 0, y: 0, width: screenWidth * 0.9, height: 220)
+        }
+        else{
+             newFrame = CGRect(x: 0, y: 0, width: screenWidth * 0.9, height: 180)
+        }
+       
         let view = UIView.init(frame: newFrame)
         view.backgroundColor = UIColor.primaryBackground
         view.layer.borderColor = UIColor.secondaryBackground.cgColor
@@ -138,6 +190,9 @@ class ConfirmView {
         }
         if let data = dataToAttach {
             attachData(toView: view, data: data)
+        }
+        if let tv = textView{
+            addTextView(toView: view, textView: tv, animated: false)
         }
         addButtons(toView: view, buttons: buttons, animated: false)
         return view
@@ -212,5 +267,29 @@ class ConfirmView {
         label.textAlignment = .center
         return label
     }
+    
+    public func getTextViewValue(fromView: UIView) -> String?{
+        for view in fromView.subviews{
+            if let tv = view as? UITextView{
+                return tv.text
+            }
+        }
+        return nil
+    }
+    
+    public func getTextView()-> UITextView{
+        let screenWidth = UIScreen.main.bounds.size.width
+        let viewFrame = CGRect(x: 0, y: 0, width: screenWidth * 0.9, height: 220)
+        let textView = UITextView.init(frame: CGRect(x: 10 , y: 55, width: viewFrame.size.width - 40, height: 80))
+        textView.layer.cornerRadius = 5.0
+        textView.clipsToBounds = true
+        textView.backgroundColor = .lightSectionColor
+        /*label.text = text
+        label.textColor = UIColor.lightGray
+        label.font = UIFont.boldSystemFont(ofSize: 13)
+        label.textAlignment = .center*/
+        return textView
+    }
+    
 
 }

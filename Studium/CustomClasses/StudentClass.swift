@@ -19,12 +19,7 @@ class Student{
     var email: String!
     var profileImage: UIImage!
     
-    /*public static func getUniqueIstance(id: String! =  nil, codFiscale: String! = nil, code: String! = nil , name: String! = nil,  surname: String! = nil, telNumber: String! = nil, email: String! = nil, profileImage: UIImage! = nil) -> Student{
-           if obj == nil{
-            obj = Student(id: id, codFiscale: codFiscale, code: code, name: name, surname: surname, telNumber: telNumber, email: email, profileImage: profileImage)
-           }
-           return obj
-       }*/
+
     public static func buildStudent(studentJSONData: Any? = nil) -> Bool{
         if let dict =  studentJSONData as? [String: Any]{
             var phone : String!

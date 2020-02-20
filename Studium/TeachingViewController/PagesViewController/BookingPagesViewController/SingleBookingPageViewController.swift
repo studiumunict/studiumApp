@@ -113,7 +113,6 @@ class SingleBookingPageViewController: UIViewController,UIPickerViewDataSource, 
         }
     }
     
-    
     private func hideAll(){
         eventStackView.isHidden = true
         bookingStackView.isHidden = true
@@ -168,6 +167,9 @@ class SingleBookingPageViewController: UIViewController,UIPickerViewDataSource, 
         if !booking.canDefinePriority() {
             eventStackView.arrangedSubviews[6].isHidden = true
         }
+        if !booking.isMultiTurn() && !booking.mine {
+            eventStackView.arrangedSubviews[5].isHidden = false
+        }
        
     }
     
@@ -181,7 +183,11 @@ class SingleBookingPageViewController: UIViewController,UIPickerViewDataSource, 
         bookingCloseHoursValueLabel.text = booking.closeHour + ":" + booking.closeMinute
         limitedBookingValueLabel.text = booking.limit == 1 ? "Si" : "No"
         turnValueLabel.text = booking.turnName
-        turnDateValueLabel.text = booking.turnHour + ":" + booking.turnMinute + ", " + booking.turnDate
+        turnDateValueLabel.text =  booking.turnDate + " " + booking.turnHour + ":" + booking.turnMinute
+        if !booking.isMultiTurn(){
+            turnDateLabel.text = "Turno:"
+            turnDateValueLabel.text = booking.turnHour + ":" + booking.turnMinute
+        }
         setUpPriorityPickerView()
         setUpConfirmButton()
         hideUselessInfo()
@@ -239,13 +245,17 @@ class SingleBookingPageViewController: UIViewController,UIPickerViewDataSource, 
     }
     
     @IBAction func confirmButtonClicked(_ sender: Any) {
-        if !booking.mine{
-            if booking.canDefinePriority(){ requestBookingWithPriority() }
-            else{ requestBooking() }
+        if booking.mine{
+            self.cancelBooking()
         }
         else{
-            cancelBooking()
+            self.showConfirmActionsView()
         }
+    }
+    
+    private func getConfirmViewTitleNotesLabel() -> UILabel{
+        let CF = ConfirmView.getUniqueIstance()
+        return CF.getTitleLabel(text: "Rilascia una nota se necessario")
     }
     
     private func getConfirmViewTitleLabel() -> UILabel{
@@ -259,11 +269,15 @@ class SingleBookingPageViewController: UIViewController,UIPickerViewDataSource, 
     }
     private func getCancelViewDescLabel() -> UILabel{
         let CF = ConfirmView.getUniqueIstance()
-        return CF.getDescriptionLabel(text: "Puoi trovare l'evento nella lista \"Altre prenotazioni\"")
+        let label = CF.getDescriptionLabel(text: "Puoi trovare l'evento nella lista \"Altre prenotazioni\"")
+        label.adjustsFontSizeToFitWidth = true
+        return label
     }
     private func getConfirmViewDescLabel() -> UILabel{
         let CF = ConfirmView.getUniqueIstance()
-        return CF.getDescriptionLabel(text: "Puoi trovare l'evento nella lista \"Mie prenotazioni\"")
+        let label =  CF.getDescriptionLabel(text: "Puoi trovare l'evento nella lista \"Mie prenotazioni\"")
+        label.adjustsFontSizeToFitWidth = true
+        return label
     }
     
     private func getActionsViewOkButton() -> UIButton{
@@ -276,13 +290,55 @@ class SingleBookingPageViewController: UIViewController,UIPickerViewDataSource, 
         self.dismiss(animated: true, completion: nil)
     }
     
+    private func getConfirmTextView() -> UITextView{
+        let CV = ConfirmView.getUniqueIstance()
+        return CV.getTextView()
+    }
+    private func getConfirmActionButton()-> UIButton{
+        let CV = ConfirmView.getUniqueIstance()
+        return CV.getButton(position: .right, title: "Conferma", selector: #selector(self.confirmBookingRequest), target: self)
+    }
+    private func getCancelActionButton()-> UIButton{
+        let CV = ConfirmView.getUniqueIstance()
+        return CV.getButton(position: .left, title: "Annulla", selector: #selector(self.closeActionsView), target: self)
+    }
+    
+    @objc func closeActionsView(){
+        let SSAnim  = CoreSSAnimation.getUniqueIstance()
+        self.view.endEditing(true)
+        SSAnim.collapseViewInSourceFrame(sourceFrame: CGRect(x: 0, y: self.view.frame.size.height/1.2, width: self.view.frame.size.width, height: 100), viewToCollapse: self.confirmActionsView, oscureView: self.oscureView, elementsInsideView: nil) { (success) in
+            
+        }
+    }
+    
+    @objc func confirmBookingRequest(){
+        if !booking.mine{
+            if booking.canDefinePriority(){ requestBookingWithPriority() }
+            else{ requestBooking() }
+        }
+        else{
+            cancelBooking()
+        }
+    }
+    
+    private func updateConfirmViewForConfirmMessage(){
+        let CV = ConfirmView.getUniqueIstance()
+        let titleLabel = getConfirmViewTitleLabel()
+        let okButton =  getActionsViewOkButton()
+        let descLabel = getConfirmViewDescLabel()
+        CV.updateView(confirmView: &confirmActionsView, titleLabel: titleLabel, descLabel: descLabel, buttons: [okButton], animated: true)
+    }
+    
     private func showConfirmActionsView(){
         
         let CF = ConfirmView.getUniqueIstance()
-        let confirmTitleLabel = self.getConfirmViewTitleLabel()
-        let confirmDescLabel = self.getConfirmViewDescLabel()
-        let actionButton = self.getActionsViewOkButton()
-        self.confirmActionsView = CF.getView(titleLabel: confirmTitleLabel, descLabel: confirmDescLabel, buttons: [actionButton], dataToAttach: nil)
+        let confirmTitleLabel = self.getConfirmViewTitleNotesLabel()
+        //let confirmDescLabel = self.getConfirmViewDescLabel()
+        let textView = self.getConfirmTextView()
+        //let actionButton = self.getActionsViewOkButton()
+        let confirmButton = self.getConfirmActionButton()
+        let cancelButton = self.getCancelActionButton()
+        self.confirmActionsView = CF.getView(titleLabel: confirmTitleLabel,textView: textView , buttons: [cancelButton,confirmButton], dataToAttach: nil)
         self.view.addSubview(confirmActionsView)
         self.confirmActionsView.layer.zPosition = 3
         let SSAnim  = CoreSSAnimation.getUniqueIstance()
@@ -305,23 +361,27 @@ class SingleBookingPageViewController: UIViewController,UIPickerViewDataSource, 
     }
     
     private func requestBookingWithPriority(){
-        booking.requestBooking(errorHandler: self, selectedPriority: 2 - self.priorityPickerView.selectedRow(inComponent: 0), notes: "") { (success) in
+        let CV = ConfirmView.getUniqueIstance()
+        let notes = CV.getTextViewValue(fromView: self.confirmActionsView)
+        booking.requestBooking(errorHandler: self, selectedPriority: 2 - self.priorityPickerView.selectedRow(inComponent: 0), notes: notes) { (success) in
             if success{
-                self.showConfirmActionsView()
+                self.updateConfirmViewForConfirmMessage()
             }
         }
     }
     private func requestBooking(){
-        booking.requestBooking(errorHandler: self, notes: "") { (success) in
+        let CV = ConfirmView.getUniqueIstance()
+        let notes = CV.getTextViewValue(fromView: self.confirmActionsView)
+        booking.requestBooking(errorHandler: self, notes: notes) { (success) in
             if success{
-                self.showConfirmActionsView()
+                self.updateConfirmViewForConfirmMessage()
             }
         }
     }
     private func cancelBooking(){
         booking.cancelBooking(errorHandler: self) { (success) in
             if success{
-                self.showCancelActionsView()
+                 self.showCancelActionsView()
             }
         }
     }

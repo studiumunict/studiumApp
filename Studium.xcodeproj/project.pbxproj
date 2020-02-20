@@ -55,6 +55,7 @@
 		9C91EEAB23906D6600B5FB50 /* SharedSourceObserverDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C91EEAA23906D6600B5FB50 /* SharedSourceObserverDelegate.swift */; };
 		9CA4511E238D060600D25B66 /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA4511D238D060600D25B66 /* ConfirmView.swift */; };
 		9CA45120238D095400D25B66 /* SSCustomLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA4511F238D095400D25B66 /* SSCustomLayers.swift */; };
+		9CA8072D23FC504000CD851F /* DevsCreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA8072C23FC504000CD851F /* DevsCreditsViewController.swift */; };
 		9CBDB9CF2379C6AD00A015A4 /* CoreSSAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBDB9CE2379C6AD00A015A4 /* CoreSSAnimation.swift */; };
 		9CC86E3F22C0EC0F007567B1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CC86E3E22C0EC0F007567B1 /* WebKit.framework */; };
 		9CD41ACD23E87D5A004B606A /* TeachingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD41ACC23E87D5A004B606A /* TeachingDelegate.swift */; };
@@ -175,6 +176,7 @@
 		9C91EEAA23906D6600B5FB50 /* SharedSourceObserverDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedSourceObserverDelegate.swift; sourceTree = "<group>"; };
 		9CA4511D238D060600D25B66 /* ConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
 		9CA4511F238D095400D25B66 /* SSCustomLayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSCustomLayers.swift; sourceTree = "<group>"; };
+		9CA8072C23FC504000CD851F /* DevsCreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevsCreditsViewController.swift; sourceTree = "<group>"; };
 		9CBDB9CE2379C6AD00A015A4 /* CoreSSAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreSSAnimation.swift; sourceTree = "<group>"; };
 		9CC86E3E22C0EC0F007567B1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		9CD41ACC23E87D5A004B606A /* TeachingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingDelegate.swift; sourceTree = "<group>"; };
@@ -430,6 +432,14 @@
 			path = FileDownloader;
 			sourceTree = "<group>";
 		};
+		9CA8072B23FC500F00CD851F /* DevsCreditsController */ = {
+			isa = PBXGroup;
+			children = (
+				9CA8072C23FC504000CD851F /* DevsCreditsViewController.swift */,
+			);
+			path = DevsCreditsController;
+			sourceTree = "<group>";
+		};
 		9CF5301C23A3D5B300D11048 /* BookingPagesViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -539,6 +549,7 @@
 				9CFEB89B21BAA5AA0045FB54 /* DocumentsViewController */,
 				9CFEB89A21BAA59B0045FB54 /* ProfileViewController */,
 				9CFE72C821BA97FA001EB697 /* CoursesViewController */,
+				9CA8072B23FC500F00CD851F /* DevsCreditsController */,
 				13CC782421C93FBE0052E579 /* PortaleStudentiViewController */,
 			);
 			path = MainMenuViewControllers;
@@ -806,6 +817,7 @@
 				9CFE9DA821A8BBEE0030AE33 /* MenuTableViewController.swift in Sources */,
 				9CFE72CA21BA9814001EB697 /* CoursesViewController.swift in Sources */,
 				9C06A22C21AB707500E695DB /* CDLClass.swift in Sources */,
+				9CA8072D23FC504000CD851F /* DevsCreditsViewController.swift in Sources */,
 				9CF6175F2302EFA1001D3E77 /* StringExtension.swift in Sources */,
 				13F8E3C221A9667200BBAD9B /* TeachingViewController.swift in Sources */,
 				139BCB6A21BDE057005A750A /* DocumentsPagesViewController.swift in Sources */,

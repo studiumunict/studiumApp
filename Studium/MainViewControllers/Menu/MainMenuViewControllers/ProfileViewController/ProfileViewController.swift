@@ -65,10 +65,10 @@ class ProfileViewController: UIViewController, SWRevealViewControllerDelegate, U
         dismiss(animated: true, completion: nil)
     }
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
+       /* super.viewDidAppear(true)
         self.userImageView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(self.imageTapped(tapGestureRecognizer:))))
         self.userImageView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(self.imageTapped(tapGestureRecognizer:))))
-        userImageView.isUserInteractionEnabled =  true
+        userImageView.isUserInteractionEnabled =  true*/
     }
     
     private func setupNavigationBar(){

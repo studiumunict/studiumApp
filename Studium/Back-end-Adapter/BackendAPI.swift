@@ -113,7 +113,7 @@ import Foundation
         }
     }
    
-    
+    /*
     //test login function. Test user : username: studente1 password: studente1
     public func login_v2(username: String, password: String, academicYear: String, completion : @escaping (Any?,Error?)->Void){
         let requestName = "V2_LoginTest"
@@ -140,12 +140,12 @@ import Foundation
             //self.delegate?.connectionErrorHandle(error: error)
             completion( nil,error)
         }
-    }
+    }*/
     
     //ritorna tutti i dati in una volta la nuova chiamata
     
     //valorizationCode : se è valorizzato, è la password per registrarsi al corso ( Sempre chiamata corsi)
-    /*public func login_v2(username: String, password: String, academicYear: String, completion : @escaping (Any?, Error?)->Void){
+    public func login_v2(username: String, password: String, academicYear: String, completion : @escaping (Any?, Error?)->Void){
         let requestName = "V2_Login"
         let request = startRequest()
         request.setValue(username, forKey: "username")
@@ -170,7 +170,7 @@ import Foundation
             //self.delegate?.connectionErrorHandle(error: error)
             completion(nil,error)
         }
-    }*/
+    }
     
     public func restoreStudentSession(username: String, password: String, academicYear: String, completion : @escaping (Any?, Error?)->Void){
         let requestName = "V2_RestoreStudentSession"

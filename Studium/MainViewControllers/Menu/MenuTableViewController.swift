@@ -15,6 +15,7 @@ class MenuTableViewController: UITableViewController, SWRevealViewControllerDele
     static var DocsFrontController : UINavigationController! = nil
     static var ManageCourseFrontController : UINavigationController! = nil
     static var PortaleStudController : UINavigationController! = nil
+    static var DevsCreditsController : UINavigationController! = nil
  
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,12 +128,27 @@ class MenuTableViewController: UITableViewController, SWRevealViewControllerDele
             //self.navigationController?.removeFromParent()
            // self.navigationController?.popToRootViewController(animated: true)
         }
+        else if indexPath.row == 7{
+           //segue to credits
+           // pushToDevs
+            if MenuTableViewController.DevsCreditsController == nil {
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "DevsNavigation") as! UINavigationController
+                let segue = SWRevealViewControllerSeguePushController.init(identifier: "pushToDevs", source: self, destination: vc)
+                           segue.perform()
+                MenuTableViewController.DevsCreditsController = vc
+            }
+            else{
+                self.revealViewController()?.pushFrontViewController(MenuTableViewController.DevsCreditsController, animated: true)
+            }
+            
+            
+        }
     }
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return 8
     }
 }

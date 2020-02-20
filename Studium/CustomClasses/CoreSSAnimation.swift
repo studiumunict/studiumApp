@@ -92,7 +92,7 @@ class CoreSSAnimation{
                    UIView.animate(withDuration: 0.3) {
                     if let _ = oscureView {oscureView.alpha = 0.9}
                     viewToExpand.transform = .identity
-                    viewToExpand.center = CGPoint(x: viewToExpand.superview!.center.x , y: viewToExpand.superview!.center.y - 50 )
+                    viewToExpand.center = CGPoint(x: viewToExpand.superview!.center.x , y: viewToExpand.superview!.center.y - 100 )
                     completion(true)
                        //porta a 1 gli alpha degli elementi della view
                        //fai un for con le subviews
