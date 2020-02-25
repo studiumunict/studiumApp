@@ -29,8 +29,6 @@ class DevsCreditsViewController: UITableViewController, SWRevealViewControllerDe
         self.tableView.allowsSelection = false
         setupFirstDevCardLayout()
         setupSecondDevCardLayout()
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,7 +68,6 @@ class DevsCreditsViewController: UITableViewController, SWRevealViewControllerDe
                
         self.firstDevEmailButton.layer.cornerRadius = 5.0
         self.firstDevEmailButton.clipsToBounds = true
-        
     }
     
     private func setupNavigationBar(){

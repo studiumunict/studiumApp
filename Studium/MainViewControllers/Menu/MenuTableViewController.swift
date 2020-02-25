@@ -23,7 +23,10 @@ class MenuTableViewController: UITableViewController, SWRevealViewControllerDele
         preloadSmartEduController()
         //preloadProfileController()
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.isUserInteractionEnabled = true
+    }
     func preloadSmartEduController(){
         if MenuTableViewController.PortaleStudController == nil {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "PortaleStudNavigation") as! UINavigationController
@@ -42,6 +45,7 @@ class MenuTableViewController: UITableViewController, SWRevealViewControllerDele
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.isUserInteractionEnabled = false
         if indexPath.row == 0{
             if MenuTableViewController.HomeFrontController == nil {
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "HomeNavigation") as! UINavigationController
@@ -140,9 +144,8 @@ class MenuTableViewController: UITableViewController, SWRevealViewControllerDele
             else{
                 self.revealViewController()?.pushFrontViewController(MenuTableViewController.DevsCreditsController, animated: true)
             }
-            
-            
         }
+        
     }
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1

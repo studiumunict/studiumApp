@@ -220,7 +220,7 @@ class DocumentsViewController: UIViewController, SWRevealViewControllerDelegate,
             let cell = self.collectionView.cellForItem(at: indexPath) as! DocumentsCollectionViewCell
             cell.showActivityIndicator()
             let file =  fs.currentFolder.childs[indexPath.item]
-        let fd = SSFileDownloader(delegate: self, errorHandlerDelegate: self)
+            let fd = SSFileDownloader(delegate: self, errorHandlerDelegate: self)
             fd.startDownload(forIndexPath: indexPath, fsDoc: file)
     }
     

@@ -19,15 +19,15 @@ class HTMLParser {
     
     private init(){}
     
-    private func addHTMLExtension(title: String)->String{
+    /*private func addHTMLExtension(title: String)->String{
         if title.lastIndex(of: ".") == nil{
             return title+".html"
         }
         return title
-    }
+    }*/
     public func parseFileTitle(text:String)->String{
         let str = parseHTMLText(text: text)
-        return addHTMLExtension(title: str)
+        return str//addHTMLExtension(title: str)
     }
     public func parseFolderTitle(text:String)->String{
         return parseHTMLText(text: text)

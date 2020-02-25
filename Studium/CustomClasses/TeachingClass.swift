@@ -233,13 +233,23 @@ class Teaching : NSObject, BookingDelegate{
         }
     }
     
+    
+    private func fixFilePath(item: inout Doc){
+        if item.type == "file" && item.title.firstIndex(of: ".") == nil {
+            //try to append the extension from the path
+            if let extens = NSURL(fileURLWithPath: item.path).pathExtension{
+                item.title = item.title + "." + extens
+            }
+        }
+    }
+    
     private func setupDocuments(prev: Doc!, JSONResponse : Any?){
         if let JSONArray = JSONResponse as? [Any] {
             for doc in JSONArray{
                 let docDict = doc as! [String:Any]
-                let item = Doc.init(title: docDict["title"] as! String, path: docDict["path"] as! String, type: docDict["type"] as! String, uploaded: docDict["insert"] as! String, lastUpdate: docDict["updated"] as! String, size: docDict["size"] as! Int, courseID: self.code)
+                var item = Doc.init(title: docDict["title"] as! String, path: docDict["path"] as! String, type: docDict["type"] as! String, uploaded: docDict["insert"] as! String, lastUpdate: docDict["updated"] as! String, size: docDict["size"] as! Int, courseID: self.code)
+                fixFilePath(item: &item)
                 let _ = self.fs.appendChild(toDoc: prev, child: item)
-            
                 if(docDict["type"] as! String == "folder") {
                     self.downloadDocuments(path: docDict["path"] as! String, prev: item) { (flag2) in
                         //do nothing
