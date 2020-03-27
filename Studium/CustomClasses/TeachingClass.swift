@@ -150,9 +150,7 @@ class Teaching : NSObject, BookingDelegate{
             else{
                 completion(false)
             }
-            
         }
-    
     }
     
     private func notifyDelegatesForBookingUpdate(){

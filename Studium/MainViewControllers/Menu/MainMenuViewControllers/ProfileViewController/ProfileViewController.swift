@@ -42,6 +42,7 @@ class ProfileViewController: UIViewController, SWRevealViewControllerDelegate, U
         print("uploadImage")
     
     }
+    //TODO: image upload api
     @objc func imageTapped( tapGestureRecognizer: UITapGestureRecognizer){
         print("imageTapped")
         //let tappedImage = tapGestureRecognizer.view as! UIImageView
@@ -65,10 +66,16 @@ class ProfileViewController: UIViewController, SWRevealViewControllerDelegate, U
         dismiss(animated: true, completion: nil)
     }
     override func viewDidAppear(_ animated: Bool) {
-       /* super.viewDidAppear(true)
+        super.viewDidAppear(true)
+        if revealViewController() != nil {
+                   revealViewController().rearViewRevealWidth = 130 //Menu sx
+                   revealViewController().delegate = self
+                   view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+               }
+               
         self.userImageView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(self.imageTapped(tapGestureRecognizer:))))
         self.userImageView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(self.imageTapped(tapGestureRecognizer:))))
-        userImageView.isUserInteractionEnabled =  true*/
+        userImageView.isUserInteractionEnabled =  true
     }
     
     private func setupNavigationBar(){
@@ -121,15 +128,6 @@ class ProfileViewController: UIViewController, SWRevealViewControllerDelegate, U
         userImageView.image = profileDataSource.profileImage
         
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if revealViewController() != nil {
-            revealViewController().rearViewRevealWidth = 130 //Menu sx
-            revealViewController().delegate = self
-            view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-        }
-        
-       
-    }
+    
 
 }

@@ -39,7 +39,10 @@ class SplashViewController: UIViewController {
                        let dict = response as! [String: Any]
                        let status = dict["status"] as? Int
                        let mode = dict["mode"] as? String
-                       let user = dict["user"] as? [String:Any]
+                        //TODO: check nil values
+                        let authObject = dict["authObject"] as? [String: Any]
+                        let user = authObject!["user"] as? [String:Any]
+                       //let user = dict["user"] as? [String:Any]
                        if status == -1{
                            //"E' necessario un primo accesso dal sito WEB per l'anno accademico selezionato"
                             self.sendToLoginController()

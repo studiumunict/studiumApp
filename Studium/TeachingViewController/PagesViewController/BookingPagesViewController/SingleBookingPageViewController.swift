@@ -385,7 +385,4 @@ class SingleBookingPageViewController: UIViewController,UIPickerViewDataSource, 
             }
         }
     }
-   
-    
-    
 }
