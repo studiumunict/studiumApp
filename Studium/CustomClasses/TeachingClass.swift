@@ -27,7 +27,7 @@ class Teaching : NSObject, BookingDelegate{
     private var isCompleted = false
     var visibility: Int!  // 2 se è libero , 1 se è privato.
     var subscribe : Int! //deve essere 1 per essere libero,0 se non puoi iscriverti
-    var unsubscribe : Int! // deve essere 0 per essere libero,1  se solo il docente può farlo
+    var unsubscribe : Int! // deve essere 1 per essere libero,0  se solo il docente può farlo
     
     var delegates = [TeachingDelegate]() //potrebbe essere un array per gli observer
     
@@ -55,7 +55,7 @@ class Teaching : NSObject, BookingDelegate{
     }
     
     func canUnsubscribe()-> Bool{
-        if unsubscribe == 0 {return true}
+        if unsubscribe == 1 {return true}
         return false
     }
     

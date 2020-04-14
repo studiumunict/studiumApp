@@ -234,6 +234,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let teach = sharedSource.dataSource[indexPath.section].teachings[indexPath.row]
+            print("canUnsubscribe", teach.canUnsubscribe())
             if teach.canUnsubscribe() {
                 showConfirmViewForSignout(indexPath: indexPath)
             }
