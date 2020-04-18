@@ -28,11 +28,11 @@ class Student{
             }
             else{ phone = dict["phone"] as? String }
             if dict["id"] == nil{
-                print("ret false")
+//                print("ret false")
                     // completion(false)
                     return false
             }
-            print("build student")
+//            print("build student")
             obj = Student(id: String(dict["id"] as! Int), codFiscale: dict["username"] as? String , code: dict["officialcode"] as? String, name: dict["firstname"] as? String, surname: dict["lastname"] as? String,telNumber: phone, email: dict["email"] as? String, profileImage: UIImage.init(named: "logo"))
             
             if obj.name == nil && obj.surname == nil {
@@ -41,7 +41,7 @@ class Student{
             }
         }
         else{
-            print("Nil student dict")
+//            print("Nil student dict")
             return false
         }
         return true

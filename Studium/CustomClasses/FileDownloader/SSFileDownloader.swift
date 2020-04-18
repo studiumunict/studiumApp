@@ -69,7 +69,7 @@ class SSFileDownloader : NSObject, URLSessionDelegate, URLSessionDataDelegate{
         do {
             try buffer.write(to: tmpURL)
         } catch let er {
-            print(er)
+//            print(er)
             DispatchQueue.main.async {
                 self.delegate?.downloadProgressFinished(withError: error, tempUrl: nil, forIndexPath: self.forIndexPath)
             }

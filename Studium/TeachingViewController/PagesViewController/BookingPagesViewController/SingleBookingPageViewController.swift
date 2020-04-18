@@ -7,6 +7,7 @@
 //
 
 import UIKit
+//import MarqueeLabel
 
 class SingleBookingPageViewController: UIViewController,UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -97,9 +98,29 @@ class SingleBookingPageViewController: UIViewController,UIPickerViewDataSource, 
         setValuesLabelColors()
         hideAll()
         completeBookingData()
-        
+        //setAnimationForLabels()
         
     }
+    override func viewDidAppear(_ animated: Bool) {
+        //setAnimationForLabels()
+    }
+    
+    /*private func setAnimationForLabels(){
+        eventNameLabel.type = .continuous
+        eventNameLabel.speed = .duration(5.0)
+        eventNameLabel.animationCurve = .easeInOut
+        eventNameLabel.fadeLength = 10.0
+        eventNameLabel.leadingBuffer = 30.0
+        eventNameLabel.trailingBuffer = 20.0
+        
+        eventDescriptionLabel.type = .continuous
+        eventDescriptionLabel.speed = .duration(5.0)
+        eventDescriptionLabel.animationCurve = .easeInOut
+        eventDescriptionLabel.fadeLength = 10.0
+        eventDescriptionLabel.leadingBuffer = 30.0
+        eventDescriptionLabel.trailingBuffer = 20.0
+        
+    }*/
     
     
     private func completeBookingData(){
@@ -167,7 +188,7 @@ class SingleBookingPageViewController: UIViewController,UIPickerViewDataSource, 
         if !booking.canDefinePriority() {
             eventStackView.arrangedSubviews[6].isHidden = true
         }
-        if !booking.isMultiTurn() && !booking.mine {
+        if !booking.isMultiTurn() && !booking.mine && booking.turnHour != "" && booking.turnMinute != "" {
             eventStackView.arrangedSubviews[5].isHidden = false
         }
        

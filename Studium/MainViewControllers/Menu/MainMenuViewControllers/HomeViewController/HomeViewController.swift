@@ -34,10 +34,10 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     }
     
     func revealController(_ revealController: SWRevealViewController!, didMoveTo position: FrontViewPosition) {
-         print("moved")
+        // print("moved")
         switch position {
         case .right:
-            print("right")
+          //  print("right")
             self.cdsSearchBar.resignFirstResponder()
             if (cdsSearchBar.isHidden == false && cdsSearchBar.text == ""){
                 hideSearchBarAnimated()
@@ -49,7 +49,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             
             break
         case .left :
-            print("move to left")
+          //  print("move to left")
             self.departmentsSelectButton.isUserInteractionEnabled = true
             self.cdlTableView.isUserInteractionEnabled = true
             self.departmentsTableView.isUserInteractionEnabled = true
@@ -133,7 +133,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     
     
     func showSearchBarAnimated(){
-        print("mostro searchbar")
+        //print("mostro searchbar")
         setCancelIconOnSearchButton()
        
        
@@ -177,18 +177,36 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
     @objc func searchingClicked(){
         if self.cdsSearchBar.isHidden {
            showSearchBarAnimated()
-           print("inizio ricerca")
+         //  print("inizio ricerca")
         }
         else{
             hideSearchBarAnimated()
         }
     }
+    private func getDbName(code: String , dbName: String) -> String{
+        var newDbName = ""
+        if dbName == ""{
+            let session =  Session.getUniqueIstance()
+           
+            if code.first!.isLetter{
+                newDbName = code
+            }
+            else if session.academicYear == "2017/2018"{
+                newDbName = "dokeos_" + code
+            }
+            else{
+                newDbName = "z"+code
+            }
+        }
+        return newDbName
+    }
     
     func getTeachingsDuringSearch(searchedText : String){
         let api = BackendAPI.getUniqueIstance(fromController: self)
         api.searchCourse(searchedText: searchedText) { (JSONData) in
-            //print(JSONData)
+            print(JSONData)
         //api.searchCourseToSubscribe_v2(searchedText: searchedText) { (JSONData) in
+            //print(JSONData)
             var teachings = [Teaching]()
             if(JSONData == nil) {return}
             for teaching in JSONData as! [Any]{
@@ -196,8 +214,11 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
                 let teachTitle = teach["title"] as! String
                 var teachTitleLowercased = teachTitle.lowercased()
                 teachTitleLowercased.capitalizeFirstLetter()
-                //print(JSONData)
-                let newTeach = Teaching.init(teachingName: teachTitleLowercased, category: teach["category"] as! String, teachingCode: teach["code"] as! String, teacherName: teach["tutorname"] as! String, dbName: teach["dbName"] as? String ?? "", visualCode: teach["visualCode"] as? String ?? "", visibility: teach["visibility"] as? Int ?? 2, subscribe: teach["subscribe"] as? Int ?? 1, unsubscribe: teach["unsubscribe"] as? Int ?? 0)
+                let code = teach["code"] as! String
+                let dbName : String = teach["dbName"] as? String ?? ""
+                let newDbName = self.getDbName(code: code, dbName: dbName)
+                    
+                let newTeach = Teaching.init(teachingName: teachTitleLowercased, category: teach["category"] as! String, teachingCode: teach["code"] as! String, teacherName: teach["tutorname"] as! String, dbName: newDbName, visualCode: teach["visualCode"] as? String ?? "", visibility: teach["visibility"] as? Int ?? 2, subscribe: teach["subscribe"] as? Int ?? 1, unsubscribe: teach["unsubscribe"] as? Int ?? 0)
                 teachings.append(newTeach)
             }
             var newCDL : CDL
@@ -255,10 +276,10 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
         self.cdlTableView.startWaitingData()
         self.CDLDataSource.removeAll()
         self.cdlTableView.reloadData()
-        print("Dipartimento selezionato:", ofDepartment.code)
+       // print("Dipartimento selezionato:", ofDepartment.code)
         let api =  BackendAPI.getUniqueIstance(fromController: self)
         api.getCDL_v2(departmentCode: ofDepartment.code) { (JSONResponse) in
-            print(JSONResponse)
+          //  print(JSONResponse)
             //TODO: aggiungere gli elementi della lista course ad una sezione apposita "Altro"
             guard let JSONResponseDegree = JSONResponse as? [String: Any] else{ return }
             guard let JSONData = JSONResponseDegree["degreeCourses"] as? [Any] else{ self.cdlTableView.stopWaitingData()
@@ -272,11 +293,11 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
                 //creo cdl
                 let newCDL = CDL.init(courseName: corso["name"] as? String, courseCode: corso["code"] as? String, courseId: corso["id"] as? Int, parent: corso["parent"] as? String)
                 //scarico insegnamenti del cdl
-                print("CORSO DI LAUREA CODE: ", newCDL.code! );
+               // print("CORSO DI LAUREA CODE: ", newCDL.code! );
                 
                 var teachings = [Teaching]()
                 api.getTeachings_v2(CDLCode: newCDL.code!, completion: { (JSONData) in
-                   print("CHIAMATA API")
+                  // print("CHIAMATA API")
                     //print(JSONData)
                     if(JSONData == nil) {
                         self.cdlTableView.stopWaitingData()
@@ -294,7 +315,8 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
                         if loaning != "0"{
                             code = loaning
                         }
-                        let newTeach = Teaching.init(teachingName: teachTitleLowercased, category: teach["category"] as! String, teachingCode: code, teacherName: teach["tutorName"] as! String,  dbName: teach["dbName"] as! String, visualCode: teach["visualCode"] as! String, visibility: teach["visibility"] as? Int ?? 2, subscribe: teach["subscribe"] as? Int ?? 1, unsubscribe: teach["unsubscribe"] as? Int ?? 0)
+                        print("newTeaching, dbName = ",teach["dbName"] as! String )
+                        let newTeach = Teaching.init(teachingName: teachTitleLowercased, category: teach["category"] as! String, teachingCode: code, teacherName: teach["tutorName"] as! String,  dbName: teach["dbName"] as! String, visualCode: teach["visualCode"] as! String, visibility: teach["visibility"] as? Int ?? 2, subscribe: teach["subscribe"] as? Int ?? 1, unsubscribe: teach["unsubscribe"] as? Int ?? 1)
                         teachings.append(newTeach)
                         
 
@@ -345,7 +367,6 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             self.view.endEditing(true)
             self.cdlTableView.isHidden = false
             self.hideDepartmentTableAnimated()
-            
             getCDLAndTeachings(ofDepartment : self.departmentsDataSource[indexPath.row])
         }
         else {
@@ -532,7 +553,7 @@ class HomeViewController: UIViewController ,UIScrollViewDelegate, UITableViewDel
             //modifico la cella e la mostro
             var dataElement : Teaching!
             if self.cdsSearchBar.isFirstResponder || self.cdsSearchBar.text != ""{
-                print("prendo dal filtered")
+              //  print("prendo dal filtered")
                  dataElement = self.filteredCDLDataSource[indexPath.section].teachings[indexPath.row]
             }
             else{

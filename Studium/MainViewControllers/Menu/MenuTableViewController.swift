@@ -119,7 +119,7 @@ class MenuTableViewController: UITableViewController, SWRevealViewControllerDele
             }
         }
         else if indexPath.row == 6{
-            print("popToRoot")
+            //print("popToRoot")
             
             //execute logout
             

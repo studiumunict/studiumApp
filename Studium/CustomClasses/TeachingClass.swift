@@ -91,6 +91,7 @@ class Teaching : NSObject, BookingDelegate{
     }
     
     func completeTeachingData(fromController: UIViewController?, completion: @escaping (Bool,Bool)->Void){
+        print("CompleteTeachingData")
         guard isCompleted == false else { completion(true,false); return}
         self.currentControler = fromController
         self.downloadCourseContent { (success) in
@@ -117,7 +118,7 @@ class Teaching : NSObject, BookingDelegate{
         }
         do {
             let myHTMLString = try String(contentsOf: myURL, encoding: .ascii)
-            print("HTML : \(myHTMLString)")
+            //print("HTML : \(myHTMLString)")
             //chrck html content and decide if completion is true or false
             if myHTMLString.count > 50{
                 completion(true)
@@ -135,7 +136,10 @@ class Teaching : NSObject, BookingDelegate{
     }
     
     private func downloadCourseContent(completion:@escaping (Bool)->Void){
+        print("downloadCourseContent")
         let api = BackendAPI.getUniqueIstance(fromController: currentControler)
+        print("dbName: ", self.dbName)
+        print("courseCode:", self.code)
         api.getCourseContent_v2(dbName: self.dbName, course: self.code) { (error, JSONResponse) in
             //print(JSONResponse)
             if JSONResponse != nil && error == nil{
@@ -155,7 +159,7 @@ class Teaching : NSObject, BookingDelegate{
     
     private func notifyDelegatesForBookingUpdate(){
         for d in delegates{
-            print("chiamo il delegate controller per reload table(bookings Updated)")
+            //print("chiamo il delegate controller per reload table(bookings Updated)")
             d.bookingsUpdated()
         }
     }

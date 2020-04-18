@@ -95,7 +95,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
         let api = BackendAPI.getUniqueIstance(fromController: self)
         
         api.moveCourse(codCourse: courseCode!, newCat: newCatCode!) { (JSONResponse) in
-            print(JSONResponse ?? "null")
+            //print(JSONResponse ?? "null")
             self.sharedSource.reloadSourceFromAPI(fromController: self) { (flag) in
                 tableView.reloadData()
             }
@@ -172,7 +172,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     
     
     @objc private func unsuscribe(sender: UIButton){
-        print("Unsuscribe")
+       // print("Unsuscribe")
         var view = sender.superview!
         let indexPath = sender.accessibilityElements?[1] as! IndexPath
         let CF = ConfirmView.getUniqueIstance()
@@ -234,7 +234,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let teach = sharedSource.dataSource[indexPath.section].teachings[indexPath.row]
-            print("canUnsubscribe", teach.canUnsubscribe())
+            //print("canUnsubscribe", teach.canUnsubscribe())
             if teach.canUnsubscribe() {
                 showConfirmViewForSignout(indexPath: indexPath)
             }
@@ -303,7 +303,7 @@ class ManageCourseViewController: UIViewController, SWRevealViewControllerDelega
     }
     
     @objc func createCategoryWithName(button : UIButton){
-        print("creo categoria")
+        //print("creo categoria")
         guard let t =  createCategoryTextField.text else{ return }
         guard t != "" else{ return }
         let api = BackendAPI.getUniqueIstance(fromController: self)

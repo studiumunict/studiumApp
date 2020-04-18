@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -19,31 +19,31 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		01703887E0DCD3984A20C4FF2C730646 /* UICircularProgressRing.h in Headers */ = {isa = PBXBuildFile; fileRef = B8B6C2A99C8BE0D0C1C21BE3DB366390 /* UICircularProgressRing.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		01703887E0DCD3984A20C4FF2C730646 /* UICircularProgressRing.h in Headers */ = {isa = PBXBuildFile; fileRef = AC13FE292BBC3269D9E4AAB50F2159DB /* UICircularProgressRing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1493EA53FC9E5EF73E7259AD9CA69F7D /* Pods-StudiumTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 73EDEE945DE0FA82939A2D04567A4E59 /* Pods-StudiumTests-dummy.m */; };
 		26635A054CB31F29A59F29C6931F41A1 /* Pods-StudiumUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 28017CE28E6BB42E54DCF5C1A0F26ACF /* Pods-StudiumUITests-dummy.m */; };
 		2D5474D4A99AE03B2869F3E8BDEFC04E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8A3472FC22956C4742A38C95E2CABF /* Foundation.framework */; };
 		4DAFB4C87C92FF58D6FB5A980B505130 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8A3472FC22956C4742A38C95E2CABF /* Foundation.framework */; };
 		4E2014D0432D9AC95CBD0FA142FA5FD0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F83106C683A402C23A70B25F88D127E0 /* CoreGraphics.framework */; };
-		5DAE820C14F6075A3DD225DEBE486F3B /* UICircularRingStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8B63325714C13A13557F80FADA4020 /* UICircularRingStyle.swift */; };
-		63CCA7BC47479ABCC8FE95E6FFCCCDE3 /* UICircularProgressRing-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B58AA732B0419201DD0CE285EF0533B7 /* UICircularProgressRing-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6C3269E89E7A65DF3890E5E910FCBA11 /* SWRevealViewController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C74FF854F5BA1EBDEF74775536880030 /* SWRevealViewController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5DAE820C14F6075A3DD225DEBE486F3B /* UICircularRingStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF6E2DA258A81D51EB08BF0CB7B4397 /* UICircularRingStyle.swift */; };
+		63CCA7BC47479ABCC8FE95E6FFCCCDE3 /* UICircularProgressRing-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D8176F4ABAB59D1554B1D40305719E2 /* UICircularProgressRing-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6C3269E89E7A65DF3890E5E910FCBA11 /* SWRevealViewController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ED520927EC0A8C225BB34A01D22377A /* SWRevealViewController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7893E539C2EBED48677A5DDAD1AD0934 /* Pods-Studium-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 39550155600FB92257D39B2784BF6E8B /* Pods-Studium-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		87D868E6B115E52367675B20851961D9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8A3472FC22956C4742A38C95E2CABF /* Foundation.framework */; };
-		96DCF70A91D0D1A10577377C830C8046 /* UICircularProgressRing-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8762CC6024D1F1DAC4FC7CF80D03E87E /* UICircularProgressRing-dummy.m */; };
-		99BF049052E3D8581B4FEFF92DA5F5A4 /* UICircularProgressRingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE48A6A79F74E2D6626C647D193261E /* UICircularProgressRingDelegate.swift */; };
+		96DCF70A91D0D1A10577377C830C8046 /* UICircularProgressRing-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE4CB178689856C758172850D7703C5 /* UICircularProgressRing-dummy.m */; };
+		99BF049052E3D8581B4FEFF92DA5F5A4 /* UICircularProgressRingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C83B9DD8CE8800DABC96C943352475 /* UICircularProgressRingDelegate.swift */; };
 		9B36EDB543FAA6538C98A7D44E2D4D22 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8A3472FC22956C4742A38C95E2CABF /* Foundation.framework */; };
-		A15F2F8D8BE0E58B744AD17AE7203CC6 /* UICircularRingValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6A9EA0CD9FDCFC953B5A8BC7D26BF1 /* UICircularRingValueFormatter.swift */; };
-		A1B655F050F899094F984A769BF9C2A3 /* UICircularProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBDD4C7C7569255A128F496E210F1AB /* UICircularProgressRing.swift */; };
-		A22C2711A391D061FA208C17FBEB7D68 /* UICircularTimerRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE94F4978CC81A9197DF407D14588061 /* UICircularTimerRing.swift */; };
+		A15F2F8D8BE0E58B744AD17AE7203CC6 /* UICircularRingValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E4900ECBDA42B60BB26FA65A4C45A9 /* UICircularRingValueFormatter.swift */; };
+		A1B655F050F899094F984A769BF9C2A3 /* UICircularProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6372D150A8189983F81956295C0FE00 /* UICircularProgressRing.swift */; };
+		A22C2711A391D061FA208C17FBEB7D68 /* UICircularTimerRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562A95FD96A58E6EE5DD99BEA83E2591 /* UICircularTimerRing.swift */; };
 		A6CEBD65DED74CB50050B52508660976 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8A3472FC22956C4742A38C95E2CABF /* Foundation.framework */; };
-		AA085271A2D4E4515519507ACCC57385 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80B5057A1339A79747434A465BDCABF1 /* SWRevealViewController.m */; };
-		AB2C883B140EFBD2CD1E250622305815 /* UICircularRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7CC41E3CEE1EE7DF4E369453B0B25 /* UICircularRing.swift */; };
-		C6E71A6A01DD351236A123C0688D28FF /* UICircularRingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5504D62B47DCD95A8CF1D450ED9D5A /* UICircularRingLayer.swift */; };
-		C921606B4B7940C97BB7982909DB35CC /* SWRevealViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F0A5A0F1D6FB9D5670BD892A9AB49D38 /* SWRevealViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA085271A2D4E4515519507ACCC57385 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B67593F71E69766C3BCA4060187010C /* SWRevealViewController.m */; };
+		AB2C883B140EFBD2CD1E250622305815 /* UICircularRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E3E29D94FDD779A3467D07551D9FDE /* UICircularRing.swift */; };
+		C6E71A6A01DD351236A123C0688D28FF /* UICircularRingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38955BF2E31C66CB96CACD941B71616 /* UICircularRingLayer.swift */; };
+		C921606B4B7940C97BB7982909DB35CC /* SWRevealViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AFFE1AEF10006A6380B7FDF5584E558 /* SWRevealViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C95E99BB37531DC852B5AB0A86E1814A /* Pods-StudiumTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A4F9787F48B6DD63AD255B8E5724F9BA /* Pods-StudiumTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D306CB16D3EA701FE96EF6893FE87329 /* SWRevealViewController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E048CA884D69C94D4719E8287700F81A /* SWRevealViewController-dummy.m */; };
-		E69E6BA1F067F2531F7F344DEC526CAD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7D3E08989C228E74988F6BF62D22 /* Extensions.swift */; };
+		D306CB16D3EA701FE96EF6893FE87329 /* SWRevealViewController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6CDF12F04232B7B2FA71B48D0BD111 /* SWRevealViewController-dummy.m */; };
+		E69E6BA1F067F2531F7F344DEC526CAD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A34E8DE391F8B4DCAD5C737B0E660 /* Extensions.swift */; };
 		F5E8127B5A1211019920D1DE4203B3B3 /* Pods-StudiumUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A8984AAF8040D35EA849C81866F12250 /* Pods-StudiumUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8E0D78D0A7B9076862D43EBEB258E79 /* Pods-Studium-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FEFD7185966A6FAD04A3DE479FF04507 /* Pods-Studium-dummy.m */; };
 /* End PBXBuildFile section */
@@ -88,62 +88,65 @@
 
 /* Begin PBXFileReference section */
 		008DA93F691744D9FD739EA22D96226C /* Pods-StudiumTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-StudiumTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		07D7CC41E3CEE1EE7DF4E369453B0B25 /* UICircularRing.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UICircularRing.swift; path = src/UICircularProgressRing/UICircularRing.swift; sourceTree = "<group>"; };
-		0A6596803E40732CA49B48F9CEB5999F /* UICircularProgressRing-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UICircularProgressRing-prefix.pch"; sourceTree = "<group>"; };
 		0AB7FB5A4E94ED27A86244F05642EC78 /* Pods-Studium.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Studium.debug.xcconfig"; sourceTree = "<group>"; };
 		0F5CB47C9A1DC74BFE7BEE2F893D4AE5 /* Pods-StudiumUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StudiumUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		140E7D3E08989C228E74988F6BF62D22 /* Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = src/UICircularProgressRing/Extensions.swift; sourceTree = "<group>"; };
+		0F6CDF12F04232B7B2FA71B48D0BD111 /* SWRevealViewController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SWRevealViewController-dummy.m"; sourceTree = "<group>"; };
 		1A93C093D8104D4C65B77B92A41C3E99 /* Pods-StudiumUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-StudiumUITests.modulemap"; sourceTree = "<group>"; };
 		1ABACF21A571C7C1714CFA01DD380FE8 /* Pods-StudiumUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-StudiumUITests-Info.plist"; sourceTree = "<group>"; };
+		1BE0F12C48C3E296F877D849CB7B9924 /* SOAPEngine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SOAPEngine.debug.xcconfig; sourceTree = "<group>"; };
 		23D0F41D3E7B77D3D21DF9442BD7F9E4 /* Pods-StudiumTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StudiumTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2479019DD61E2367BD5AD42BBA06F18C /* SOAPEngine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SOAPEngine.release.xcconfig; sourceTree = "<group>"; };
 		28017CE28E6BB42E54DCF5C1A0F26ACF /* Pods-StudiumUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-StudiumUITests-dummy.m"; sourceTree = "<group>"; };
 		2B8A3472FC22956C4742A38C95E2CABF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		314D2226B4F6881601C389E5F9AA5177 /* SWRevealViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SWRevealViewController-prefix.pch"; sourceTree = "<group>"; };
 		39550155600FB92257D39B2784BF6E8B /* Pods-Studium-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Studium-umbrella.h"; sourceTree = "<group>"; };
-		3C5504D62B47DCD95A8CF1D450ED9D5A /* UICircularRingLayer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UICircularRingLayer.swift; path = src/UICircularProgressRing/UICircularRingLayer.swift; sourceTree = "<group>"; };
-		3C8B63325714C13A13557F80FADA4020 /* UICircularRingStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UICircularRingStyle.swift; path = src/UICircularProgressRing/UICircularRingStyle.swift; sourceTree = "<group>"; };
+		4200EA0E072537B2CDB134B6AFB370D5 /* UICircularProgressRing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = UICircularProgressRing.release.xcconfig; sourceTree = "<group>"; };
+		454533AE5E65D723326B5A0742DAAC87 /* UICircularProgressRing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = UICircularProgressRing.debug.xcconfig; sourceTree = "<group>"; };
 		470646B5745A80E0390F967F3E0780F8 /* Pods-StudiumUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StudiumUITests.release.xcconfig"; sourceTree = "<group>"; };
-		50CB31E48B8A8ADF7EDB93FA648D4F12 /* UICircularProgressRing-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "UICircularProgressRing-Info.plist"; sourceTree = "<group>"; };
-		56E9FC0E334B33F781F5401A6EDFE4EE /* SWRevealViewController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SWRevealViewController.modulemap; sourceTree = "<group>"; };
-		6FE48A6A79F74E2D6626C647D193261E /* UICircularProgressRingDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UICircularProgressRingDelegate.swift; path = src/UICircularProgressRing/UICircularProgressRingDelegate.swift; sourceTree = "<group>"; };
-		710D539EEB8998A4394802ECA3BFB2CE /* SOAPEngine64.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SOAPEngine64.framework; sourceTree = "<group>"; };
+		4AFFE1AEF10006A6380B7FDF5584E558 /* SWRevealViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = SWRevealViewController/SWRevealViewController.h; sourceTree = "<group>"; };
+		55E3E29D94FDD779A3467D07551D9FDE /* UICircularRing.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UICircularRing.swift; path = src/UICircularProgressRing/UICircularRing.swift; sourceTree = "<group>"; };
+		562A95FD96A58E6EE5DD99BEA83E2591 /* UICircularTimerRing.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UICircularTimerRing.swift; path = src/UICircularProgressRing/UICircularTimerRing.swift; sourceTree = "<group>"; };
+		5D8176F4ABAB59D1554B1D40305719E2 /* UICircularProgressRing-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UICircularProgressRing-umbrella.h"; sourceTree = "<group>"; };
+		668EB0047307A513483439E3EE113F83 /* SWRevealViewController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SWRevealViewController.modulemap; sourceTree = "<group>"; };
+		68E4900ECBDA42B60BB26FA65A4C45A9 /* UICircularRingValueFormatter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UICircularRingValueFormatter.swift; path = src/UICircularProgressRing/UICircularRingValueFormatter.swift; sourceTree = "<group>"; };
+		69DA6AD37A4EDAF0BAF7DF19354230C6 /* UICircularProgressRing-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "UICircularProgressRing-Info.plist"; sourceTree = "<group>"; };
+		6AC2E504F7FD36BB49DFB38A11751F72 /* SOAPEngine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SOAPEngine.h; path = SOAPEngine64.framework/Headers/SOAPEngine.h; sourceTree = "<group>"; };
+		6B5A34E8DE391F8B4DCAD5C737B0E660 /* Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = src/UICircularProgressRing/Extensions.swift; sourceTree = "<group>"; };
+		6D5C52557E37361A2FC4C2080A642E40 /* SWRevealViewController.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SWRevealViewController.release.xcconfig; sourceTree = "<group>"; };
+		6ED520927EC0A8C225BB34A01D22377A /* SWRevealViewController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SWRevealViewController-umbrella.h"; sourceTree = "<group>"; };
 		73EDEE945DE0FA82939A2D04567A4E59 /* Pods-StudiumTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-StudiumTests-dummy.m"; sourceTree = "<group>"; };
+		7B67593F71E69766C3BCA4060187010C /* SWRevealViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = SWRevealViewController/SWRevealViewController.m; sourceTree = "<group>"; };
 		7D09C484BE765121CBBF2D8D52E6F2DA /* Pods_StudiumUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_StudiumUITests.framework; path = "Pods-StudiumUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		80B5057A1339A79747434A465BDCABF1 /* SWRevealViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = SWRevealViewController/SWRevealViewController.m; sourceTree = "<group>"; };
+		81118266BB308B040CE824C39725DB48 /* SWRevealViewController-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SWRevealViewController-Info.plist"; sourceTree = "<group>"; };
+		821DE15D4D85E4ABD68BFD72E4079834 /* UICircularProgressRing-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UICircularProgressRing-prefix.pch"; sourceTree = "<group>"; };
 		86EDC44F6CA2909F2EFBED17C9B8F7C8 /* Pods-Studium.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Studium.release.xcconfig"; sourceTree = "<group>"; };
-		8762CC6024D1F1DAC4FC7CF80D03E87E /* UICircularProgressRing-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UICircularProgressRing-dummy.m"; sourceTree = "<group>"; };
-		89A64F638E3FA2C0B4E4FC61B78503F0 /* SOAPEngine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SOAPEngine.h; path = SOAPEngine64.framework/Headers/SOAPEngine.h; sourceTree = "<group>"; };
 		8C3E32C155725A76052083C4CD2DDFA9 /* Pods-Studium.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Studium.modulemap"; sourceTree = "<group>"; };
-		8CA4C1561FC9515DFC08A70967C2F3CD /* SWRevealViewController-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SWRevealViewController-Info.plist"; sourceTree = "<group>"; };
 		8D104EBF5B1D0064DCAC17312A3C0F10 /* Pods_Studium.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Studium.framework; path = "Pods-Studium.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FB1F3E8161C2182DC762E9C5CD94F57 /* Pods_StudiumTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_StudiumTests.framework; path = "Pods-StudiumTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		91946B3B4981E17571142486D3303643 /* UICircularProgressRing.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = UICircularProgressRing.modulemap; sourceTree = "<group>"; };
-		981F27C51A657EDFF83D5F9E54B8D359 /* SWRevealViewController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SWRevealViewController.xcconfig; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DD0AA7964A7FBAFA517C46A0B917725 /* Pods-StudiumUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-StudiumUITests-acknowledgements.plist"; sourceTree = "<group>"; };
+		A2C83B9DD8CE8800DABC96C943352475 /* UICircularProgressRingDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UICircularProgressRingDelegate.swift; path = src/UICircularProgressRing/UICircularProgressRingDelegate.swift; sourceTree = "<group>"; };
 		A4F9787F48B6DD63AD255B8E5724F9BA /* Pods-StudiumTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-StudiumTests-umbrella.h"; sourceTree = "<group>"; };
 		A8984AAF8040D35EA849C81866F12250 /* Pods-StudiumUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-StudiumUITests-umbrella.h"; sourceTree = "<group>"; };
-		AD6A9EA0CD9FDCFC953B5A8BC7D26BF1 /* UICircularRingValueFormatter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UICircularRingValueFormatter.swift; path = src/UICircularProgressRing/UICircularRingValueFormatter.swift; sourceTree = "<group>"; };
+		AC13FE292BBC3269D9E4AAB50F2159DB /* UICircularProgressRing.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = UICircularProgressRing.h; path = src/UICircularProgressRing/UICircularProgressRing.h; sourceTree = "<group>"; };
 		B1FA6F3AE8B9A8BE8134D8AB8AA9AFFC /* Pods-StudiumTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StudiumTests.release.xcconfig"; sourceTree = "<group>"; };
-		B3CA7441D8CDED56909D3CB41B18CC20 /* UICircularProgressRing.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = UICircularProgressRing.xcconfig; sourceTree = "<group>"; };
-		B401E39B79CE2E2D8A7CB5608E4326BB /* SOAPEngine.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SOAPEngine.xcconfig; sourceTree = "<group>"; };
-		B58AA732B0419201DD0CE285EF0533B7 /* UICircularProgressRing-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UICircularProgressRing-umbrella.h"; sourceTree = "<group>"; };
-		B8B6C2A99C8BE0D0C1C21BE3DB366390 /* UICircularProgressRing.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = UICircularProgressRing.h; path = src/UICircularProgressRing/UICircularProgressRing.h; sourceTree = "<group>"; };
-		C74FF854F5BA1EBDEF74775536880030 /* SWRevealViewController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SWRevealViewController-umbrella.h"; sourceTree = "<group>"; };
+		BC756D60EF83C3CC1DC1FE4A5D1E61BC /* UICircularProgressRing.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = UICircularProgressRing.modulemap; sourceTree = "<group>"; };
+		C38955BF2E31C66CB96CACD941B71616 /* UICircularRingLayer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UICircularRingLayer.swift; path = src/UICircularProgressRing/UICircularRingLayer.swift; sourceTree = "<group>"; };
+		CBA364CBC1FE11B518454C657E4599C8 /* SWRevealViewController.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SWRevealViewController.debug.xcconfig; sourceTree = "<group>"; };
 		CF91464525CA5068ACD292D3242C7EBA /* Pods-StudiumUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-StudiumUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		D0B803943E2B48F301371645B77B5452 /* Pods-Studium-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Studium-acknowledgements.markdown"; sourceTree = "<group>"; };
 		D0C4411F7C1A0B651F68CBEE4247206B /* Pods-Studium-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Studium-frameworks.sh"; sourceTree = "<group>"; };
+		D19D4985A9B5342BBE5688D1F08F5FB1 /* SOAPEngine64.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SOAPEngine64.framework; sourceTree = "<group>"; };
 		D334B9CDEC21015DD48358DB94CB1CFA /* SWRevealViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SWRevealViewController.framework; path = SWRevealViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5806B0F005BE2F4A9877C210562A90C /* Pods-Studium-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Studium-acknowledgements.plist"; sourceTree = "<group>"; };
 		D5AFE6AF9A57C24C7EF03F97747E510C /* Pods-Studium-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Studium-Info.plist"; sourceTree = "<group>"; };
 		DBF0567FD90198168ABC5383EE2C1384 /* Pods-StudiumTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-StudiumTests-Info.plist"; sourceTree = "<group>"; };
-		DCBDD4C7C7569255A128F496E210F1AB /* UICircularProgressRing.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UICircularProgressRing.swift; path = src/UICircularProgressRing/UICircularProgressRing.swift; sourceTree = "<group>"; };
-		DE94F4978CC81A9197DF407D14588061 /* UICircularTimerRing.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UICircularTimerRing.swift; path = src/UICircularProgressRing/UICircularTimerRing.swift; sourceTree = "<group>"; };
-		E048CA884D69C94D4719E8287700F81A /* SWRevealViewController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SWRevealViewController-dummy.m"; sourceTree = "<group>"; };
 		E37A4B1BCD503BAC430C79B2CD699C47 /* Pods-StudiumTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-StudiumTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		E74B916B8BACF5D57AE6A89CD8D0C546 /* UICircularProgressRing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = UICircularProgressRing.framework; path = UICircularProgressRing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F0A5A0F1D6FB9D5670BD892A9AB49D38 /* SWRevealViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = SWRevealViewController/SWRevealViewController.h; sourceTree = "<group>"; };
+		EFF6E2DA258A81D51EB08BF0CB7B4397 /* UICircularRingStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UICircularRingStyle.swift; path = src/UICircularProgressRing/UICircularRingStyle.swift; sourceTree = "<group>"; };
+		F6372D150A8189983F81956295C0FE00 /* UICircularProgressRing.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UICircularProgressRing.swift; path = src/UICircularProgressRing/UICircularProgressRing.swift; sourceTree = "<group>"; };
 		F83106C683A402C23A70B25F88D127E0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
-		FC903D40D6A256878BD42CCEA463AA9F /* SWRevealViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SWRevealViewController-prefix.pch"; sourceTree = "<group>"; };
+		FBE4CB178689856C758172850D7703C5 /* UICircularProgressRing-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UICircularProgressRing-dummy.m"; sourceTree = "<group>"; };
 		FCC1D93FE1BD08E70E1D94FEAC0DC315 /* Pods-StudiumTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-StudiumTests.modulemap"; sourceTree = "<group>"; };
 		FEFD7185966A6FAD04A3DE479FF04507 /* Pods-Studium-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Studium-dummy.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -248,33 +251,47 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		4AC92FA7595F7C8506E60DC2B4D3E3B6 /* SOAPEngine */ = {
+		48EFCC1EAB64EA6AAF5B0524F3297D00 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				89A64F638E3FA2C0B4E4FC61B78503F0 /* SOAPEngine.h */,
-				7AB3C6C9890D086270FB8EB10D617D44 /* Frameworks */,
-				BE098C541A1F081E9BABEC4008695538 /* Support Files */,
+				D19D4985A9B5342BBE5688D1F08F5FB1 /* SOAPEngine64.framework */,
 			);
-			name = SOAPEngine;
-			path = SOAPEngine;
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5693F26280DF8A4926E9D10EEB1BAB2D /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				1BE0F12C48C3E296F877D849CB7B9924 /* SOAPEngine.debug.xcconfig */,
+				2479019DD61E2367BD5AD42BBA06F18C /* SOAPEngine.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SOAPEngine";
+			sourceTree = "<group>";
+		};
+		622E7879035CF1C1A224B2DDAA45769D /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				BC756D60EF83C3CC1DC1FE4A5D1E61BC /* UICircularProgressRing.modulemap */,
+				FBE4CB178689856C758172850D7703C5 /* UICircularProgressRing-dummy.m */,
+				69DA6AD37A4EDAF0BAF7DF19354230C6 /* UICircularProgressRing-Info.plist */,
+				821DE15D4D85E4ABD68BFD72E4079834 /* UICircularProgressRing-prefix.pch */,
+				5D8176F4ABAB59D1554B1D40305719E2 /* UICircularProgressRing-umbrella.h */,
+				454533AE5E65D723326B5A0742DAAC87 /* UICircularProgressRing.debug.xcconfig */,
+				4200EA0E072537B2CDB134B6AFB370D5 /* UICircularProgressRing.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/UICircularProgressRing";
 			sourceTree = "<group>";
 		};
 		73C1EB60774D1C27062E4A62C4C4B4CE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4AC92FA7595F7C8506E60DC2B4D3E3B6 /* SOAPEngine */,
-				855FB6E83EA6DE070485460AE91D5254 /* SWRevealViewController */,
-				AC3DC3F7594C8BA226D33875E26F44B1 /* UICircularProgressRing */,
+				9A9BD9B1B3B8DF558813C3EAC1C0B4FD /* SOAPEngine */,
+				A1D28F6951E72234083336D1B69598D9 /* SWRevealViewController */,
+				F17B471D562B912D713A241395A7EC22 /* UICircularProgressRing */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		7AB3C6C9890D086270FB8EB10D617D44 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				710D539EEB8998A4394802ECA3BFB2CE /* SOAPEngine64.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		8082AA28D679245AB2BEE2578B89F17C /* Pods-Studium */ = {
@@ -294,56 +311,41 @@
 			path = "Target Support Files/Pods-Studium";
 			sourceTree = "<group>";
 		};
-		855FB6E83EA6DE070485460AE91D5254 /* SWRevealViewController */ = {
+		9A9BD9B1B3B8DF558813C3EAC1C0B4FD /* SOAPEngine */ = {
 			isa = PBXGroup;
 			children = (
-				F0A5A0F1D6FB9D5670BD892A9AB49D38 /* SWRevealViewController.h */,
-				80B5057A1339A79747434A465BDCABF1 /* SWRevealViewController.m */,
-				E2A0228DD0AE56CA3688EB128DA4454B /* Support Files */,
+				6AC2E504F7FD36BB49DFB38A11751F72 /* SOAPEngine.h */,
+				48EFCC1EAB64EA6AAF5B0524F3297D00 /* Frameworks */,
+				5693F26280DF8A4926E9D10EEB1BAB2D /* Support Files */,
+			);
+			name = SOAPEngine;
+			path = SOAPEngine;
+			sourceTree = "<group>";
+		};
+		A1D28F6951E72234083336D1B69598D9 /* SWRevealViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4AFFE1AEF10006A6380B7FDF5584E558 /* SWRevealViewController.h */,
+				7B67593F71E69766C3BCA4060187010C /* SWRevealViewController.m */,
+				AFE1399B79515B789459C2D1639A1C63 /* Support Files */,
 			);
 			name = SWRevealViewController;
 			path = SWRevealViewController;
 			sourceTree = "<group>";
 		};
-		AC3DC3F7594C8BA226D33875E26F44B1 /* UICircularProgressRing */ = {
+		AFE1399B79515B789459C2D1639A1C63 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				140E7D3E08989C228E74988F6BF62D22 /* Extensions.swift */,
-				B8B6C2A99C8BE0D0C1C21BE3DB366390 /* UICircularProgressRing.h */,
-				DCBDD4C7C7569255A128F496E210F1AB /* UICircularProgressRing.swift */,
-				6FE48A6A79F74E2D6626C647D193261E /* UICircularProgressRingDelegate.swift */,
-				07D7CC41E3CEE1EE7DF4E369453B0B25 /* UICircularRing.swift */,
-				3C5504D62B47DCD95A8CF1D450ED9D5A /* UICircularRingLayer.swift */,
-				3C8B63325714C13A13557F80FADA4020 /* UICircularRingStyle.swift */,
-				AD6A9EA0CD9FDCFC953B5A8BC7D26BF1 /* UICircularRingValueFormatter.swift */,
-				DE94F4978CC81A9197DF407D14588061 /* UICircularTimerRing.swift */,
-				C572E5E3A437239A6607AE62BC304F7E /* Support Files */,
-			);
-			name = UICircularProgressRing;
-			path = UICircularProgressRing;
-			sourceTree = "<group>";
-		};
-		BE098C541A1F081E9BABEC4008695538 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				B401E39B79CE2E2D8A7CB5608E4326BB /* SOAPEngine.xcconfig */,
+				668EB0047307A513483439E3EE113F83 /* SWRevealViewController.modulemap */,
+				0F6CDF12F04232B7B2FA71B48D0BD111 /* SWRevealViewController-dummy.m */,
+				81118266BB308B040CE824C39725DB48 /* SWRevealViewController-Info.plist */,
+				314D2226B4F6881601C389E5F9AA5177 /* SWRevealViewController-prefix.pch */,
+				6ED520927EC0A8C225BB34A01D22377A /* SWRevealViewController-umbrella.h */,
+				CBA364CBC1FE11B518454C657E4599C8 /* SWRevealViewController.debug.xcconfig */,
+				6D5C52557E37361A2FC4C2080A642E40 /* SWRevealViewController.release.xcconfig */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/SOAPEngine";
-			sourceTree = "<group>";
-		};
-		C572E5E3A437239A6607AE62BC304F7E /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				91946B3B4981E17571142486D3303643 /* UICircularProgressRing.modulemap */,
-				B3CA7441D8CDED56909D3CB41B18CC20 /* UICircularProgressRing.xcconfig */,
-				8762CC6024D1F1DAC4FC7CF80D03E87E /* UICircularProgressRing-dummy.m */,
-				50CB31E48B8A8ADF7EDB93FA648D4F12 /* UICircularProgressRing-Info.plist */,
-				0A6596803E40732CA49B48F9CEB5999F /* UICircularProgressRing-prefix.pch */,
-				B58AA732B0419201DD0CE285EF0533B7 /* UICircularProgressRing-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/UICircularProgressRing";
+			path = "../Target Support Files/SWRevealViewController";
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -373,18 +375,22 @@
 			path = "Target Support Files/Pods-StudiumUITests";
 			sourceTree = "<group>";
 		};
-		E2A0228DD0AE56CA3688EB128DA4454B /* Support Files */ = {
+		F17B471D562B912D713A241395A7EC22 /* UICircularProgressRing */ = {
 			isa = PBXGroup;
 			children = (
-				56E9FC0E334B33F781F5401A6EDFE4EE /* SWRevealViewController.modulemap */,
-				981F27C51A657EDFF83D5F9E54B8D359 /* SWRevealViewController.xcconfig */,
-				E048CA884D69C94D4719E8287700F81A /* SWRevealViewController-dummy.m */,
-				8CA4C1561FC9515DFC08A70967C2F3CD /* SWRevealViewController-Info.plist */,
-				FC903D40D6A256878BD42CCEA463AA9F /* SWRevealViewController-prefix.pch */,
-				C74FF854F5BA1EBDEF74775536880030 /* SWRevealViewController-umbrella.h */,
+				6B5A34E8DE391F8B4DCAD5C737B0E660 /* Extensions.swift */,
+				AC13FE292BBC3269D9E4AAB50F2159DB /* UICircularProgressRing.h */,
+				F6372D150A8189983F81956295C0FE00 /* UICircularProgressRing.swift */,
+				A2C83B9DD8CE8800DABC96C943352475 /* UICircularProgressRingDelegate.swift */,
+				55E3E29D94FDD779A3467D07551D9FDE /* UICircularRing.swift */,
+				C38955BF2E31C66CB96CACD941B71616 /* UICircularRingLayer.swift */,
+				EFF6E2DA258A81D51EB08BF0CB7B4397 /* UICircularRingStyle.swift */,
+				68E4900ECBDA42B60BB26FA65A4C45A9 /* UICircularRingValueFormatter.swift */,
+				562A95FD96A58E6EE5DD99BEA83E2591 /* UICircularTimerRing.swift */,
+				622E7879035CF1C1A224B2DDAA45769D /* Support Files */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/SWRevealViewController";
+			name = UICircularProgressRing;
+			path = UICircularProgressRing;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -540,7 +546,7 @@
 				LastUpgradeCheck = 1100;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -686,6 +692,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		0761B3E9794949D5338F6153BF3084DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BE0F12C48C3E296F877D849CB7B9924 /* SOAPEngine.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 		1422B121EAEAEA11307496903FA623C6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -784,44 +806,26 @@
 			};
 			name = Debug;
 		};
-		5207C73F37A2D945292ABADD7EB59251 /* Debug */ = {
+		25B7BEE6ADBFF77BAC9DF4D8D12CEC9D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 981F27C51A657EDFF83D5F9E54B8D359 /* SWRevealViewController.xcconfig */;
+			baseConfigurationReference = 2479019DD61E2367BD5AD42BBA06F18C /* SOAPEngine.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SWRevealViewController/SWRevealViewController-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SWRevealViewController/SWRevealViewController-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
 				);
-				MODULEMAP_FILE = "Target Support Files/SWRevealViewController/SWRevealViewController.modulemap";
-				PRODUCT_MODULE_NAME = SWRevealViewController;
-				PRODUCT_NAME = SWRevealViewController;
 				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
+				VALIDATE_PRODUCT = YES;
 			};
-			name = Debug;
+			name = Release;
 		};
-		58F56CAB74BF0F3402DD64C7944C24F8 /* Release */ = {
+		3238E0E772F8C4E150769753ABC34C60 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B3CA7441D8CDED56909D3CB41B18CC20 /* UICircularProgressRing.xcconfig */;
+			baseConfigurationReference = 4200EA0E072537B2CDB134B6AFB370D5 /* UICircularProgressRing.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -844,6 +848,42 @@
 				MODULEMAP_FILE = "Target Support Files/UICircularProgressRing/UICircularProgressRing.modulemap";
 				PRODUCT_MODULE_NAME = UICircularProgressRing;
 				PRODUCT_NAME = UICircularProgressRing;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5432A68D6FA01C47672B5ADC3444FA54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6D5C52557E37361A2FC4C2080A642E40 /* SWRevealViewController.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SWRevealViewController/SWRevealViewController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SWRevealViewController/SWRevealViewController-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/SWRevealViewController/SWRevealViewController.modulemap";
+				PRODUCT_MODULE_NAME = SWRevealViewController;
+				PRODUCT_NAME = SWRevealViewController;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
@@ -893,22 +933,40 @@
 			};
 			name = Debug;
 		};
-		8E60EB69CC8A4326C10B252D312B83F7 /* Release */ = {
+		87E3EB1346260F3E34FAAB91DD72CB03 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B401E39B79CE2E2D8A7CB5608E4326BB /* SOAPEngine.xcconfig */;
+			baseConfigurationReference = CBA364CBC1FE11B518454C657E4599C8 /* SWRevealViewController.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SWRevealViewController/SWRevealViewController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SWRevealViewController/SWRevealViewController-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
 				);
+				MODULEMAP_FILE = "Target Support Files/SWRevealViewController/SWRevealViewController.modulemap";
+				PRODUCT_MODULE_NAME = SWRevealViewController;
+				PRODUCT_NAME = SWRevealViewController;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		9293DA97DE67AABF3C82CE0484C8A751 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -949,9 +1007,9 @@
 			};
 			name = Release;
 		};
-		A88231B61829DF091CA33495F67983C8 /* Debug */ = {
+		A260F5077CC0682A0D2E9AF4DF02E3A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B3CA7441D8CDED56909D3CB41B18CC20 /* UICircularProgressRing.xcconfig */;
+			baseConfigurationReference = 454533AE5E65D723326B5A0742DAAC87 /* UICircularProgressRing.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -981,58 +1039,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		B4136FBE8ED411933D611DB906B00C69 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 981F27C51A657EDFF83D5F9E54B8D359 /* SWRevealViewController.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SWRevealViewController/SWRevealViewController-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SWRevealViewController/SWRevealViewController-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/SWRevealViewController/SWRevealViewController.modulemap";
-				PRODUCT_MODULE_NAME = SWRevealViewController;
-				PRODUCT_NAME = SWRevealViewController;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		CACB5058A02191EDFE17FF9AF0064F8D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B401E39B79CE2E2D8A7CB5608E4326BB /* SOAPEngine.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1222,8 +1228,8 @@
 		0A71B86C264CB035A7A40F5DAF0C0651 /* Build configuration list for PBXNativeTarget "UICircularProgressRing" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A88231B61829DF091CA33495F67983C8 /* Debug */,
-				58F56CAB74BF0F3402DD64C7944C24F8 /* Release */,
+				A260F5077CC0682A0D2E9AF4DF02E3A2 /* Debug */,
+				3238E0E772F8C4E150769753ABC34C60 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1267,8 +1273,8 @@
 		8699BD691A94701D81C0335EEBE6A8CB /* Build configuration list for PBXAggregateTarget "SOAPEngine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CACB5058A02191EDFE17FF9AF0064F8D /* Debug */,
-				8E60EB69CC8A4326C10B252D312B83F7 /* Release */,
+				0761B3E9794949D5338F6153BF3084DC /* Debug */,
+				25B7BEE6ADBFF77BAC9DF4D8D12CEC9D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1276,8 +1282,8 @@
 		F4DCFA77F99A91185C15F518612A9E61 /* Build configuration list for PBXNativeTarget "SWRevealViewController" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5207C73F37A2D945292ABADD7EB59251 /* Debug */,
-				B4136FBE8ED411933D611DB906B00C69 /* Release */,
+				87E3EB1346260F3E34FAAB91DD72CB03 /* Debug */,
+				5432A68D6FA01C47672B5ADC3444FA54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

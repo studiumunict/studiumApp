@@ -58,6 +58,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("TeachingViewDIdLoad")
         teachingDataSource.attachDelegate(delegate: self)
         courseNameLabel.text = teachingDataSource.name
         nameTeacherLabel.text = teachingDataSource.teacherName
@@ -285,9 +286,9 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
     }
     private func loadContent(){
         teachingDataSource.completeTeachingData(fromController:self) { (wasLoaded,success) in
-            if success {self.contentDidLoaded()}
+            if success || wasLoaded {self.contentDidLoaded()}
             else{self.hideSpinnerInOscureView()} //connection error
-            if wasLoaded && !success {self.contentDidLoaded()} //it was loaded, we have still all data
+          //  if wasLoaded && !success {self.contentDidLoaded()} //it was loaded, we have still all data
         }
     }
     
@@ -513,7 +514,7 @@ class TeachingViewController: UIViewController, UIPageViewControllerDataSource, 
              revealViewController().frontViewPosition = .left
          }
         appDelegate.isFilePresented = false
-        print("TeachingAppeared")
+        //print("TeachingAppeared")
      }
      
      func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {

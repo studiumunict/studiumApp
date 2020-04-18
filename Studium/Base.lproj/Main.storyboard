@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xSl-IC-Cjh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xSl-IC-Cjh">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -2438,7 +2438,7 @@
                                                                         <constraint firstItem="yQD-EL-hcS" firstAttribute="leading" secondItem="JjT-p9-L4l" secondAttribute="leading" id="KHN-ri-6vR"/>
                                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JjT-p9-L4l" secondAttribute="trailing" constant="40" id="KxS-ih-VjX"/>
                                                                         <constraint firstItem="yQD-EL-hcS" firstAttribute="top" secondItem="Qqc-I4-TC0" secondAttribute="top" id="TRn-eS-Wvw"/>
-                                                                        <constraint firstAttribute="height" constant="70" id="X42-8x-ipN"/>
+                                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="X42-8x-ipN"/>
                                                                         <constraint firstItem="JjT-p9-L4l" firstAttribute="leading" secondItem="Qqc-I4-TC0" secondAttribute="leading" constant="10" id="ZKs-Xo-HwQ"/>
                                                                         <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="yQD-EL-hcS" secondAttribute="trailing" constant="100" id="ZWC-gW-bhs"/>
                                                                         <constraint firstItem="JjT-p9-L4l" firstAttribute="top" secondItem="yQD-EL-hcS" secondAttribute="bottom" id="aHo-jQ-fBY"/>
@@ -3157,7 +3157,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xg-3D-hWD">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xg-3D-hWD">
                                                 <rect key="frame" x="100" y="0.0" width="237.5" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
@@ -3749,22 +3749,27 @@
             <point key="canvasLocation" x="569.56521739130437" y="1910.4910714285713"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="PQQ-En-RsV"/>
+        <segue reference="fLw-CQ-9GN"/>
+        <segue reference="035-UK-Tez"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow" width="64" height="64"/>
-        <image name="arrowshape.turn.up.left" catalog="system" width="64" height="52"/>
-        <image name="clear" catalog="system" width="64" height="56"/>
+        <image name="arrowshape.turn.up.left" catalog="system" width="128" height="106"/>
+        <image name="clear" catalog="system" width="128" height="114"/>
         <image name="close" width="64" height="64"/>
         <image name="courses" width="128" height="128"/>
         <image name="customer-review" width="512" height="512"/>
         <image name="expand" width="16" height="16"/>
         <image name="fb" width="1200" height="1200"/>
-        <image name="folder.badge.plus" catalog="system" width="64" height="42"/>
+        <image name="folder.badge.plus" catalog="system" width="128" height="86"/>
         <image name="folder_1" width="128" height="128"/>
         <image name="home" width="128" height="128"/>
         <image name="linkedin" width="3000" height="3000"/>
         <image name="logo" width="64" height="64"/>
         <image name="mails" width="512" height="512"/>
-        <image name="pencil.and.ellipsis.rectangle" catalog="system" width="64" height="40"/>
+        <image name="pencil.and.ellipsis.rectangle" catalog="system" width="128" height="81"/>
         <image name="petro" width="734" height="762"/>
         <image name="power" width="512" height="512"/>
         <image name="showcase" width="64" height="64"/>
@@ -3772,9 +3777,4 @@
         <image name="smartlight" width="256" height="256"/>
         <image name="student" width="128" height="128"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="PQQ-En-RsV"/>
-        <segue reference="fLw-CQ-9GN"/>
-        <segue reference="035-UK-Tez"/>
-    </inferredMetricsTieBreakers>
 </document>

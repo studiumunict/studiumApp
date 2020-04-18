@@ -72,8 +72,8 @@ class SharedCoursesSource: NSObject {
                             let dict =  course as!  [String:Any]
                            //cerca la riga con categoria corrispondente
                         let i = self.getRowIndexByCategory(newSource: newSource,cat: String(dict["category"] as! Int))
-                        print(i)
-                        newSource[i].teachings.append(Teaching.init(teachingName: dict["title"] as! String, category: String(dict["category"] as! Int), teachingCode: dict["code"] as! String, teacherName: dict["tutorName"] as! String, dbName: dict["dbName"] as! String, visualCode: dict["visualCode"] as! String, visibility: dict["visibility"] as? Int ?? 2, subscribe: dict["subscribe"] as? Int ?? 1, unsubscribe: dict["unsubscribe"] as? Int ?? 0))
+                        //print(i)
+                        newSource[i].teachings.append(Teaching.init(teachingName: dict["title"] as! String, category: String(dict["category"] as! Int), teachingCode: dict["code"] as! String, teacherName: dict["tutorName"] as! String, dbName: dict["dbName"] as! String, visualCode: dict["visualCode"] as! String, visibility: dict["visibility"] as? Int ?? 2, subscribe: dict["subscribe"] as? Int ?? 1, unsubscribe: dict["unsubscribe"] as? Int ?? 1))
                        
                        }
                     self.dataSource = newSource

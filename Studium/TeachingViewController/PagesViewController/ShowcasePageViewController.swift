@@ -49,7 +49,7 @@ class ShowcasePageViewController: UIViewController, WKNavigationDelegate {
     
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("\n\n didFinish")
+        //print("\n\n didFinish")
         isLoaded = true
     }
     

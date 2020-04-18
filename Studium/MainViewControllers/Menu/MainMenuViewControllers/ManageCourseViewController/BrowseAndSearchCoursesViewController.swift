@@ -242,14 +242,14 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
     
    override func getCDLAndTeachings(ofDepartment : Department){ //questa funzione scaricherà dal db
         
-        print("getCDLandTeachings")
+      //  print("getCDLandTeachings")
         self.cdlTableView.startWaitingData()
         self.CDLDataSource.removeAll()
         self.cdlTableView.reloadData()
-        print("Dipartimento selezionato:", ofDepartment.code)
+       // print("Dipartimento selezionato:", ofDepartment.code)
         let api =  BackendAPI.getUniqueIstance(fromController: self)
         api.getCDLToSubscribe_v2(departmentCode: ofDepartment.code) { (JSONResponse) in
-            print(JSONResponse)
+          //  print(JSONResponse)
             //TODO: aggiungere gli elementi della lista course ad una sezione apposita "Altro"
             guard let JSONResponseDegree = JSONResponse as? [String: Any] else{ return }
             guard let JSONData = JSONResponseDegree["degreeCourses"] as? [Any] else{ self.cdlTableView.stopWaitingData()
@@ -263,11 +263,11 @@ class BrowseAndSearchCoursesViewController: HomeViewController{
                 //creo cdl
                 let newCDL = CDL.init(courseName: corso["name"] as? String, courseCode: corso["code"] as? String, courseId: corso["id"] as? Int, parent: corso["parent"] as? String)
                 //scarico insegnamenti del cdl
-                print("CORSO DI LAUREA CODE: ", newCDL.code! );
+               // print("CORSO DI LAUREA CODE: ", newCDL.code! );
                 
                 var teachings = [Teaching]()
                 api.getTeachingsToSubscribe_v2(CDLCode: newCDL.code!, completion: { (JSONData) in
-                   print("CHIAMATA API")
+                 //  print("CHIAMATA API")
                     //print(JSONData)
                     if(JSONData == nil) {
                         self.cdlTableView.stopWaitingData()

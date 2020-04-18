@@ -163,7 +163,7 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
                 return
             }
             let dict = response as! [String: Any]
-            print(dict)
+            //print(dict)
             
             let status = dict["status"] as? Int
             let mode = dict["mode"] as? String
@@ -182,7 +182,7 @@ class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
                 return
             }
             else if status  == 0{
-                print("User data error")
+                //print("User data error")
                 self.errorLabel.text = "Dati d'accesso errati!"
                 self.errorLabel.isHidden = false
                 self.loginButton.isEnabled = true

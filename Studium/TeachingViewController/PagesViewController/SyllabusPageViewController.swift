@@ -47,7 +47,7 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate, UIScro
         
         if syllabusCode != nil {
             webView.load(URLRequest(url: URL(string: "https://syllabus.unict.it/insegnamento.php?mod=" + syllabusCode!)!))
-            print("CARICO SYLLABUS: ", syllabusCode!)
+           // print("CARICO SYLLABUS: ", syllabusCode!)
         }
         
     }
@@ -96,31 +96,31 @@ class SyllabusPageViewController: UIViewController, WKNavigationDelegate, UIScro
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("\n\n didFinish")
+       // print("\n\n didFinish")
         
         isLoaded = true
     }
     
     func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
-        print("\n\n webViewWebContentProcessDidTerminate")
+       // print("\n\n webViewWebContentProcessDidTerminate")
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        print("\n\n didfail, error: ", error.localizedDescription )
+        //print("\n\n didfail, error: ", error.localizedDescription )
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        print("\n\n didFailProvisionalNavigation, error: ", error.localizedDescription)
+        //print("\n\n didFailProvisionalNavigation, error: ", error.localizedDescription)
     }
     
     
     @IBAction func backButtonPressed(_ sender: UIButton) {
-        print("backButton Pressed")
+        //print("backButton Pressed")
         webView.goBack()
     }
     
     @IBAction func forwardButtonPressed(_ sender: UIButton) {
-        print("forwardButton Pressed")
+       // print("forwardButton Pressed")
         webView.goForward()
     }
     

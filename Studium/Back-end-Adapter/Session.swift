@@ -64,7 +64,7 @@ class Session{
     private func restoreStudentSession(completion: @escaping (Bool) -> Void){
         let api = BackendAPI.getUniqueIstance(fromController: nil)
         api.restoreStudentSession(username: username, password: PswEncryption.decode(str: encryptedPassword), academicYear: academicYear) { (JSONResponse, Error) in
-            print(JSONResponse)
+//            print(JSONResponse)
             if let resp =  JSONResponse as? String{
                 if resp == "ok"{
                     completion(true)
@@ -78,7 +78,7 @@ class Session{
     private func restoreCASSession(completion: @escaping (Bool) -> Void){
         let api = BackendAPI.getUniqueIstance(fromController: nil)
         api.restoreCASSession(username: username, password: PswEncryption.decode(str: encryptedPassword), academicYear: academicYear) { (JSONResponse, Error) in
-            print(JSONResponse)
+//            print(JSONResponse)
             if let resp =  JSONResponse as? String{
                 if resp == "ok"{
                     completion(true)
@@ -92,7 +92,7 @@ class Session{
     private func restoreOtherSession(completion: @escaping (Bool) -> Void){
         let api = BackendAPI.getUniqueIstance(fromController: nil)
         api.restoreOtherSession(username: username, password: PswEncryption.decode(str: encryptedPassword), academicYear: academicYear) { (JSONResponse, Error) in
-            print(JSONResponse)
+//            print(JSONResponse)
             if let resp =  JSONResponse as? String{
                 if resp == "ok"{
                     completion(true)

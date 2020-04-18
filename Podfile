@@ -9,7 +9,6 @@ target 'Studium' do
   pod 'SWRevealViewController'
   pod 'SOAPEngine'
   pod 'UICircularProgressRing'
-  
   target 'StudiumTests' do
     inherit! :search_paths
     # Pods for testing
