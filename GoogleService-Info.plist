@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>169989231574-pib6e4vjg48n6rt7odebqe8g1evii7nc.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.169989231574-pib6e4vjg48n6rt7odebqe8g1evii7nc</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC36ATaEQgJA7u-CBypjViIYccGe2KJ0Zk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>169989231574</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>Unict.it.Studium</string>
+	<key>PROJECT_ID</key>
+	<string>braided-trees-537</string>
+	<key>STORAGE_BUCKET</key>
+	<string>braided-trees-537.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:169989231574:ios:bd1c57b941365f91b94a77</string>
+	<key>DATABASE_URL</key>
+	<string>https://braided-trees-537.firebaseio.com</string>
+</dict>
+</plist>
